@@ -157,58 +157,9 @@ const constructProductList = async () => {
         let charbon = document.querySelector('#jag-color-charbon')
         console.log(jagjag)
         console.log(jagjagdock)
-        console.log(jagjagfauve)
-        console.log(jagjagweimar)
-        console.log(jagjagcharbon)
-
-
-        // if (done.includes(product.metadata.productId)) {
-        //     let button = document.createElement('button')
-        //     button.textContent = product.metadata.colorId
-        //     document.querySelector('#block' + product.metadata.productId.replace('.', '-'))
-        //         .appendChild(button)
-
-        // } else {
-        //     done.push(product.metadata.productId)
-        //     let divCol = document.createElement('div');
-        //     divCol.classList.add('col')
-        //     let divCard = document.createElement('div');
-        //     divCard.classList.add('card')
-        //     divCard.style = "width: 20rem;"
-        //     let img = document.createElement('img');
-        //     img.id = product.metadata.productId
-        //     img.classList.add('card-img-top')
-        //     img.alt = 'Card image cap'
-        //     img.src = product.image ?? ""
-        //     let divCardBlock = document.createElement('div');
-        //     divCardBlock.classList.add('card-block')
-        //     divCardBlock.id = 'block' + product.metadata.productId.replace('.', '-')
-        //     let title = document.createElement('h4')
-        //     title.classList.add('card-title')
-        //     title.textContent = product.name
-        //     let price = document.createElement('p')
-        //     price.classList.add('card-text')
-        //     price.textContent = product.prices[0].price + product.prices[0].currency
-        //     let button = document.createElement('a')
-        //     button.href = "#button"
-        //     button.setAttribute('data-name', product.name)
-        //     button.setAttribute('data-prices', JSON.stringify(product.prices))
-        //     button.setAttribute('data-price', product.prices[0].price)
-        //     button.setAttribute('data-image', product.image ?? "")
-        //     button.classList.add("add-to-cart", "btn", "btn-primary")
-        //     button.onclick = (event) => {
-        //         addToCart(event)
-        //     }
-        //     button.textContent = "Add to cart"
-
-        //     divProductList.appendChild(divCol)
-        //     divCol.appendChild(divCard)
-        //     divCard.appendChild(img)
-        //     divCard.appendChild(divCardBlock)
-        //     divCardBlock.appendChild(title)
-        //     divCardBlock.appendChild(price)
-        //     divCardBlock.appendChild(button)
-        // }
+        console.log(fauve)
+        console.log(weimar)
+        console.log(charbon)
 
     }
 }
