@@ -1,5 +1,5 @@
 console.log('toto');
-alert('toto')
+alert('toto');
 const commander = document.querySelector("#open-cart");
 commander.setAttribute("data-toggle", "modal")
 commander.setAttribute("data-target", "#cart")
