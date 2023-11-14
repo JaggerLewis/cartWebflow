@@ -179,7 +179,7 @@ const redirectToStripe = async (event) => {
     window.location.href = apiResJson.url
 }
 
-const showCart = document.getElementById('open-cart');
+const showCart = document.querySelector('#jag-cart')
 showCart.onclick = (event) => {
     event.preventDefault();
 
