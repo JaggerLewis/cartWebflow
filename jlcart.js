@@ -292,3 +292,6 @@ const goToStripe = document.getElementById("validate-cart");
 goToStripe.onclick = (event) => {
     redirectToStripe(event)
 }
+
+
+console.log('coucou');
