@@ -153,6 +153,7 @@ const constructProductList = async () => {
     let product = productJSON[0]
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
+        console.log('bebdjbdtrès DesCriPtiF')
         shoppingCart.addItem(product.name, product.price, product.image, product.prices)
     })
     let jagjagdock = document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
@@ -180,6 +181,16 @@ const redirectToStripe = async (event) => {
     const apiRes = await shoppingCart.getCartStripeUrl()
     const apiResJson = await apiRes.json()
     window.location.href = apiResJson.url
+}
+
+
+const addToCart = (event) => {
+    event.preventDefault();
+    var name = event.target.getAttribute('data-name');
+    var price = Number(event.target.getAttribute('data-price'));
+    var prices = event.target.getAttribute('data-prices');
+    var img = event.target.getAttribute('data-image');
+    shoppingCart.addItem(new Product(name, price, img, prices), 1)
 }
 
 const showCart = document.querySelector('#jag-cart')
