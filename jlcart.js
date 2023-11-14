@@ -119,9 +119,10 @@ class ShoppingCart {
 
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.items));
+        console.log('localStorage =>', localStorage)
         let count = 0
         JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.count)
-        document.querySelector('.total-count').textContent = count
+        // document.querySelector('.total-count').textContent = count
     }
 
     getCartStripeUrl() {
@@ -187,7 +188,9 @@ showCart.addEventListener('click', () => {
     event.preventDefault();
 
     let allProduct = JSON.parse(localStorage.getItem("shoppingCart"))
+    console.log('allProduct => ', allProduct)
     allProduct.forEach(prod => {
+        console.log('prod =>', prod)
     let id = JSON.parse(prod.prices)[0].id
         addHtml(prod, id)
         addFunction(prod, id)
