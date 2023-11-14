@@ -48,6 +48,7 @@ class ShoppingCart {
     }
 
     addItem(item, count = 1) {
+        console.log(item)
         const itemIndex = this.findItemIndexByName(item.name)
         if (itemIndex < 0) {
             const cardProduct = new ProductCart(item, count)
@@ -150,16 +151,12 @@ const constructProductList = async () => {
     const divProductList = document.getElementsByClassName('product-list')[0];
     for (const product of productJSON) {
         console.log(product)
-        let jagjag = document.querySelector('#jag-jag')
-        let jagjagdock = document.querySelector('#jag-jag-dock')
-        let fauve = document.querySelector('#jag-color-fauve')
-        let weimar = document.querySelector('#jag-color-weimar')
-        let charbon = document.querySelector('#jag-color-charbon')
-        console.log(jagjag)
-        console.log(jagjagdock)
-        console.log(fauve)
-        console.log(weimar)
-        console.log(charbon)
+        let jagjag = document.querySelector('#jag-jag').addEventListener('click', () => shoppingCart.addItem(product.name, product.price, product.image, product.prices))
+        let jagjagdock = document.querySelector('#jag-jag-dock').addEventListener('click', () => console.log('ui'))
+        let fauve = document.querySelector('#jag-color-fauve').addEventListener('click', () => console.log('ui'))
+        let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', () => console.log('ui'))
+        let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', () => console.log('ui'))
+
 
     }
 }
