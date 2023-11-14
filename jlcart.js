@@ -149,6 +149,7 @@ const constructProductList = async () => {
     const products = await getProductsFromStripe()
     const productJSON = await products.json();
     const divProductList = document.getElementsByClassName('product-list')[0];
+    let product = productJSON[0]
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         shoppingCart.addItem(product.name, product.price, product.image, product.prices)
@@ -239,14 +240,10 @@ showCart.addEventListener('click', () => {
 
 })
 
-const clearCart = document.getElementsByClassName('clear-cart')[0];
-clearCart.onclick = (event) => {
-    shoppingCart.clear();
-}
 
-const goToStripe = document.getElementById("validate-cart");
-goToStripe.onclick = (event) => {
-    redirectToStripe(event)
-}
+// const goToStripe = document.getElementById("validate-cart");
+// goToStripe.onclick = (event) => {
+//     redirectToStripe(event)
+// }
 
 
