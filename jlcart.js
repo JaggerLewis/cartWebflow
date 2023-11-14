@@ -153,8 +153,8 @@ const constructProductList = async () => {
     let product = productJSON[0]
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('bebdjbdtrès DesCriPtiF')
-        shoppingCart.addItem(product.name, product.price, product.image, product.prices)
+        console.log('bebdjbdtrès DesCriPtiF', product)
+        shoppingCart.addItem(new Product(product.name, product.price, product.image, product.prices), 1)
     })
     let jagjagdock = document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
         event.preventDefault()
