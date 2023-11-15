@@ -16,7 +16,8 @@
 
 .product-pict {
     height: 100px;
-    width: 4px;
+    width: 80%;
+    object-fit: contain;
 }
 
 .trash-pict {

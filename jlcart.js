@@ -248,7 +248,7 @@ showCart.addEventListener('click', () => {
         quantityContainer.classList.add('jl-input', 'input-groupe')
         quantityContainer.innerHTML = "<p>qt : " + prod.count + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
         name.textContent = prod.name
-        price.textContent = prod.price
+        price.textContent = prod.prices[0].price + '&euro;'
         containerProductText.appendChild(name)
         containerProductText.appendChild(desc)
         containerProductText.appendChild(price)
