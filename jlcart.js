@@ -178,24 +178,9 @@ const colorButtonAction = (elem, image, id) => {
 let products = []
 
 const initHome = async () => {
-    let productsJSON = await (await getProductsFromStripe()).json()
-    let jlCartNumber = document.createElement('div')
-    let divProductList = document.getElementsByClassName('product-list')[0];
+    
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
-
-    jlCartNumber.classList.add('jl-cart-number')
-    jlCartNumber.id = 'jlCartNumber'
-    jlCartNumber.setAttribute("data-toggle", "modal")
-    jlCartNumber.setAttribute("data-target", "#cart")
-    jlCartNumber.textContent = 0
-    jlCartNumber.addEventListener('click',(event) => showCart(event))
-    document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
-    setCartNumber();
-
-    for (const product of productsJSON) {
-        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
-    }
 
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
@@ -238,13 +223,39 @@ const initHome = async () => {
     dock.srcset = products[0].image
 }
 
+const initBox = async ()  => {
+    document.querySelector('#jag-jag').addEventListener('click', (event) => {
+        event.preventDefault()
+        let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
+        shoppingCart.addItem(product, 1)
+    })
+}
+
 const init = async () => {
+
+    let productsJSON = await (await getProductsFromStripe()).json()
+    let jlCartNumber = document.createElement('div')
+
+    for (const product of productsJSON) {
+        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
+    }
+    jlCartNumber.classList.add('jl-cart-number')
+    jlCartNumber.id = 'jlCartNumber'
+    jlCartNumber.setAttribute("data-toggle", "modal")
+    jlCartNumber.setAttribute("data-target", "#cart")
+    jlCartNumber.textContent = 0
+    jlCartNumber.addEventListener('click',(event) => showCart(event))
+    document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
+    setCartNumber();
+
     page = window.location.href.split('/')[3];
     switch(page) {
         case '' : 
-            initHome() 
+            initHome(productsJSON) 
         case 'page-produit-dock' :
             console.log('page-produit-dock')
+        case 'page-produit-boitier' :
+            initBox(productsJSON)
         default : 
             console.log('page')
     }
