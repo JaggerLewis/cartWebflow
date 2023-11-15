@@ -165,19 +165,16 @@ const init = async () => {
     let fauve = document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('fauve')
-        let src = pict.src
-        console.log('src => ',src)
-        pict.srcset = pict.srcset.replace(src, productJSON[3].image)
+
+        pict.srcset = productJSON[3].image
         pict.setAttribute('data-selected', productJSON[3].prices[0].id)
         pict.src = productJSON[3].image
-        console.log('src => ',src)
     })
     let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('weimar')
        
-        let src = pict.src
-        pict.srcset = pict.srcset.replace(src, productJSON[1].image)
+        pict.srcset = productJSON[1].image
         pict.setAttribute('data-selected', productJSON[1].prices[0].id)
         pict.src = productJSON[1].image
     })
@@ -185,8 +182,7 @@ const init = async () => {
         event.preventDefault()
         console.log('charbon')
        
-        let src = pict.src
-        pict.srcset = pict.srcset.replace(src, productJSON[5].image)
+        pict.srcset = productJSON[5].image
         pict.setAttribute('data-selected', productJSON[5].prices[0].id)
         pict.src = productJSON[5].image
     })
