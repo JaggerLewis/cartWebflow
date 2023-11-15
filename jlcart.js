@@ -238,13 +238,9 @@ showCart.addEventListener('click', (event) => {
     event.preventDefault();
 
     let allProduct = []
-    shoppingCart.cart.forEach((item) => {
-        allProduct.push(item.getProductFromList(products))
-    })
-    console.log('allProduct => ', allProduct)
-    allProduct.forEach(prod => {
-        console.log('prod =>', prod)
-    let id = prod.prices[0].id
+    shoppingCart.cart.forEach((prod) => {
+        console.log(prod)
+        let id = prod.price.id
         addHtml(prod, id)
         addFunction(prod, id)
     })
