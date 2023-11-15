@@ -150,7 +150,6 @@ class ShoppingCart {
     }
 
     getCartStripeUrl() {
-        console.log('cart =>', this.cart)
         let value = this.cart.map((e) => {return {id : e.id.price.id, quantity : e.quantity}})
         const answer = fetch("https://dev.jagger-tracker.com/stripe/create-checkout-session", {
             method: "POST",
@@ -178,8 +177,13 @@ const colorButtonAction = (elem, image, id) => {
 }
 let products = []
 const init = async () => {
-
+    
+    let productsJSON = await (await getProductsFromStripe()).json()
     let jlCartNumber = document.createElement('div')
+    let divProductList = document.getElementsByClassName('product-list')[0];
+    let collar = document.querySelector('#jl-collar')
+    let dock = document.querySelector('#jl-dock')
+
     jlCartNumber.classList.add('jl-cart-number')
     jlCartNumber.id = 'jlCartNumber'
     jlCartNumber.setAttribute("data-toggle", "modal")
@@ -187,13 +191,11 @@ const init = async () => {
     jlCartNumber.textContent = 0
     document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
     setCartNumber();
-    const productsJSON = await (await getProductsFromStripe()).json()
+
     for (const product of productsJSON) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
-    const divProductList = document.getElementsByClassName('product-list')[0];
-    let collar = document.querySelector('#jl-collar')
-    let dock = document.querySelector('#jl-dock')
+
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
@@ -232,7 +234,7 @@ const init = async () => {
     collar.setAttribute('data-selected', products[1].price.id)
     collar.srcset = products[1].image
     dock.setAttribute('data-selected', products[0].price.id)
-    dock.srcset = products[1].image
+    dock.srcset = products[0].image
 }
 
 init()
@@ -312,7 +314,7 @@ const showCart = (event) => {
             event.preventDefault()
             document.querySelector('.border-container').removeChild(document.querySelector('#' + id))
 
-            shoppingCart.clearItem(new Product(prod.id.name, prod.id.price, prod.id.img, prod.id.prices), 1);
+            shoppingCart.clearItem(new Product(prod.name, prod.price, prod.img, prod.prices), 1);
             shoppingCart.setTotalPrice();
         })
     }
