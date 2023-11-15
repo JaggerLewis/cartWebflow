@@ -189,6 +189,7 @@ const init = async () => {
     jlCartNumber.setAttribute("data-toggle", "modal")
     jlCartNumber.setAttribute("data-target", "#cart")
     jlCartNumber.textContent = 0
+    jlCartNumber.addEventListener('click',(event) => showCart(event))
     document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
     setCartNumber();
 
@@ -237,7 +238,6 @@ const init = async () => {
     dock.srcset = products[0].image
 }
 
-init()
 
 const redirectToStripe = async (event) => {
     event.preventDefault();
@@ -320,9 +320,9 @@ const showCart = (event) => {
     }
 
 }
+init()
 
 document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
-document.querySelector('#jl-cart-number').addEventListener('click',(event) => showCart(event))
 
 const goToStripe = document.getElementById("validate-cart");
 goToStripe.onclick = (event) => {
