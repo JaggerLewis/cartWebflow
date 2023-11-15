@@ -176,8 +176,8 @@ const colorButtonAction = (elem, image, id) => {
     elem.src = image
 }
 let products = []
-const init = async () => {
-    console.log(window.location.href);
+
+const initHome = async () => {
     let productsJSON = await (await getProductsFromStripe()).json()
     let jlCartNumber = document.createElement('div')
     let divProductList = document.getElementsByClassName('product-list')[0];
@@ -236,6 +236,19 @@ const init = async () => {
     collar.srcset = products[1].image
     dock.setAttribute('data-selected', products[0].price.id)
     dock.srcset = products[0].image
+}
+
+const init = async () => {
+    page = window.location.href.split('/')[3];
+    switch(page) {
+        case '' : 
+            initHome() 
+        case 'page-produit-dock' :
+            console.log('page-produit-dock')
+        default : 
+            console.log('page')
+    }
+   
 }
 
 
