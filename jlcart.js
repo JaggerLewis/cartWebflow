@@ -172,6 +172,7 @@ const constructProductList = async () => {
         event.preventDefault()
         console.log('ui')
     })
+    let collarpict =  document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = product.image
 }
 
 constructProductList()
