@@ -245,8 +245,8 @@ const addToCart = (event) => {
     shoppingCart.addItem(id, 1)
 }
 
-const showCart = document.querySelector('#jag-cart')
-showCart.addEventListener('click', (event) => {
+
+const showCart = (event) => {
     event.preventDefault();
 
     shoppingCart.cart.forEach((prod) => {
@@ -300,8 +300,10 @@ showCart.addEventListener('click', (event) => {
         })
     }
 
-})
+}
 
+document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
+document.querySelector('#jlCartNumber').addEventListener('click',(event) => showCart(event))
 
 const goToStripe = document.getElementById("validate-cart");
 goToStripe.onclick = (event) => {
