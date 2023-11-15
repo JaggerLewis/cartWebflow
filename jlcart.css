@@ -55,6 +55,10 @@
     justify-content: center;
 }
 
+.container-product-text {
+    width: 50%;
+}
+
 .border-container {
     padding: 16px 14px 16px 16px;
     border-radius: 15px;
@@ -137,4 +141,10 @@ p {
 
 .card-img-top {
     object-fit: contain;
+}
+
+.jl-input {
+    width: 30%;
+    justify-content: space-around;
+    display :flex;
 }
