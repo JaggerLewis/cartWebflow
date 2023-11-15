@@ -202,7 +202,7 @@ showCart.addEventListener('click', () => {
     console.log('allProduct => ', allProduct)
     allProduct.forEach(prod => {
         console.log('prod =>', prod)
-    let id = JSON.parse(prod.prices)[0].id
+    let id = prod.prices[0].id
         addHtml(prod, id)
         addFunction(prod, id)
     })
