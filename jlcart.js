@@ -168,6 +168,7 @@ const init = async () => {
         let src = pict.src
         console.log('src => ',src)
         pict.srcset = pict.srcset.replace(src, productJSON[3].image)
+        pict.setAttribute('data-selected', productJSON[3].prices[0].id)
         pict.src = productJSON[3].image
         console.log('src => ',src)
     })
@@ -177,6 +178,7 @@ const init = async () => {
        
         let src = pict.src
         pict.srcset = pict.srcset.replace(src, productJSON[1].image)
+        pict.setAttribute('data-selected', productJSON[1].prices[0].id)
         pict.src = productJSON[1].image
     })
     let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
@@ -185,11 +187,12 @@ const init = async () => {
        
         let src = pict.src
         pict.srcset = pict.srcset.replace(src, productJSON[5].image)
+        pict.setAttribute('data-selected', productJSON[5].prices[0].id)
         pict.src = productJSON[5].image
     })
-    let collarpict =  document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
-    collarpict.src = product.image
-    collarpict.srcset = product.image
+   
+    pict.setAttribute('data-selected', productJSON[3].prices[0].id)
+    pict.srcset = product.image
 }
 
 init()
