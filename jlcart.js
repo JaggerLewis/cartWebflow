@@ -254,11 +254,15 @@ const showCart = (event) => {
 
     shoppingCart.cart.forEach((prod) => {
         let id = prod.id.price.id
+        clearHtml()
         addHtml(prod, id)
         addFunction(prod.id, id)
     })
     shoppingCart.setTotalPrice();
 
+    function clearHtml () {
+        document.querySelector('.border-container').innerHTML = '';
+    } 
 
     function addHtml(prod, id) {
         let container = document.querySelector('.border-container')
