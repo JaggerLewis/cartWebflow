@@ -194,7 +194,7 @@ const init = async () => {
         event.preventDefault()
         console.log('ui')
     })
-    let fauve = document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
+    let fauve = document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('fauve')
 
@@ -202,7 +202,7 @@ const init = async () => {
         pict.setAttribute('data-selected', products[3].price.id)
         pict.src = products[3].image
     })
-    let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
+    let weimar = document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('weimar')
        
@@ -210,7 +210,7 @@ const init = async () => {
         pict.setAttribute('data-selected', products[1].price.id)
         pict.src = products[1].image
     })
-    let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
+    let charbon = document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('charbon')
        
