@@ -218,15 +218,15 @@ const init = async () => {
     })
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[2].image, products[2].price.id )
+        colorButtonAction(dock, products[2].image, products[2].price.id )
     })
     document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[0].image, products[0].price.id )
+        colorButtonAction(dock, products[0].image, products[0].price.id )
     })
     document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[4].image, products[4].price.id )
+        colorButtonAction(dock, products[4].image, products[4].price.id )
     })
    
     collar.setAttribute('data-selected', products[1].price.id)
