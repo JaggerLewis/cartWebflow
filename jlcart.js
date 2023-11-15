@@ -171,10 +171,10 @@ const getProductsFromStripe = async () => {
 
 
 const shoppingCart = new ShoppingCart();
-const colorButtonAction = (pict, image, id) => {
-    pict.srcset = image
-    pict.setAttribute('data-selected', id)
-    pict.src = image
+const colorButtonAction = (elem, image, id) => {
+    elem.srcset = image
+    elem.setAttribute('data-selected', id)
+    elem.src = image
 }
 let products = []
 const init = async () => {
