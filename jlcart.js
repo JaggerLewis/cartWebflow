@@ -238,7 +238,7 @@ showCart.addEventListener('click', (event) => {
     event.preventDefault();
 
     let allProduct = []
-    shoppingCart.cart((item) => {
+    shoppingCart.cart.forEach((item) => {
         allProduct.push(item.getProductFromList(products))
     })
     console.log('allProduct => ', allProduct)
