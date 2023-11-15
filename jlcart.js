@@ -229,8 +229,10 @@ init()
 
 const redirectToStripe = async (event) => {
     event.preventDefault();
+    console.log('2')
     const apiRes = await shoppingCart.getCartStripeUrl()
     const apiResJson = await apiRes.json()
+    console.log('apiRes =>', apiResJson)
     window.location.href = apiResJson.url
 }
 
@@ -303,6 +305,7 @@ showCart.addEventListener('click', (event) => {
 
 const goToStripe = document.getElementById("validate-cart");
 goToStripe.onclick = (event) => {
+    console.log('1')
     redirectToStripe(event)
 }
 
