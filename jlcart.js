@@ -105,7 +105,7 @@ class ShoppingCart {
     setTotalPrice() {
         let price = 0;
         this.items.forEach(item => {
-            price += item.price * item.count
+            price += item.prices[0].price * item.count
         })
         const totalSpan = document.querySelector('.total-price')
         totalSpan.innerHTML = price + "&euro;"
@@ -248,7 +248,7 @@ showCart.addEventListener('click', () => {
         quantityContainer.classList.add('jl-input', 'input-groupe')
         quantityContainer.innerHTML = "<p>qt : " + prod.count + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
         name.textContent = prod.name
-        price.textContent = prod.prices[0].price + '&euro;'
+        price.textContent = prod.prices[0].price + '€'
         containerProductText.appendChild(name)
         containerProductText.appendChild(desc)
         containerProductText.appendChild(price)
@@ -272,9 +272,9 @@ showCart.addEventListener('click', () => {
 })
 
 
-// const goToStripe = document.getElementById("validate-cart");
-// goToStripe.onclick = (event) => {
-//     redirectToStripe(event)
-// }
+const goToStripe = document.getElementById("validate-cart");
+goToStripe.onclick = (event) => {
+    redirectToStripe(event)
+}
 
 
