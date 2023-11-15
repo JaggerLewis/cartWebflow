@@ -240,7 +240,7 @@ showCart.addEventListener('click', (event) => {
         console.log('prod => ',prod)
         console.log('prod => ',prod.id)
         let id = prod.id.price.id
-        addHtml(prod.id, id)
+        addHtml(prod, id)
         addFunction(prod.id, id)
     })
     shoppingCart.setTotalPrice();
@@ -256,7 +256,7 @@ showCart.addEventListener('click', (event) => {
         let desc = document.createElement('p')
         let price = document.createElement('p')
         let quantityContainer = document.createElement('p')
-        image.src = prod.image
+        image.src = prod.id.image
         image.classList.add('product-pict')
         elemContainer.classList.add('container-product-bis')
         containerProduct.classList.add('container-product')
@@ -267,8 +267,8 @@ showCart.addEventListener('click', (event) => {
         price.classList.add('product-price')
         quantityContainer.classList.add('jl-input', 'input-groupe')
         quantityContainer.innerHTML = "<p>qt : " + prod.quantity + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
-        name.textContent = prod.name
-        price.textContent = prod.price.price + '€'
+        name.textContent = prod.id.name
+        price.textContent = prod.id.price.price + '€'
         containerProductText.appendChild(name)
         containerProductText.appendChild(desc)
         containerProductText.appendChild(price)
