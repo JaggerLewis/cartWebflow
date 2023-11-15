@@ -221,8 +221,8 @@ const init = async () => {
         pict.src = products[5].image
     })
    
-    pict.setAttribute('data-selected', products[3].price.id)
-    pict.srcset = products[3].image
+    pict.setAttribute('data-selected', products[1].price.id)
+    pict.srcset = products[1].image
 }
 
 init()
