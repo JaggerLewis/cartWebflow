@@ -139,9 +139,7 @@ class ShoppingCart {
 
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
-        let count = 0
-        JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
-         document.querySelector('#jlCartNumber').textContent = count
+        setCartNumber();
     }
 
     getCartStripeUrl() {
@@ -173,7 +171,7 @@ const init = async () => {
     jlCartNumber.id = 'jlCartNumber'
     jlCartNumber.textContent = 0
     document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
-
+    setCartNumber();
     const productsJSON = await (await getProductsFromStripe()).json()
     for (const product of productsJSON) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
@@ -225,6 +223,12 @@ const redirectToStripe = async (event) => {
     const apiRes = await shoppingCart.getCartStripeUrl()
     const apiResJson = await apiRes.json()
     window.location.href = apiResJson.url
+}
+
+const setCartNumber = () => {
+    let count = 0
+    JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
+     document.querySelector('#jlCartNumber').textContent = count
 }
 
 
