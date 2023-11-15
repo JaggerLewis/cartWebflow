@@ -301,7 +301,7 @@ const showCart = (event) => {
             event.preventDefault()
             document.querySelector('.border-container').removeChild(document.querySelector('#' + id))
 
-            shoppingCart.clearItem(new Product(prod.name, prod.price, prod.img, prod.prices), 1);
+            shoppingCart.clearItem(new Product(prod.id.name, prod.id.price, prod.id.img, prod.id.prices), 1);
             shoppingCart.setTotalPrice();
         })
     }
