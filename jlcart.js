@@ -223,11 +223,45 @@ const initHome = async () => {
     dock.srcset = products[0].image
 }
 
-const initBox = async ()  => {
+const initCollar = async ()  => {
+    let collar = document.querySelector('#jl-collar')
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
+    })
+    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[3].image, products[3].price.id )
+    })
+    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[1].image, products[1].price.id )
+    })
+    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[5].image, products[5].price.id )
+    })
+}
+
+const initBox = async ()  => {
+    let dock = document.querySelector('#jl-dock')
+    document.querySelector('#jag-dock').addEventListener('click', (event) => {
+        event.preventDefault()
+        let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
+        shoppingCart.addItem(product, 1)
+    })
+    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(dock, products[3].image, products[3].price.id )
+    })
+    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(dock, products[1].image, products[1].price.id )
+    })
+    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(dock, products[5].image, products[5].price.id )
     })
 }
 
@@ -251,11 +285,11 @@ const init = async () => {
     page = window.location.href.split('/')[3];
     switch(page) {
         case '' : 
-            initHome(productsJSON) 
+            initHome() 
         case 'page-produit-dock' :
-            console.log('page-produit-dock')
+            initBox()
         case 'page-produit-boitier' :
-            initBox(productsJSON)
+            initCollar()
         default : 
             console.log('page')
     }
