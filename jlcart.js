@@ -150,12 +150,12 @@ const init = async () => {
     const products = await getProductsFromStripe()
     const productJSON = await products.json();
     const divProductList = document.getElementsByClassName('product-list')[0];
-    let product = productJSON[0]
     let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
     console.log('productJSON =>', productJSON)
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('bebdjbdtrès DesCriPtiF', product)
+        let product = productJSON.find(elem => elem.prices[0].id == pict.getAttribute('data-selected'))
+        console.log(product)
         shoppingCart.addItem(new Product(product.name, product.price, product.image, product.prices), 1)
     })
     let jagjagdock = document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
