@@ -171,7 +171,11 @@ const getProductsFromStripe = async () => {
 
 
 const shoppingCart = new ShoppingCart();
-
+const colorButtonAction = (pict, image, id) => {
+    pict.srcset = image
+    pict.setAttribute('data-selected', id)
+    pict.src = image
+}
 let products = []
 const init = async () => {
 
@@ -194,33 +198,21 @@ const init = async () => {
         let product = products.find(elem => elem.price.id == pict.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
     })
-    let jagjagdock = document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
+    document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('ui')
     })
-    let fauve = document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
+    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('fauve')
-
-        pict.srcset = products[3].image
-        pict.setAttribute('data-selected', products[3].price.id)
-        pict.src = products[3].image
+        colorButtonAction(pict, products[3].image, products[3].price.id )
     })
-    let weimar = document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
+    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('weimar')
-       
-        pict.srcset = products[1].image
-        pict.setAttribute('data-selected', products[1].price.id)
-        pict.src = products[1].image
+        colorButtonAction(pict, products[1].image, products[1].price.id )
     })
-    let charbon = document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
+    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('charbon')
-       
-        pict.srcset = products[5].image
-        pict.setAttribute('data-selected', products[5].price.id)
-        pict.src = products[5].image
+        colorButtonAction(pict, products[5].image, products[5].price.id )
     })
    
     pict.setAttribute('data-selected', products[1].price.id)
