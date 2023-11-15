@@ -241,9 +241,9 @@ showCart.addEventListener('click', (event) => {
     shoppingCart.cart.forEach((prod) => {
         console.log('prod => ',prod)
         console.log('prod => ',prod.id)
-        let id = prod.price.id
-        addHtml(prod, id)
-        addFunction(prod, id)
+        let id = prod.id.price.id
+        addHtml(prod.id, id)
+        addFunction(prod.id, id)
     })
     shoppingCart.setTotalPrice();
 
