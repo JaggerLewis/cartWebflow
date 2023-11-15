@@ -15,6 +15,13 @@ modalDiv.setAttribute("class", "modal fade")
 modalDiv.innerHTML = '<div class="global-container"><div class="jl-header"><p class="title">Panier</p><p class="close-button">x</p></div><div class="border-container"><div class="container-product"></div></div><div class="container-receipe"><div class="container-sub-reciepe"><p class="reciep-text">Frais D\'activitation</p><p class="reciep-text">5,00&euro;</p></div><div class="container-sub-reciepe"><p class="reciep-text">Livraison</p><p class="reciep-text">GRATUIT</p></div></div><div class="container-total"><p class="total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="button" >Finaliser la commande</button></div>'
 body.appendChild(modalDiv)
 
+
+const setCartNumber = () => {
+    let count = 0
+    JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
+     document.querySelector('#jlCartNumber').textContent = count
+}
+
 class Product {
     constructor(name, description, metadata, image, price) {
         this.name = name;
@@ -224,13 +231,6 @@ const redirectToStripe = async (event) => {
     const apiResJson = await apiRes.json()
     window.location.href = apiResJson.url
 }
-
-const setCartNumber = () => {
-    let count = 0
-    JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
-     document.querySelector('#jlCartNumber').textContent = count
-}
-
 
 const addToCart = (event) => {
     event.preventDefault();
