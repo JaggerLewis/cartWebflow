@@ -165,7 +165,7 @@ const getProductsFromStripe = async () => {
 
 const shoppingCart = new ShoppingCart();
 
-let listProduct = []
+let products = []
 const init = async () => {
     const productsJSON = await (await getProductsFromStripe()).json()
     for (const product of productsJSON) {
@@ -173,10 +173,10 @@ const init = async () => {
     }
     const divProductList = document.getElementsByClassName('product-list')[0];
     let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
-    console.log('products =>', listProduct)
+    console.log('products =>', products)
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
-        let product = listProduct.find(elem => elem.price.id == pict.getAttribute('data-selected'))
+        let product = products.find(elem => elem.price.id == pict.getAttribute('data-selected'))
         console.log(product)
         shoppingCart.addItem(product, 1)
     })
@@ -239,7 +239,7 @@ showCart.addEventListener('click', (event) => {
 
     let allProduct = []
     shoppingCart.cart((item) => {
-        allProduct.push(item.getProductFromList(listProduct))
+        allProduct.push(item.getProductFromList(products))
     })
     console.log('allProduct => ', allProduct)
     allProduct.forEach(prod => {
