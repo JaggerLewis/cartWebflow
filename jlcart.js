@@ -176,6 +176,8 @@ const init = async () => {
     let jlCartNumber = document.createElement('div')
     jlCartNumber.classList.add('jl-cart-number')
     jlCartNumber.id = 'jlCartNumber'
+    jlCartNumber.setAttribute("data-toggle", "modal")
+    jlCartNumber.setAttribute("data-target", "#cart")
     jlCartNumber.textContent = 0
     document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
     setCartNumber();
