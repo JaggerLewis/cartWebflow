@@ -150,6 +150,7 @@ class ShoppingCart {
     }
 
     getCartStripeUrl() {
+        console.log('cart =>', this.cart)
         const answer = fetch("https://dev.jagger-tracker.com/stripe/create-checkout-session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
