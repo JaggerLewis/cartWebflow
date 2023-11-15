@@ -251,10 +251,10 @@ const addToCart = (event) => {
 
 const showCart = (event) => {
     event.preventDefault();
-
+    
+    clearHtml()
     shoppingCart.cart.forEach((prod) => {
         let id = prod.id.price.id
-        clearHtml()
         addHtml(prod, id)
         addFunction(prod.id, id)
     })
