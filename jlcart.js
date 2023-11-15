@@ -192,31 +192,47 @@ const init = async () => {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
     const divProductList = document.getElementsByClassName('product-list')[0];
-    let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
-    let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
+    let collar = document.querySelector('#jl-collar')
+    let dock = document.querySelector('#jl-dock')
+    document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
-        let product = products.find(elem => elem.price.id == pict.getAttribute('data-selected'))
+        let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
     })
     document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('ui')
+        let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
+        shoppingCart.addItem(product, 1)
     })
     document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(pict, products[3].image, products[3].price.id )
+        colorButtonAction(collar, products[3].image, products[3].price.id )
     })
     document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(pict, products[1].image, products[1].price.id )
+        colorButtonAction(collar, products[1].image, products[1].price.id )
     })
     document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(pict, products[5].image, products[5].price.id )
+        colorButtonAction(collar, products[5].image, products[5].price.id )
+    })
+    document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[2].image, products[2].price.id )
+    })
+    document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[0].image, products[0].price.id )
+    })
+    document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[4].image, products[4].price.id )
     })
    
-    pict.setAttribute('data-selected', products[1].price.id)
-    pict.srcset = products[1].image
+    collar.setAttribute('data-selected', products[1].price.id)
+    collar.srcset = products[1].image
+    dock.setAttribute('data-selected', products[0].price.id)
+    dock.srcset = products[1].image
 }
 
 init()
