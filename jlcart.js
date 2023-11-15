@@ -163,6 +163,7 @@ const init = async () => {
     })
     let fauve = document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
+        console.log('fauve')
         let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
         let src = pict.src
         pict.srcset = pict.srcset.replace(src, productJSON[3].image)
@@ -170,6 +171,7 @@ const init = async () => {
     })
     let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
+        console.log('weimar')
         let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
         let src = pict.src
         pict.srcset = pict.srcset.replace(src, productJSON[1].image)
@@ -177,12 +179,15 @@ const init = async () => {
     })
     let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
+        console.log('charbon')
         let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
         let src = pict.src
         pict.srcset = pict.srcset.replace(src, productJSON[4].image)
         pict.src = productJSON[2].image
     })
-    let collarpict =  document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = product.image
+    let collarpict =  document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
+    collarpict.src = product.image
+    collarpict.srcset = product.image
 }
 
 init()
