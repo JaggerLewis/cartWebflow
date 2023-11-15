@@ -285,11 +285,14 @@ const init = async () => {
     page = window.location.href.split('/')[3];
     switch(page) {
         case '' : 
-            initHome() 
+            initHome()
+            break;
         case 'page-produit-dock' :
             initBox()
+            break;
         case 'page-produit-boitier' :
             initCollar()
+            break;
         default : 
             console.log('page')
     }
