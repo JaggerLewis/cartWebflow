@@ -239,7 +239,10 @@ init()
 
 const redirectToStripe = async (event) => {
     event.preventDefault();
-    console.log('2')
+    if (shoppingCart.countItems() == 0) {
+            alert("vous n'avez pas d'article")
+            return
+        }
     const apiRes = await shoppingCart.getCartStripeUrl()
     const apiResJson = await apiRes.json()
     console.log('apiRes =>', apiResJson)
@@ -321,7 +324,6 @@ document.querySelector('#jlCartNumber').addEventListener('click',(event) => show
 
 const goToStripe = document.getElementById("validate-cart");
 goToStripe.onclick = (event) => {
-    console.log('1')
     redirectToStripe(event)
 }
 
