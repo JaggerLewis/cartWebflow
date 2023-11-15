@@ -16,118 +16,131 @@ modalDiv.innerHTML = '<div class="global-container"><div class="jl-header"><p cl
 body.appendChild(modalDiv)
 
 class Product {
-    constructor(name, price, image, prices) {
+    constructor(name, description, metadata, image, price) {
         this.name = name;
-        this.price = price;
+        this.description = description;
+        this.metadata = metadata;
         this.image = image;
-        this.prices = prices
+        this.price = price
     }
 }
 
-class ProductCart extends Product {
-    constructor(product, count) {
-        super(product.name, product.price, product.image, product.prices)
-        this.count = count;
+class ProductCart {
+    constructor(id, quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
+
+    getProductFromList(products) {
+        return products.find((product) => {
+            return product.price.id === this.id
+        })
     }
 }
 
 class ShoppingCart {
     constructor() {
         if (localStorage.getItem("shoppingCart")) {
-            this.items = JSON.parse(localStorage.getItem("shoppingCart"))
+            let cart = JSON.parse(localStorage.getItem("shoppingCart"))
+            this.cart = []
+            for (const product of cart) {
+                this.cart.push(new ProductCart(product.id, product.quantity))
+            }
         } else {
-            this.items = []
+            this.cart = []
         }
     }
 
-    findItemIndexByName(name) {
-        const itemIndex = this.items.findIndex((item) => {
-            return item.name === name
+    findProductIndexById(id) {
+        return this.cart.findIndex((product) => {
+            return product.id === id
         })
-        return itemIndex
     }
 
-    addItem(item, count = 1) {
-        console.log(item)
-        console.log('this.countItems =>', this.countItems())
-        if (this.countItems() >= 2) {
-            alert('Vous ne pouvez pas ajouter plus de deux produit...')
-            return
-        }
-        
-        const itemIndex = this.findItemIndexByName(item.name)
-        if (itemIndex < 0) {
-            const cardProduct = new ProductCart(item, count)
-            this.items.push(cardProduct)
+    addItem(id, count = 1) {
+        const productIndex = this.findProductIndexById(id)
+        if (productIndex < 0) {
+            const cardProduct = new ProductCart(id, count)
+            this.cart.push(cardProduct)
         } else {
-            this.items[itemIndex].count++
+            this.cart[productIndex].quantity++
         }
         this.saveCart()
     }
 
-    removeItem(item, count = 1) {
-        const itemIndex = this.findItemIndexByName(item.name)
-        if (itemIndex < -1) {
+    removeItem(id, count = 1) {
+        const productIndex = this.findProductIndexById(id)
+        if (productIndex < -1) {
             throw new Error();
         }
-        this.items.count -= count
-        if (this.items.count <= 0) {
-            this.clearItem(item);
+        this.cart[productIndex].quantity -= count
+        if (this.cart[productIndex].quantity <= 0) {
+            this.clearItem(id);
         }
+        this.saveCart()
     }
 
-    setItemCount(item, count) {
-        const itemIndex = this.findItemIndexByName(item.name)
-        if (itemIndex < -1) {
+    setItemCount(id, count) {
+        const productIndex = this.findProductIndexById(id)
+        if (productIndex < -1) {
             throw new Error();
         }
         if (count < 0) {
             throw new Error();
         }
         if (count === 0) {
-            this.removeItem(item)
+            this.removeItem(id)
         } else {
-            this.items[itemIndex].count = count
+            this.cart[productIndex].quantity = count
         }
+        this.saveCart()
     }
 
-    clearItem(item) {
-        const itemIndex = this.findItemIndexByName(item.name)
-        if (itemIndex < -1) {
+    clearItem(id) {
+        const productIndex = this.findProductIndexById(id)
+        if (productIndex < -1) {
             throw new Error();
         }
-        this.items.splice(itemIndex, 1)
+        this.cart.splice(productIndex, 1)
         this.saveCart()
     }
 
     countItems() {
         let total = 0
-        this.items.forEach(item => {
-            total += item.count
+        this.cart.forEach(product => {
+            total += product.quantity
         })
         return total
     }
 
-    setTotalPrice() {
-        let price = 0;
-        this.items.forEach(item => {
-            price += item.prices[0].price * item.count
+    getTotalPrice(products) {
+        let totalPrice = 0;
+        this.cart.forEach((productCart) => {
+            console.log('totalPrice product', productCart)
+            const product = productCart.getProductFromList(products)
+            totalPrice += product.price.price * productCart.quantity
+            console.log("totalprice calculation", totalPrice, product.price.price)
         })
+        return totalPrice
+    }
+
+    setTotalPrice(products) {
+        let price = this.getTotalPrice(products)
         const totalSpan = document.querySelector('.total-price')
         totalSpan.innerHTML = price + "&euro;"
     }
 
 
     clear() {
-        this.items = []
+        this.cart = []
         this.saveCart();
     }
 
     saveCart() {
-        localStorage.setItem('shoppingCart', JSON.stringify(this.items));
+        localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         console.log('localStorage =>', localStorage)
         let count = 0
-        JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.count)
+        JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
         // document.querySelector('.total-count').textContent = count
     }
 
@@ -135,7 +148,7 @@ class ShoppingCart {
         const answer = fetch("https://dev.jagger-tracker.com/stripe/create-checkout-session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: this.items, mode: 'payment' })
+            body: JSON.stringify({ cart: this.cart, mode: 'payment' })
         })
         return answer
     }
@@ -152,17 +165,20 @@ const getProductsFromStripe = async () => {
 
 const shoppingCart = new ShoppingCart();
 
+let listProduct = []
 const init = async () => {
-    const products = await getProductsFromStripe()
-    const productJSON = await products.json();
+    const productsJSON = await (await getProductsFromStripe()).json()
+    for (const product of productsJSON) {
+        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
+    }
     const divProductList = document.getElementsByClassName('product-list')[0];
     let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
-    console.log('productJSON =>', productJSON)
+    console.log('products =>', listProduct)
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
-        let product = productJSON.find(elem => elem.prices[0].id == pict.getAttribute('data-selected'))
+        let product = listProduct.find(elem => elem.price.id == pict.getAttribute('data-selected'))
         console.log(product)
-        shoppingCart.addItem(new Product(product.name, product.price, product.image, product.prices), 1)
+        shoppingCart.addItem(product, 1)
     })
     let jagjagdock = document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
         event.preventDefault()
@@ -172,29 +188,29 @@ const init = async () => {
         event.preventDefault()
         console.log('fauve')
 
-        pict.srcset = productJSON[3].image
-        pict.setAttribute('data-selected', productJSON[3].prices[0].id)
-        pict.src = productJSON[3].image
+        pict.srcset = products[3].image
+        pict.setAttribute('data-selected', products[3].price.id)
+        pict.src = products[3].image
     })
     let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('weimar')
        
-        pict.srcset = productJSON[1].image
-        pict.setAttribute('data-selected', productJSON[1].prices[0].id)
-        pict.src = productJSON[1].image
+        pict.srcset = products[1].image
+        pict.setAttribute('data-selected', products[1].price.id)
+        pict.src = products[1].image
     })
     let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('charbon')
        
-        pict.srcset = productJSON[5].image
-        pict.setAttribute('data-selected', productJSON[5].prices[0].id)
-        pict.src = productJSON[5].image
+        pict.srcset = products[5].image
+        pict.setAttribute('data-selected', products[5].price.id)
+        pict.src = products[5].image
     })
    
-    pict.setAttribute('data-selected', productJSON[3].prices[0].id)
-    pict.srcset = productJSON[3].image
+    pict.setAttribute('data-selected', products[3].price.id)
+    pict.srcset = products[3].image
 }
 
 init()
@@ -213,15 +229,18 @@ const addToCart = (event) => {
     var price = Number(event.target.getAttribute('data-price'));
     var prices = event.target.getAttribute('data-prices');
     var img = event.target.getAttribute('data-image');
-    shoppingCart.addItem(new Product(name, price, img, prices), 1)
+    shoppingCart.addItem(id, 1)
 }
 
 const showCart = document.querySelector('#jag-cart')
 console.log('showCart => ', showCart);
-showCart.addEventListener('click', () => {
+showCart.addEventListener('click', (event) => {
     event.preventDefault();
 
-    let allProduct = JSON.parse(localStorage.getItem("shoppingCart"))
+    let allProduct = []
+    shoppingCart.cart((item) => {
+        allProduct.push(item.getProductFromList(listProduct))
+    })
     console.log('allProduct => ', allProduct)
     allProduct.forEach(prod => {
         console.log('prod =>', prod)
@@ -252,9 +271,9 @@ showCart.addEventListener('click', () => {
         desc.classList.add('product-description')
         price.classList.add('product-price')
         quantityContainer.classList.add('jl-input', 'input-groupe')
-        quantityContainer.innerHTML = "<p>qt : " + prod.count + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
+        quantityContainer.innerHTML = "<p>qt : " + prod.quantity + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
         name.textContent = prod.name
-        price.textContent = prod.prices[0].price + '€'
+        price.textContent = prod.price.price + '€'
         containerProductText.appendChild(name)
         containerProductText.appendChild(desc)
         containerProductText.appendChild(price)
