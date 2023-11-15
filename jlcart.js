@@ -163,15 +163,24 @@ const init = async () => {
     })
     let fauve = document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = productJSON[2].image
+        let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
+        let src = pict.src
+        pict.srcset.replace(src, productJSON[3].image)
+        pict.src = productJSON[2].image
     })
     let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = productJSON[3].image
+        let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
+        let src = pict.src
+        pict.srcset.replace(src, productJSON[1].image)
+        pict.src = productJSON[2].image
     })
     let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = productJSON[1].image
+        let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
+        let src = pict.src
+        pict.srcset.replace(src, productJSON[4].image)
+        pict.src = productJSON[2].image
     })
     let collarpict =  document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = product.image
 }
