@@ -177,7 +177,7 @@ const colorButtonAction = (elem, image, id) => {
 }
 let products = []
 const init = async () => {
-    
+    console.log(window.location.href);
     let productsJSON = await (await getProductsFromStripe()).json()
     let jlCartNumber = document.createElement('div')
     let divProductList = document.getElementsByClassName('product-list')[0];
