@@ -137,7 +137,7 @@ class ShoppingCart {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         let count = 0
         JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
-        // document.querySelector('.total-count').textContent = count
+         document.querySelector('#jlCartNumber').textContent = count
     }
 
     getCartStripeUrl() {
