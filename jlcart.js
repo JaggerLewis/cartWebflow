@@ -146,11 +146,12 @@ const getProductsFromStripe = async () => {
 
 const shoppingCart = new ShoppingCart();
 
-const constructProductList = async () => {
+const init = async () => {
     const products = await getProductsFromStripe()
     const productJSON = await products.json();
     const divProductList = document.getElementsByClassName('product-list')[0];
     let product = productJSON[0]
+    console.log('productJSON =>', productJSON)
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('bebdjbdtrès DesCriPtiF', product)
@@ -162,20 +163,20 @@ const constructProductList = async () => {
     })
     let fauve = document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('ui')
+        document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = productJSON[2].image
     })
     let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('ui')
+        document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = productJSON[3].image
     })
     let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('ui')
+        document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = productJSON[1].image
     })
     let collarpict =  document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7').src = product.image
 }
 
-constructProductList()
+init()
 
 const redirectToStripe = async (event) => {
     event.preventDefault();
