@@ -322,7 +322,7 @@ const showCart = (event) => {
 }
 
 document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
-document.querySelector('#jlCartNumber').addEventListener('click',(event) => showCart(event))
+document.querySelector('#jl-cart-number').addEventListener('click',(event) => showCart(event))
 
 const goToStripe = document.getElementById("validate-cart");
 goToStripe.onclick = (event) => {
