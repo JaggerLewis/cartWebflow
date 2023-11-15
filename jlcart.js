@@ -165,10 +165,11 @@ const init = async () => {
     let fauve = document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('fauve')
-       
         let src = pict.src
+        console.log('src => ',src)
         pict.srcset = pict.srcset.replace(src, productJSON[3].image)
         pict.src = productJSON[2].image
+        console.log('src => ',src)
     })
     let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
