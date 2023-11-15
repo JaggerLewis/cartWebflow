@@ -58,8 +58,8 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
-        if (countItems() >= 2) {
-            alert('vous ne pouvez pas ajouter plus de deux elelment au panier')
+        if (this.countItems() >= 2) {
+            alert('vous ne pouvez pas ajouter plus de deux elements au panier')
             return
         }
         const productIndex = this.findProductIndexById(id)
