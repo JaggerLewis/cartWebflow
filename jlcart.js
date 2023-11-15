@@ -116,7 +116,6 @@ class ShoppingCart {
     getTotalPrice() {
         let totalPrice = 0;
         this.cart.forEach((productCart) => {
-            console.log('totalPrice product', productCart)
             totalPrice += productCart.id.price.price * productCart.quantity
         })
         return totalPrice
@@ -136,7 +135,6 @@ class ShoppingCart {
 
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
-        console.log('localStorage =>', localStorage)
         let count = 0
         JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
         // document.querySelector('.total-count').textContent = count
@@ -165,17 +163,22 @@ const shoppingCart = new ShoppingCart();
 
 let products = []
 const init = async () => {
+
+    let jlCartNumber = document.createElement('div')
+    jlCartNumber.classList.add('jl-cart-number')
+    jlCartNumber.id = jlCartNumber
+    jlCartNumber.textContent = 0
+    document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
+
     const productsJSON = await (await getProductsFromStripe()).json()
     for (const product of productsJSON) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
     const divProductList = document.getElementsByClassName('product-list')[0];
     let pict = document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
-    console.log('products =>', products)
     let jagjag = document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == pict.getAttribute('data-selected'))
-        console.log(product)
         shoppingCart.addItem(product, 1)
     })
     let jagjagdock = document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
@@ -231,14 +234,10 @@ const addToCart = (event) => {
 }
 
 const showCart = document.querySelector('#jag-cart')
-console.log('showCart => ', showCart);
 showCart.addEventListener('click', (event) => {
     event.preventDefault();
 
-    let allProduct = []
     shoppingCart.cart.forEach((prod) => {
-        console.log('prod => ',prod)
-        console.log('prod => ',prod.id)
         let id = prod.id.price.id
         addHtml(prod, id)
         addFunction(prod.id, id)

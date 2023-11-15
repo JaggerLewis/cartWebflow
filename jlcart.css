@@ -155,3 +155,16 @@ p {
     justify-content: space-between;
     flex-direction: row;
 }
+
+.jl-cart-number {
+    position: absolute;
+    background-color: var(--baby-blue);
+    height: 12px;
+    width: 12px;
+    font-size: 8px;
+    text-align: center;
+    border-radius: 10px;
+    top: 35px;
+    right: 3px;
+    color: white;
+}
