@@ -154,7 +154,9 @@ class ShoppingCart {
         const answer = fetch("https://dev.jagger-tracker.com/stripe/create-checkout-session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: this.cart, mode: 'payment' })
+            body: JSON.stringify({ cart: this.cart.map((e), () => {
+                 return {"id" : e.id.price.id, 'quantity' : e.quantity}
+        }), mode: 'payment' })
         })
         return answer
     }
