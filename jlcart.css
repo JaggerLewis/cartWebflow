@@ -149,3 +149,9 @@ p {
     justify-content: space-around;
     display :flex;
 }
+
+.jl-header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
