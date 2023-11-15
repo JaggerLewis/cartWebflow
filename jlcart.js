@@ -113,19 +113,17 @@ class ShoppingCart {
         return total
     }
 
-    getTotalPrice(products) {
+    getTotalPrice() {
         let totalPrice = 0;
         this.cart.forEach((productCart) => {
             console.log('totalPrice product', productCart)
-            const product = productCart.getProductFromList(products)
-            totalPrice += product.price.price * productCart.quantity
-            console.log("totalprice calculation", totalPrice, product.price.price)
+            totalPrice += productCart.id.price.price * productCart.quantity
         })
         return totalPrice
     }
 
-    setTotalPrice(products) {
-        let price = this.getTotalPrice(products)
+    setTotalPrice() {
+        let price = this.getTotalPrice()
         const totalSpan = document.querySelector('.total-price')
         totalSpan.innerHTML = price + "&euro;"
     }
