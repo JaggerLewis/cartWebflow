@@ -168,7 +168,7 @@ const init = async () => {
         let src = pict.src
         console.log('src => ',src)
         pict.srcset = pict.srcset.replace(src, productJSON[3].image)
-        pict.src = productJSON[2].image
+        pict.src = productJSON[3].image
         console.log('src => ',src)
     })
     let weimar = document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
@@ -177,15 +177,15 @@ const init = async () => {
        
         let src = pict.src
         pict.srcset = pict.srcset.replace(src, productJSON[1].image)
-        pict.src = productJSON[2].image
+        pict.src = productJSON[1].image
     })
     let charbon = document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         console.log('charbon')
        
         let src = pict.src
-        pict.srcset = pict.srcset.replace(src, productJSON[4].image)
-        pict.src = productJSON[2].image
+        pict.srcset = pict.srcset.replace(src, productJSON[5].image)
+        pict.src = productJSON[5].image
     })
     let collarpict =  document.querySelector('#w-node-_438be8f3-a333-f580-da31-2066f4127c97-0608d8f7')
     collarpict.src = product.image
