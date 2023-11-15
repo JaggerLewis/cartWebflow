@@ -49,6 +49,12 @@ class ShoppingCart {
 
     addItem(item, count = 1) {
         console.log(item)
+        console.log('this.countItems =>', this.countItems())
+        if (this.countItems() >= 2) {
+            alert('Vous ne pouvez pas ajouter plus de deux produit...')
+            return
+        }
+        
         const itemIndex = this.findItemIndexByName(item.name)
         if (itemIndex < 0) {
             const cardProduct = new ProductCart(item, count)
@@ -188,7 +194,7 @@ const init = async () => {
     })
    
     pict.setAttribute('data-selected', productJSON[3].prices[0].id)
-    pict.srcset = product.image
+    pict.srcset = productJSON[3].image
 }
 
 init()
