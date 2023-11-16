@@ -157,6 +157,7 @@ p {
 }
 
 .jl-cart-number {
+    cursor: pointer;
     position: relative;
     background-color: var(--baby-blue);
     height: 15px;
