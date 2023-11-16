@@ -388,7 +388,7 @@ const init = async () => {
             initCollar()
             break;
         default : 
-            console.log('page')
+            console.log(page)
     }
    
 }
@@ -490,4 +490,3 @@ goToStripe.onclick = (event) => {
 }
 
 init()
-
