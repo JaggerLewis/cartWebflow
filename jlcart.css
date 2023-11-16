@@ -167,3 +167,7 @@ p {
     color: white;
     transform: translate(-290%, 20%);
 }
+
+.jl-color-selected {
+    border-radius: 2px;
+}
