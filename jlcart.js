@@ -348,7 +348,7 @@ const init = async () => {
 
     let productsJSON = await (await getProductsFromStripe()).json()
     let jlCartNumber = document.createElement('div')
-
+    initNewsLettre()
     for (const product of productsJSON) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
