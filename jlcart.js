@@ -180,7 +180,7 @@ const colorButtonAction = (elem, image, id) => {
 
 const colotButtonSelect = (newBtn, attribut) => {
     let btn = document.querySelector(newBtn)
-    let oldBtn = document.querySelector('[${attribut}=true]')
+    let oldBtn = document.querySelector('['+attribut+'=true]')
 
     if (oldBtn != null) {
     oldBtn.removeAttribute(attribut)
