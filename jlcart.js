@@ -199,9 +199,10 @@ const initHome = async () => {
         colorButtonAction(collar, products[3].image, products[3].price.id )
         let btn = document.querySelector('#btn-color-fauve')
         let oldBtn = document.querySelector('[color-selected=true]')
-        
+        if (oldBtn != null) {
         oldBtn.removeAttribute('color-selected')
         oldBtn.classList.remove('jl-color-selected')
+        }
         btn.classList.add('jl-color-selected')
         btn.setAttribute('color-selected', 'true')
     })
@@ -210,9 +211,10 @@ const initHome = async () => {
         colorButtonAction(collar, products[1].image, products[1].price.id )
         let btn = document.querySelector('#btn-color-weimar')
         let oldBtn = document.querySelector('[color-selected=true]')
-        
+        if (oldBtn != null) {
         oldBtn.removeAttribute('color-selected')
         oldBtn.classList.remove('jl-color-selected')
+        }
         btn.classList.add('jl-color-selected')
         btn.setAttribute('color-selected', 'true')
     })
@@ -221,9 +223,10 @@ const initHome = async () => {
         colorButtonAction(collar, products[5].image, products[5].price.id )
         let btn = document.querySelector('#btn-color-charbon')
         let oldBtn = document.querySelector('[color-selected=true]')
-        
+        if (oldBtn != null) {
         oldBtn.removeAttribute('color-selected')
         oldBtn.classList.remove('jl-color-selected')
+        }
         btn.classList.add('jl-color-selected')
         btn.setAttribute('color-selected', 'true')
     })
@@ -232,9 +235,10 @@ const initHome = async () => {
         colorButtonAction(dock, products[2].image, products[2].price.id )
         let btn = document.querySelector('#btn-dock-color-fauve')
         let oldBtn = document.querySelector('[color-dock-selected=true]')
-        
+        if (oldBtn != null) {
         oldBtn.removeAttribute('color-dock-selected')
         oldBtn.classList.remove('jl-color-selected')
+        }
         btn.classList.add('jl-color-selected')
         btn.setAttribute('color-dock-selected', 'true')
     })
@@ -243,9 +247,10 @@ const initHome = async () => {
         colorButtonAction(dock, products[0].image, products[0].price.id )
         let btn = document.querySelector('#btn-dock-color-weimar')
         let oldBtn = document.querySelector('[color-dock-selected=true]')
-        
+        if (oldBtn != null) {
         oldBtn.removeAttribute('color-dock-selected')
         oldBtn.classList.remove('jl-color-selected')
+        }
         btn.classList.add('jl-color-selected')
         btn.setAttribute('color-dock-selected', 'true')
     })
@@ -254,9 +259,10 @@ const initHome = async () => {
         colorButtonAction(dock, products[4].image, products[4].price.id )
     let btn = document.querySelector('#btn-dock-color-charbon')
     let oldBtn = document.querySelector('[color-dock-selected=true]')
-        
+    if (oldBtn != null) {    
     oldBtn.removeAttribute('color-dock-selected')
     oldBtn.classList.remove('jl-color-selected')
+    }
     btn.classList.add('jl-color-selected')
     btn.setAttribute('color-dock-selected', 'true')
     })
