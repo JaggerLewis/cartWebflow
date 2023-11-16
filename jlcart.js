@@ -334,6 +334,16 @@ const initBox = async ()  => {
     })
 }
 
+const initNewsLettre = () => {
+    let btn = document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
+        let email = document.querySelector('#input-restons-en-contact').value
+        if (value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
+            fetch('')
+        else
+         showSnackBar('error')
+    })
+}
+
 const init = async () => {
 
     let productsJSON = await (await getProductsFromStripe()).json()
@@ -450,13 +460,22 @@ const showCart = (event) => {
     }
 
 }
-init()
 
 document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
+
+const showSnackBar = (text) => {
+    let snack = document.createElement('div')
+    snack.id = 'jl-snackbar'
+    snack.textContent = text
+    document.querySelector("body").appendChild(snack)
+    snack.className = "show";
+    setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
+}
 
 const goToStripe = document.getElementById("validate-cart");
 goToStripe.onclick = (event) => {
     redirectToStripe(event)
 }
 
+init()
 
