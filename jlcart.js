@@ -337,7 +337,7 @@ const initBox = async ()  => {
 const initNewsLettre = () => {
     let btn = document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
         let email = document.querySelector('#input-restons-en-contact').value
-        if (value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
+        if (email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
             fetch('')
         else
          showSnackBar('error')
