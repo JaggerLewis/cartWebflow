@@ -252,6 +252,8 @@ const initCollar = async ()  => {
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
         let option = document.querySelector('[hover-selected=true]')
         let productId
+        console.log('option =>', option)
+        console.log('option =>', color)
         switch (option.id) {
             case 'jl-collar-select-1':
                 productId = 'jag'
