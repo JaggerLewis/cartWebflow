@@ -224,24 +224,26 @@ const initHome = async () => {
 }
 
 const initCollar = async ()  => {
-    let collar = document.querySelector('#jl-collar')
+    let collar = document.querySelector('#page-jag-collar')
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
     })
-    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
+    document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[3].image, products[3].price.id )
     })
-    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
+    document.querySelector('#page-jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[1].image, products[1].price.id )
     })
-    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
+    document.querySelector('#page-jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[5].image, products[5].price.id )
     })
+    collar.setAttribute('data-selected', products[1].price.id)
+    collar.srcset = products[1].image
 }
 
 const initBox = async ()  => {
