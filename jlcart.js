@@ -153,7 +153,7 @@ class ShoppingCart {
 
     getCartStripeUrl() {
         let value = this.cart.map((e) => {return {id : e.id.price.id, quantity : e.quantity}})
-        const answer = fetch("https://dev.jagger-tracker.com/stripe/create-checkout-session", {
+        const answer = fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ cart: value, mode: 'payment' })
@@ -163,7 +163,7 @@ class ShoppingCart {
 }
 
 const getProductsFromStripe = async () => {
-    const answer = await fetch("https://dev.jagger-tracker.com/stripe/products", {
+    const answer = await fetch("https://api.jagger-tracker.com/stripe/products", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
     })
