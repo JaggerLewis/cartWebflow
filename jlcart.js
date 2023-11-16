@@ -353,7 +353,7 @@ const loadData = async () => {
     if (localStorage.getItem('data') == null) {
         console.log('load')
         productRaw = await getProductsFromStripe()
-        localStorage.setItem('data', productsRaw)
+        localStorage.setItem('data', productRaw)
         productsJSON = productRaw.json()
     }
     else 
