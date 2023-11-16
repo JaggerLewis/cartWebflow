@@ -178,15 +178,15 @@ const colorButtonAction = (elem, image, id) => {
     elem.src = image
 }
 
-const colotButtonSelect = (newBtn, attribut) => {
+const colorButtonSelect = (newBtn, attribut, Newclass) => {
     let btn = document.querySelector(newBtn)
     let oldBtn = document.querySelector('['+attribut+'=true]')
 
     if (oldBtn != null) {
     oldBtn.removeAttribute(attribut)
-    oldBtn.classList.remove('jl-color-selected')
+    oldBtn.classList.remove(Newclass)
     }
-    btn.classList.add('jl-color-selected')
+    btn.classList.add(Newclass)
     btn.setAttribute(attribut, 'true')
 }
 
@@ -210,32 +210,32 @@ const initHome = async () => {
     document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[3].image, products[3].price.id )
-        colotButtonSelect('#btn-color-fauve', 'color-selected')
+        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[1].image, products[1].price.id )
-        colotButtonSelect('#btn-color-weimar', 'color-selected')
+        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[5].image, products[5].price.id )
-        colotButtonSelect('#btn-color-charbon', 'color-selected')
+        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[2].image, products[2].price.id )
-        colotButtonSelect('#btn-dock-color-fauve', 'color-dock-selected')
+        colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[0].image, products[0].price.id )
-        colotButtonSelect('#btn-dock-color-weimar', 'color-dock-selected')
+        colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[4].image, products[4].price.id )
-        colotButtonSelect('#btn-dock-color-charbon', 'color-dock-selected')
+        colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected')
     })
    
     collar.setAttribute('data-selected', products[1].price.id)
@@ -254,18 +254,22 @@ const initCollar = async ()  => {
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[3].image, products[3].price.id )
-        colotButtonSelect('#page-jag-color-fauve', 'color-selected')
+        colorButtonSelect('#page-jag-color-fauve', 'color-selected', 'jl-color-selected')
         
     })
     document.querySelector('#page-jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[1].image, products[1].price.id )
-        colotButtonSelect('#page-jag-color-weimar', 'color-selected')
+        colorButtonSelect('#page-jag-color-weimar', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#page-jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[5].image, products[5].price.id )
-        colotButtonSelect('#page-jag-color-charbon', 'color-selected')
+        colorButtonSelect('#page-jag-color-charbon', 'color-selected', 'jl-color-selected')
+    })
+    document.querySelector('#jl-collar-select-3').addEventListener('click', (event) => {
+        let btn = document.querySelector('#jl-collar-select-3')
+        colorButtonSelect('#jl-collar-select-3', 'hover-selected', 'jag-solo')
     })
     collar.setAttribute('data-selected', products[1].price.id)
     collar.srcset = products[1].image
