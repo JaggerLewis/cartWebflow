@@ -284,6 +284,15 @@ const initCollar = async ()  => {
         let btn = document.querySelector('#jl-collar-select-3')
         colorButtonSelect('#jl-collar-select-4', 'hover-selected', 'jag-solo')
     })
+    document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
+        event.preventDefault()
+        console.log('prod => ', products)
+        shoppingCart.addItem(products[2], 1)
+    })
+    document.querySelector('#jl-jag-cable').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products[3], 1)
+    })
     collar.setAttribute('data-selected', products[16].price.id)
     collar.srcset = products[16].image
 }
