@@ -357,11 +357,7 @@ const initAccessory = () => {
     })
     document.querySelector('#jl-coque-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[3], 1)
-    })
-    document.querySelector('#jl-antenne').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(products[4], 1)
+        shoppingCart.addItem(products[0], 1)
     })
     document.querySelector('#jl-antenne').addEventListener('click', (event) => {
         event.preventDefault()
