@@ -165,5 +165,5 @@ p {
     text-align: center;
     border-radius: 10px;
     color: white;
-    transform: translate(290%, 20%);
+    transform: translate(-290%, 20%);
 }
