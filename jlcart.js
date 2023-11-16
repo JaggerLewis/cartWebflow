@@ -216,10 +216,12 @@ const initHome = async () => {
         event.preventDefault()
         colorButtonAction(collar, products[1].image, products[1].price.id )
         colotButtonSelect('#btn-color-weimar', 'color-selected')
+    })
     document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[5].image, products[5].price.id )
         colotButtonSelect('#btn-color-charbon', 'color-selected')
+    })
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[2].image, products[2].price.id )
