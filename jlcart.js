@@ -373,7 +373,7 @@ const showCart = (event) => {
     shoppingCart.cart.forEach((prod) => {
         let id = prod.id.price.id
         addHtml(prod, id)
-        addFunction(prod.id, id)
+        addFunction(prod, id)
     })
     shoppingCart.setTotalPrice();
 
