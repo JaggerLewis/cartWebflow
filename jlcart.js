@@ -271,8 +271,11 @@ const initCollar = async ()  => {
         }
         let finalProduct = products.find(elem => elem.metadata.productId == productId && elem.metadata.colorId == color)
 
+        if (finalProduct != null)
+            shoppingCart.addItem(finalProduct, 1)
+        else 
+            alert("votre produit n'a pas été trouvé....")
 
-        shoppingCart.addItem(finalProduct, 1)
     })
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
