@@ -373,7 +373,7 @@ const showCart = (event) => {
     shoppingCart.cart.forEach((prod) => {
         let id = prod.id.price.id
         addHtml(prod, id)
-        addFunction(prod, id)
+        addFunction(prod.id, id)
     })
     shoppingCart.setTotalPrice();
 
@@ -418,7 +418,7 @@ const showCart = (event) => {
         document.querySelector('#remove-' + id).addEventListener('click', (event) => {
             event.preventDefault()
             document.querySelector('.border-container').removeChild(document.querySelector('#' + id))
-            shoppingCart.clearItem(new Product(prod.name, prod.description, prod.metadata, prod.image, prod.prices[0]), 1);
+            shoppingCart.clearItem(new Product(prod.name, prod.description, prod.metadata, prod.image, prod.prices));
             shoppingCart.setTotalPrice();
         })
     }
