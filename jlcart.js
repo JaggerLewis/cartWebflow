@@ -288,7 +288,14 @@ const initCollar = async ()  => {
 }
 
 const initBox = async ()  => {
-    console.log('initBox')
+    document.querySelector('#jl-dock-antenne').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products, 1)
+    })
+    document.querySelector('#jl-dock-cable').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(product, 1)
+    })
 }
 
 const init = async () => {
