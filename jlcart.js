@@ -197,32 +197,32 @@ const initHome = async () => {
     document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[3].image, products[3].price.id )
-        this.classList.add('jl-color-selected')
+        document.querySelector('#btn-color-fauve').classList.add('jl-color-selected')
     })
     document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[1].image, products[1].price.id )
-        this.classList.add('jl-color-selected')
+        document.querySelector('#btn-color-weimar').classList.add('jl-color-selected')
     })
     document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[5].image, products[5].price.id )
-        this.classList.add('jl-color-selected')
+        document.querySelector('#btn-color-charbon').classList.add('jl-color-selected')
     })
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[2].image, products[2].price.id )
-        this.classList.add('jl-color-selected')
+        document.querySelector('#btn-dock-color-fauve').classList.add('jl-color-selected')
     })
     document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[0].image, products[0].price.id )
-        this.classList.add('jl-color-selected')
+        document.querySelector('#btn-dock-color-weimar').classList.add('jl-color-selected')
     })
     document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[4].image, products[4].price.id )
-        this.classList.add('jl-color-selected')
+    document.querySelector('#btn-dock-color-charbon').classList.add('jl-color-selected')
     })
    
     collar.setAttribute('data-selected', products[1].price.id)
