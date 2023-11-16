@@ -254,14 +254,18 @@ const initCollar = async ()  => {
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[3].image, products[3].price.id )
+        colotButtonSelect('#page-jag-color-fauve', 'color-selected')
+        
     })
     document.querySelector('#page-jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[1].image, products[1].price.id )
+        colotButtonSelect('#page-jag-color-weimar', 'color-selected')
     })
     document.querySelector('#page-jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[5].image, products[5].price.id )
+        colotButtonSelect('#page-jag-color-charbon', 'color-selected')
     })
     collar.setAttribute('data-selected', products[1].price.id)
     collar.srcset = products[1].image
