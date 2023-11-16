@@ -18,8 +18,10 @@ body.appendChild(modalDiv)
 
 const setCartNumber = () => {
     let count = 0
-    JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
-     document.querySelector('#jlCartNumber').textContent = count
+    if (localStorage.getItem("shoppingCart")) {
+        JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
+    }
+    document.querySelector('#jlCartNumber').textContent = count
 }
 
 class Product {
