@@ -314,7 +314,6 @@ const initCollar = async ()  => {
     })
     document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('prod => ', products)
         shoppingCart.addItem(products[2], 1)
     })
     document.querySelector('#jl-jag-cable').addEventListener('click', (event) => {
@@ -347,17 +346,44 @@ const initNewsLettre = () => {
     })
 }
 
+const initAccessory = () => {
+    document.querySelector('#jl-coque-fauve').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products[2], 1)
+    })
+    document.querySelector('#jl-coque-charbon').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products[1], 1)
+    })
+    document.querySelector('#jl-coque-weimar').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products[3], 1)
+    })
+    document.querySelector('#jl-antenne').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products[4], 1)
+    })
+    document.querySelector('#jl-antenne').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products[4], 1)
+    })
+    document.querySelector('#jl-cable-cta').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(products[3], 1)
+    })
+    document.querySelector('#jl-cable-cta-dock').addEventListener('click', (event) => {
+        event.preventDefault()
+        alert('ON NE VEND PAS DE CABLE POUR LE DOCK')
+    })
+}
+
 const loadData = async () => {
-    console.log('productsJSON =>', productsJSON)
-    console.log('productsJSON =>', localStorage.getItem('data'))
     if (localStorage.getItem('data') == null) {
-        console.log('load')
         productRaw = await (await getProductsFromStripe()).json()
-        localStorage.setItem('data', JSON.stringify(productRaw))
         productsJSON = productRaw
     }
     else 
-    productsJSON = JSON.parse(localStorage.getItem('data'))
+        productsJSON = JSON.parse(localStorage.getItem('data'))
 }
 
 const init = async () => {
