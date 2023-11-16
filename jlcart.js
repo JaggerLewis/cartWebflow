@@ -289,10 +289,10 @@ const init = async () => {
         case '' : 
             initHome()
             break;
-        case 'page-produit-dock' :
+        case 'smartdock-jagger-lewis' :
             initBox()
             break;
-        case 'page-produit-boitier' :
+        case 'jag-collier-gps' :
             initCollar()
             break;
         default : 
