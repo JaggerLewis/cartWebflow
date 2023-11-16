@@ -267,9 +267,21 @@ const initCollar = async ()  => {
         colorButtonAction(collar, products[5].image, products[5].price.id )
         colorButtonSelect('#page-jag-color-charbon', 'color-selected', 'jl-color-selected')
     })
+    document.querySelector('#jl-collar-select-1').addEventListener('click', (event) => {
+        let btn = document.querySelector('#jl-collar-select-3')
+        colorButtonSelect('#jl-collar-select-1', 'hover-selected', 'jag-solo')
+    })
+    document.querySelector('#jl-collar-select-2').addEventListener('click', (event) => {
+        let btn = document.querySelector('#jl-collar-select-3')
+        colorButtonSelect('#jl-collar-select-2', 'hover-selected', 'jag-solo')
+    })
     document.querySelector('#jl-collar-select-3').addEventListener('click', (event) => {
         let btn = document.querySelector('#jl-collar-select-3')
         colorButtonSelect('#jl-collar-select-3', 'hover-selected', 'jag-solo')
+    })
+    document.querySelector('#jl-collar-select-4').addEventListener('click', (event) => {
+        let btn = document.querySelector('#jl-collar-select-3')
+        colorButtonSelect('#jl-collar-select-4', 'hover-selected', 'jag-solo')
     })
     collar.setAttribute('data-selected', products[1].price.id)
     collar.srcset = products[1].image
