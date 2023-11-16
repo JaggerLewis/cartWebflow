@@ -14,7 +14,6 @@ modalDiv.setAttribute("aria-hidden", "true")
 modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
-snack.textContent = text
 document.querySelector("body").appendChild(snack)
 modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="global-container"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="border-container"><div class="container-product"></div></div><div class="container-receipe"><div class="container-sub-reciepe"><p class="reciep-text">Frais D\'activitation</p><p class="reciep-text">5,00&euro;</p></div><div class="container-sub-reciepe"><p class="reciep-text">Livraison</p><p class="reciep-text">GRATUIT</p></div></div><div class="container-total"><p class="total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="button" >Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
@@ -480,6 +479,7 @@ const showCart = (event) => {
 document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
 
 const showSnackBar = (text) => {
+    snack.textContent = text
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
 }
