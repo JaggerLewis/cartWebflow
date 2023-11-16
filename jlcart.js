@@ -209,39 +209,39 @@ const initHome = async () => {
     })
     document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[3].image, products[3].price.id )
+        colorButtonAction(collar, products[14].image, products[14].price.id )
         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[1].image, products[1].price.id )
+        colorButtonAction(collar, products[16].image, products[16].price.id )
         colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[5].image, products[5].price.id )
+        colorButtonAction(collar, products[12].image, products[12].price.id )
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[2].image, products[2].price.id )
+        colorButtonAction(dock, products[13].image, products[13].price.id )
         colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[0].image, products[0].price.id )
+        colorButtonAction(dock, products[15].image, products[15].price.id )
         colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected')
     })
     document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[4].image, products[4].price.id )
+        colorButtonAction(dock, products[11].image, products[11].price.id )
         colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected')
     })
    
-    collar.setAttribute('data-selected', products[1].price.id)
-    collar.srcset = products[1].image
-    dock.setAttribute('data-selected', products[0].price.id)
-    dock.srcset = products[0].image
+    collar.setAttribute('data-selected', products[16].price.id)
+    collar.srcset = products[16].image
+    dock.setAttribute('data-selected', products[15].price.id)
+    dock.srcset = products[15].image
 }
 
 const initCollar = async ()  => {
@@ -253,18 +253,18 @@ const initCollar = async ()  => {
     })
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[3].image, products[3].price.id )
+        colorButtonAction(collar, products[14].image, products[14].price.id )
         colorButtonSelect('#page-jag-color-fauve', 'color-selected', 'jl-color-selected')
         
     })
     document.querySelector('#page-jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[1].image, products[1].price.id )
+        colorButtonAction(collar, products[16].image, products[16].price.id )
         colorButtonSelect('#page-jag-color-weimar', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#page-jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[5].image, products[5].price.id )
+        colorButtonAction(collar, products[12].image, products[12].price.id )
         colorButtonSelect('#page-jag-color-charbon', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#jl-collar-select-1').addEventListener('click', (event) => {
@@ -283,29 +283,12 @@ const initCollar = async ()  => {
         let btn = document.querySelector('#jl-collar-select-3')
         colorButtonSelect('#jl-collar-select-4', 'hover-selected', 'jag-solo')
     })
-    collar.setAttribute('data-selected', products[1].price.id)
-    collar.srcset = products[1].image
+    collar.setAttribute('data-selected', products[16].price.id)
+    collar.srcset = products[16].image
 }
 
 const initBox = async ()  => {
-    let dock = document.querySelector('#jl-dock')
-    document.querySelector('#jag-dock').addEventListener('click', (event) => {
-        event.preventDefault()
-        let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
-        shoppingCart.addItem(product, 1)
-    })
-    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, products[3].image, products[3].price.id )
-    })
-    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, products[1].image, products[1].price.id )
-    })
-    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, products[5].image, products[5].price.id )
-    })
+    console.log('initBox')
 }
 
 const init = async () => {
