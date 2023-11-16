@@ -5,7 +5,7 @@ commander.setAttribute("data-target", "#cart")
 const body = document.querySelector("body");
 const modalDiv = document.createElement("div");
 let snack = document.createElement('div')
-
+let productsJSON
 modalDiv.setAttribute("id", "cart")
 modalDiv.setAttribute("tabindex", "-1")
 modalDiv.setAttribute("role", "dialog")
@@ -348,9 +348,21 @@ const initNewsLettre = () => {
     })
 }
 
-const init = async () => {
+const loadData = async () => {
+    console.log('productsJSON =>', productsJSON)
+    console.log('productsJSON =>', localStorage.getItem('data'))
+    if (localStorage.getItem('data') == null) {
+        console.log('load')
+        productRaw = await getProductsFromStripe()
+        localStorage.setItem('data', productsRaw)
+        productsJSON = productRaw.json()
+    }
+    else 
+    productsJSON = localStorage.getItem('data')
+}
 
-    let productsJSON = await (await getProductsFromStripe()).json()
+const init = async () => {
+    await loadData()
     let jlCartNumber = document.createElement('div')
     initNewsLettre()
     for (const product of productsJSON) {
