@@ -268,7 +268,7 @@ const initCollar = async ()  => {
             default:
         }
         let finalProduct = products.find(elem => elem.metadata.productId == productId && elem.metadata.colorId == color)
-
+        console.log('finalProduct => ',finalProduct)
 
 
         // shoppingCart.addItem(product, 1)
