@@ -67,6 +67,7 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
+        console.log('item => ', id)
         if (this.countItems() >= 2) {
             alert('vous ne pouvez pas ajouter plus de deux elements au panier')
             return
@@ -290,11 +291,12 @@ const initCollar = async ()  => {
 const initBox = async ()  => {
     document.querySelector('#jl-dock-antenne').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products, 1)
+        console.log('prod => ', products)
+        shoppingCart.addItem(products[4], 1)
     })
     document.querySelector('#jl-dock-cable').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(product, 1)
+        shoppingCart.addItem(products[3], 1)
     })
 }
 
