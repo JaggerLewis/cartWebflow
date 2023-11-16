@@ -324,7 +324,7 @@ const init = async () => {
     jlCartNumber.addEventListener('click',(event) => showCart(event))
     document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
     setCartNumber();
-
+    console.log('productsJSON => ', productsJSON)
     page = window.location.href.split('/')[3];
     switch(page) {
         case '' : 
