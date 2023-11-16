@@ -249,8 +249,29 @@ const initCollar = async ()  => {
     let collar = document.querySelector('#page-jag-collar')
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
-        let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
-        shoppingCart.addItem(product, 1)
+        let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
+        let option = document.querySelector('[hover-selected=true]')
+        let productId
+        switch (option.id) {
+            case 'jl-collar-select-1':
+                productId = 'jag'
+                break;
+            case 'jl-collar-select-2':
+                productId = 'jag.smartdock'
+                break;
+            case 'jl-collar-select-3':
+                productId = 'jag-unlimited'
+                break;
+            case 'jl-collar-select-4':
+                productId = 'jag-smartdock-unlimited'
+                break;
+            default:
+        }
+        let finalProduct = products.find(elem => elem.metadata.productId == productId && elem.metadata.colorId == color)
+
+
+
+        // shoppingCart.addItem(product, 1)
     })
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
