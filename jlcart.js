@@ -413,6 +413,9 @@ const init = async () => {
         case 'jagger-lewis-jag' :
             initCollar()
             break;
+        case 'accessoires-jag-smartdock' :
+            initAccessory()
+            break;
         default : 
             console.log(page)
     }
