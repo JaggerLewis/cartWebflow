@@ -6,7 +6,6 @@ const body = document.querySelector("body");
 const modalDiv = document.createElement("div");
 let snack = document.createElement('div')
 let loaderContainer = document.createElement('div')
-let productsJSON
 
 loaderContainer.classList.add('jl-loader-container')
 loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
@@ -381,19 +380,33 @@ const initAccessory = () => {
     })
 }
 
+
+const setData = async () => {
+    console.log('setData')
+    let result = await (await getProductsFromStripe()).json()
+    result.ts = date
+    localStorage.setItem('data', JSON.stringify(result))
+
+    console.log('result => ', result)
+
+    return result
+}
+
 const loadData = async () => {
     let date = Date.now()
+    let result
     if (localStorage.getItem('data') == null) {
-        productsJSON = await (await getProductsFromStripe()).json()
-        productsJSON.ts = date
-        localStorage.setItem('data', JSON.stringify(productsJSON))
+      result = setData()
     }
     else 
-        productsJSON = JSON.parse(localStorage.getItem('data'))
-    if (((date - productsJSON.ts) / 3600) > 100) {
-        productsJSON = await (await getProductsFromStripe()).json()
-        productsJSON.ts = date
-        localStorage.setItem('data', JSON.stringify(productsJSON))
+        result = JSON.parse(localStorage.getItem('data'))
+    console.log((date - result.ts) / 3600)
+    if (((date - result.ts) / 3600) > 100) {
+        console.log('inside')
+        result = setData()
+    }
+    for (const product of result) {
+        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
 
     body.removeChild(loaderContainer)
@@ -403,14 +416,11 @@ const init = async () => {
     await loadData()
     let jlCartNumber = document.querySelector('#jl-cart-number')
     initNewsLettre()
-    for (const product of productsJSON) {
-        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
-    }
+   
     jlCartNumber.setAttribute("data-toggle", "modal")
     jlCartNumber.setAttribute("data-target", "#cart")
     jlCartNumber.addEventListener('click',(event) => showCart(event))
     setCartNumber();
-    console.log('productsJSON => ', productsJSON)
     page = window.location.href.split('/')[3];
     switch(page) {
         case '' : 
