@@ -22,7 +22,7 @@ modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="jl-border-container"><div class="jl-container-product"></div></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="button">Finaliser la commande</button></div></div>'
+modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="jl-border-container"></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="button">Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
 body.insertBefore(loaderContainer, document.body.firstChild);
 
