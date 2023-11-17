@@ -5,7 +5,14 @@ commander.setAttribute("data-target", "#cart")
 const body = document.querySelector("body");
 const modalDiv = document.createElement("div");
 let snack = document.createElement('div')
+let loader = document.createElement('div')
+let loaderContainer = document.createElement('div')
 let productsJSON
+
+loaderContainer.classList.add('jl-loader-container')
+loader.classList.add('jl-loader')
+loaderContainer.appendChild(loader)
+
 modalDiv.setAttribute("id", "cart")
 modalDiv.setAttribute("tabindex", "-1")
 modalDiv.setAttribute("role", "dialog")
@@ -17,7 +24,7 @@ snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
 modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="jl-border-container"><div class="jl-container-product"></div></div><div class="jl-container-receipe"><div class="container-sub-reciepe"><p class="jl-receip-text">Frais D\'activitation</p><p class="jl-receip-text">5,00&euro;</p></div><div class="container-sub-reciepe"><p class="jl-receip-text">Livraison</p><p class="jl-receip-text">GRATUIT</p></div></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="button" >Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
-
+body.appendChild(loaderContainer)
 
 const setCartNumber = () => {
     let count = 0
@@ -380,6 +387,8 @@ const loadData = async () => {
     }
     else 
         productsJSON = JSON.parse(localStorage.getItem('data'))
+
+    body.removeChild(loaderContainer)
 }
 
 const init = async () => {
