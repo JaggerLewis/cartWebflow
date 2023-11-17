@@ -16,7 +16,7 @@
 
 .jl-product-img {
     height: 100px;
-    width: 80%;
+    width: 50%;
     object-fit: contain;
     margin: auto;
     border-radius: 7px;
@@ -46,7 +46,7 @@
 }
 
 .jl-container-product-text {
-    width: 50%;
+    margin-left: 10px;
 }
 
 .jl-border-container {
@@ -86,19 +86,16 @@
 }
 
 .jl-product-name {
-    margin-left: 10px;
     font-family: Stolzl;
     font-size: 15px;
     font-weight: 700;
 }
 
 .jl-product-description {
-    margin-left: 10px;
     font-size: 13px;
 }
 
 .jl-product-price {
-    margin-left: 10px;
     font-size: 16px;
     font-weight: 400;
 }
