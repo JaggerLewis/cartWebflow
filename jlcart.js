@@ -15,7 +15,7 @@ modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="global-container"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="border-container"><div class="container-product"></div></div><div class="container-receipe"><div class="container-sub-reciepe"><p class="reciep-text">Frais D\'activitation</p><p class="reciep-text">5,00&euro;</p></div><div class="container-sub-reciepe"><p class="reciep-text">Livraison</p><p class="reciep-text">GRATUIT</p></div></div><div class="container-total"><p class="total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="button" >Finaliser la commande</button></div></div>'
+modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="jl-border-container"><div class="jl-container-product"></div></div><div class="jl-container-receipe"><div class="container-sub-reciepe"><p class="jl-receip-text">Frais D\'activitation</p><p class="jl-receip-text">5,00&euro;</p></div><div class="container-sub-reciepe"><p class="jl-receip-text">Livraison</p><p class="jl-receip-text">GRATUIT</p></div></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="button" >Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
 
 
@@ -453,11 +453,11 @@ const showCart = (event) => {
     shoppingCart.setTotalPrice();
 
     function clearHtml () {
-        document.querySelector('.border-container').innerHTML = '';
+        document.querySelector('.jl-border-container').innerHTML = '';
     } 
 
     function addHtml(prod, id) {
-        let container = document.querySelector('.border-container')
+        let container = document.querySelector('.jl-border-container')
         let containerProduct = document.createElement('div')
         let containerProductText = document.createElement('div')
         let elemContainer = document.createElement('div')
@@ -467,14 +467,14 @@ const showCart = (event) => {
         let price = document.createElement('p')
         let quantityContainer = document.createElement('p')
         image.src = prod.id.image
-        image.classList.add('product-pict')
-        elemContainer.classList.add('container-product-bis')
-        containerProduct.classList.add('container-product')
+        image.classList.add('jl-product-img')
+        elemContainer.classList.add('jl-container-product-bis')
+        containerProduct.classList.add('jl-container-product')
         containerProduct.id = id
-        containerProductText.classList.add('container-product-text')
-        name.classList.add('product-name')
-        desc.classList.add('product-description')
-        price.classList.add('product-price')
+        containerProductText.classList.add('jl-container-product-text')
+        name.classList.add('jl-product-name')
+        desc.classList.add('jl-product-description')
+        price.classList.add('jl-product-price')
         quantityContainer.classList.add('jl-input', 'input-groupe')
         quantityContainer.innerHTML = "<p>qt : " + prod.quantity + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
         name.textContent = prod.id.name
@@ -492,7 +492,7 @@ const showCart = (event) => {
     function addFunction(prod, id) {
         document.querySelector('#remove-' + id).addEventListener('click', (event) => {
             event.preventDefault()
-            document.querySelector('.border-container').removeChild(document.querySelector('#' + id))
+            document.querySelector('.jl-border-container').removeChild(document.querySelector('#' + id))
             console.log('remove => ', prod)
             shoppingCart.clearItem(prod);
             shoppingCart.setTotalPrice();

@@ -1,4 +1,4 @@
-.global-container {
+.jl-modal {
     margin: auto;
     margin-top: 10vh;
     width: 50vw;
@@ -9,33 +9,22 @@
 }
 
 @media (max-width: 1000px) {
-    .global-container {
+    .jl-modal {
         width: 90vw;
     }
 }
 
-.product-pict {
+.jl-product-img {
     height: 100px;
     width: 80%;
     object-fit: contain;
-}
-
-.trash-pict {
-    flex: 1;
-    height: 10px;
-    width: 10px;
-    margin-bottom: 20%;
-}
-
-.product-pict {
     margin: auto;
-    width: 69px;
-    height: 69px;
     border-radius: 7px;
 }
 
-.container-receipe,
-.container-total {
+
+.jl-container-receipe,
+.jl-container-total {
     display: flex;
     padding: 16px 14px 16px 16px;
     flex-direction: row;
@@ -43,12 +32,12 @@
     justify-content: space-between;
 }
 
-.container-receipe {
+.jl-container-receipe {
     border-top: 2px solid rgba(0, 0, 0, 0.30);
     border-bottom: 2px solid rgba(0, 0, 0, 0.30);
 }
 
-.container-product-bis {
+.jl-container-product-bis {
     flex: 2;
     display: flex;
     align-items: flex-start;
@@ -56,11 +45,11 @@
     justify-content: center;
 }
 
-.container-product-text {
+.jl-container-product-text {
     width: 50%;
 }
 
-.border-container {
+.jl-border-container {
     padding: 16px 14px 16px 16px;
     border-radius: 15px;
     border: 2px solid rgba(0, 0, 0, 0.30);
@@ -68,7 +57,7 @@
 
 }
 
-.container-product {
+.jl-container-product {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -78,7 +67,7 @@
 
 }
 
-.reciep-text {
+.jl-receip-text {
     color: rgba(0, 0, 0, 0.30);
     font-family: Source Sans 3;
     font-style: normal;
@@ -86,35 +75,35 @@
     line-height: normal;
 }
 
-.total-title {
+.jl-total-title {
     font-family: Stolzl;
     font-size: 24px;
     font-weight: 700;
 }
 
-.tital-price {
+.jl-tital-price {
     font-size: 16px;
 }
 
-.product-name {
+.jl-product-name {
     margin-left: 10px;
     font-family: Stolzl;
     font-size: 15px;
     font-weight: 700;
 }
 
-.product-description {
+.jl-product-description {
     margin-left: 10px;
     font-size: 13px;
 }
 
-.product-price {
+.jl-product-price {
     margin-left: 10px;
     font-size: 16px;
     font-weight: 400;
 }
 
-.product-quantity {
+.jl-product-quantity {
     flex: 1;
     font-size: 13px;
 }
@@ -138,10 +127,6 @@ p {
     border-radius: 5px;
     background: #000;
     color: #FFF;
-}
-
-.card-img-top {
-    object-fit: contain;
 }
 
 .jl-input {
@@ -188,30 +173,30 @@ p {
     left: 50%;
     bottom: 20%;
     font-size: 17px;
-  }
+}
   
-  #jl-snackbar.show {
+#jl-snackbar.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  }
-  
-  @-webkit-keyframes fadein {
+}
+
+@-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}
-  }
-  
-  @keyframes fadein {
+}
+
+@keyframes fadein {
     from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
-  }
-  
-  @-webkit-keyframes fadeout {
+}
+
+@-webkit-keyframes fadeout {
     from {bottom: 30px; opacity: 1;} 
     to {bottom: 0; opacity: 0;}
-  }
-  
-  @keyframes fadeout {
+}
+
+@keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
-  }
+}
