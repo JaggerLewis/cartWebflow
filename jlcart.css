@@ -46,6 +46,7 @@
 }
 
 .jl-container-product-text {
+    width: 50%;
     margin-left: 10px;
 }
 
@@ -113,7 +114,7 @@ p {
     line-height: normal;
 }
 
-.button {
+.jl-button {
     width: 84%;
     margin: auto;
     display: flex;
