@@ -31,7 +31,7 @@ const setCartNumber = () => {
     if (localStorage.getItem("shoppingCart")) {
         JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
     }
-    document.querySelector('#jlCartNumber').textContent = count
+    document.querySelector('#jl-cart-number').textContent = count
 }
 
 class Product {
@@ -398,18 +398,14 @@ const loadData = async () => {
 
 const init = async () => {
     await loadData()
-    let jlCartNumber = document.createElement('div')
+    let jlCartNumber = document.querySelector('#jl-cart-number')
     initNewsLettre()
     for (const product of productsJSON) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
-    jlCartNumber.classList.add('jl-cart-number')
-    jlCartNumber.id = 'jlCartNumber'
     jlCartNumber.setAttribute("data-toggle", "modal")
     jlCartNumber.setAttribute("data-target", "#cart")
-    jlCartNumber.textContent = 0
     jlCartNumber.addEventListener('click',(event) => showCart(event))
-    document.querySelector('#jag-cart').parentElement.appendChild(jlCartNumber)
     setCartNumber();
     console.log('productsJSON => ', productsJSON)
     page = window.location.href.split('/')[3];
