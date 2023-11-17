@@ -388,7 +388,7 @@ const loadData = async () => {
     else 
         productsJSON = JSON.parse(localStorage.getItem('data'))
 
-    body.removeChild(loaderContainer)
+    // body.removeChild(loaderContainer)
 }
 
 const init = async () => {
