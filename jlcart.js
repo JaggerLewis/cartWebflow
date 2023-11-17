@@ -382,13 +382,19 @@ const initAccessory = () => {
 }
 
 const loadData = async () => {
+    let date = Date.now()
     if (localStorage.getItem('data') == null) {
         productsJSON = await (await getProductsFromStripe()).json()
-        productsJSON.ts = Date.now()
+        productsJSON.ts = date
         localStorage.setItem('data', JSON.stringify(productsJSON))
     }
     else 
         productsJSON = JSON.parse(localStorage.getItem('data'))
+    if (((date - productsJSON.ts) / 3600) > 100) {
+        productsJSON = await (await getProductsFromStripe()).json()
+        productsJSON.ts = date
+        localStorage.setItem('data', JSON.stringify(productsJSON))
+    }
 
     body.removeChild(loaderContainer)
 }
