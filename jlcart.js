@@ -9,7 +9,7 @@ let loaderContainer = document.createElement('div')
 let productsJSON
 
 loaderContainer.classList.add('jl-loader-container')
-loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 200px; height: 200px;"  autoplay></lottie-player>'
+loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
 modalDiv.setAttribute("id", "cart")
 modalDiv.setAttribute("tabindex", "-1")
 modalDiv.setAttribute("role", "dialog")
@@ -383,8 +383,8 @@ const initAccessory = () => {
 
 const loadData = async () => {
     if (localStorage.getItem('data') == null) {
-        productRaw = await (await getProductsFromStripe()).json()
-        productsJSON = productRaw
+        productsJSON = await (await getProductsFromStripe()).json()
+        productsJSON.ts = Date.now()
         localStorage.setItem('data', JSON.stringify(productsJSON))
     }
     else 
