@@ -207,12 +207,16 @@ const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
-
+    console.log('initHome')
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
+        console.log('onCLick')
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
+        console.log('onCLick with product => ', product)
         shoppingCart.addItem(product, 1)
+        console.log('item')
     })
+    console.log('elem =>',  document.querySelector('#jag-jag'))
     document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
