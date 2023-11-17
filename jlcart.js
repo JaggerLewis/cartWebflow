@@ -394,7 +394,7 @@ const loadData = async () => {
     let date = Date.now()
     let result
     if (localStorage.getItem('data') == null) {
-       let result = await (await getProductsFromStripe()).json()
+        result = await (await getProductsFromStripe()).json()
         localStorage.setItem('data', JSON.stringify(result))
         localStorage.setItem('ts', date)
     }
@@ -402,8 +402,8 @@ const loadData = async () => {
         result = JSON.parse(localStorage.getItem('data'))
     if (((date - JSON.parse(localStorage.getItem('ts'))) / 3600) > 100) {
         console.log('inside')
-         let result = await (await getProductsFromStripe()).json()
-         localStorage.setItem('ts', date)
+        result = await (await getProductsFromStripe()).json()
+        localStorage.setItem('ts', date)
         localStorage.setItem('data', JSON.stringify(result))
     }
     for (const product of result) {
