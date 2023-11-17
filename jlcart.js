@@ -5,13 +5,11 @@ commander.setAttribute("data-target", "#cart")
 const body = document.querySelector("body");
 const modalDiv = document.createElement("div");
 let snack = document.createElement('div')
-let loader = document.createElement('div')
 let loaderContainer = document.createElement('div')
 let productsJSON
 
 loaderContainer.classList.add('jl-loader-container')
-loader.classList.add('jl-loader')
-loaderContainer.appendChild(loader)
+loaderContainer.innerHTML = '<lottie-player src="https://github.com/JaggerLewis/cartWebflow/blob/main/loader%20site.lottie" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop controls autoplay></lottie-player>'
 
 modalDiv.setAttribute("id", "cart")
 modalDiv.setAttribute("tabindex", "-1")
