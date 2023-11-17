@@ -400,7 +400,7 @@ const loadData = async () => {
     }
     else 
         result = JSON.parse(localStorage.getItem('data'))
-    if (((date - JSON.parse(localStorage.getItem('ts'))) / 3600) > 100) {
+    if (((date - JSON.parse(localStorage.getItem('ts'))) / -3600) > 100) {
         console.log('inside')
         result = await (await getProductsFromStripe()).json()
         localStorage.setItem('ts', date)
