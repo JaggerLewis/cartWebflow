@@ -383,9 +383,7 @@ const initAccessory = () => {
 
 const setData = async () => {
     console.log('setData')
-    let result = await (await getProductsFromStripe()).json()
-    result.ts = date
-    localStorage.setItem('data', JSON.stringify(result))
+   
 
     console.log('result => ', result)
 
@@ -396,14 +394,17 @@ const loadData = async () => {
     let date = Date.now()
     let result
     if (localStorage.getItem('data') == null) {
-      result = setData()
+       let result = await (await getProductsFromStripe()).json()
+        localStorage.setItem('data', JSON.stringify(result))
+        localStorage.setItem('ts', date)
     }
     else 
         result = JSON.parse(localStorage.getItem('data'))
-    console.log((date - result.ts) / 3600)
-    if (((date - result.ts) / 3600) > 100) {
+    if (((date - JSON.parse(localStorage.getItem('ts'))) / 3600) > 100) {
         console.log('inside')
-        result = setData()
+         let result = await (await getProductsFromStripe()).json()
+         localStorage.setItem('ts', date)
+        localStorage.setItem('data', JSON.stringify(result))
     }
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
