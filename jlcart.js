@@ -9,8 +9,7 @@ let loaderContainer = document.createElement('div')
 let productsJSON
 
 loaderContainer.classList.add('jl-loader-container')
-loaderContainer.innerHTML = '<lottie-player src="https://github.com/JaggerLewis/cartWebflow/blob/main/loader%20site.lottie" background="transparent"  speed="1"  style="width: 300px; height: 300px;" loop controls autoplay></lottie-player>'
-
+loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
 modalDiv.setAttribute("id", "cart")
 modalDiv.setAttribute("tabindex", "-1")
 modalDiv.setAttribute("role", "dialog")
