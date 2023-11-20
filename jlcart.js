@@ -436,13 +436,15 @@ const initAbonnement = async () => {
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
             document.querySelector('#abo-2-mois').style.display = "block";
             console.log()
-            document.querySelector('#abo-prix-family-premium').textContent = datas[0].prices[0].price
+            document.querySelector('#abo-prix-family-premium').textContent = datas[0].prices[0].price + '/ mois'
 
         }
         else {
             document.querySelector('#abo-facture-mois').classList.add('text-selected')
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
             document.querySelector('#abo-2-mois').style.display = "none";
+            document.querySelector('#abo-prix-family-premium').textContent = datas[0].prices[1].price + '/ année'
+
         }
     })
 }
