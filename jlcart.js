@@ -18,7 +18,7 @@ modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="jl-border-container"></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
+modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
 body.insertBefore(loaderContainer, document.body.firstChild);
 
@@ -28,6 +28,9 @@ const setCartNumber = () => {
         JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
     }
     document.querySelector('#jl-cart-number').textContent = count
+    if (count == 0) {
+        document.querySelector('#jl-no-display').style.display = count == 0 ? 'block' : 'none'
+    }
 }
 
 class Product {
@@ -403,11 +406,11 @@ const loadAbonnement = async () => {
     if (localStorage.getItem('abonnement') == null) {
         answer = await (await getAbonnementFromStripe()).json()
         localStorage.setItem('abonnement', JSON.stringify(answer))
-        localStorage.setItem('ts', date)
+        localStorage.setItem('ts-abonnement', date)
     }
     else 
         answer = JSON.parse(localStorage.getItem('abonnement'))
-    if (date - JSON.parse(localStorage.getItem('ts')) > 600000) {
+    if (date - JSON.parse(localStorage.getItem('ts-abonnement')) > 600000) {
         answer = await (await getAbonnementFromStripe()).json()
         localStorage.setItem('ts', date)
         localStorage.setItem('abonnement', JSON.stringify(answer))
@@ -520,11 +523,19 @@ const showCart = (event) => {
     event.preventDefault();
     
     clearHtml()
-    shoppingCart.cart.forEach((prod) => {
-        let id = prod.id.price.id
-        addHtml(prod, id)
-        addFunction(prod.id, id)
-    })
+
+    if (shoppingCart.cart.length == 0) {
+        document.querySelector('#jl-no-display').style.display = 'block'
+    }
+    else {
+        document.querySelector('#jl-no-display').style.display = 'none'
+        shoppingCart.cart.forEach((prod) => {
+            let id = prod.id.price.id
+            addHtml(prod, id)
+            addFunction(prod.id, id)
+        })
+    }
+
     shoppingCart.setTotalPrice();
 
     function clearHtml () {
