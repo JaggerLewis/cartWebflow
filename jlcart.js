@@ -447,12 +447,12 @@ const initAbonnement = async () => {
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
             document.querySelector('#abo-2-mois').style.display = "block";
             console.log()
-            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '€/ mois'
-            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ mois'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ mois'
-            document.querySelector('#total-family-premium').parentElement.style.display = 'block'
-            document.querySelector('#total-starter-family').parentElement.style.display = 'block'
-            document.querySelector('#total-starter').parentElement.style.display = 'block'
+            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
+            document.querySelector('#total-family-premium').parentElement.style.display = 'none'
+            document.querySelector('#total-starter-family').parentElement.style.display = 'none'
+            document.querySelector('#total-starter').parentElement.style.display = 'none'
             updateTime(false)
 
         }
@@ -460,12 +460,12 @@ const initAbonnement = async () => {
             document.querySelector('#abo-facture-mois').classList.add('text-selected')
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
             document.querySelector('#abo-2-mois').style.display = "none";
-            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '€/ an'
-            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '€/ an'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ an'
-            document.querySelector('#total-family-premium').parentElement.style.display = 'none'
-            document.querySelector('#total-starter-family').parentElement.style.display = 'none'
-            document.querySelector('#total-starter').parentElement.style.display = 'none'
+            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '€/ mois'
+            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '€/ mois'
+            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ mois'
+            document.querySelector('#total-family-premium').parentElement.style.display = 'block'
+            document.querySelector('#total-starter-family').parentElement.style.display = 'block'
+            document.querySelector('#total-starter').parentElement.style.display = 'block'
             updateTime(true)
         }
     })
