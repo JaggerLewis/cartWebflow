@@ -390,10 +390,29 @@ const initAccessory = () => {
 
 const loadAbonnement = async () => {
     loaderContainer.style = null
-    const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-    })
+
+    let date = Date.now()
+    let result
+    if (localStorage.getItem('abonnement') == null) {
+        const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
+        localStorage.setItem('abonnement', JSON.stringify(result))
+        localStorage.setItem('ts', date)
+    }
+    else 
+        result = JSON.parse(localStorage.getItem('abonnement'))
+    if (date - JSON.parse(localStorage.getItem('ts')) > 600000) {
+        const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
+        localStorage.setItem('ts', date)
+        localStorage.setItem('abonnement', JSON.stringify(result))
+    }
+
+  
     loaderContainer.style.display = 'none'
 
     return answer
@@ -416,7 +435,6 @@ const initAbonnement = async () => {
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
             document.querySelector('#abo-2-mois').style.display = "none";
         }
-        console.log('load')
     })
 }
 
