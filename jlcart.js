@@ -392,9 +392,9 @@ const loadAbonnement = async () => {
     loaderContainer.style = null
 
     let date = Date.now()
-    let result
+    let answer
     if (localStorage.getItem('abonnement') == null) {
-        const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
+         answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         })
