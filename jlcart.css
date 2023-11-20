@@ -8,11 +8,6 @@
     border-radius: 10px;
 }
 
-@media (max-width: 1000px) {
-    .jl-modal {
-        width: 90vw;
-    }
-}
 
 .jl-product-img {
     height: 100px;
@@ -167,6 +162,7 @@ p {
     position: fixed;
     z-index: 1000000;
     right: 10%;
+    left: 50%;
     top: 100px;
     font-size: 17px;
     border-radius: 7.5px;
@@ -215,4 +211,14 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+@media (max-width: 1000px) {
+    .jl-modal {
+        width: 90vw;
+    }
+    .jl-snackbar {
+        left: 10%;
+    }
 }
