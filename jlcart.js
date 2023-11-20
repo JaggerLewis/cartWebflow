@@ -539,7 +539,7 @@ const showCart = (event) => {
     shoppingCart.setTotalPrice();
 
     function clearHtml () {
-        document.querySelector('.jl-border-container').innerHTML = '';
+        document.querySelector('.jl-border-container').innerHTML = '<div class="jl-no-display">Aucun element séléctionné</div>';
     } 
 
     function addHtml(prod, id) {
