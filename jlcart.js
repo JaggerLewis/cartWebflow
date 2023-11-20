@@ -431,7 +431,7 @@ const updateTime = (search) => {
     
     for (var i = 0; i < div.length; i++) {
       if (div[i].textContent == searchText) {
-        atags[i].textContent = search ? '1 mois':  '1 an';
+        div[i].textContent = search ? '1 mois':  '1 an';
       }
     }
 }
