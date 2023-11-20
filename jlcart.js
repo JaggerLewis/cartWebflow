@@ -411,6 +411,7 @@ const loadAbonnement = async () => {
         localStorage.setItem('ts', date)
         localStorage.setItem('abonnement', JSON.stringify(answer))
     }
+    console.log("answer =>", answer)
 
   
     loaderContainer.style.display = 'none'
