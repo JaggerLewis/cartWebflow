@@ -165,7 +165,7 @@ p {
     text-align: center;
     padding: 10px 16px;
     position: fixed;
-    z-index: 100;
+    z-index: 1000000;
     right: 10%;
     top: 100px;
     font-size: 17px;
