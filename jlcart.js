@@ -234,11 +234,11 @@ const initHome = async () => {
         let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
     })
-    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
+    document.querySelector('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[14].image, products[14].price.id )
         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
-    })
+    }))
     document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[16].image, products[16].price.id )
@@ -425,7 +425,7 @@ const loadAbonnement = async () => {
 } 
 
 const initAbonnement = async () => {
-    let value = await loadAbonnement()
+    let datas = await loadAbonnement()
     document.querySelector('#abo-facture-mois').classList.add('text-selected')
     document.querySelector('#abo-2-mois').style.display = "none";
     document.querySelector('#toggle').addEventListener('click', (event) => {
@@ -434,6 +434,8 @@ const initAbonnement = async () => {
             document.querySelector('#abo-facture-mois').classList.remove('text-selected')
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
             document.querySelector('#abo-2-mois').style.display = "block";
+            console.log()
+            document.querySelector('#abo-prix-family-premium').textContent = datas[0].prices[0].price
 
         }
         else {
