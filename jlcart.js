@@ -226,32 +226,32 @@ const initHome = async () => {
     document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[14].image, products[14].price.id )
-        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[16].image, products[16].price.id )
-        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[12].image, products[12].price.id )
-        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[13].image, products[13].price.id )
-        colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[15].image, products[15].price.id )
-        colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[11].image, products[11].price.id )
-        colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
    
     collar.setAttribute('data-selected', products[16].price.id)
