@@ -239,16 +239,16 @@ const initHome = async () => {
         colorButtonAction(collar, products[14].image, products[14].price.id )
         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     }))
-    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
+    document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[16].image, products[16].price.id )
         colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
+    }))
+    document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[12].image, products[12].price.id )
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
-    })
+    }))
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, products[13].image, products[13].price.id )
