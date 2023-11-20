@@ -449,7 +449,7 @@ const initAbonnement = async () => {
             console.log()
             document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ an'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
             updateTime(false)
 
         }
@@ -459,7 +459,7 @@ const initAbonnement = async () => {
             document.querySelector('#abo-2-mois').style.display = "none";
             document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '€/ an'
             document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '€/ an'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
+            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ an'
             updateTime(true)
         }
     })
