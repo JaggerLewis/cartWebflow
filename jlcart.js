@@ -423,7 +423,18 @@ const loadAbonnement = async () => {
     loaderContainer.style.display = 'none'
 
     return answer
-} 
+}
+
+const updateTime = (search) => {
+    var div = document.getElementsByTagName("div");
+    var searchText = search ? '1 an':  '1 mois';
+    
+    for (var i = 0; i < div.length; i++) {
+      if (div[i].textContent == searchText) {
+        atags[i].textContent = search ? '1 mois':  '1 an';
+      }
+    }
+}
 
 const initAbonnement = async () => {
     let datas = await loadAbonnement()
@@ -436,18 +447,18 @@ const initAbonnement = async () => {
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
             document.querySelector('#abo-2-mois').style.display = "block";
             console.log()
-            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '&euro;/ an'
-            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '&euro;/ an'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '&euro;/ an'
+            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ an'
 
         }
         else {
             document.querySelector('#abo-facture-mois').classList.add('text-selected')
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
             document.querySelector('#abo-2-mois').style.display = "none";
-            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '&euro;/ an'
-            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '&euro;/ an'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '&euro;/ an'
+            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '€/ an'
+            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '€/ an'
+            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
 
         }
     })
