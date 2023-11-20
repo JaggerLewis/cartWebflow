@@ -398,18 +398,18 @@ const loadAbonnement = async () => {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         })
-        localStorage.setItem('abonnement', JSON.stringify(result))
+        localStorage.setItem('abonnement', JSON.stringify(answer))
         localStorage.setItem('ts', date)
     }
     else 
-        result = JSON.parse(localStorage.getItem('abonnement'))
+        answer = JSON.parse(localStorage.getItem('abonnement'))
     if (date - JSON.parse(localStorage.getItem('ts')) > 600000) {
         const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         })
         localStorage.setItem('ts', date)
-        localStorage.setItem('abonnement', JSON.stringify(result))
+        localStorage.setItem('abonnement', JSON.stringify(answer))
     }
 
   
