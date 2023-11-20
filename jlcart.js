@@ -185,7 +185,7 @@ const colorButtonAction = (elem, image, id) => {
     elem.src = image
 }
 
-const colorButtonSelect = (newBtn, attribut, Newclass, txt) => {
+const colorButtonSelect = (newBtn, attribut, Newclass) => {
     let btn = document.querySelector(newBtn)
     let oldBtn = document.querySelector('['+attribut+'=true]')
 
@@ -194,9 +194,6 @@ const colorButtonSelect = (newBtn, attribut, Newclass, txt) => {
     oldBtn.classList.remove(Newclass)
     }
 
-    if (txt) {
-
-    }
     btn.classList.add(Newclass)
     btn.setAttribute(attribut, 'true')
 }
@@ -329,6 +326,8 @@ const initCollar = async ()  => {
     })
     collar.setAttribute('data-selected', products[16].price.id)
     collar.srcset = products[16].image
+    colorButtonSelect('#page-jag-color-weimar', 'color-selected', 'jl-color-selected')
+
 }
 
 const initBox = async ()  => {
