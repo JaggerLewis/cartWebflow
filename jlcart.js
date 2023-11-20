@@ -388,7 +388,20 @@ const initAccessory = () => {
     })
 }
 
-const initAbonnement = () => {
+const loadAbonnement = async () => {
+    loaderContainer.style.display = 'block'
+    document.querySelector()
+    const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    loaderContainer.style.display = 'none'
+
+    return answer
+} 
+
+const initAbonnement = async () => {
+    let value = await loadAbonnement()
     document.querySelector('#abo-facture-mois').classList.add('text-selected')
     document.querySelector('#abo-2-mois').style.display = "none";
     document.querySelector('#toggle').addEventListener('click', (event) => {
@@ -427,7 +440,7 @@ const loadData = async () => {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
 
-    body.removeChild(loaderContainer)
+    loaderContainer.style.display = 'none'
 }
 
 const init = async () => {
