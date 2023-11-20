@@ -193,6 +193,7 @@ const colorButtonSelect = (newBtn, attribut, Newclass) => {
     oldBtn.removeAttribute(attribut)
     oldBtn.classList.remove(Newclass)
     }
+    // document.querySelectorAll('[color-selected="true"]').forEach((element) => {if (element.tagName == 'DIV') element.classList.add('text-selected')})
 
     btn.classList.add(Newclass)
     btn.setAttribute(attribut, 'true')
@@ -378,6 +379,13 @@ const initAccessory = () => {
     })
 }
 
+const initAbonnement = () => {
+    document.querySelector('#buttontoggle').addEventListener('click', (event) => {
+        event.preventDefault()
+        console.log('load')
+    })
+}
+
 const loadData = async () => {
     let date = Date.now()
     let result
@@ -422,6 +430,9 @@ const init = async () => {
             break;
         case 'accessoires-jag-smartdock' :
             initAccessory()
+            break;
+        case 'abonnement' : 
+            initAbonnement()
             break;
         default : 
             console.log(page)
