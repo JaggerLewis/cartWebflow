@@ -446,8 +446,8 @@ const initAbonnement = async () => {
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
             document.querySelector('#abo-2-mois').style.display = "none";
             document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '/ an'
-            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[2].price + '/ an'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[3].price + '/ an'
+            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '/ an'
+            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '/ an'
 
         }
     })
