@@ -451,7 +451,7 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
             document.querySelector('#total-family-premium').parentElement.style.display = 'block'
-            document.querySelector('#total-starter-familly').parentElement.style.display = 'block'
+            document.querySelector('#total-starter-family').parentElement.style.display = 'block'
             document.querySelector('#total-starter').parentElement.style.display = 'block'
             updateTime(false)
 
@@ -464,7 +464,7 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '€/ an'
             document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ an'
             document.querySelector('#total-family-premium').parentElement.style.display = 'none'
-            document.querySelector('#total-starter-familly').parentElement.style.display = 'none'
+            document.querySelector('#total-starter-family').parentElement.style.display = 'none'
             document.querySelector('#total-starter').parentElement.style.display = 'none'
             updateTime(true)
         }
