@@ -122,6 +122,10 @@ p {
     color: #FFF;
 }
 
+.jl-button:hover {
+    background-color: #5663FF;
+}
+
 .jl-input {
     width: 30%;
     justify-content: space-around;
