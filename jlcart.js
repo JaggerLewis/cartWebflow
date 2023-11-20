@@ -440,6 +440,7 @@ const initAbonnement = async () => {
     let datas = await loadAbonnement()
     document.querySelector('#abo-facture-mois').classList.add('text-selected')
     document.querySelector('#abo-2-mois').style.display = "none";
+    updateTime(true)
     document.querySelector('#toggle').addEventListener('click', (event) => {
         event.preventDefault()
         if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
