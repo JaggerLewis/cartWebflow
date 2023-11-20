@@ -389,7 +389,7 @@ const initAccessory = () => {
 }
 
 const loadAbonnement = async () => {
-    loaderContainer.style.display = 'block'
+    loaderContainer.style = null
     const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
