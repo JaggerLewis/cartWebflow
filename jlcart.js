@@ -380,8 +380,17 @@ const initAccessory = () => {
 }
 
 const initAbonnement = () => {
-    document.querySelector('#buttontoggle').addEventListener('click', (event) => {
+    document.querySelector('#abo-facture-mois').classList.add('text-selected')
+    document.querySelector('#toggle').addEventListener('click', (event) => {
         event.preventDefault()
+        if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
+            document.querySelector('#abo-facture-mois').classList.remove('text-selected')
+            document.querySelector('#abo-facture-annee').classList.add('text-selected')
+        }
+        else {
+            document.querySelector('#abo-facture-mois').classList.add('text-selected')
+            document.querySelector('#abo-facture-annee').classList.remove('text-selected')
+        }
         console.log('load')
     })
 }
