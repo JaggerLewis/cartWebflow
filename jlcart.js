@@ -75,7 +75,7 @@ class ShoppingCart {
     addItem(id, count = 1) {
         console.log('item => ', id)
         if (this.countItems() >= 2) {
-            alert('vous ne pouvez pas ajouter plus de deux elements au panier')
+            showSnackBar('vous ne pouvez pas ajouter plus de deux elements au panier')
             return
         }
         const productIndex = this.findProductIndexById(id)
@@ -290,7 +290,7 @@ const initCollar = async ()  => {
         if (finalProduct != null)
             shoppingCart.addItem(finalProduct, 1)
         else 
-            alert("votre produit n'a pas été trouvé....")
+        showSnackBar("votre produit n'a pas été trouvé....")
 
     })
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
@@ -383,7 +383,7 @@ const initAccessory = () => {
     })
     document.querySelector('#jl-cable-cta-dock').addEventListener('click', (event) => {
         event.preventDefault()
-        alert('ON NE VEND PAS DE CABLE POUR LE DOCK')
+        showSnackBar('ON NE VEND PAS DE CABLE POUR LE DOCK')
     })
 }
 
@@ -465,7 +465,7 @@ const init = async () => {
 const redirectToStripe = async (event) => {
     event.preventDefault();
     if (shoppingCart.countItems() == 0) {
-            alert("vous n'avez pas d'article")
+        showSnackBar("vous n'avez pas d'article")
             return
         }
     const apiRes = await shoppingCart.getCartStripeUrl()
