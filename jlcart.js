@@ -78,6 +78,7 @@ class ShoppingCart {
             showSnackBar('vous ne pouvez pas ajouter plus de deux elements au panier')
             return
         }
+        showSnackBar(id.name + ' ajouter au panier')
         const productIndex = this.findProductIndexById(id)
         if (productIndex < 0) {
             const cardProduct = new ProductCart(id, count)
