@@ -185,15 +185,23 @@ const colorButtonAction = (elem, image, id) => {
     elem.src = image
 }
 
-const colorButtonSelect = (newBtn, attribut, Newclass) => {
+const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
     let btn = document.querySelector(newBtn)
-    let oldBtn = document.querySelector('['+attribut+'=true]')
+    let oldBtn = document.querySelectorAll('['+attribut+'=true]')
 
     if (oldBtn != null) {
-    oldBtn.removeAttribute(attribut)
-    oldBtn.classList.remove(Newclass)
+    oldBtn.forEach((element) => {
+        element.removeAttribute(attribut)
+        element.classList.remove(Newclass)
+        element.classList.remove('text-selected')
+    })
     }
-    // document.querySelectorAll('[color-selected="true"]').forEach((element) => {if (element.tagName == 'DIV') element.classList.add('text-selected')})
+    if (is_text) {
+        let txt = document.querySelector(newBtn.replace('btn, txt'))
+        console.log('txt =>', txt)
+        txt.classList.add('text-selected')
+        txt.setAttribute(attribut, 'true')
+    }
 
     btn.classList.add(Newclass)
     btn.setAttribute(attribut, 'true')
@@ -250,8 +258,8 @@ const initHome = async () => {
     collar.srcset = products[16].image
     dock.setAttribute('data-selected', products[15].price.id)
     dock.srcset = products[15].image
-    colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
-    colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected')
+    colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
+    colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
 
 }
 
