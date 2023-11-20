@@ -208,10 +208,11 @@ const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
     })
     }
     if (is_text) {
-        let txt = document.querySelector(newBtn.replace('btn', 'txt'))
-        console.log('txt =>', txt)
-        txt.classList.add('text-selected')
-        txt.setAttribute(attribut, 'true')
+        let txt = document.querySelectorAll(newBtn.replace('btn', 'txt')).forEach(element => {
+            element.classList.add('text-selected')
+            element.setAttribute(attribut, 'true')
+        })
+       
     }
 
     btn.classList.add(Newclass)
