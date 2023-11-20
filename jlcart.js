@@ -234,7 +234,7 @@ const initHome = async () => {
         let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
     })
-    document.querySelector('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
+    document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[14].image, products[14].price.id )
         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
