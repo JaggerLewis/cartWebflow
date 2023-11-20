@@ -450,7 +450,7 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ an'
-            updateTime(true)
+            updateTime(false)
 
         }
         else {
@@ -460,7 +460,7 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '€/ an'
             document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '€/ an'
             document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
-            updateTime(false)
+            updateTime(true)
         }
     })
 }
