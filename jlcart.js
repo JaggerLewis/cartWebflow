@@ -185,13 +185,17 @@ const colorButtonAction = (elem, image, id) => {
     elem.src = image
 }
 
-const colorButtonSelect = (newBtn, attribut, Newclass) => {
+const colorButtonSelect = (newBtn, attribut, Newclass, txt) => {
     let btn = document.querySelector(newBtn)
     let oldBtn = document.querySelector('['+attribut+'=true]')
 
     if (oldBtn != null) {
     oldBtn.removeAttribute(attribut)
     oldBtn.classList.remove(Newclass)
+    }
+
+    if (txt) {
+
     }
     btn.classList.add(Newclass)
     btn.setAttribute(attribut, 'true')
@@ -203,16 +207,11 @@ const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
-    console.log('initHome')
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('onCLick')
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
-        console.log('onCLick with product => ', product)
         shoppingCart.addItem(product, 1)
-        console.log('item')
     })
-    console.log('elem =>',  document.querySelector('#jag-jag'))
     document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
@@ -253,6 +252,9 @@ const initHome = async () => {
     collar.srcset = products[16].image
     dock.setAttribute('data-selected', products[15].price.id)
     dock.srcset = products[15].image
+    colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
+    colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected')
+
 }
 
 const initCollar = async ()  => {
@@ -262,8 +264,6 @@ const initCollar = async ()  => {
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
         let option = document.querySelector('[hover-selected=true]')
         let productId
-        console.log('option =>', option)
-        console.log('option =>', color)
         switch (option.id) {
             case 'jl-collar-select-1':
                 productId = 'jag'
@@ -334,7 +334,6 @@ const initCollar = async ()  => {
 const initBox = async ()  => {
     document.querySelector('#jl-dock-antenne').addEventListener('click', (event) => {
         event.preventDefault()
-        console.log('prod => ', products)
         shoppingCart.addItem(products[4], 1)
     })
     document.querySelector('#jl-dock-cable').addEventListener('click', (event) => {
@@ -380,16 +379,6 @@ const initAccessory = () => {
     })
 }
 
-
-const setData = async () => {
-    console.log('setData')
-   
-
-    console.log('result => ', result)
-
-    return result
-}
-
 const loadData = async () => {
     let date = Date.now()
     let result
@@ -401,7 +390,6 @@ const loadData = async () => {
     else 
         result = JSON.parse(localStorage.getItem('data'))
     if (date - JSON.parse(localStorage.getItem('ts')) > 600000) {
-        console.log('inside')
         result = await (await getProductsFromStripe()).json()
         localStorage.setItem('ts', date)
         localStorage.setItem('data', JSON.stringify(result))
@@ -451,7 +439,6 @@ const redirectToStripe = async (event) => {
         }
     const apiRes = await shoppingCart.getCartStripeUrl()
     const apiResJson = await apiRes.json()
-    console.log('apiRes =>', apiResJson)
     window.location.href = apiResJson.url
 }
 
@@ -517,7 +504,6 @@ const showCart = (event) => {
         document.querySelector('#remove-' + id).addEventListener('click', (event) => {
             event.preventDefault()
             document.querySelector('.jl-border-container').removeChild(document.querySelector('#' + id))
-            console.log('remove => ', prod)
             shoppingCart.clearItem(prod);
             shoppingCart.setTotalPrice();
         })
