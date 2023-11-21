@@ -5,6 +5,8 @@ commander.setAttribute("data-target", "#cart")
 const body = document.querySelector("body");
 const modalDiv = document.createElement("div");
 let snack = document.createElement('div')
+snack.innerHTML = '<div class="jl-snack-icon-container"><img class="jl-snack-icon" id="jl-snack-icon" src="icon-close.png"></img></div><div class="jl-snack-text-container" id="jl-snack-text-container"></div>'
+
 let loaderContainer = document.createElement('div')
 
 loaderContainer.classList.add('jl-loader-container')
@@ -78,10 +80,10 @@ class ShoppingCart {
     addItem(id, count = 1) {
         console.log('item => ', id)
         if (this.countItems() >= 2) {
-            showSnackBar('vous ne pouvez pas ajouter plus de deux elements au panier')
+            showSnackBar('vous ne pouvez pas ajouter plus de deux elements au panier', true)
             return
         }
-        showSnackBar(id.name + ' ajouter au panier')
+        showSnackBar(id.name + ' ajouter au panier', false)
         const productIndex = this.findProductIndexById(id)
         if (productIndex < 0) {
             const cardProduct = new ProductCart(id, count)
@@ -302,7 +304,7 @@ const initCollar = async ()  => {
         if (finalProduct != null)
             shoppingCart.addItem(finalProduct, 1)
         else 
-        showSnackBar("votre produit n'a pas été trouvé....")
+        showSnackBar("votre produit n'a pas été trouvé....", true)
 
     })
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
@@ -369,7 +371,7 @@ const initNewsLettre = () => {
         if (email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
             fetch('')
         else
-         showSnackBar('error')
+         showSnackBar('error', true)
     })
 }
 
@@ -396,7 +398,7 @@ const initAccessory = () => {
     })
     document.querySelector('#jl-cable-cta-dock').addEventListener('click', (event) => {
         event.preventDefault()
-        showSnackBar('ON NE VEND PAS DE CABLE POUR LE DOCK')
+        showSnackBar('ON NE VEND PAS DE CABLE POUR LE DOCK', true)
     })
 }
 
@@ -530,7 +532,7 @@ const init = async () => {
 const redirectToStripe = async (event) => {
     event.preventDefault();
     if (shoppingCart.countItems() == 0) {
-        showSnackBar("vous n'avez pas d'article")
+        showSnackBar("vous n'avez pas d'article", true)
             return
         }
     const apiRes = await shoppingCart.getCartStripeUrl()
@@ -617,8 +619,9 @@ const showCart = (event) => {
 
 document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
 
-const showSnackBar = (text) => {
-    snack.textContent = text
+const showSnackBar = (text, isError) => {
+    document.querySelector('#jl-snack-text-container').textContent = text
+    document.querySelector('#jl-snack-icon').src = isError ? 'https://webcart.jagger-lewis.com/asset/icon_error.png' : 'https://webcart.jagger-lewis.com/asset/icon_validate.png'
     snack.className = "show";
     setTimeout(function(){ snack.className = snack.className.replace("show", ""); }, 3000);
 }
