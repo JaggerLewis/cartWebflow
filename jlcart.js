@@ -80,10 +80,10 @@ class ShoppingCart {
     addItem(id, count = 1) {
         console.log('item => ', id)
         if (this.countItems() >= 2) {
-            showSnackBar('vous ne pouvez pas ajouter plus de deux elements au panier', true)
+            showSnackBar('Vous ne pouvez pas ajouter plus de deux éléments au panier', true)
             return
         }
-        showSnackBar(id.name + ' ajouter au panier', false)
+        showSnackBar(id.name + ' ajouté au panier', false)
         const productIndex = this.findProductIndexById(id)
         if (productIndex < 0) {
             const cardProduct = new ProductCart(id, count)
@@ -304,7 +304,7 @@ const initCollar = async ()  => {
         if (finalProduct != null)
             shoppingCart.addItem(finalProduct, 1)
         else 
-        showSnackBar("votre produit n'a pas été trouvé....", true)
+        showSnackBar("Votre produit n'a pas été trouvé...", true)
 
     })
     document.querySelector('#page-jag-color-fauve').addEventListener('click', (event) => {
@@ -371,7 +371,7 @@ const initNewsLettre = () => {
         if (email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
             fetch('')
         else
-         showSnackBar('error', true)
+         showSnackBar('Wrong email', true)
     })
 }
 
@@ -532,7 +532,7 @@ const init = async () => {
 const redirectToStripe = async (event) => {
     event.preventDefault();
     if (shoppingCart.countItems() == 0) {
-        showSnackBar("vous n'avez pas d'article", true)
+        showSnackBar("Vous n'avez pas d'article", true)
             return
         }
     const apiRes = await shoppingCart.getCartStripeUrl()
