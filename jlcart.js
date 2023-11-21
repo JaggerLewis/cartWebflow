@@ -5,7 +5,7 @@ commander.setAttribute("data-target", "#cart")
 const body = document.querySelector("body");
 const modalDiv = document.createElement("div");
 let snack = document.createElement('div')
-snack.innerHTML = '<div class="jl-snack-icon-container"><img class="jl-snack-icon" id="jl-snack-icon" src="icon-close.png"></img></div><div class="jl-snack-text-container" id="jl-snack-text-container"></div>'
+snack.innerHTML = '<div class="jl-snack-icon-container"><img class="jl-snack-icon" id="jl-snack-icon"></img></div><div class="jl-snack-text-container" id="jl-snack-text-container"></div>'
 
 let loaderContainer = document.createElement('div')
 
