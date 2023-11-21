@@ -156,8 +156,26 @@ p {
 }
 
 
+.jl-snack-icon {
+    height: 20px;
+    align-items: start;
+
+}
+
+.jl-snack-icon-container {
+    display: flex;
+    width: 10%;
+}
+
+.jl-snack-text-container {
+    width: 80%;
+}
+
 #jl-snackbar {
-    visibility: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
     min-width: 250px;
     margin-left: -125px;
     color: black;
