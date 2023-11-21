@@ -1,3 +1,15 @@
+
+@media (max-width: 1000px) {
+    .jl-modal {
+        width: 90vw;
+    }
+    .jl-snackbar {
+        left: 10%;
+        background-color: #000;
+    }
+}
+
+
 .jl-modal {
     margin: auto;
     margin-top: 10vh;
@@ -237,15 +249,6 @@ p {
 }
 
 
-@media (max-width: 1000px) {
-    .jl-modal {
-        width: 90vw;
-    }
-    .jl-snackbar {
-        left: 10%;
-        background-color: #000;
-    }
-}
 
 .jl-no-display {
     display: flex;
