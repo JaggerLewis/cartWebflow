@@ -243,6 +243,7 @@ p {
     }
     .jl-snackbar {
         left: 10%;
+        background-color: #000;
     }
 }
 
