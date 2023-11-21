@@ -1,5 +1,5 @@
 
-@media (max-width: 1000px) {
+@media only screen and (max-width: 600px) {
     .jl-modal {
         width: 90vw;
     }
