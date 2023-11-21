@@ -1,15 +1,3 @@
-
-@media only screen and (max-width: 666px) {
-    .jl-modal {
-        width: 90vw;
-    }
-    #jl-snackbar {
-        left: 10%;
-        background: #000;
-    }
-}
-
-
 .jl-modal {
     margin: auto;
     margin-top: 10vh;
@@ -190,7 +178,6 @@ p {
     justify-content: center;
     flex-wrap: wrap;
     min-width: 250px;
-    margin-left: -125px;
     color: black;
     text-align: center;
     padding: 10px 16px;
@@ -254,4 +241,14 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media only screen and (max-width: 666px) {
+    .jl-modal {
+        width: 90vw;
+    }
+    #jl-snackbar {
+        left: 10%;
+        background: #000;
+    }
 }
