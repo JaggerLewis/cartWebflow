@@ -3,7 +3,7 @@
     .jl-modal {
         width: 90vw;
     }
-    .jl-snackbar {
+    #jl-snackbar {
         left: 10%;
         background-color: #000;
     }
