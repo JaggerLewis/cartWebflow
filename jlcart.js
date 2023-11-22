@@ -20,7 +20,7 @@ modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button hover" data-dismiss="modal">x</p></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
+modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><img class="close-button hover" data-dismiss="modal" src="icon_close2.png"></img></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-bottom-container"><p class="jl-bottom-text">Frait de livraison (standart)</p><p class="jl-bottom-text">XX€</p></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="jl-total-title">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
 body.insertBefore(loaderContainer, document.body.firstChild);
 
@@ -577,33 +577,26 @@ const showCart = (event) => {
         let container = document.querySelector('.jl-border-container')
         let containerProduct = document.createElement('div')
         let containerProductText = document.createElement('div')
-        let elemContainer = document.createElement('div')
+        let RowElem1 = document.createElement('div')
+        let RowElem2 = document.createElement('div')
+        let RowElem3 = document.createElement('div')
         let image = document.createElement('img')
-        let name = document.createElement('p')
-        let desc = document.createElement('p')
-        let price = document.createElement('p')
-        let quantityContainer = document.createElement('p')
+        RowElem1.classList.add('jl-product-row')
+        RowElem1.innerHTML = "<p class='jl-product-name'>"+ prod.id.name+"</p><img class='close-button' id='remove-"  + id + "' src='trash.png'></img >"
+        RowElem2.classList.add('jl-product-row')
+        RowElem2.innerHTML = "<p class='jl-product-quantity'>Qut : "+ prod.quantity + " </p><p class='jl-product-price'>" + prod.id.price.price + '€' + "</p>"
+        RowElem3.classList.add('jl-product-row-end')
+        RowElem3.innerHTML = "<img class='close-button'  src='info.png'><p class='jl-text-hint'>Choisissez un abonnement après l’achat de votre Jag. </p>"
         image.src = prod.id.image
         image.classList.add('jl-product-img')
-        elemContainer.classList.add('jl-container-product-bis')
         containerProduct.classList.add('jl-container-product')
         containerProduct.id = id
         containerProductText.classList.add('jl-container-product-text')
-        name.classList.add('jl-product-name')
-        desc.classList.add('jl-product-description')
-        price.classList.add('jl-product-price')
-        quantityContainer.classList.add('jl-input')
-        quantityContainer.innerHTML = "<p class='jl-product-quantity'>qt : " + prod.quantity + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
-        name.textContent = prod.id.name
-        desc.textContent = prod.id.description
-        price.textContent = prod.id.price.price + '€'
-        containerProductText.appendChild(name)
-        containerProductText.appendChild(desc)
-        containerProductText.appendChild(price)
-        elemContainer.appendChild(image)
-        elemContainer.appendChild(containerProductText)
-        containerProduct.appendChild(elemContainer)
-        containerProduct.appendChild(quantityContainer)
+        containerProduct.appendChild(image)
+        containerProductText.appendChild(RowElem1)
+        containerProductText.appendChild(RowElem2)
+        containerProductText.appendChild(RowElem3)
+        containerProduct.appendChild(containerProductText)
         container.appendChild(containerProduct)
     }
 
