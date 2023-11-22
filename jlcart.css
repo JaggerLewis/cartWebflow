@@ -48,6 +48,7 @@
 
 
 .jl-container-receipe,
+.jl-bottom-container,
 .jl-container-total {
     display: flex;
     padding: 16px 14px 16px 16px;
@@ -85,12 +86,7 @@
 }
 
 .jl-bottom-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-
-    flex-wrap: wrap;
+    margin-top: 1rem;
     border-top: 2px solid rgba(0, 0, 0, 0.30);
     border-bottom: 2px solid rgba(0, 0, 0, 0.30);
 }
