@@ -38,7 +38,7 @@
 
 .close-button {
     height: 20px;
-    padding: 5px;
+    margin: 5px;
 }
 
 .flex-row {
@@ -68,7 +68,6 @@
 }
 
 .jl-border-container {
-    padding: 16px 14px 16px 16px;
     border-radius: 17px;
     border: 2px solid rgba(0, 0, 0, 0.30);
     margin-bottom: 1%;
@@ -86,6 +85,7 @@
 }
 
 .jl-bottom-container {
+    padding-bottom: 0px;
     margin-top: 1rem;
     border-top: 2px solid rgba(0, 0, 0, 0.30);
     border-bottom: 2px solid rgba(0, 0, 0, 0.30);
