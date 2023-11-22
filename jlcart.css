@@ -331,6 +331,10 @@ p {
         width: 90vw;
     }
 
+    .jl-product-name {
+        font-size: 15px;
+    }
+
     #jl-snackbar {
         left: 10%;
     }
