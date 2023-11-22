@@ -1,9 +1,3 @@
-body,
-.modal-dialog,
-.modal-lg {
-    background-color: grey;
-}
-
 .jl-product-row {
     display: flex;
     flex-direction: row;
