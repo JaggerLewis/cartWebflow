@@ -29,7 +29,7 @@
 }
 
 .jl-product-img {
-    height: 100px;
+    width: 20%;
     flex: 1;
     object-fit: contain;
     margin: auto;
