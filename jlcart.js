@@ -20,7 +20,7 @@ modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><img class="close-button hover" data-dismiss="modal" src="https://webcart.jagger-lewis.com/asset/icon_close.png"></img></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-bottom-container"><p class="jl-bottom-text">Frait de livraison (standart)</p><p class="jl-bottom-text">XX€</p></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="jl-total-title">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
+modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><img class="close-button hover" data-dismiss="modal" src="https://webcart.jagger-lewis.com/asset/icon_close.png"></img></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-bottom-container"><p class="jl-bottom-text">Frait de livraison (standart)</p><p class="jl-bottom-text">XX€</p></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="jl-total-title" id="jl-total">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
 body.insertBefore(loaderContainer, document.body.firstChild);
 
@@ -150,7 +150,7 @@ class ShoppingCart {
 
     setTotalPrice() {
         let price = this.getTotalPrice()
-        const totalSpan = document.querySelector('.total-price')
+        const totalSpan = document.querySelector('jl-total')
         totalSpan.innerHTML = price + "&euro;"
     }
 
