@@ -68,6 +68,7 @@
 }
 
 .jl-border-container {
+    padding: 5px;
     border-radius: 17px;
     border: 2px solid rgba(0, 0, 0, 0.30);
     margin-bottom: 1%;
