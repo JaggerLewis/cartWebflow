@@ -33,6 +33,7 @@ const setCartNumber = () => {
     if (count == 0) {
         document.querySelector('#jl-no-display').style.display = count == 0 ? 'block' : 'none'
     }
+    document.querySelector('#bulle-shopping-cart').style.display = document.querySelector('#jl-cart-number').textContent != '0'? 'block' : 'none'
 }
 
 class Product {
