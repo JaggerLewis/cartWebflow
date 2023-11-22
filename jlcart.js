@@ -20,7 +20,7 @@ modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button" data-dismiss="modal">x</p></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
+modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><p class="close-button hover" data-dismiss="modal">x</p></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="total-price">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
 body.insertBefore(loaderContainer, document.body.firstChild);
 
@@ -593,8 +593,9 @@ const showCart = (event) => {
         desc.classList.add('jl-product-description')
         price.classList.add('jl-product-price')
         quantityContainer.classList.add('jl-input')
-        quantityContainer.innerHTML = "<p>qt : " + prod.quantity + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
+        quantityContainer.innerHTML = "<p class='jl-product-quantity'>qt : " + prod.quantity + " </p><button class='delete-item btn btn-danger' id=remove-" + id + " > X</button >"
         name.textContent = prod.id.name
+        desc.textContent = prod.id.description
         price.textContent = prod.id.price.price + '€'
         containerProductText.appendChild(name)
         containerProductText.appendChild(desc)

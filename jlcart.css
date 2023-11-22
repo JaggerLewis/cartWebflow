@@ -9,6 +9,10 @@
 }
 
 
+.hover:hover {
+    cursor: pointer;
+}
+
 .jl-product-img {
     height: 100px;
     width: 50%;
