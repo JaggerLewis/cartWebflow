@@ -149,7 +149,7 @@ class ShoppingCart {
     }
 
     setTotalPrice() {
-        let price = this.getTotalPrice()
+        let price = this.getTotalPrice() + 5.99
         const totalSpan = document.querySelector('#jl-total')
         totalSpan.innerHTML = price + "&euro;"
     }
