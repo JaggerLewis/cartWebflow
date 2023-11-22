@@ -124,6 +124,7 @@
     font-style: normal;
     font-size: 20px;
     font-weight: 700;
+    flex: 1;
 }
 
 .jl-product-description {
@@ -150,6 +151,8 @@
 .jl-text-hint {
     font-size: 10px;
     font-weight: 400;
+    flex: 1;
+    margin: auto;
 }
 
 p {
@@ -331,9 +334,6 @@ p {
         width: 90vw;
     }
 
-    .jl-product-name {
-        font-size: 15px;
-    }
 
     #jl-snackbar {
         left: 10%;
