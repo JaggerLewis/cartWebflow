@@ -20,7 +20,7 @@ modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
 snack.id = 'jl-snackbar'
 document.querySelector("body").appendChild(snack)
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><img class="close-button hover" data-dismiss="modal" src="icon_close2.png"></img></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-bottom-container"><p class="jl-bottom-text">Frait de livraison (standart)</p><p class="jl-bottom-text">XX€</p></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="jl-total-title">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
+modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title">Panier</p><img class="close-button hover" data-dismiss="modal" src="https://webcart.jagger-lewis.com/asset/icon_close.png"></img></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun element séléctionné</div></div><div class="jl-bottom-container"><p class="jl-bottom-text">Frait de livraison (standart)</p><p class="jl-bottom-text">XX€</p></div><div class="jl-container-total"><p class="jl-total-title">Total</p><p class="jl-total-title">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
 body.insertBefore(loaderContainer, document.body.firstChild);
 
@@ -582,11 +582,11 @@ const showCart = (event) => {
         let RowElem3 = document.createElement('div')
         let image = document.createElement('img')
         RowElem1.classList.add('jl-product-row')
-        RowElem1.innerHTML = "<p class='jl-product-name'>"+ prod.id.name+"</p><img class='close-button' id='remove-"  + id + "' src='trash.png'></img >"
+        RowElem1.innerHTML = "<p class='jl-product-name'>"+ prod.id.name+"</p><img class='close-button hover' id='remove-"  + id + "' src='https://webcart.jagger-lewis.com/asset/icon_trash.png'></img >"
         RowElem2.classList.add('jl-product-row')
         RowElem2.innerHTML = "<p class='jl-product-quantity'>Qut : "+ prod.quantity + " </p><p class='jl-product-price'>" + prod.id.price.price + '€' + "</p>"
         RowElem3.classList.add('jl-product-row-end')
-        RowElem3.innerHTML = "<img class='close-button'  src='info.png'><p class='jl-text-hint'>Choisissez un abonnement après l’achat de votre Jag. </p>"
+        RowElem3.innerHTML = "<img class='close-button'  src='https://webcart.jagger-lewis.com/asset/icon_info.png'><p class='jl-text-hint'>Choisissez un abonnement après l’achat de votre Jag. </p>"
         image.src = prod.id.image
         image.classList.add('jl-product-img')
         containerProduct.classList.add('jl-container-product')
