@@ -502,13 +502,19 @@ const initAbonnement = async () => {
 }
 
 const initResult = async () => {
+    shoppingCart.clear()
     let id = new URLSearchParams(window.location.search).get('id')
     let datas = await loadCart(id)
+    loaderContainer.style = 'none'
+    document.querySelector('#jl-product-id').textContent = datas[0].id
+    datas.forEach(element =>  document.querySelector('#jl-product-content').innerHTML += element.description)
+   
     console.log(id)
     console.log(datas)
 }
 
 const loadCart = async (id) => {
+    loaderContainer.style = null
     return await fetch('https://dev.jagger-tracker.com/stripe/checkout_session/'+id+'/cart').then(res => res.json())
 }
 
