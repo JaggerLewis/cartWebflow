@@ -503,11 +503,11 @@ const initAbonnement = async () => {
 
 const initResult = async () => {
     shoppingCart.clear()
-    let id = new URLSearchParams(window.location.search).get('id')
+    let id = new URLSearchParams(window.location.search).get('session_id')
     let datas = await loadCart(id)
     loaderContainer.display = 'none'
     document.querySelector('#jl-product-id').textContent = datas.numOrder
-    datas.cart.forEach(element =>  document.querySelector('#jl-product-content').innerHTML += element.name)
+    datas.cart.forEach(element =>  document.querySelector('#jl-product-content').innerHTML += element.name + '<br>')
 }
 
 const loadCart = async (id) => {
