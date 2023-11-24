@@ -506,8 +506,8 @@ const initResult = async () => {
     let id = new URLSearchParams(window.location.search).get('id')
     let datas = await loadCart(id)
     loaderContainer.style = 'none'
-    document.querySelector('#jl-product-id').textContent = datas[0].id
-    datas.forEach(element =>  document.querySelector('#jl-product-content').innerHTML += element.description)
+    document.querySelector('#jl-product-id').textContent = datas.numOrder
+    datas.cart.forEach(element =>  document.querySelector('#jl-product-content').innerHTML += element.name)
    
     console.log(id)
     console.log(datas)
