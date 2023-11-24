@@ -536,19 +536,28 @@ const init = async () => {
     switch(page) {
         case '' : 
             initHome()
+            initNewsLettre()
+
             break;
         case 'jagger-lewis-smartdock' :
             initBox()
+            initNewsLettre()
             break;
         case 'jagger-lewis-jag' :
             initCollar()
+            initNewsLettre()
             break;
         case 'accessoires-jag-smartdock' :
             initAccessory()
+            initNewsLettre()
             break;
         case 'jagger-lewis-abonnement' : 
             initAbonnement()
+            initNewsLettre()
             break;
+        case 'eliot-test': 
+            console.log('ui')
+            break
         default : 
             console.log(page)
     }
