@@ -260,12 +260,12 @@ const initHome = async () => {
     document.querySelectorAll('#txt-color-weimar').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[16].image, products[16].price.id )
-         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
+         colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelectorAll('#txt-color-charbon').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[12].image, products[12].price.id )
-         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
+         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
@@ -281,6 +281,21 @@ const initHome = async () => {
         event.preventDefault()
         colorButtonAction(dock, products[11].image, products[11].price.id )
         colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
+    })
+    document.querySelector('#txt-dock-color-fauve').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(dock, products[13].image, products[13].price.id )
+        colorButtonSelect('#txt-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
+    })
+    document.querySelector('#txt-dock-color-weimar').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(dock, products[15].image, products[15].price.id )
+        colorButtonSelect('#txt-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
+    })
+    document.querySelector('#txt-dock-color-charbon').addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(dock, products[11].image, products[11].price.id )
+        colorButtonSelect('#txt-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
    
     collar.setAttribute('data-selected', products[16].price.id)
