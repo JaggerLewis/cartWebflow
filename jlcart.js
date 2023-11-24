@@ -447,6 +447,7 @@ const initAbonnement = async () => {
     document.querySelector('#toggle').addEventListener('click', (event) => {
         event.preventDefault()
         if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
+            console.log('update 1')
             document.querySelector('#abo-facture-mois').classList.remove('text-selected')
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
             document.querySelector('#abo-2-mois').style.display = "block";
@@ -461,6 +462,7 @@ const initAbonnement = async () => {
 
         }
         else {
+            console.log('update 2')
             document.querySelector('#abo-facture-mois').classList.add('text-selected')
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
             document.querySelector('#abo-2-mois').style.display = "none";
@@ -520,7 +522,7 @@ const init = async () => {
         case 'accessoires-jag-smartdock' :
             initAccessory()
             break;
-        case 'abonnement' : 
+        case 'jagger-lewis-abonnement' : 
             initAbonnement()
             break;
         default : 
