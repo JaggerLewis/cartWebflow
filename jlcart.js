@@ -526,7 +526,6 @@ const loadData = async () => {
 const init = async () => {
     await loadData()
     let jlCartNumber = document.querySelector('#jl-cart-number')
-    initNewsLettre()
    
     jlCartNumber.setAttribute("data-toggle", "modal")
     jlCartNumber.setAttribute("data-target", "#cart")
