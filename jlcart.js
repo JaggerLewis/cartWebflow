@@ -542,7 +542,7 @@ const init = async () => {
     jlCartNumber.setAttribute("data-target", "#cart")
     jlCartNumber.addEventListener('click',(event) => showCart(event))
     setCartNumber();
-    page = window.location.href.split('/')[3];
+    page = window.location.href.split('/')[3].split('?')[0];
     switch(page) {
         case '' : 
             initHome()
