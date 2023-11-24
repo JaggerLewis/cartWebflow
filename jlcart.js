@@ -31,9 +31,9 @@ const setCartNumber = () => {
     }
     document.querySelector('#jl-cart-number').textContent = count
     if (count == 0) {
-        document.querySelector('#jl-no-display').style.display = count == 0 ? 'block' : 'none'
+        document.querySelector('#jl-no-display').style.display = count == 0 ? '' : 'none'
     }
-    document.querySelector('#bulle-shopping-cart').style.display = document.querySelector('#jl-cart-number').textContent != '0'? 'block' : 'none'
+    document.querySelector('#bulle-shopping-cart').style.display = document.querySelector('#jl-cart-number').textContent != '0'? '' : 'none'
 }
 
 class Product {
@@ -553,7 +553,7 @@ const showCart = (event) => {
     clearHtml()
 
     if (shoppingCart.cart.length == 0) {
-        document.querySelector('#jl-no-display').style.display = 'block'
+        document.querySelector('#jl-no-display').style.display = ''
     }
     else {
         document.querySelector('#jl-no-display').style.display = 'none'
