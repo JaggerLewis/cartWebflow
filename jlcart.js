@@ -255,14 +255,17 @@ const initHome = async () => {
     document.querySelectorAll('#txt-color-fauve').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[14].image, products[14].price.id )
+         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelectorAll('#txt-color-weimar').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[16].image, products[16].price.id )
+         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelectorAll('#txt-color-charbon').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[12].image, products[12].price.id )
+         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
@@ -301,7 +304,7 @@ const initCollar = async ()  => {
                 productId = 'jag'
                 break;
             case 'jl-collar-select-2':
-                productId = 'jag.smartdock'
+                productId = 'jag-smartdock'
                 break;
             case 'jl-collar-select-3':
                 productId = 'jag-unlimited'
