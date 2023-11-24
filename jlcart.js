@@ -144,13 +144,13 @@ class ShoppingCart {
         this.cart.forEach((productCart) => {
             totalPrice += productCart.id.price.price * productCart.quantity
         })
-        return totalPrice.toFixed(2)
+        return totalPrice
     }
 
     setTotalPrice() {
         let price = this.getTotalPrice() + 5.99
         const totalSpan = document.querySelector('#jl-total')
-        totalSpan.innerHTML = price + "&euro;"
+        totalSpan.innerHTML = price.toFixed(2) + "&euro;"
     }
 
 
@@ -251,6 +251,18 @@ const initHome = async () => {
         event.preventDefault()
         colorButtonAction(collar, products[12].image, products[12].price.id )
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
+    })) 
+    document.querySelectorAll('#txt-color-fauve').forEach(element => element.addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[14].image, products[14].price.id )
+    }))
+    document.querySelectorAll('#txt-color-weimar').forEach(element => element.addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[16].image, products[16].price.id )
+    }))
+    document.querySelectorAll('#txt-color-charbon').forEach(element => element.addEventListener('click', (event) => {
+        event.preventDefault()
+        colorButtonAction(collar, products[12].image, products[12].price.id )
     }))
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
