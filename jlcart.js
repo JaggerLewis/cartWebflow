@@ -501,6 +501,17 @@ const initAbonnement = async () => {
     })
 }
 
+const initResult = async () => {
+    let id = new URLSearchParams(window.location.search).get('id')
+    let datas = await loadCart(id)
+    console.log(id)
+    console.log(datas)
+}
+
+const loadCart = async (id) => {
+    return await fetch('https://dev.jagger-tracker.com/stripe/checkout_session/'+id+'/cart').then(res => res.json())
+}
+
 const loadData = async () => {
     let date = Date.now()
     let result
@@ -555,7 +566,7 @@ const init = async () => {
             initNewsLettre()
             break;
         case 'eliot-test': 
-            console.log('ui')
+            initResult()
             break
         default : 
             console.log(page)
