@@ -79,7 +79,7 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
-        if (this.countItems() >= 5) {
+        if (this.countItems() >= 4) {
             showSnackBar('Vous ne pouvez pas ajouter plus de cinq éléments au panier', true)
             return
         }
