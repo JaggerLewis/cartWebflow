@@ -144,7 +144,7 @@ class ShoppingCart {
         this.cart.forEach((productCart) => {
             totalPrice += productCart.id.price.price * productCart.quantity
         })
-        return totalPrice
+        return totalPrice.toFixed(2)
     }
 
     setTotalPrice() {
