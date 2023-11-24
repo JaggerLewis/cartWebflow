@@ -79,9 +79,8 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
-        console.log('item => ', id)
-        if (this.countItems() >= 2) {
-            showSnackBar('Vous ne pouvez pas ajouter plus de deux éléments au panier', true)
+        if (this.countItems() >= 5) {
+            showSnackBar('Vous ne pouvez pas ajouter plus de cinq éléments au panier', true)
             return
         }
         showSnackBar(id.name + ' ajouté au panier', false)
