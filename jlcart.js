@@ -639,8 +639,8 @@ const showCart = (event) => {
         return  price % 1 == 0 
                 ? price + '.00'
                 : price % 0.1 == 0
-                    ? '' + price
-                    : price+ '0' 
+                    ?price+ '0' 
+                    : '' + price
     }
 
     function addHtml(prod, id) {
