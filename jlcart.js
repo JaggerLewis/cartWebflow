@@ -80,7 +80,7 @@ class ShoppingCart {
 
     addItem(id, count = 1) {
         if (this.countItems() >= 4) {
-            showSnackBar('Vous ne pouvez pas ajouter plus de cinq éléments au panier', true)
+            showSnackBar('Vous ne pouvez pas ajouter plus de 4 éléments au panier', true)
             return
         }
         showSnackBar(id.name + ' ajouté au panier', false)
@@ -369,7 +369,7 @@ const initCollar = async ()  => {
         colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
     })
     document.querySelector('#jag-avec-smartdock').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-avec-smartdock')
+        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-solo')
     })
    
     document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
