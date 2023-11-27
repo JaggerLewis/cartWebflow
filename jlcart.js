@@ -313,9 +313,7 @@ const initCollar = async ()  => {
     document.querySelector('#je-commande-mon-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
-        console.log('color =>', color)
         let option = document.querySelector('[hover-selected=true]')
-        console.log('color =>', option.id)
         let productId
         switch (option.id) {
             case 'jag-en-solo':
@@ -463,9 +461,6 @@ const loadAbonnement = async () => {
         localStorage.setItem('ts-abonnemnt', date)
         localStorage.setItem('abonnement', JSON.stringify(answer))
     }
-    console.log("answer =>", answer)
-
-  
     loaderContainer.style.display = 'none'
 
     return answer
@@ -490,7 +485,6 @@ const initAbonnement = async (datas) => {
         if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
             document.querySelector('#abo-facture-mois').classList.remove('text-selected')
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
-            console.log()
             document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
@@ -635,7 +629,6 @@ const showCart = (event) => {
     } 
 
     function displayPrice (price) {
-        console.log(price)
         return  price % 1 == 0 
                 ? price + '.00'
                 : price % 0.1 == 0
