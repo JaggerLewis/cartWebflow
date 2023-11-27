@@ -223,8 +223,8 @@ const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
 
 let products = []
 
-const initHome = async () => {
-    
+const initHome = async (datas) => {
+    console.log(datas)
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
@@ -481,8 +481,7 @@ const updateTime = (search) => {
     }
 }
 
-const initAbonnement = async () => {
-    let datas = await loadAbonnement()
+const initAbonnement = async (datas) => {
     document.querySelector('#abo-facture-mois').classList.add('text-selected')
     updateTime(true)
     document.querySelector('#toggle').addEventListener('click', (event) => {
@@ -548,11 +547,13 @@ const loadData = async () => {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
 
-    loaderContainer.style.display = 'none'
 }
 
 const init = async () => {
     await loadData()
+    let aboData =  await loadAbonnement()
+    loaderContainer.style.display = 'none'
+
     let jlCartNumber = document.querySelector('#jl-cart-number')
    
     jlCartNumber.setAttribute("data-toggle", "modal")
@@ -562,25 +563,21 @@ const init = async () => {
     page = window.location.href.split('/')[3].split('?')[0];
     switch(page) {
         case '' : 
-            initHome()
+            initHome(aboData)
             initNewsLettre()
 
             break;
         case 'jagger-lewis-smartdock' :
             initBox()
-            initNewsLettre()
             break;
         case 'jagger-lewis-jag' :
             initCollar()
-            initNewsLettre()
             break;
         case 'accessoires-jag-smartdock' :
             initAccessory()
-            initNewsLettre()
             break;
         case 'jagger-lewis-abonnement' : 
-            initAbonnement()
-            initNewsLettre()
+            initAbonnement(aboData)
             break;
         case 'eliot-test': 
             initResult()
