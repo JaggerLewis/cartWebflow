@@ -635,6 +635,7 @@ const showCart = (event) => {
     } 
 
     function displayPrice (price) {
+        console.log(price)
         return  price % 1 == 0 
                 ? price + '.00'
                 : price % 0.1 == 0
