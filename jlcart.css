@@ -15,6 +15,7 @@
 }
 
 .jl-modal {
+    max-width: 700px;
     margin: auto;
     margin-top: 10vh;
     width: 50vw;
