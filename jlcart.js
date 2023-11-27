@@ -337,7 +337,7 @@ const initCollar = async ()  => {
         event.preventDefault()
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
         let option = 'jag-smartdock'
-        let finalProduct = products.find(elem => elem.metadata.productId == productId && elem.metadata.colorId == color)
+        let finalProduct = products.find(elem => elem.metadata.productId == option && elem.metadata.colorId == color)
         if (finalProduct != null)
             shoppingCart.addItem(finalProduct, 1)
         else 
