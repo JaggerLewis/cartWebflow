@@ -229,7 +229,7 @@ const findProduct = (product, color)=> {
     if (color != null)
         filtered = filtered.filter(elem => elem.metadata.colorId == color)
     console.log(filtered)
-    return filtered
+    return filtered[0]
 }
 
 const initHome = async (datas) => {
