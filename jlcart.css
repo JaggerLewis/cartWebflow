@@ -41,6 +41,11 @@
     margin: 5px;
 }
 
+.small-button {
+    height: 15px;
+    margin: 0;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;

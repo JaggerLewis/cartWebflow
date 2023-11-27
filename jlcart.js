@@ -640,13 +640,13 @@ const showCart = (event) => {
         let RowElem3 = document.createElement('div')
         let image = document.createElement('img')
         RowElem1.classList.add('jl-product-row')
-        RowElem1.innerHTML = "<p class='jl-product-name'>"+ prod.id.name+"</p><p class='jl-product-price'>" + displayPrice(prod.id.price.price) + "</p>"
+        RowElem1.innerHTML = "<p class='jl-product-name'>"+ prod.id.name+"</p><p class='jl-product-price'>" + displayPrice(prod.id.price.price) + "€</p>"
         RowElem2.classList.add('jl-product-row')
-        RowElem2.innerHTML = "<p class='jl-product-quantity'>Qté : "+ prod.quantity + " </p> <img class='close-button hover' id='remove-"  + id + "' src='https://webcart.jagger-lewis.com/asset/icon_trash.png'></img >"
+        RowElem2.innerHTML = "<p class='jl-product-quantity'>Qté : "+ prod.quantity + " </p>"
        
         
         RowElem3.classList.add('jl-product-row-end')
-        RowElem3.innerHTML = "<img class='close-button'  src='https://webcart.jagger-lewis.com/asset/icon_info.png'><p class='jl-text-hint'>Choisissez un abonnement après l’achat de votre Jag. </p>"
+        RowElem3.innerHTML = "<img class='close-button'  src='https://webcart.jagger-lewis.com/asset/icon_info.png'><p class='jl-text-hint'>Choisissez un abonnement après l’achat de votre Jag. </p> <img class='close-button hover button-small' id='remove-"  + id + "' src='https://webcart.jagger-lewis.com/asset/icon_trash.png'></img >"
         image.src = prod.id.image
         image.classList.add('jl-product-img')
         containerProduct.classList.add('jl-container-product')
