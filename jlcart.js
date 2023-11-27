@@ -353,22 +353,13 @@ const initCollar = async ()  => {
         colorButtonAction(collar, products[12].image, products[12].price.id )
         colorButtonSelect('#page-jag-color-charbon', 'color-selected', 'jl-color-selected')
     })
-    document.querySelector('#jl-collar-select-1').addEventListener('click', (event) => {
-        let btn = document.querySelector('#jl-collar-select-3')
-        colorButtonSelect('#jl-collar-select-1', 'hover-selected', 'jag-solo')
+    document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
+        colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
     })
-    document.querySelector('#jl-collar-select-2').addEventListener('click', (event) => {
-        let btn = document.querySelector('#jl-collar-select-3')
-        colorButtonSelect('#jl-collar-select-2', 'hover-selected', 'jag-solo')
+    document.querySelector('#jag-avec-smartdock').addEventListener('click', (event) => {
+        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-solo')
     })
-    document.querySelector('#jl-collar-select-3').addEventListener('click', (event) => {
-        let btn = document.querySelector('#jl-collar-select-3')
-        colorButtonSelect('#jl-collar-select-3', 'hover-selected', 'jag-solo')
-    })
-    document.querySelector('#jl-collar-select-4').addEventListener('click', (event) => {
-        let btn = document.querySelector('#jl-collar-select-3')
-        colorButtonSelect('#jl-collar-select-4', 'hover-selected', 'jag-solo')
-    })
+   
     document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         shoppingCart.addItem(products[2], 1)
