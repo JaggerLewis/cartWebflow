@@ -521,14 +521,17 @@ const initResult = async () => {
     shoppingCart.clear()
     console.log('here');
     let id = new URLSearchParams(window.location.search).get('session_id')
-    localStorage.setItem('session_id', id)
-    console.log('here2');
-    loaderContainer.display = 'none'
-    document.querySelector('#jl-product-id').textContent = datas.numOrder
+    if (id != null) {
+        let datas = await loadCart(id)
+        localStorage.setItem('session_id', id)
+        console.log('here');
+        loaderContainer.display = 'none'
+        document.querySelector('#jl-product-id').textContent = datas.numOrder
+    }
     document.querySelector('#jl-result-redirect').addEventListener('click', (e) => {
-        console.log('here3');
+        console.log('here');
         e.preventDefault(); 
-        console.log('here4');
+        console.log('here');
         redirectToStripeBis()
     })
     // document.querySelector('#jl-result-name').textContent += datas.customer.name[0].toUpperCase() + datas.customer.name.substr(1)
