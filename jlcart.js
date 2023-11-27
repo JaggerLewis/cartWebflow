@@ -524,7 +524,7 @@ const initResult = async () => {
     localStorage.setItem('session_id', id)
     loaderContainer.display = 'none'
     document.querySelector('#jl-product-id').textContent = datas.numOrder
-    document.querySelector('#jl-product-redirect').addEventListener('click', () => )
+    document.querySelector('#jl-product-redirect').addEventListener('click',  redirectToStripeBis())
     // document.querySelector('#jl-result-name').textContent += datas.customer.name[0].toUpperCase() + datas.customer.name.substr(1)
 }
 
@@ -604,8 +604,8 @@ const redirectToStripe = async (event) => {
     const apiResJson = await apiRes.json()
     window.location.href = apiResJson.url
 }
-const redirectToStripe = async (event) => {
-    event.preventDefault();
+const redirectToStripeBis = async (e) => {
+    e.preventDefault()
     const answer = fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
