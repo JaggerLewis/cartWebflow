@@ -467,7 +467,7 @@ const loadAbonnement = async () => {
         answer = JSON.parse(localStorage.getItem('abonnement'))
     if (date - JSON.parse(localStorage.getItem('ts-abonnement')) > 600000) {
         answer = await (await getAbonnementFromStripe()).json()
-        localStorage.setItem('ts-abonnemnt', date)
+        localStorage.setItem('ts-abonnement', date)
         localStorage.setItem('abonnement', JSON.stringify(answer))
     }
     loaderContainer.style.display = 'none'
