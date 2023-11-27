@@ -642,7 +642,7 @@ const showCart = (event) => {
         RowElem1.classList.add('jl-product-row')
         RowElem1.innerHTML = "<p class='jl-product-name'>"+ prod.id.name+"</p><img class='close-button hover' id='remove-"  + id + "' src='https://webcart.jagger-lewis.com/asset/icon_trash.png'></img >"
         RowElem2.classList.add('jl-product-row')
-        RowElem2.innerHTML = "<p class='jl-product-quantity'>Qté : "+ prod.quantity + " </p><p class='jl-product-price'>" + displayPrice(prod.id.price.price)  + ',00€' + "</p>"
+        RowElem2.innerHTML = "<p class='jl-product-quantity'>Qté : "+ prod.quantity + " </p><p class='jl-product-price'>" + displayPrice(prod.id.price.price) + "</p>"
         RowElem3.classList.add('jl-product-row-end')
         RowElem3.innerHTML = "<img class='close-button'  src='https://webcart.jagger-lewis.com/asset/icon_info.png'><p class='jl-text-hint'>Choisissez un abonnement après l’achat de votre Jag. </p>"
         image.src = prod.id.image
