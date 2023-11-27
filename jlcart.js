@@ -608,7 +608,7 @@ const redirectToStripe = async (event) => {
     window.location.href = apiResJson.url
 }
 const redirectToStripeBis = async () => {
-    const answer = fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
+    const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ cart: {id : 'price_1OH5hFADzHYMiB1Ymd8LFtTR', quantity : 1}, mode: 'payment' })
