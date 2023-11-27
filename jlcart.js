@@ -351,37 +351,37 @@ const initCollar = async ()  => {
         else 
         showSnackBar("Votre produit n'a pas été trouvé...", true)
     })
-    document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
+    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
-        colorButtonSelect('#jag-color-fauve', 'color-selected', 'jl-color-selected', true)
+        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
         
     })
-    document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
+    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
-        colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected', true)
+        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     })
-    document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
+    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
-        colorButtonSelect('#jag-color-charbon', 'color-selected', 'jl-color-selected', true)
+        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
-        colorButtonSelect('#jag-color-fauve', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected')
         
     })
     document.querySelector('#txt-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
-        colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#txt-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
-        colorButtonSelect('#jag-color-charbon', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
         colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
@@ -400,7 +400,7 @@ const initCollar = async ()  => {
     })
     collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
     collar.srcset = findProduct('jag', 'weimar').image
-    colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected')
+    colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
     colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
 
 }
@@ -660,7 +660,7 @@ const showCart = (event) => {
        
         
         RowElem3.classList.add('jl-product-row-end')
-        RowElem3.innerHTML = "<img class='close-button'  src='https://webcart.jagger-lewis.com/asset/icon_info.png'><p class='jl-text-hint'>Choisissez un abonnement après l’achat de votre Jag. </p> <img class='close-button hover button-small' id='remove-"  + id + "' src='https://webcart.jagger-lewis.com/asset/icon_trash.png'></img >"
+        RowElem3.innerHTML = "<img class='close-button'  src='https://webcart.jagger-lewis.com/asset/icon_info.png'><p class='jl-text-hint'>Choisissez un abonnement après votre achat. </p> <img class='close-button hover button-small' id='remove-"  + id + "' src='https://webcart.jagger-lewis.com/asset/icon_trash.png'></img >"
         image.src = prod.id.image
         image.classList.add('jl-product-img')
         containerProduct.classList.add('jl-container-product')
