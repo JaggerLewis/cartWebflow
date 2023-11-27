@@ -29,7 +29,7 @@
 }
 
 .jl-product-img {
-    width: 20%;
+    width: 70px;
     flex: 1;
     object-fit: contain;
     margin: auto;
@@ -82,8 +82,6 @@
     align-items: center;
     justify-content: space-between;
     background: #FFF;
-    gap: 10px;
-
 }
 
 .jl-bottom-container {
