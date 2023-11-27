@@ -392,11 +392,11 @@ const initCollar = async ()  => {
    
     document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[2], 1)
+        shoppingCart.addItem(findProduct('jag-sock', 'fauve'), 1)
     })
     document.querySelector('#jl-jag-cable').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[3], 1)
+        shoppingCart.addItem(findProduct('jag-chargingcable'), 1)
     })
     collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
     collar.srcset = findProduct('jag', 'weimar').image
@@ -408,11 +408,11 @@ const initCollar = async ()  => {
 const initBox = async ()  => {
     document.querySelector('#jl-dock-antenne').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[4], 1)
+        shoppingCart.addItem(findProduct('jag-smartdock-antenna-md'), 1)
     })
     document.querySelector('#jl-dock-cable').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[3], 1)
+        shoppingCart.addItem(findProduct('jag-chargingcable'), 1)
     })
 }
 
@@ -429,23 +429,23 @@ const initNewsLettre = () => {
 const initAccessory = () => {
     document.querySelector('#jl-coque-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[2], 1)
+        shoppingCart.addItem(findProduct('jag-sock', 'fauve'), 1)
     })
     document.querySelector('#jl-coque-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[1], 1)
+        shoppingCart.addItem(findProduct('jack-sock', 'charbon'), 1)
     })
     document.querySelector('#jl-coque-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[0], 1)
+        shoppingCart.addItem(findProduct('jag-sock', 'weimar'), 1)
     })
     document.querySelector('#jl-antenne').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[4], 1)
+        shoppingCart.addItem(findProduct('jag-smartdock-antenna-md'), 1)
     })
     document.querySelector('#jl-cable-cta').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(products[3], 1)
+        shoppingCart.addItem(findProduct('jag-chargingcable'), 1)
     })
     document.querySelector('#jl-cable-cta-dock').addEventListener('click', (event) => {
         event.preventDefault()
