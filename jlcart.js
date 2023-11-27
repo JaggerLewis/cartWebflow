@@ -521,8 +521,10 @@ const initResult = async () => {
     shoppingCart.clear()
     console.log('here');
     let id = new URLSearchParams(window.location.search).get('session_id')
+    console.log('id =>', id)
     if (id != null) {
-        let datas = await loadCart(id)
+    console.log('id =>', id)
+    let datas = await loadCart(id)
         localStorage.setItem('session_id', id)
         console.log('here');
         loaderContainer.display = 'none'
