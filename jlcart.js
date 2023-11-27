@@ -508,7 +508,7 @@ const initResult = async () => {
     localStorage.setItem('session_id', id)
     loaderContainer.display = 'none'
     document.querySelector('#jl-product-id').textContent = datas.numOrder
-    datas.cart.forEach(element =>  document.querySelector('#jl-product-content').innerHTML += element.name + '<br>')
+    document.querySelector('#jl-result-name').textContent += datas.customer.name[0].toUpperCase() + datas.customer.name.substr(1)
 }
 
 const loadCart = async (id) => {

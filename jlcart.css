@@ -64,6 +64,7 @@
 
 .jl-container-product-text {
     margin-left: 10px;
+    padding: 10px;
     flex: 10;
 }
 
@@ -117,6 +118,7 @@
 }
 
 .jl-product-name {
+    padding-bottom: 0px;
     font-family: "stolzl", sans-serif;
     font-style: normal;
     font-size: 20px;
@@ -125,16 +127,19 @@
 }
 
 .jl-product-description {
+    padding-bottom: 0px;
     font-size: 13px;
 }
 
 .jl-product-price {
     font-size: 16px;
     font-weight: 400;
+    padding-bottom: 0px;
 }
 
 .jl-product-quantity {
     flex: 1;
+    padding-bottom: 0px;
     font-size: 13px;
 }
 
