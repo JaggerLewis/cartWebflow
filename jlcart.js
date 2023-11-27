@@ -619,7 +619,7 @@ const redirectToStripeBis = async () => {
     const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: {id : 'price_1OH5hFADzHYMiB1Ymd8LFtTR', quantity : 1}, mode: 'payment' })
+            body: JSON.stringify({ cart: [{id : 'price_1OH5hFADzHYMiB1Ymd8LFtTR', quantity : 1}], mode: 'payment' })
         })
         console.log(answer);
     const apiResJson = await answer.json()
