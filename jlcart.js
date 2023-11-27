@@ -524,7 +524,7 @@ const initResult = async () => {
     localStorage.setItem('session_id', id)
     loaderContainer.display = 'none'
     document.querySelector('#jl-product-id').textContent = datas.numOrder
-    document.querySelector('#jl-product-redirect').addEventListener('click', (e) => {
+    document.querySelector('#jl-result-redirect').addEventListener('click', (e) => {
         e.preventDefault(); 
         redirectToStripeBis()
     })
