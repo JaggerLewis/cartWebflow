@@ -210,7 +210,7 @@ const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
     })
     }
     if (is_text) {
-        let txt = document.querySelectorAll(newBtn.replace('btn', 'txt')).forEach(element => {
+        let txt = document.querySelectorAll(newBtn.replace('jag', 'txt')).forEach(element => {
             element.classList.add('text-selected')
             element.setAttribute(attribut, 'true')
         })
@@ -312,13 +312,15 @@ const initCollar = async ()  => {
     document.querySelector('#je-commande-mon-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
+        console.log('color =>', color)
         let option = document.querySelector('[hover-selected=true]')
+        console.log('color =>', option.id)
         let productId
         switch (option.id) {
             case 'jag-en-solo':
                 productId = 'jag'
                 break;
-            case 'jag-en-solo':
+            case 'jag-avec-smartdock':
                 productId = 'jag-smartdock'
                 break;
             default:
@@ -367,7 +369,7 @@ const initCollar = async ()  => {
         colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
     })
     document.querySelector('#jag-avec-smartdock').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-solo')
+        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-avec-smartdock')
     })
    
     document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
