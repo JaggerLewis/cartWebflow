@@ -347,18 +347,18 @@ const initCollar = async ()  => {
         colorButtonAction(collar, products[12].image, products[12].price.id )
         colorButtonSelect('#jag-color-charbon', 'color-selected', 'jl-color-selected', true)
     })
-    document.querySelector('#txt-dock-color-fauve').addEventListener('click', (event) => {
+    document.querySelector('#txt-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[14].image, products[14].price.id )
         colorButtonSelect('#jag-color-fauve', 'color-selected', 'jl-color-selected')
         
     })
-    document.querySelector('#txt-dock-color-weimar').addEventListener('click', (event) => {
+    document.querySelector('#txt-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[16].image, products[16].price.id )
         colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected')
     })
-    document.querySelector('#txt-dock-color-charbon').addEventListener('click', (event) => {
+    document.querySelector('#txt-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[12].image, products[12].price.id )
         colorButtonSelect('#jag-color-charbon', 'color-selected', 'jl-color-selected')
