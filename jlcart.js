@@ -279,39 +279,39 @@ const initHome = async (datas) => {
     }))
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[13].image, products[13].price.id )
+        colorButtonAction(dock, findProduct('jag-smartdock', 'fauve').image, findProduct('jag-smartdock', 'fauve').price.id )
         colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[15].image, products[15].price.id )
+        colorButtonAction(dock, findProduct('jag-smartdock', 'weimar').image, findProduct('jag-smartdock', 'weimar').price.id )
         colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[11].image, products[11].price.id )
+        colorButtonAction(dock, findProduct('jag-smartdock', 'charbon').image, findProduct('jag-smartdock', 'charbon').price.id )
         colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[13].image, products[13].price.id )
+        colorButtonAction(dock, findProduct('jag-smartdock', 'fauve').image, findProduct('jag-smartdock', 'fauve').price.id )
         colorButtonSelect('#txt-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[15].image, products[15].price.id )
+        colorButtonAction(dock, findProduct('jag-smartdock', 'weimar').image, findProduct('jag-smartdock', 'weimar').price.id )
         colorButtonSelect('#txt-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(dock, products[11].image, products[11].price.id )
+        colorButtonAction(dock, findProduct('jag-smartdock', 'charbon').image, findProduct('jag-smartdock', 'charbon').price.id )
         colorButtonSelect('#txt-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
    
     collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
     collar.srcset = findProduct('jag', 'weimar').image
-    dock.setAttribute('data-selected', products[15].price.id)
-    dock.srcset = products[15].image
+    dock.setAttribute('data-selected', findProduct('jag-smartdock', 'weimar').price.id)
+    dock.srcset = findProduct('jag-smartdock', 'weimar').image
     colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
 
