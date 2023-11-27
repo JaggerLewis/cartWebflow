@@ -380,8 +380,8 @@ const initCollar = async ()  => {
     })
     collar.setAttribute('data-selected', products[16].price.id)
     collar.srcset = products[16].image
-    colorButtonSelect('#page-jag-color-weimar', 'color-selected', 'jl-color-selected')
-    colorButtonSelect('#jl-collar-select-1', 'hover-selected', 'jag-solo')
+    colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected')
+    colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
 
 }
 
