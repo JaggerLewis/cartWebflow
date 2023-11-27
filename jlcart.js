@@ -224,9 +224,10 @@ const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
 let products = []
 
 const initHome = async (datas) => {
-    console.log(datas)
+    
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
+    document.querySelector('#jl-price-month').textContent = (datas[0].prices[1].price/12).toFixed(2)
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
