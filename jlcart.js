@@ -223,6 +223,15 @@ const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
 
 let products = []
 
+
+const findProduct = (product, color)=> {
+    let filtered = products.filter(elem => elem.metadata.productId == product)
+    if (color != null)
+        filtered = filtered.filter(elem => elem.metadata.colorId == color)
+    console.log(filtered)
+    return filtered
+}
+
 const initHome = async (datas) => {
     
     let collar = document.querySelector('#jl-collar')
@@ -240,32 +249,32 @@ const initHome = async (datas) => {
     })
     document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[14].image, products[14].price.id )
+        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[16].image, products[16].price.id )
+        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
         colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[12].image, products[12].price.id )
+        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     })) 
     document.querySelectorAll('#txt-color-fauve').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[14].image, products[14].price.id )
+        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
          colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelectorAll('#txt-color-weimar').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[16].image, products[16].price.id )
+        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
          colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelectorAll('#txt-color-charbon').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[12].image, products[12].price.id )
+        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
          colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     }))
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
@@ -299,8 +308,8 @@ const initHome = async (datas) => {
         colorButtonSelect('#txt-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
    
-    collar.setAttribute('data-selected', products[16].price.id)
-    collar.srcset = products[16].image
+    collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
+    collar.srcset = findProduct('jag', 'weimar').image
     dock.setAttribute('data-selected', products[15].price.id)
     dock.srcset = products[15].image
     colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
@@ -344,34 +353,34 @@ const initCollar = async ()  => {
     })
     document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[14].image, products[14].price.id )
+        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
         colorButtonSelect('#jag-color-fauve', 'color-selected', 'jl-color-selected', true)
         
     })
     document.querySelector('#jag-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[16].image, products[16].price.id )
+        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
         colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#jag-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[12].image, products[12].price.id )
+        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
         colorButtonSelect('#jag-color-charbon', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[14].image, products[14].price.id )
+        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
         colorButtonSelect('#jag-color-fauve', 'color-selected', 'jl-color-selected')
         
     })
     document.querySelector('#txt-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[16].image, products[16].price.id )
+        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
         colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#txt-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        colorButtonAction(collar, products[12].image, products[12].price.id )
+        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
         colorButtonSelect('#jag-color-charbon', 'color-selected', 'jl-color-selected')
     })
     document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
@@ -389,8 +398,8 @@ const initCollar = async ()  => {
         event.preventDefault()
         shoppingCart.addItem(products[3], 1)
     })
-    collar.setAttribute('data-selected', products[16].price.id)
-    collar.srcset = products[16].image
+    collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
+    collar.srcset = findProduct('jag', 'weimar').image
     colorButtonSelect('#jag-color-weimar', 'color-selected', 'jl-color-selected')
     colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
 
