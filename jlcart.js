@@ -366,7 +366,7 @@ const initCollar = async ()  => {
     document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
         colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
     })
-    document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
+    document.querySelector('#jag-avec-smartdock').addEventListener('click', (event) => {
         colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-solo')
     })
    
