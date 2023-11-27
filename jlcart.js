@@ -519,13 +519,17 @@ const initAbonnement = async (datas) => {
 
 const initResult = async () => {
     shoppingCart.clear()
+    console.log('here');
     let id = new URLSearchParams(window.location.search).get('session_id')
     let datas = await loadCart(id)
     localStorage.setItem('session_id', id)
+    console.log('here2');
     loaderContainer.display = 'none'
     document.querySelector('#jl-product-id').textContent = datas.numOrder
     document.querySelector('#jl-result-redirect').addEventListener('click', (e) => {
+        console.log('here3');
         e.preventDefault(); 
+        console.log('here4');
         redirectToStripeBis()
     })
     // document.querySelector('#jl-result-name').textContent += datas.customer.name[0].toUpperCase() + datas.customer.name.substr(1)
