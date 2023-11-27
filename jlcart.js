@@ -309,7 +309,7 @@ const initHome = async () => {
 
 const initCollar = async ()  => {
     let collar = document.querySelector('#page-jag-collar')
-    document.querySelector('#jag-jag').addEventListener('click', (event) => {
+    document.querySelector('#je-commande-mon-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
         let option = document.querySelector('[hover-selected=true]')
