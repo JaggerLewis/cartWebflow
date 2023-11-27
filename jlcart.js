@@ -433,7 +433,7 @@ const initAccessory = () => {
     })
     document.querySelector('#jl-coque-charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        shoppingCart.addItem(findProduct('jack-sock', 'charbon'), 1)
+        shoppingCart.addItem(findProduct('jag-sock', 'charbon'), 1)
     })
     document.querySelector('#jl-coque-weimar').addEventListener('click', (event) => {
         event.preventDefault()
