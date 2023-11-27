@@ -333,6 +333,16 @@ const initCollar = async ()  => {
         showSnackBar("Votre produit n'a pas été trouvé...", true)
 
     })
+    document.querySelector('#je-commande-un-dock').addEventListener('click', (event) => {
+        event.preventDefault()
+        let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
+        let option = 'jag-smartdock'
+        let finalProduct = products.find(elem => elem.metadata.productId == productId && elem.metadata.colorId == color)
+        if (finalProduct != null)
+            shoppingCart.addItem(finalProduct, 1)
+        else 
+        showSnackBar("Votre produit n'a pas été trouvé...", true)
+    })
     document.querySelector('#jag-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, products[14].image, products[14].price.id )
