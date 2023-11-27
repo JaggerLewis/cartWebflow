@@ -524,7 +524,10 @@ const initResult = async () => {
     localStorage.setItem('session_id', id)
     loaderContainer.display = 'none'
     document.querySelector('#jl-product-id').textContent = datas.numOrder
-    document.querySelector('#jl-product-redirect').addEventListener('click',  redirectToStripeBis())
+    document.querySelector('#jl-product-redirect').addEventListener('click', (e) => {
+        e.preventDefault(); 
+        redirectToStripeBis()
+    })
     // document.querySelector('#jl-result-name').textContent += datas.customer.name[0].toUpperCase() + datas.customer.name.substr(1)
 }
 
@@ -604,16 +607,15 @@ const redirectToStripe = async (event) => {
     const apiResJson = await apiRes.json()
     window.location.href = apiResJson.url
 }
-const redirectToStripeBis = async (e) => {
-    e.preventDefault()
+const redirectToStripeBis = async () => {
     const answer = fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ cart: {id : 'price_1OH5hFADzHYMiB1Ymd8LFtTR', quantity : 1}, mode: 'payment' })
         })
-   
+        console.log(answer);
     const apiResJson = await answer.json()
-    console.log(apiResJson())
+        console.log(apiResJson);
     window.location.href = apiResJson.url
 }
 
