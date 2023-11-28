@@ -276,6 +276,13 @@ p {
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+#jl-snack-green {
+    border: solid 2px green;
+}
+#jl-snack-red {
+    border: solid 2px green;
+}
+
 @-webkit-keyframes fadein {
     from {
         top: 0;
