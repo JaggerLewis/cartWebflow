@@ -722,7 +722,7 @@ document.querySelector('#jag-cart').addEventListener('click',(event) => showCart
 const showSnackBar = (text, isError) => {
     document.querySelector('#jl-snack-text-container').textContent = text
     document.querySelector('#jl-snack-icon').src = isError ? 'https://webcart.jagger-lewis.com/asset/icon_error.png' : 'https://webcart.jagger-lewis.com/asset/icon_validate.png'
-    snack.className = "show jl-snack-" + isError ? 'red' : 'green';
+    snack.className = isError ? 'show jl-snack-red' : 'show jl-snack-green';
     setTimeout(function(){ snack.className = ''})
 }
 
