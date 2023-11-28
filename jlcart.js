@@ -378,18 +378,18 @@ const initCollar = async ()  => {
     document.querySelector('#txt-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
-        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
         
     })
     document.querySelector('#txt-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
-        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
-        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected')
+        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
         colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
