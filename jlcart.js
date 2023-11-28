@@ -222,6 +222,7 @@ const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
 }
 
 let products = []
+let abonnement = []
 
 
 const findProduct = (product, color)=> {
@@ -232,11 +233,17 @@ const findProduct = (product, color)=> {
     return filtered[0]
 }
 
-const initHome = async (datas) => {
+const findAbonnement = (product)=> {
+    let filtered = products.find(elem => elem.metadata.productId == product)
+   
+    return filtered[0]
+}
+
+const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
-    document.querySelector('#jl-price-month').textContent = (datas[1].prices[1].price/12).toFixed(2)
+    document.querySelector('#jl-price-month').textContent = (abonnement[1].prices[1].price/12).toFixed(2)
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
@@ -461,22 +468,20 @@ const loadAbonnement = async () => {
     loaderContainer.style = null
 
     let date = Date.now()
-    let answer
     if (localStorage.getItem('abonnement') == null) {
-        answer = await (await getAbonnementFromStripe()).json()
-        localStorage.setItem('abonnement', JSON.stringify(answer))
+        abonnement = await (await getAbonnementFromStripe()).json()
+        localStorage.setItem('abonnement', JSON.stringify(abonnement))
         localStorage.setItem('ts-abonnement', date)
     }
     else 
-        answer = JSON.parse(localStorage.getItem('abonnement'))
+        abonnement = JSON.parse(localStorage.getItem('abonnement'))
     if (date - JSON.parse(localStorage.getItem('ts-abonnement')) > 600000) {
-        answer = await (await getAbonnementFromStripe()).json()
+        abonnement = await (await getAbonnementFromStripe()).json()
         localStorage.setItem('ts-abonnement', date)
-        localStorage.setItem('abonnement', JSON.stringify(answer))
+        localStorage.setItem('abonnement', JSON.stringify(abonnement))
     }
     loaderContainer.style.display = 'none'
 
-    return answer
 }
 
 const updateTime = (search) => {
@@ -490,7 +495,7 @@ const updateTime = (search) => {
     }
 }
 
-const initAbonnement = async (datas) => {
+const initAbonnement = async () => {
     document.querySelector('#abo-facture-mois').classList.add('text-selected')
     updateTime(true)
     document.querySelector('#toggle').addEventListener('click', (event) => {
@@ -498,9 +503,9 @@ const initAbonnement = async (datas) => {
         if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
             document.querySelector('#abo-facture-mois').classList.remove('text-selected')
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
-            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[0].price + '€/ an'
-            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[0].price + '€/ an'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[1].price + '€/ an'
+            document.querySelector('#abo-prix-family-premium').textContent = abonnement[2].prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter-family').textContent = abonnement[1].prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter').textContent = abonnement[0].prices[1].price + '€/ an'
             document.querySelector('#total-family-premium').style.display = 'none'
             document.querySelector('#total-starter-family').style.display = 'none'
             document.querySelector('#total-starter').style.display = 'none'
@@ -510,9 +515,9 @@ const initAbonnement = async (datas) => {
         else {
             document.querySelector('#abo-facture-mois').classList.add('text-selected')
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
-            document.querySelector('#abo-prix-family-premium').textContent = datas[2].prices[1].price + '€/ mois'
-            document.querySelector('#abo-prix-starter-family').textContent = datas[1].prices[1].price + '€/ mois'
-            document.querySelector('#abo-prix-starter').textContent = datas[0].prices[0].price + '€/ mois'
+            document.querySelector('#abo-prix-family-premium').textContent = abonnement[2].prices[1].price + '€/ mois'
+            document.querySelector('#abo-prix-starter-family').textContent = abonnement[1].prices[1].price + '€/ mois'
+            document.querySelector('#abo-prix-starter').textContent = abonnement[0].prices[0].price + '€/ mois'
             document.querySelector('#total-family-premium').style.display = 'block'
             document.querySelector('#total-starter-family').style.display = 'block'
             document.querySelector('#total-starter').style.display = 'block'
@@ -528,11 +533,13 @@ const initResult = async () => {
     console.log('id =>', id)
     if (id != null) {
     console.log('id =>', id)
-    let datas = await loadCart(id)
+        let datas = await loadCart(id)
         localStorage.setItem('session_id', id)
         console.log('here');
         loaderContainer.display = 'none'
-        document.querySelector('#jl-product-id').textContent = datas.numOrder
+        document.querySelector('#jl-result-id').textContent = datas.numOrder
+        if (datas.cart[0].metadata.productId == 'jag-chargingcable')
+            document.querySelector('#')
     }
     document.querySelector('#jl-result-redirect').addEventListener('click', (e) => {
         console.log('here');
@@ -571,7 +578,7 @@ const loadData = async () => {
 
 const init = async () => {
     await loadData()
-    let aboData =  await loadAbonnement()
+    await loadAbonnement()
     loaderContainer.style.display = 'none'
 
     let jlCartNumber = document.querySelector('#jl-cart-number')
@@ -583,7 +590,7 @@ const init = async () => {
     page = window.location.href.split('/')[3].split('?')[0];
     switch(page) {
         case '' : 
-            initHome(aboData)
+            initHome()
             initNewsLettre()
 
             break;
@@ -597,7 +604,7 @@ const init = async () => {
             initAccessory()
             break;
         case 'jagger-lewis-abonnement' : 
-            initAbonnement(aboData)
+            initAbonnement()
             break;
         case 'jagger-lewis-redirect': 
             initResult()
