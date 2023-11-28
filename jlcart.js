@@ -443,7 +443,7 @@ const initNewsLettre = () => {
         let emailValue = document.querySelector('#input-restons-en-contact').value
         console.log(JSON.stringify({ email: emailValue }))
         if (emailValue.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
-            fetch('https://dev.jagger-tracker.com/newsletter/subscribe', {
+            fetch('https://api.jagger-tracker.com/newsletter/subscribe', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: emailValue })
