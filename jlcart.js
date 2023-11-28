@@ -511,9 +511,9 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[1].price + '€/ an'
-            document.querySelector('#total-family-premium').innerHTML = "soit " + (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + ' au mois'
-            document.querySelector('#total-starter-family').innerHTML = "soit " + (findAbonnement("starter-family").prices[0].price / 12).toFixed(2) + ' au mois'
-            document.querySelector('#total-starter').innerHTML = "soit " + (findAbonnement("starter").prices[1].price / 12).toFixed(2) + ' au mois'
+            document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + '</b> au mois'
+            document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAbonnement("starter-family").prices[0].price / 12).toFixed(2) + '</b> au mois'
+            document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAbonnement("starter").prices[1].price / 12).toFixed(2) + '</b> au mois'
             updateTime(false)
 
         }
@@ -523,9 +523,9 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[1].price + '€/ mois'
             document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[1].price + '€/ mois'
             document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[0].price + '€/ mois'
-            document.querySelector('#total-family-premium').innerHTML = "soit <b>" +  findAbonnement("premium-family").prices[1].price * 12 + "</b> à l'année"
-            document.querySelector('#total-starter-family').innerHTML = "soit <b>" +  findAbonnement("starter-family").prices[1].price * 12 + "</b> à l'année"
-            document.querySelector('#total-starter').innerHTML = "soit <b>" +  findAbonnement("starter").prices[0].price * 12 + "</b> à l'année"
+            document.querySelector('#total-family-premium').innerHTML = "soit <b>" +  findAbonnement("premium-family").prices[1].price * 12 + "</b> par an"
+            document.querySelector('#total-starter-family').innerHTML = "soit <b>" +  findAbonnement("starter-family").prices[1].price * 12 + "</b> par an"
+            document.querySelector('#total-starter').innerHTML = "soit <b>" +  findAbonnement("starter").prices[0].price * 12 + "</b> par an"
             updateTime(true)
         }
     })
