@@ -180,6 +180,7 @@ class ShoppingCart {
 
     async getCartStripeUrl() {
         let value = this.cart.map((e) => {return {id : e.id.price.id, quantity : e.quantity}})
+        console.log(value)
         const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
