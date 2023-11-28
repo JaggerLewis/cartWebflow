@@ -651,7 +651,7 @@ const redirectToStripe = async (event) => {
         }
     const apiRes = await shoppingCart.getCartStripeUrl()
     const apiResJson = await apiRes.json()
-    window.location.href = apiResJson.url
+    // window.location.href = apiResJson.url
 }
 const redirectToStripeBis = async () => {
     const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
