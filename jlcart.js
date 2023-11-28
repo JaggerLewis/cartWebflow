@@ -440,9 +440,14 @@ const initBox = async ()  => {
 
 const initNewsLettre = () => {
     let btn = document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
-        let email = document.querySelector('#input-restons-en-contact').value
-        if (email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
-            fetch('')
+        let emailValue = document.querySelector('#input-restons-en-contact').value
+        console.log(JSON.stringify({ email: emailValue }))
+        if (emailValue.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
+            fetch('https://dev.jagger-tracker.com/newsletter/subscribe', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: emailValue })
+            })
         else
          showSnackBar('Wrong email', true)
     })
@@ -605,7 +610,6 @@ const init = async () => {
         case '' : 
             initHome()
             initNewsLettre()
-
             break;
         case 'jagger-lewis-smartdock' :
             initBox()
