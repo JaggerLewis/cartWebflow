@@ -280,7 +280,7 @@ p {
     border: solid 2px green;
 }
 .jl-snack-red {
-    border: solid 2px green;
+    border: solid 2px red;
 }
 
 @-webkit-keyframes fadein {
