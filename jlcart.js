@@ -227,10 +227,11 @@ let abonnement = []
 
 const findProduct = (product, color)=> {
     let filtered = products.filter(elem => elem.metadata.productId == product)
+  
     if (color != null)
         filtered = filtered.filter(elem => elem.metadata.colorId == color)
-    console.log(filtered)
-    return filtered[0]
+
+        return filtered[0]
 }
 
 const findAbonnement = (product)=> {
@@ -528,23 +529,17 @@ const initAbonnement = async () => {
 
 const initResult = async () => {
     shoppingCart.clear()
-    console.log('here');
     let id = new URLSearchParams(window.location.search).get('session_id')
-    console.log('id =>', id)
     if (id != null) {
-    console.log('id =>', id)
         let datas = await loadCart(id)
         localStorage.setItem('session_id', id)
-        console.log('here');
         loaderContainer.display = 'none'
         document.querySelector('#jl-result-id').textContent = document.querySelector('#jl-result-id').textContent.replace('00', datas.numOrder)
         if (datas.cart[0].metadata.productId == 'premium-first')
             document.querySelector('#jl-result-redirect').parentElement.style.display = 'none'
     }
     document.querySelector('#jl-result-redirect').addEventListener('click', (e) => {
-        console.log('here');
         e.preventDefault(); 
-        console.log('here');
         redirectToStripeBis()
     })
     // document.querySelector('#jl-result-name').textContent += datas.customer.name[0].toUpperCase() + datas.customer.name.substr(1)
@@ -632,9 +627,7 @@ const redirectToStripeBis = async () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ cart: [{id : 'price_1OH5hFADzHYMiB1Ymd8LFtTR', quantity : 1}], mode: 'payment' })
         })
-        console.log(answer);
     const apiResJson = await answer.json()
-        console.log(apiResJson);
     window.location.href = apiResJson.url
 }
 
