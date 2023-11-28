@@ -136,6 +136,11 @@
     font-size: 13px;
 }
 
+.jag-button-selected{
+    border-color: var(--blue);
+    border-width: 2px;
+}
+
 .jl-product-price {
     font-size: 20px;
     font-weight: 600;

@@ -392,10 +392,10 @@ const initCollar = async ()  => {
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-soloO')
+        colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-button-selected')
     })
     document.querySelector('#jag-avec-smartdock').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-soloO')
+        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-button-selected')
     })
    
     document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
@@ -409,7 +409,7 @@ const initCollar = async ()  => {
     collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
     collar.srcset = findProduct('jag', 'weimar').image
     colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
-    colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
+    colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-button-selected')
 
 }
 
