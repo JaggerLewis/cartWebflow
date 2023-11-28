@@ -234,16 +234,16 @@ const findProduct = (product, color)=> {
 }
 
 const findAbonnement = (product)=> {
-    let filtered = products.find(elem => elem.metadata.productId == product)
+    let filtered = abonnement.find(elem => elem.metadata.productId == product)
    
-    return filtered[0]
+    return filtered
 }
 
 const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
-    document.querySelector('#jl-price-month').textContent = (abonnement[1].prices[1].price/12).toFixed(2)
+    document.querySelector('#jl-price-month').textContent = (findAbonnement("starter").prices[1].price/12).toFixed(2)
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
@@ -503,9 +503,9 @@ const initAbonnement = async () => {
         if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
             document.querySelector('#abo-facture-mois').classList.remove('text-selected')
             document.querySelector('#abo-facture-annee').classList.add('text-selected')
-            document.querySelector('#abo-prix-family-premium').textContent = abonnement[2].prices[0].price + '€/ an'
-            document.querySelector('#abo-prix-starter-family').textContent = abonnement[1].prices[0].price + '€/ an'
-            document.querySelector('#abo-prix-starter').textContent = abonnement[0].prices[1].price + '€/ an'
+            document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[0].price + '€/ an'
+            document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[1].price + '€/ an'
             document.querySelector('#total-family-premium').style.display = 'none'
             document.querySelector('#total-starter-family').style.display = 'none'
             document.querySelector('#total-starter').style.display = 'none'
@@ -515,9 +515,9 @@ const initAbonnement = async () => {
         else {
             document.querySelector('#abo-facture-mois').classList.add('text-selected')
             document.querySelector('#abo-facture-annee').classList.remove('text-selected')
-            document.querySelector('#abo-prix-family-premium').textContent = abonnement[2].prices[1].price + '€/ mois'
-            document.querySelector('#abo-prix-starter-family').textContent = abonnement[1].prices[1].price + '€/ mois'
-            document.querySelector('#abo-prix-starter').textContent = abonnement[0].prices[0].price + '€/ mois'
+            document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[1].price + '€/ mois'
+            document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[1].price + '€/ mois'
+            document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[0].price + '€/ mois'
             document.querySelector('#total-family-premium').style.display = 'block'
             document.querySelector('#total-starter-family').style.display = 'block'
             document.querySelector('#total-starter').style.display = 'block'
