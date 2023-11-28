@@ -392,10 +392,10 @@ const initCollar = async ()  => {
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     })
     document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-solo')
+        colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-soloO')
     })
     document.querySelector('#jag-avec-smartdock').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-solo')
+        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-soloO')
     })
    
     document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
