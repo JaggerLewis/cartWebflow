@@ -511,9 +511,9 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[0].price + '€/ an'
             document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[1].price + '€/ an'
-            document.querySelector('#total-family-premium').textContent = "soit" (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + ' au mois'
-            document.querySelector('#total-starter-family').textContent = "soit" (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + ' au mois'
-            document.querySelector('#total-starter').textContent = "soit" (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + ' au mois'
+            document.querySelector('#total-family-premium').textContent = "soit" + (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + ' au mois'
+            document.querySelector('#total-starter-family').textContent = "soit" + (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + ' au mois'
+            document.querySelector('#total-starter').textContent = "soit" + (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + ' au mois'
             updateTime(false)
 
         }
