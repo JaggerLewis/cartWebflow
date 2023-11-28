@@ -85,11 +85,11 @@ class ShoppingCart {
         console.log(id)
         console.log(this.cart)
         console.log(this.cart.findIndex(product => 
-            product.id === id
+            product.id.price.id === id.price.id
         ))
-        return this.cart.findIndex((product) => {
-            return product.id === id
-        })
+        return this.cart.findIndex(product => 
+             product.id.price.id === id.price.id
+        )
     }
 
     addItem(id, count = 1) {
