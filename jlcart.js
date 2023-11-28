@@ -463,6 +463,10 @@ const initAccessory = () => {
         event.preventDefault()
         shoppingCart.addItem(findProduct('jag-smartdock-antenna-lg'), 1)
     })
+    document.querySelector('#jl-smartdock-accessoire').addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(findProduct('smartdock'), 1)
+    })
 }
 
 const loadAbonnement = async () => {
