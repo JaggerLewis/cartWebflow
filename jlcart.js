@@ -442,12 +442,13 @@ const initNewsLettre = () => {
     let btn = document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
         let emailValue = document.querySelector('#input-restons-en-contact').value
         console.log(JSON.stringify({ email: emailValue }))
-        if (emailValue.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
+        if (emailValue.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
             fetch('https://api.jagger-tracker.com/newsletter/subscribe', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: emailValue })
             })
+        }
         else
          showSnackBar('Wrong email', true)
     })
@@ -610,18 +611,25 @@ const init = async () => {
         case '' : 
             initHome()
             initNewsLettre()
+
             break;
         case 'jagger-lewis-smartdock' :
             initBox()
+            initNewsLettre()
+
             break;
         case 'jagger-lewis-jag' :
             initCollar()
             break;
         case 'accessoires-jag-smartdock' :
             initAccessory()
+            initNewsLettre()
+
             break;
         case 'jagger-lewis-abonnement' : 
             initAbonnement()
+            initNewsLettre()
+
             break;
         case 'jagger-lewis-redirect': 
             initResult()
