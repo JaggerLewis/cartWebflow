@@ -457,7 +457,7 @@ const initAccessory = () => {
     })
     document.querySelector('#jl-cable-cta-dock').addEventListener('click', (event) => {
         event.preventDefault()
-        showSnackBar('ON NE VEND PAS DE CABLE POUR LE DOCK', true)
+         shoppingCart.addItem(findProduct('jag-smartdock-chargingcable'), 1)
     })
     document.querySelector('#jl-grande-antenne').addEventListener('click', (event) => {
         event.preventDefault()
