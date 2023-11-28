@@ -139,6 +139,7 @@
 .jag-button-selected{
     border-color: var(--blue);
     border-width: 1px;
+    box-shadow: 0px 0px 8px 0px #6090F6;
 }
 
 .jl-product-price {
