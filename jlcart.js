@@ -180,7 +180,7 @@ class ShoppingCart {
 
     getCartStripeUrl() {
         let value = this.cart.map((e) => {return {id : e.id.price.id, quantity : e.quantity}})
-        const answer = fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
+        const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ cart: value, mode: 'payment' })
@@ -643,6 +643,7 @@ const init = async () => {
 
 const redirectToStripe = async (event) => {
     event.preventDefault();
+    console.log('here')
     if (shoppingCart.countItems() == 0) {
         showSnackBar("Vous n'avez pas d'article", true)
             return
