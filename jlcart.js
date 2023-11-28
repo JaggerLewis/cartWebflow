@@ -28,7 +28,7 @@ body.insertBefore(loaderContainer, document.body.firstChild);
 function displayPrice (price) {
     return  price % 1 == 0 
             ? price + '.00'
-            : price % 0.1 == 0
+            :  (price % 0.1).toFixed(5) == 0
                 ?price+ '0' 
                 : '' + price
 }
