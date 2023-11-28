@@ -538,7 +538,7 @@ const initResult = async () => {
         console.log('here');
         loaderContainer.display = 'none'
         document.querySelector('#jl-result-id').textContent.replace('00', datas.numOrder)
-        if (datas.cart[0].metadata.productId == 'jag-chargingcable')
+        if (datas.cart[0].metadata.productId == 'premium-first')
             document.querySelector('#jl-result-redirect').parentElement.style.display = 'none'
     }
     document.querySelector('#jl-result-redirect').addEventListener('click', (e) => {
