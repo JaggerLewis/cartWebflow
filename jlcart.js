@@ -537,7 +537,7 @@ const initResult = async () => {
         localStorage.setItem('session_id', id)
         console.log('here');
         loaderContainer.display = 'none'
-        document.querySelector('#jl-result-id').textContent.replace('00', datas.numOrder)
+        document.querySelector('#jl-result-id').textContent = document.querySelector('#jl-result-id').textContent.replace('00', datas.numOrder)
         if (datas.cart[0].metadata.productId == 'premium-first')
             document.querySelector('#jl-result-redirect').parentElement.style.display = 'none'
     }
