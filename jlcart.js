@@ -24,6 +24,15 @@ modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div cl
 body.appendChild(modalDiv)
 body.insertBefore(loaderContainer, document.body.firstChild);
 
+
+function displayPrice (price) {
+    return  price % 1 == 0 
+            ? price + '.00'
+            : price % 0.1 == 0
+                ?price+ '0' 
+                : '' + price
+}
+
 const setCartNumber = () => {
     let count = 0
     if (localStorage.getItem("shoppingCart")) {
@@ -668,14 +677,6 @@ const showCart = (event) => {
     function clearHtml () {
         document.querySelector('.jl-border-container').innerHTML = '<div id="jl-no-display" class="jl-no-display">Aucun élément sélectionné</div>';
     } 
-
-    function displayPrice (price) {
-        return  price % 1 == 0 
-                ? price + '.00'
-                : price % 0.1 == 0
-                    ?price+ '0' 
-                    : '' + price
-    }
 
     function addHtml(prod, id) {
         let container = document.querySelector('.jl-border-container')
