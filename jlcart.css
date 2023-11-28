@@ -359,6 +359,10 @@ p {
         margin-top: 15vh;
     }
 
+    .jl-product-name {
+        font-size: 15px;
+    }
+
 
     #jl-snackbar {
         left: 10%;
