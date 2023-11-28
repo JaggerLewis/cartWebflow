@@ -723,7 +723,8 @@ const showSnackBar = (text, isError) => {
     document.querySelector('#jl-snack-text-container').textContent = text
     document.querySelector('#jl-snack-icon').src = isError ? 'https://webcart.jagger-lewis.com/asset/icon_error.png' : 'https://webcart.jagger-lewis.com/asset/icon_validate.png'
     snack.className = isError ? 'show jl-snack-red' : 'show jl-snack-green';
-    setTimeout(function(){ snack.className = ''})
+    setTimeout(function(){ snack.className = '' }, 3000);
+
 }
 
 const goToStripe = document.getElementById("validate-cart");
