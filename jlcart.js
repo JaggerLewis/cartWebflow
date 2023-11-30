@@ -441,16 +441,11 @@ const initBox = async ()  => {
 const initNewsLettre = () => {
     let btn = document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
         let emailValue = document.querySelector('#input-restons-en-contact').value
-        console.log(JSON.stringify({ email: emailValue }))
-        if (emailValue.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-            fetch('https://api.jagger-tracker.com/newsletter/subscribe', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: emailValue })
-            })
-        }
-        else
-         showSnackBar('Wrong email', true)
+        fetch('https://api.jagger-tracker.com/newsletter/subscribe', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email: emailValue })
+        })
     })
 }
 
@@ -652,10 +647,11 @@ const redirectToStripe = async (event) => {
     window.location.href = apiResJson.url
 }
 const redirectToStripeBis = async () => {
+    let abo = findAbonnement('premium-first').prices[0].id;
     const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: [{id : 'price_1OH5hFADzHYMiB1Ymd8LFtTR', quantity : 1}], mode: 'payment' })
+            body: JSON.stringify({ cart: [{id : abo, quantity : 1}], mode: 'payment' })
         })
     const apiResJson = await answer.json()
     window.location.href = apiResJson.url
