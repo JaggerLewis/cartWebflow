@@ -330,12 +330,12 @@ const initHome = async () => {
         colorButtonSelect('#txt-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
    
-    collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
-    collar.srcset = findProduct('jag', 'weimar').image
-    dock.setAttribute('data-selected', findProduct('jag-smartdock', 'weimar').price.id)
-    dock.srcset = findProduct('jag-smartdock', 'weimar').image
-    colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
-    colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
+    collar.setAttribute('data-selected', findProduct('jag', 'fauve').price.id)
+    collar.srcset = findProduct('jag', 'fauve').image
+    dock.setAttribute('data-selected', findProduct('jag-smartdock', 'fauve').price.id)
+    dock.srcset = findProduct('jag-smartdock', 'fauve').image
+    colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
+    colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
 
 }
 
@@ -420,9 +420,9 @@ const initCollar = async ()  => {
         event.preventDefault()
         shoppingCart.addItem(findProduct('jag-chargingcable'), 1)
     })
-    collar.setAttribute('data-selected', findProduct('jag', 'weimar').price.id)
-    collar.srcset = findProduct('jag', 'weimar').image
-    colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
+    collar.setAttribute('data-selected', findProduct('jag', 'fauve').price.id)
+    collar.srcset = findProduct('jag', 'fauve').image
+    colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-button-selected')
 
 }
