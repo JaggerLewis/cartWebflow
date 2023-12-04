@@ -538,9 +538,9 @@ const initAbonnement = async () => {
             document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[1].price + '€/ mois'
             document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[1].price + '€/ mois'
             document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[0].price + '€/ mois'
-            document.querySelector('#total-family-premium').innerHTML = "soit <b>" +  findAbonnement("premium-family").prices[1].price * 12 + "€</b> par an"
-            document.querySelector('#total-starter-family').innerHTML = "soit <b>" +  findAbonnement("starter-family").prices[1].price * 12 + "€</b> par an"
-            document.querySelector('#total-starter').innerHTML = "soit <b>" +  findAbonnement("starter").prices[0].price * 12 + "€</b> par an"
+            document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  (findAbonnement("premium-family").prices[0].price / 12).toFixed(2) + "€</b> / mois à l'année"
+            document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAbonnement("starter-family").prices[0].price / 12).toFixed(2) + "€</b> / mois à l'année"
+            document.querySelector('#total-starter').innerHTML =  "ou <b>" +  (findAbonnement("starter").prices[1].price / 12).toFixed(2)  + "€</b> / mois à l'année"
             updateTime(true)
         }
     })
