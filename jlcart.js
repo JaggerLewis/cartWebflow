@@ -579,7 +579,7 @@ const initAbonnement = async () => {
     });
     document.querySelector('#abo-facture-mois').classList.add('text-selected')
     updateTime(true)
-    document.querySelector('#jl-switch').innerHTML = '<label class="switch"><input id="jl-slide-input" type="checkbox" checked><span class="slider round"></span></label>'
+    document.querySelector('#jl-switch').innerHTML = '<label class="switch"><input id="jl-slide-input" type="checkbox"><span class="slider round"></span></label>'
     document.querySelector('#jl-switch').classList.remove('togglebuttongreen')
     document.querySelector('#jl-switch').addEventListener('click', (event) => {
         event.preventDefault()
