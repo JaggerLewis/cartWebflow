@@ -386,11 +386,10 @@
   .slider {
     position: absolute;
     cursor: pointer;
+    height: 34px;
+    width: 60px;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
+    background-color: #C1C6FF;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -408,11 +407,11 @@
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #5663FF;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #5663FF;
   }
   
   input:checked + .slider:before {
