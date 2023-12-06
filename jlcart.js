@@ -635,9 +635,9 @@ const loadData = async () => {
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
-    findProduct('jag', 'fauve').image
-    findProduct('jag', 'weimar').image
-    findProduct('jag', 'charbon').image
+    preload(findProduct('jag', 'fauve').image)
+    preload(findProduct('jag', 'weimar').image)
+    preload(findProduct('jag', 'charbon').image)
 }
 
 const init = async () => {
