@@ -610,6 +610,13 @@ const loadCart = async (id) => {
     return await fetch('https://dev.jagger-tracker.com/stripe/checkout_session/'+id+'/cart').then(res => res.json())
 }
 
+function preload(url) {
+    for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = url;
+    }
+}
+
 const loadData = async () => {
     let date = Date.now()
     let result
@@ -628,7 +635,9 @@ const loadData = async () => {
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
-
+    findProduct('jag', 'fauve').image
+    findProduct('jag', 'weimar').image
+    findProduct('jag', 'charbon').image
 }
 
 const init = async () => {
