@@ -610,10 +610,9 @@ const loadCart = async (id) => {
     return await fetch('https://dev.jagger-tracker.com/stripe/checkout_session/'+id+'/cart').then(res => res.json())
 }
 
-var images = []
 function preload(url) {
-    images[i] = new Image();
-    images[i].src = url;
+    let tmp = new Image();
+    tmp.src = url;
     }
 
 const loadData = async () => {
