@@ -636,6 +636,9 @@ const loadData = async () => {
     preload(findProduct('jag', 'fauve').image)
     preload(findProduct('jag', 'weimar').image)
     preload(findProduct('jag', 'charbon').image)
+    preload(findProduct('jag-smartdock', 'fauve').image)
+    preload(findProduct('jag-smartdock', 'weimar').image)
+    preload(findProduct('jag-smartdock', 'charbon').image)
 }
 
 const init = async () => {
