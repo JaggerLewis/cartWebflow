@@ -318,17 +318,17 @@ const initHome = async () => {
     document.querySelector('#txt-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, findProduct('jag-smartdock', 'fauve').image, findProduct('jag-smartdock', 'fauve').price.id )
-        colorButtonSelect('#txt-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
+        colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-dock-color-weimar').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, findProduct('jag-smartdock', 'weimar').image, findProduct('jag-smartdock', 'weimar').price.id )
-        colorButtonSelect('#txt-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
+        colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
     })
     document.querySelector('#txt-dock-color-charbon').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, findProduct('jag-smartdock', 'charbon').image, findProduct('jag-smartdock', 'charbon').price.id )
-        colorButtonSelect('#txt-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
+        colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
    
     collar.setAttribute('data-selected', findProduct('jag', 'fauve').price.id)
