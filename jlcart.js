@@ -195,6 +195,7 @@ const getProductsFromStripe = async () => {
         method: "GET",
         headers: { "Content-Type": "application/json" },
     })
+    loaderContainer.style.display = 'none'
     return answer
 }
 const getAbonnementFromStripe = async () => {
