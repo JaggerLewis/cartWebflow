@@ -191,12 +191,18 @@ class ShoppingCart {
 }
 
 const getProductsFromStripe = async () => {
-    const answer = await fetch("https://api.jagger-tracker.com/stripe/products", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-    })
-    loaderContainer.style.display = 'none'
-    return answer
+    try {
+
+        const answer = await fetch("https://api.jagger-tracker.com/stripe/products", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
+        return answer
+    }
+    catch(e) {
+        loaderContainer.style.display = 'none'
+    }
+    
 }
 const getAbonnementFromStripe = async () => {
     const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
