@@ -353,8 +353,8 @@ const initHome = async () => {
 
 const initCollar = async ()  => {
     let collar = document.querySelector('#page-jag-collar')
-    document.querySelector('#abo-dock-price').innerHTML = document.querySelector('#abo-dock-price').innerHTML.replace('70,00', findProduct('jag-smartdock', 'fauve').price.price) 
-    document.querySelector('#abo-jag-price').innerHTML = document.querySelector('#abo-jag-price').innerHTML.replace('120,00', findProduct('jag', 'fauve').price.price)
+    document.querySelector('#abo-dock-price').innerHTML = document.querySelector('#abo-dock-price').innerHTML.replace('120,00', findProduct('jag-smartdock', 'fauve').price.price) 
+    document.querySelector('#abo-jag-price').innerHTML = document.querySelector('#abo-jag-price').innerHTML.replace('70,00', findProduct('jag', 'fauve').price.price)
     document.querySelector('#abo-cable-price').innerHTML = document.querySelector('#abo-cable-price').innerHTML.replace('9,99', findProduct('jag-chargingcable').price.price)
     document.querySelector('#abo-coque-price').innerHTML = document.querySelector('#abo-coque-price').innerHTML.replace('9,98', findProduct('jag-sock', 'fauve').price.price)
     console.log
