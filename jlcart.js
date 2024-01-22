@@ -457,6 +457,14 @@ const initNewsLettre = () => {
 }
 
 const initAccessory = () => {
+    document.querySelector('#acc-coque-fauve-price').innerHTML = document.querySelector('#acc-coque-fauve-price').innerHTML.replace('9,98', findProduct('jag-sock', 'fauve').price.price) 
+    document.querySelector('#acc-coque-charbon-price').innerHTML = document.querySelector('#acc-coque-charbon-price').innerHTML.replace('9,98',findProduct('jag-sock', 'charbon').price.price) 
+    document.querySelector('#acc-coque-weimar-price').innerHTML = document.querySelector('#acc-coque-weimar-price').innerHTML.replace('9,98', findProduct('jag-sock', 'weimar').price.price) 
+    document.querySelector('#acc-cable-sm-price').innerHTML = document.querySelector('#acc-cable-sm-price').innerHTML.replace('9,98', findProduct('jag-chargingcable').price.price) 
+    document.querySelector('#acc-cable-price').innerHTML = document.querySelector('#acc-cable-price').innerHTML.replace('9,98', findProduct('jag-chargingcable').price.price) 
+    document.querySelector('#acc-dock-price').innerHTML = document.querySelector('#acc-dock-price').innerHTML.replace('54', findProduct('smartdock').price.price) 
+    document.querySelector('#acc-big-antena-price').innerHTML = document.querySelector('#acc-big-antena-price').innerHTML.replace('9,98', findProduct('jag-smartdock-antenna-lg').price.price) 
+    document.querySelector('#acc-sml-antena-price').innerHTML = document.querySelector('#acc-sml-antena-price').innerHTML.replace('9,98', findProduct('jag-smartdock-antenna-md').price.price) 
     document.querySelector('#jl-coque-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         shoppingCart.addItem(findProduct('jag-sock', 'fauve'), 1)
