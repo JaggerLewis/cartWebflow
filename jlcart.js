@@ -268,8 +268,8 @@ const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
-    document.querySelector('#price-jag-smartdock').innerHTML = document.querySelector('#price-jag-smartdock').innerHTML.replace('110', findProduct('jag-smartdock', 'fauve').price.price) 
-    document.querySelector('#price-jag').innerHTML = findProduct('jag', 'fauve').price.price + '€'
+    document.querySelector('#price-jag-smartdock').innerHTML = document.querySelector('#price-jag-smartdock').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price) 
+    document.querySelector('#price-jag').innerHTML =  document.querySelector('#price-jag').innerHTML.replace('{price}',findProduct('jag', 'fauve').price.price) 
     document.querySelector('#jl-price-month').textContent = (findAbonnement("starter").prices[1].price/12).toFixed(2)
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
@@ -353,10 +353,10 @@ const initHome = async () => {
 
 const initCollar = async ()  => {
     let collar = document.querySelector('#page-jag-collar')
-    document.querySelector('#abo-dock-price').innerHTML = document.querySelector('#abo-dock-price').innerHTML.replace('120,00', findProduct('jag-smartdock', 'fauve').price.price) 
-    document.querySelector('#abo-jag-price').innerHTML = document.querySelector('#abo-jag-price').innerHTML.replace('70,00', findProduct('jag', 'fauve').price.price)
-    document.querySelector('#abo-cable-price').innerHTML = document.querySelector('#abo-cable-price').innerHTML.replace('9,99', findProduct('jag-chargingcable').price.price)
-    document.querySelector('#abo-coque-price').innerHTML = document.querySelector('#abo-coque-price').innerHTML.replace('9,98', findProduct('jag-sock', 'fauve').price.price)
+    document.querySelector('#abo-dock-price').innerHTML = document.querySelector('#abo-dock-price').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price) 
+    document.querySelector('#abo-jag-price').innerHTML = document.querySelector('#abo-jag-price').innerHTML.replace('{price}', findProduct('jag', 'fauve').price.price)
+    document.querySelector('#abo-cable-price').innerHTML = document.querySelector('#abo-cable-price').innerHTML.replace('{price}', findProduct('jag-chargingcable').price.price)
+    document.querySelector('#abo-coque-price').innerHTML = document.querySelector('#abo-coque-price').innerHTML.replace('{price}', findProduct('jag-sock', 'fauve').price.price)
     console.log
     document.querySelector('#je-commande-mon-jag').addEventListener('click', (event) => {
         event.preventDefault()
@@ -457,14 +457,14 @@ const initNewsLettre = () => {
 }
 
 const initAccessory = () => {
-    document.querySelector('#acc-coque-fauve-price').innerHTML = document.querySelector('#acc-coque-fauve-price').innerHTML.replace('9,98', findProduct('jag-sock', 'fauve').price.price) 
-    document.querySelector('#acc-coque-carbon-price').innerHTML = document.querySelector('#acc-coque-carbon-price').innerHTML.replace('9,98',findProduct('jag-sock', 'charbon').price.price) 
-    document.querySelector('#acc-coque-weimar-price').innerHTML = document.querySelector('#acc-coque-weimar-price').innerHTML.replace('9,98', findProduct('jag-sock', 'weimar').price.price) 
-    document.querySelector('#acc-cable-sm-price').innerHTML = document.querySelector('#acc-cable-sm-price').innerHTML.replace('9,98', findProduct('jag-chargingcable').price.price) 
-    document.querySelector('#acc-cable-price').innerHTML = document.querySelector('#acc-cable-price').innerHTML.replace('9,98', findProduct('jag-chargingcable').price.price) 
-    document.querySelector('#acc-dock-price').innerHTML = document.querySelector('#acc-dock-price').innerHTML.replace('54', findProduct('smartdock').price.price) 
-    document.querySelector('#acc-big-antena-price').innerHTML = document.querySelector('#acc-big-antena-price').innerHTML.replace('9,98', findProduct('jag-smartdock-antenna-lg').price.price) 
-    document.querySelector('#acc-sml-antena-price').innerHTML = document.querySelector('#acc-sml-antena-price').innerHTML.replace('9,98', findProduct('jag-smartdock-antenna-md').price.price) 
+    document.querySelector('#acc-coque-fauve-price').innerHTML = document.querySelector('#acc-coque-fauve-price').innerHTML.replace('{price}', findProduct('jag-sock', 'fauve').price.price) 
+    document.querySelector('#acc-coque-carbon-price').innerHTML = document.querySelector('#acc-coque-carbon-price').innerHTML.replace('{price}',findProduct('jag-sock', 'charbon').price.price) 
+    document.querySelector('#acc-coque-weimar-price').innerHTML = document.querySelector('#acc-coque-weimar-price').innerHTML.replace('{price}', findProduct('jag-sock', 'weimar').price.price) 
+    document.querySelector('#acc-cable-sm-price').innerHTML = document.querySelector('#acc-cable-sm-price').innerHTML.replace('{price}', findProduct('jag-chargingcable').price.price) 
+    document.querySelector('#acc-cable-price').innerHTML = document.querySelector('#acc-cable-price').innerHTML.replace('{price}', findProduct('jag-chargingcable').price.price) 
+    document.querySelector('#acc-dock-price').innerHTML = document.querySelector('#acc-dock-price').innerHTML.replace('{price}', findProduct('smartdock').price.price) 
+    document.querySelector('#acc-big-antena-price').innerHTML = document.querySelector('#acc-big-antena-price').innerHTML.replace('{price}', findProduct('jag-smartdock-antenna-lg').price.price) 
+    document.querySelector('#acc-sml-antena-price').innerHTML = document.querySelector('#acc-sml-antena-price').innerHTML.replace('{price}', findProduct('jag-smartdock-antenna-md').price.price) 
     document.querySelector('#jl-coque-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         shoppingCart.addItem(findProduct('jag-sock', 'fauve'), 1)
