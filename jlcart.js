@@ -353,6 +353,12 @@ const initHome = async () => {
 
 const initCollar = async ()  => {
     let collar = document.querySelector('#page-jag-collar')
+    document.querySelector('#abo-dock-price').innerHTML = document.querySelector('#abo-dock-price').innerHTML.replace('110', findProduct('jag-smartdock', 'fauve').price.price) 
+    document.querySelector('#abo-jag-price').innerHTML = document.querySelector('#abo-jag-price').innerHTML.replace('110', findProduct('jag', 'fauve').price.price)
+    document.querySelector('#abo-cable-price').innerHTML = document.querySelector('#abo-cable-price').innerHTML.replace('110', findProduct('jag-chargingcable').price.price)
+    document.querySelector('#abo-coque-price').innerHTML = document.querySelector('#abo-coque-price').innerHTML.replace('110', findProduct('jag-sock', 'fauve').price.price)
+    // findProduct('jag-sock', 'fauve') abo-cable-price
+    // findProduct('jag-chargingcable') abo-coque-price
     document.querySelector('#je-commande-mon-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
