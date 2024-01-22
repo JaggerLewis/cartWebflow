@@ -540,7 +540,6 @@ const initAbonnement = async () => {
         document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAbonnement("starter-family").prices[0].price / 12).toFixed(2) + '€</b> au mois'
         document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAbonnement("starter").prices[1].price / 12).toFixed(2) + '€</b> au mois'
         updateTime(false)
-        document.querySelector('#jl-slide-input').checked = true
     }
 
     const toMonth = () => {
@@ -557,7 +556,6 @@ const initAbonnement = async () => {
         document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAbonnement("starter-family").prices[0].price / 12).toFixed(2) + "€</b> / mois à l'année"
         document.querySelector('#total-starter').innerHTML =  "ou <b>" +  (findAbonnement("starter").prices[1].price / 12).toFixed(2)  + "€</b> / mois à l'année"
         updateTime(true)
-        document.querySelector('#jl-slide-input').checked = false
     }
 
     const toLife = () => {
