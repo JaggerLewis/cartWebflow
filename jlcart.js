@@ -572,7 +572,6 @@ const initAbonnement = async () => {
         document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  'no data' + "€</b> "
         document.querySelector('#total-starter').innerHTML =  "ou <b>" +  'no data'  + "€</b> "
         updateTime(true)
-        document.querySelector('#jl-slide-input').checked = false
 
     }
     document.querySelector('#abo-facture-annee').addEventListener('click', (event) => {
@@ -601,12 +600,7 @@ const initAbonnement = async () => {
     });
     document.querySelector('#abo-facture-mois').classList.add('text-selected')
     updateTime(true)
-    document.querySelector('#jl-switch').innerHTML = '<label class="switch"><input id="jl-slide-input" type="checkbox"><span class="slider round"></span></label>'
-    document.querySelector('#jl-switch').classList.remove('togglebuttongreen')
-    document.querySelector('#jl-switch').addEventListener('click', (event) => {
-        event.preventDefault()
-       switchDisplay()
-    })
+
 }
 
 const initResult = async () => {
