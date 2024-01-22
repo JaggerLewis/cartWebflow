@@ -458,7 +458,7 @@ const initNewsLettre = () => {
 
 const initAccessory = () => {
     document.querySelector('#acc-coque-fauve-price').innerHTML = document.querySelector('#acc-coque-fauve-price').innerHTML.replace('9,98', findProduct('jag-sock', 'fauve').price.price) 
-    document.querySelector('#acc-coque-charbon-price').innerHTML = document.querySelector('#acc-coque-charbon-price').innerHTML.replace('9,98',findProduct('jag-sock', 'charbon').price.price) 
+    document.querySelector('#acc-coque-carbon-price').innerHTML = document.querySelector('#acc-coque-carbon-price').innerHTML.replace('9,98',findProduct('jag-sock', 'charbon').price.price) 
     document.querySelector('#acc-coque-weimar-price').innerHTML = document.querySelector('#acc-coque-weimar-price').innerHTML.replace('9,98', findProduct('jag-sock', 'weimar').price.price) 
     document.querySelector('#acc-cable-sm-price').innerHTML = document.querySelector('#acc-cable-sm-price').innerHTML.replace('9,98', findProduct('jag-chargingcable').price.price) 
     document.querySelector('#acc-cable-price').innerHTML = document.querySelector('#acc-cable-price').innerHTML.replace('9,98', findProduct('jag-chargingcable').price.price) 
