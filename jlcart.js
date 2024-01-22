@@ -200,7 +200,9 @@ const getProductsFromStripe = async () => {
         return answer
     }
     catch(e) {
-        loaderContainer.style.display = 'none'
+        return await setTimeout(async() => {
+            return await getProductsFromStripe()
+          }, "1000");
     }
     
 }
@@ -519,14 +521,15 @@ const initAbonnement = async () => {
         if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
             toYear();
         }
-        else {
+        else if (document.querySelector('#abo-facture-mois').classList.contains('text-selected')) {
             toMonth();
         }
     }
  
     const toYear = () => {
         document.querySelector('#abo-facture-mois').classList.remove('text-selected')
-        document.querySelector('#abo-facture-annee').classList.add('text-selected')
+        document.querySelector('#abo-facture-annee').classList.remove('text-selected')
+        document.querySelector('#abo-facture-life').classList.remove('text-selected')
         document.querySelector('#abo-prix-family-premium').textContent = displayPrice(findAbonnement("premium-family").prices[0].price) + '€/ an'
         document.querySelector('#abo-prix-starter-family').textContent = displayPrice(findAbonnement("starter-family").prices[0].price) + '€/ an'
         document.querySelector('#abo-prix-starter').textContent = displayPrice(findAbonnement("starter").prices[1].price) + '€/ an'
@@ -543,6 +546,7 @@ const initAbonnement = async () => {
     const toMonth = () => {
         document.querySelector('#abo-facture-mois').classList.add('text-selected')
         document.querySelector('#abo-facture-annee').classList.remove('text-selected')
+        document.querySelector('#abo-facture-life').classList.remove('text-selected')
         document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[1].price + '€/ mois'
         document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[1].price + '€/ mois'
         document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[0].price + '€/ mois'
@@ -555,9 +559,31 @@ const initAbonnement = async () => {
         updateTime(true)
         document.querySelector('#jl-slide-input').checked = false
     }
+
+    const toLife = () => {
+        document.querySelector('#abo-facture-life').classList.add('text-selected')
+        document.querySelector('#abo-facture-annee').classList.remove('text-selected')
+        document.querySelector('#abo-facture-mois').classList.remove('text-selected')
+        document.querySelector('#abo-prix-family-premium').textContent = 'no data'+ '€/ mois'
+        document.querySelector('#abo-prix-starter-family').textContent = 'no data' + '€/ mois'
+        document.querySelector('#abo-prix-starter').textContent = 'no data' + '€/ mois'
+        document.querySelector('#abo-annee-mois-starter').textContent = 'À vie'
+        document.querySelector('#abo-annee-mois-starter-family').textContent = 'À vie'
+        document.querySelector('#abo-annee-mois-family-premium').textContent = 'À vie'
+        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  'no data' + "€</b> "
+        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  'no data' + "€</b> "
+        document.querySelector('#total-starter').innerHTML =  "ou <b>" +  'no data'  + "€</b> "
+        updateTime(true)
+        document.querySelector('#jl-slide-input').checked = false
+
+    }
     document.querySelector('#abo-facture-annee').addEventListener('click', (event) => {
         event.preventDefault();
         toYear();
+    });
+    document.querySelector('#abo-facture-life').addEventListener('click', (event) => {
+        event.preventDefault();
+        toLife();
     });
     document.querySelector('#total-family-premium').addEventListener('click', (event) => {
         event.preventDefault();
