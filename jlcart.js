@@ -562,15 +562,15 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-life').classList.add('text-selected')
         document.querySelector('#abo-facture-annee').classList.remove('text-selected')
         document.querySelector('#abo-facture-mois').classList.remove('text-selected')
-        document.querySelector('#abo-prix-family-premium').textContent = 'no data'+ '€/ mois'
-        document.querySelector('#abo-prix-starter-family').textContent = 'no data' + '€/ mois'
-        document.querySelector('#abo-prix-starter').textContent = 'no data' + '€/ mois'
-        document.querySelector('#abo-annee-mois-starter').textContent = 'À vie'
-        document.querySelector('#abo-annee-mois-starter-family').textContent = 'À vie'
-        document.querySelector('#abo-annee-mois-family-premium').textContent = 'À vie'
-        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  'no data' + "€</b> "
-        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  'no data' + "€</b> "
-        document.querySelector('#total-starter').innerHTML =  "ou <b>" +  'no data'  + "€</b> "
+        document.querySelector('#abo-prix-family-premium').textContent = 'no data'
+        document.querySelector('#abo-prix-starter-family').textContent = 'no data'
+        document.querySelector('#abo-prix-starter').textContent = 'no data'
+        document.querySelector('#abo-annee-mois-starter').textContent = ''
+        document.querySelector('#abo-annee-mois-starter-family').textContent = ''
+        document.querySelector('#abo-annee-mois-family-premium').textContent = ''
+        document.querySelector('#total-family-premium').innerHTML = "À vie"
+        document.querySelector('#total-starter-family').innerHTML =  "À vie"
+        document.querySelector('#total-starter').innerHTML =  "À vie"
         updateTime(true)
 
     }
