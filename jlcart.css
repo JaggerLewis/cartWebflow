@@ -340,6 +340,7 @@
 .text-selected-abonnement {
     font-weight: bold;
     background-color:#5363ff;
+    color : white;
 }
 
 .jl-loader-container {
