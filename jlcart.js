@@ -264,6 +264,12 @@ const findAbonnement = (product)=> {
     return filtered
 }
 
+const findAboType = (abo, type) => {
+    let filtered =  abonnement.find(elem => elem.metadata.productId == type)
+
+    return filtered
+}
+
 const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
@@ -551,9 +557,9 @@ const initAbonnement = async () => {
         document.querySelector('#abo-annee-mois-starter').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-starter-family').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-family-premium').textContent = '2 mois offert'
-        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAbonnement("premium-family").prices[2].price / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAbonnement("starter-family").prices[2].price / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAbonnement("starter").prices[1].price / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAbonnement("premium-family").prices[2].price*10 / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAbonnement("starter-family").prices[2].price*10 / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAbonnement("starter").prices[1].price*10 / 12).toFixed(2) + '€</b> au mois'
         updateTime(false)
     }
 
