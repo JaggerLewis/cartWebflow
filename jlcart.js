@@ -265,7 +265,7 @@ const findAbonnement = (product)=> {
 }
 
 const findAboType = (abo, type) => {
-    let filtered =  abonnement.find(elem => elem.metadata.productId == type)
+    let filtered =  abo.prices.find(elem => elem.metadata.interval == type)
 
     return filtered
 }
@@ -276,7 +276,7 @@ const initHome = async () => {
     let dock = document.querySelector('#jl-dock')
     document.querySelector('#price-jag-smartdock').innerHTML = document.querySelector('#price-jag-smartdock').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price) 
     document.querySelector('#price-jag').innerHTML =  document.querySelector('#price-jag').innerHTML.replace('{price}',findProduct('jag', 'fauve').price.price) 
-    document.querySelector('#jl-price-month').textContent = (findAbonnement("starter").prices[1].price/12).toFixed(2)
+    document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), 0).price/12).toFixed(2)
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
@@ -551,15 +551,15 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-mois').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-life').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent = displayPrice(findAbonnement("premium-family").prices[1].price) + '€/ an'
-        document.querySelector('#abo-prix-starter-family').textContent = displayPrice(findAbonnement("starter-family").prices[1].price) + '€/ an'
-        document.querySelector('#abo-prix-starter').textContent = displayPrice(findAbonnement("starter").prices[2].price) + '€/ an'
+        document.querySelector('#abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), 0).price) + '€/ an'
+        document.querySelector('#abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), 0).price) + '€/ an'
+        document.querySelector('#abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), 12).price) + '€/ an'
         document.querySelector('#abo-annee-mois-starter').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-starter-family').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-family-premium').textContent = '2 mois offert'
-        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAbonnement("premium-family").prices[2].price*10 / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAbonnement("starter-family").prices[2].price*10 / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAbonnement("starter").prices[1].price*10 / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAboType(findAbonnement("premium-family"), 12).price*10 / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter-family"), 12).price*10 / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter"), 0).price*10 / 12).toFixed(2) + '€</b> au mois'
         updateTime(false)
     }
 
@@ -567,15 +567,15 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-mois').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-life').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent = findAbonnement("premium-family").prices[2].price + '€/ mois'
-        document.querySelector('#abo-prix-starter-family').textContent = findAbonnement("starter-family").prices[2].price + '€/ mois'
-        document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[1].price + '€/ mois'
+        document.querySelector('#abo-prix-family-premium').textContent = findAboType(findAbonnement("premium-family"), 12).price + '€/ mois'
+        document.querySelector('#abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), 12).price + '€/ mois'
+        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), 0).price + '€/ mois'
         document.querySelector('#abo-annee-mois-starter').textContent = 'Sans engagement'
         document.querySelector('#abo-annee-mois-starter-family').textContent = 'Sans engagement'
         document.querySelector('#abo-annee-mois-family-premium').textContent = 'Sans engagement'
-        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  (findAbonnement("premium-family").prices[1].price / 12).toFixed(2) + "€</b> / mois à l'année"
-        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAbonnement("starter-family").prices[1].price / 12).toFixed(2) + "€</b> / mois à l'année"
-        document.querySelector('#total-starter').innerHTML =  "ou <b>" +  (findAbonnement("starter").prices[2].price / 12).toFixed(2)  + "€</b> / mois à l'année"
+        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  (findAboType(findAbonnement("premium-family"), 0).price / 12).toFixed(2) + "€</b> / mois à l'année"
+        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter-family"), 0).price / 12).toFixed(2) + "€</b> / mois à l'année"
+        document.querySelector('#total-starter').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter"), 12).price / 12).toFixed(2)  + "€</b> / mois à l'année"
         updateTime(true)
     }
 
@@ -583,9 +583,9 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-life').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-mois').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent =  findAbonnement("premium-family").prices[0].price + '€ à vie'
-        document.querySelector('#abo-prix-starter-family').textContent =  findAbonnement("starter-family").prices[0].price + '€ à vie'
-        document.querySelector('#abo-prix-starter').textContent = findAbonnement("starter").prices[0].price + '€ à vie'
+        document.querySelector('#abo-prix-family-premium').textContent =  findAboType(findAbonnement("premium-family"), 0).price + '€ à vie'
+        document.querySelector('#abo-prix-starter-family').textContent =  findAboType(findAbonnement("starter-family"), 0).price + '€ à vie'
+        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), 0).price + '€ à vie'
         document.querySelector('#abo-annee-mois-starter').textContent = ''
         document.querySelector('#abo-annee-mois-starter-family').textContent = ''
         document.querySelector('#abo-annee-mois-family-premium').textContent = ''
@@ -668,7 +668,7 @@ const loadData = async () => {
         localStorage.setItem('data', JSON.stringify(result))
     }
     for (const product of result) {
-        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
+        products.push(new Product(product.name, product.description, product.metadata, product.image, product.findAboType(0)))
     }
     preload(findProduct('jag', 'fauve').image)
     preload(findProduct('jag', 'weimar').image)
@@ -735,7 +735,7 @@ const redirectToStripe = async (event) => {
     window.location.href = apiResJson.url
 }
 const redirectToStripeBis = async () => {
-    let abo = findAbonnement('premium-first').prices[0].id;
+    let abo = findAboType(findAbonnement('premium-first'),0).id;
     const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
