@@ -551,15 +551,15 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-mois').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-life').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), 0).price) + '€/ an'
-        document.querySelector('#abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), 0).price) + '€/ an'
+        document.querySelector('#abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), 12).price) + '€/ an'
+        document.querySelector('#abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), 12).price) + '€/ an'
         document.querySelector('#abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), 12).price) + '€/ an'
         document.querySelector('#abo-annee-mois-starter').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-starter-family').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-family-premium').textContent = '2 mois offert'
-        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAboType(findAbonnement("premium-family"), 12).price*10 / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter-family"), 12).price*10 / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter"), 0).price*10 / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAboType(findAbonnement("premium-family"), 12).price / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter-family"), 12).price / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter"), 12).price / 12).toFixed(2) + '€</b> au mois'
         updateTime(false)
     }
 
@@ -567,14 +567,14 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-mois').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-life').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent = findAboType(findAbonnement("premium-family"), 12).price + '€/ mois'
-        document.querySelector('#abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), 12).price + '€/ mois'
-        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), 0).price + '€/ mois'
+        document.querySelector('#abo-prix-family-premium').textContent = findAboType(findAbonnement("premium-family"), 1).price + '€/ mois'
+        document.querySelector('#abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), 1).price + '€/ mois'
+        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), 1).price + '€/ mois'
         document.querySelector('#abo-annee-mois-starter').textContent = 'Sans engagement'
         document.querySelector('#abo-annee-mois-starter-family').textContent = 'Sans engagement'
         document.querySelector('#abo-annee-mois-family-premium').textContent = 'Sans engagement'
-        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  (findAboType(findAbonnement("premium-family"), 0).price / 12).toFixed(2) + "€</b> / mois à l'année"
-        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter-family"), 0).price / 12).toFixed(2) + "€</b> / mois à l'année"
+        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  (findAboType(findAbonnement("premium-family"), 12).price / 12).toFixed(2) + "€</b> / mois à l'année"
+        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter-family"), 12).price / 12).toFixed(2) + "€</b> / mois à l'année"
         document.querySelector('#total-starter').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter"), 12).price / 12).toFixed(2)  + "€</b> / mois à l'année"
         updateTime(true)
     }
