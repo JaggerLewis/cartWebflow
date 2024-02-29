@@ -5,7 +5,7 @@ commander.setAttribute("data-target", "#cart")
 const body = document.querySelector("body");
 const modalDiv = document.createElement("div");
 let snack = document.createElement('div')
-// document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
+document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
 snack.innerHTML = '<div class="jl-snack-icon-container"><img class="jl-snack-icon" id="jl-snack-icon"></img></div><div class="jl-snack-text-container" id="jl-snack-text-container"></div>'
 
 let loaderContainer = document.createElement('div')
@@ -621,6 +621,7 @@ const initAbonnement = async () => {
     });
     document.querySelector('#abo-facture-mois').classList.add('text-selected-abonnement')
     updateTime(true)
+    toMonth();
 
 }
 
