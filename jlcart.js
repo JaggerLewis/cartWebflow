@@ -668,7 +668,7 @@ const loadData = async () => {
         localStorage.setItem('data', JSON.stringify(result))
     }
     for (const product of result) {
-        products.push(new Product(product.name, product.description, product.metadata, product.image, findAboType(product,0)))
+        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
     }
     preload(findProduct('jag', 'fauve').image)
     preload(findProduct('jag', 'weimar').image)
