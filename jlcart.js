@@ -265,7 +265,7 @@ const findAbonnement = (product)=> {
 }
 
 const findAboType = (abo, type) => {
-    let filtered =  abo.prices.find(elem => elem.metadata.interval == type)
+    let filtered =  abo.prices.find(elem => elem.metadata.pricing == type)
 
     return filtered
 }
@@ -276,7 +276,7 @@ const initHome = async () => {
     let dock = document.querySelector('#jl-dock')
     document.querySelector('#price-jag-smartdock').innerHTML = document.querySelector('#price-jag-smartdock').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price) 
     document.querySelector('#price-jag').innerHTML =  document.querySelector('#price-jag').innerHTML.replace('{price}',findProduct('jag', 'fauve').price.price) 
-    document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), 0).price/12).toFixed(2)
+    document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "life").price/12).toFixed(2)
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
@@ -551,15 +551,15 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-mois').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-life').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), 12).price) + '€/ an'
-        document.querySelector('#abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), 12).price) + '€/ an'
-        document.querySelector('#abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), 12).price) + '€/ an'
+        document.querySelector('#abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + '€/ an'
+        document.querySelector('#abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) + '€/ an'
+        document.querySelector('#abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "yearly").price) + '€/ an'
         document.querySelector('#abo-annee-mois-starter').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-starter-family').textContent = '2 mois offert'
         document.querySelector('#abo-annee-mois-family-premium').textContent = '2 mois offert'
-        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAboType(findAbonnement("premium-family"), 12).price / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter-family"), 12).price / 12).toFixed(2) + '€</b> au mois'
-        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter"), 12).price / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-family-premium').innerHTML = "soit <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter-family').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + '€</b> au mois'
+        document.querySelector('#total-starter').innerHTML = "soit <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + '€</b> au mois'
         updateTime(false)
     }
 
@@ -567,15 +567,15 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-mois').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-life').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent = findAboType(findAbonnement("premium-family"), 1).price + '€/ mois'
-        document.querySelector('#abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), 1).price + '€/ mois'
-        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), 1).price + '€/ mois'
+        document.querySelector('#abo-prix-family-premium').textContent = findAboType(findAbonnement("premium-family"), "monthly").price + '€/ mois'
+        document.querySelector('#abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), "monthly").price + '€/ mois'
+        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), "monthly").price + '€/ mois'
         document.querySelector('#abo-annee-mois-starter').textContent = 'Sans engagement'
         document.querySelector('#abo-annee-mois-starter-family').textContent = 'Sans engagement'
         document.querySelector('#abo-annee-mois-family-premium').textContent = 'Sans engagement'
-        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  (findAboType(findAbonnement("premium-family"), 12).price / 12).toFixed(2) + "€</b> / mois à l'année"
-        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter-family"), 12).price / 12).toFixed(2) + "€</b> / mois à l'année"
-        document.querySelector('#total-starter').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter"), 12).price / 12).toFixed(2)  + "€</b> / mois à l'année"
+        document.querySelector('#total-family-premium').innerHTML = "ou <b>" +  (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + "€</b> / mois à l'année"
+        document.querySelector('#total-starter-family').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + "€</b> / mois à l'année"
+        document.querySelector('#total-starter').innerHTML =  "ou <b>" +  (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2)  + "€</b> / mois à l'année"
         updateTime(true)
     }
 
@@ -583,9 +583,9 @@ const initAbonnement = async () => {
         document.querySelector('#abo-facture-life').classList.add('text-selected-abonnement')
         document.querySelector('#abo-facture-annee').classList.remove('text-selected-abonnement')
         document.querySelector('#abo-facture-mois').classList.remove('text-selected-abonnement')
-        document.querySelector('#abo-prix-family-premium').textContent =  findAboType(findAbonnement("premium-family"), 0).price + '€ à vie'
-        document.querySelector('#abo-prix-starter-family').textContent =  findAboType(findAbonnement("starter-family"), 0).price + '€ à vie'
-        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), 0).price + '€ à vie'
+        document.querySelector('#abo-prix-family-premium').textContent =  findAboType(findAbonnement("premium-family"), "life").price + '€ à vie'
+        document.querySelector('#abo-prix-starter-family').textContent =  findAboType(findAbonnement("starter-family"), "life").price + '€ à vie'
+        document.querySelector('#abo-prix-starter').textContent = findAboType(findAbonnement("starter"), "life").price + '€ à vie'
         document.querySelector('#abo-annee-mois-starter').textContent = ''
         document.querySelector('#abo-annee-mois-starter-family').textContent = ''
         document.querySelector('#abo-annee-mois-family-premium').textContent = ''
@@ -736,7 +736,7 @@ const redirectToStripe = async (event) => {
     window.location.href = apiResJson.url
 }
 const redirectToStripeBis = async () => {
-    let abo = findAboType(findAbonnement('premium-first'),0).id;
+    let abo = findAboType(findAbonnement('premium-first'), 'life').id;
     const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
