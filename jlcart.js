@@ -276,7 +276,7 @@ const initHome = async () => {
     let dock = document.querySelector('#jl-dock')
     document.querySelector('#price-jag-smartdock').innerHTML = document.querySelector('#price-jag-smartdock').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price) 
     document.querySelector('#price-jag').innerHTML =  document.querySelector('#price-jag').innerHTML.replace('{price}',findProduct('jag', 'fauve').price.price) 
-    document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "life").price/12).toFixed(2)
+    document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "monthly").price).toFixed(2)
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
