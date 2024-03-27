@@ -1049,7 +1049,6 @@ const init = async () => {
     
     if ( document.getElementById('JL_Abonnement_Full_Grille') )
     {
-        //initAbonnement()
         initAboJag()
     }
 
@@ -1063,6 +1062,10 @@ const init = async () => {
 
     if ( document.getElementById('jl-collar')) {
         initJagGPS();
+    }
+
+    if ( document.getElementById('jl-price-month')) {
+        document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "monthly").price).toFixed(2)
     }
 
     if ( document.getElementById('jl-Accessory')) {
