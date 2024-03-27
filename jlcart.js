@@ -432,7 +432,6 @@ const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
-    document.querySelector('#price-jag-smartdock').innerHTML = document.querySelector('#price-jag-smartdock').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price) 
     document.querySelector('#price-jag').innerHTML =  document.querySelector('#price-jag').innerHTML.replace('{price}',findProduct('jag', 'fauve').price.price) 
     document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "monthly").price).toFixed(2)
     
