@@ -340,12 +340,6 @@ const initJagGPS = async () => {
         document.activeElement.blur();
     })
 
-    document.getElementById('JL_Basket_Valide_Commande').addEventListener('click', (event) => {
-        event.preventDefault()
-        redirectToStripe()
-        document.activeElement.blur();
-    })
-
     document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
 
     document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
@@ -1109,6 +1103,12 @@ const showNewCart = (event) => {
 
     event.preventDefault();
 
+    document.getElementById('JL_Basket_Valide_Commande').addEventListener('click', (event) => {
+        event.preventDefault()
+        redirectToStripe()
+        document.activeElement.blur();
+    })
+    
     function clearCart() {
         const myElement = document.getElementById("JL_Basket_Items");
         for (const child of myElement.children) {
