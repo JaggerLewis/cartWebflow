@@ -1,17 +1,21 @@
-const commander = document.querySelector('#jag-cart')
-commander.setAttribute("data-toggle", "modal")
-commander.setAttribute("data-target", "#cart")
+//const commander = document.querySelector('#jag-cart')
+//commander.setAttribute("data-toggle", "modal")
+//commander.setAttribute("data-target", "#cart")
 
 const body = document.querySelector("body");
-const modalDiv = document.createElement("div");
+const JL_NavBar = document.getElementById('JL_NavBar')
+
+if (document.querySelector('#jl-aqua-modal'))
+{
+    document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
+}
+
 let snack = document.createElement('div')
-document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
 snack.innerHTML = '<div class="jl-snack-icon-container"><img class="jl-snack-icon" id="jl-snack-icon"></img></div><div class="jl-snack-text-container" id="jl-snack-text-container"></div>'
+snack.id = 'jl-snackbar'
+document.querySelector("body").appendChild(snack)
 
-let loaderContainer = document.createElement('div')
-
-loaderContainer.classList.add('jl-loader-container')
-loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
+const modalDiv = document.createElement("div");
 modalDiv.setAttribute("id", "cart")
 modalDiv.setAttribute("tabindex", "-1")
 modalDiv.setAttribute("role", "dialog")
@@ -19,11 +23,8 @@ modalDiv.setAttribute("aria-labelledby", "exampleModalLabel")
 modalDiv.setAttribute("aria-hidden", "true")
 modalDiv.classList.add("modal")
 modalDiv.setAttribute("class", "modal fade")
-snack.id = 'jl-snackbar'
-document.querySelector("body").appendChild(snack)
 modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title jl-p">Panier</p><img class="close-button hover" data-dismiss="modal" src="https://webcart.jagger-lewis.com/asset/icon_close.png"></img></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun élément sélectionné</div></div><div class="jl-bottom-container"><p class="jl-p jl-bottom-text">Frais de livraison (Standard)</p><p class=" jl-p jl-bottom-text">5.99€</p></div><div class="jl-container-total"><p class=" jl-p jl-total-title">Total</p><p class="jl-p jl-total-title" id="jl-total">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
 body.appendChild(modalDiv)
-body.insertBefore(loaderContainer, document.body.firstChild);
 
 
 function displayPrice (price) {
@@ -35,15 +36,15 @@ function displayPrice (price) {
 }
 
 const setCartNumber = () => {
-    let count = 0
-    if (localStorage.getItem("shoppingCart")) {
-        JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
+    if (JL_NavBar)
+    {
+        let count = 0
+        if (localStorage.getItem("shoppingCart")) {
+            JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
+        }
+        document.getElementById('jl-cart-number').textContent = count;
     }
-    document.querySelector('#jl-cart-number').textContent = count
-    if (count == 0) {
-        document.querySelector('#jl-no-display').style.display = count == 0 ? '' : 'none'
-    }
-    document.querySelector('#bulle-shopping-cart').style.display = document.querySelector('#jl-cart-number').textContent != '0'? '' : 'none'
+    
 }
 
 class Product {
@@ -83,10 +84,10 @@ class ShoppingCart {
     }
 
     findProductIndexById(id) {
-        console.log(id)
-        console.log(this.cart)
-        console.log(this.cart.findIndex(product => 
+        console.log(this.cart.findIndex(product => {
             product.id.price.id === id.price.id
+        }
+            
         ))
         return this.cart.findIndex(product => 
              product.id.price.id === id.price.id
@@ -94,11 +95,16 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
-        if (this.countItems() >= 4) {
-            showSnackBar('Vous ne pouvez pas ajouter plus de 4 éléments au panier', true)
+        let maxProductinCart = 4
+        if (this.countItems() >= maxProductinCart) {
+            //showSnackBar('Vous ne pouvez pas ajouter plus de 4 éléments au panier', true)
+            let labeltocart = getTrad( 'Vous ne pouvez pas ajouter plus de ' + maxProductinCart + ' articles au panier', "You can't add more than " + maxProductinCart + " products in your cart");
+            showAddCart( labeltocart, true)
             return
         }
-        showSnackBar(id.name + ' ajouté au panier', false)
+        //showSnackBar(id.name + ' ajouté au panier', false)
+        let labeltocart = getTrad( id.name + ' ajouté au panier', id.name + ' add to cart');
+        showAddCart(labeltocart, false)
         const productIndex = this.findProductIndexById(id)
         if (productIndex < 0) {
             const cardProduct = new ProductCart(id, count)
@@ -164,8 +170,9 @@ class ShoppingCart {
 
     setTotalPrice() {
         let price = this.getTotalPrice() + 5.99
-        const totalSpan = document.querySelector('#jl-total')
-        totalSpan.innerHTML = price.toFixed(2) + "&euro;"
+        //const totalSpan = document.querySelector('#jl-total')
+        const totalSpan = document.getElementById('JL_Basket_Total_Amount');
+        totalSpan.innerHTML = price.toFixed(2) + " &euro;"
     }
 
 
@@ -192,7 +199,6 @@ class ShoppingCart {
 
 const getProductsFromStripe = async () => {
     try {
-
         const answer = await fetch("https://api.jagger-tracker.com/stripe/products", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
@@ -206,6 +212,7 @@ const getProductsFromStripe = async () => {
     }
     
 }
+
 const getAbonnementFromStripe = async () => {
     const answer = await fetch("https://api.jagger-tracker.com/stripe/products/category/subscription", {
         method: "GET",
@@ -214,8 +221,8 @@ const getAbonnementFromStripe = async () => {
     return answer
 }
 
-
 const shoppingCart = new ShoppingCart();
+
 const colorButtonAction = (elem, image, id) => {
     elem.srcset = image
     elem.setAttribute('data-selected', id)
@@ -223,31 +230,40 @@ const colorButtonAction = (elem, image, id) => {
 }
 
 const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
-    let btn = document.querySelector(newBtn)
+    //let btn = document.querySelector(newBtn)
+
+    newBtn = newBtn.replace('#','');
+
+    let btn = document.getElementById( newBtn );
+
+    if (btn == null) {
+        console.log('not_find', newBtn);
+        return false;
+    }
+
     let oldBtn = document.querySelectorAll('['+attribut+'=true]')
-
     if (oldBtn != null) {
-    oldBtn.forEach((element) => {
-        element.removeAttribute(attribut)
-        element.classList.remove(Newclass)
-        element.classList.remove('text-selected')
-    })
-    }
-    if (is_text) {
-        let txt = document.querySelectorAll(newBtn.replace('btn', 'txt')).forEach(element => {
-            element.classList.add('text-selected')
-            element.setAttribute(attribut, 'true')
+        oldBtn.forEach((element) => {
+            element.removeAttribute(attribut)
+            element.classList.remove(Newclass)
+            element.classList.remove('text-selected')
         })
-       
     }
 
-    btn.classList.add(Newclass)
-    btn.setAttribute(attribut, 'true')
+    if (is_text) {
+        let txtlabel = document.getElementById(newBtn.replace('btn', 'txt'));
+        txtlabel.classList.add(Newclass);
+        txtlabel.setAttribute(attribut, 'true');
+    }
+
+    btn.setAttribute(attribut, 'true');
+    return true;
+
 }
 
 let products = []
 let abonnement = []
-
+let accessory = []
 
 const findProduct = (product, color)=> {
     let filtered = products.filter(elem => elem.metadata.productId == product)
@@ -255,12 +271,13 @@ const findProduct = (product, color)=> {
     if (color != null)
         filtered = filtered.filter(elem => elem.metadata.colorId == color)
 
-        return filtered[0]
+    return filtered[0]
 }
 
 const findAbonnement = (product)=> {
     let filtered = abonnement.find(elem => elem.metadata.productId == product)
-   
+    console.log(filtered);
+
     return filtered
 }
 
@@ -270,6 +287,147 @@ const findAboType = (abo, type) => {
     return filtered
 }
 
+const getTargetProduct = () => {
+    smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
+    if ( smartboxIsChecked == 'yes') {
+        targetProduct = 'jag-smartdock';
+    }
+    else
+    {
+        targetProduct = 'jag';
+    }
+    return targetProduct;
+}
+
+const initJagGPS = async () => {
+
+    let collar = document.getElementById('jl-collar')
+    let initialColor = 'fauve' ;
+
+    //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
+    document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
+        event.preventDefault()
+        let targetProduct = getTargetProduct();
+        colorButtonAction(collar, findProduct(targetProduct, 'fauve').image, findProduct(targetProduct, 'fauve').price.id )
+        colorButtonSelect('btn-color-fauve', 'color-selected', 'txt-color-selected', true)
+        document.activeElement.blur();
+    })
+    //document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
+    document.getElementById('btn_boitier_color_weimar').addEventListener('click', (event) => {
+        event.preventDefault()
+        let targetProduct = getTargetProduct();
+        colorButtonAction(collar, findProduct(targetProduct, 'weimar').image, findProduct(targetProduct, 'weimar').price.id )
+        colorButtonSelect('btn-color-weimar', 'color-selected', 'txt-color-selected', true)
+        document.activeElement.blur();
+    })
+    //document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
+    document.getElementById('btn_boitier_color_charbon').addEventListener('click', (event) => {
+        event.preventDefault()
+        let targetProduct = getTargetProduct();
+        colorButtonAction(collar, findProduct(targetProduct, 'charbon').image, findProduct(targetProduct, 'charbon').price.id )
+        colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
+        document.activeElement.blur();
+    })
+
+    document.getElementById('jag-jag').addEventListener('click', (event) => {
+        event.preventDefault()
+        let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
+        shoppingCart.addItem(product, 1)
+        document.activeElement.blur();
+    })
+
+    document.getElementById('JL_Basket_Valide_Commande').addEventListener('click', (event) => {
+        event.preventDefault()
+        redirectToStripe()
+        document.activeElement.blur();
+    })
+
+    document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
+
+    document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
+        event.preventDefault()
+        switchSmartdock();
+        document.activeElement.blur();
+    })
+
+    document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
+    collar.setAttribute('data-selected', findProduct('jag', initialColor).price.id)
+    collar.srcset = findProduct('jag', 'fauve').image
+    colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
+
+    return true;
+}
+
+const initSmartDockAlone = async () => {
+    let smartdock = document.getElementById('jag-smartdock-alone')
+
+    let priceLabel = document.getElementById('price-jag')
+    let btnAddBasket = document.getElementById('btn-buy-smartdock-alone')
+    
+    if ( !priceLabel ) { return false; }
+    if ( !btnAddBasket ) { return false; }
+
+    smartdockProduct = findProduct('smartdock');
+    console.log(smartdockProduct);
+
+    priceLabel.innerHTML = smartdockProduct.price.price;
+    btnAddBasket.addEventListener('click', (event) => {
+        event.preventDefault()
+        shoppingCart.addItem(smartdockProduct, 1)
+        document.activeElement.blur();
+    })
+
+}
+
+const switchSmartdock = () => {
+
+    smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
+
+    if ( smartboxIsChecked == 'yes') {
+        document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
+        document.getElementById('btn_add_smartdock').classList.remove('add_smartdock_checked');
+        targetProduct = 'jag';
+    }
+    else
+    {
+        document.getElementById('btn_add_smartdock').setAttribute('isChecked','yes');
+        document.getElementById('btn_add_smartdock').classList.add('add_smartdock_checked');
+        targetProduct = 'jag-smartdock';
+    }
+
+    colors = ['fauve', 'weimar', 'charbon'] ;
+    colorChanged = false;
+
+    let collar = document.getElementById('jl-collar')
+    colors.forEach( (color) => {
+        theBtnColor = document.getElementById('btn-color-' + color);
+        console.log(theBtnColor);
+
+        if ( theBtnColor.getAttribute('color-selected') == 'true' )
+        {
+            colorChanged = true;
+            colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id );
+            colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
+            console.log( findProduct(targetProduct, color) );
+            document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
+            console.log(targetProduct,color);
+        }
+    })
+
+    if (colorChanged == false) {
+        color = 'fauve';
+        targetProduct = 'jag';
+        colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id );
+        colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
+        console.log( findProduct(targetProduct, color) );
+        document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
+        console.log(targetProduct,color);
+    }
+
+
+    
+}
+
 const initHome = async () => {
     
     let collar = document.querySelector('#jl-collar')
@@ -277,31 +435,41 @@ const initHome = async () => {
     document.querySelector('#price-jag-smartdock').innerHTML = document.querySelector('#price-jag-smartdock').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price) 
     document.querySelector('#price-jag').innerHTML =  document.querySelector('#price-jag').innerHTML.replace('{price}',findProduct('jag', 'fauve').price.price) 
     document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "monthly").price).toFixed(2)
+    
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
+        document.activeElement.blur();
     })
+
     document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
         event.preventDefault()
         let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
+        document.activeElement.blur();
     })
-    document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
+    
+    //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
+    document.querySelectorAll('#btn_boitier_color_fauve').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
     }))
-    document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
+    //document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
+    document.querySelectorAll('#btn_boitier_color_weimar').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
         colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
     }))
-    document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
+    //document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
+    document.querySelectorAll('#btn_boitier_color_charbon').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
-    })) 
+    }))
+
+    /*
     document.querySelectorAll('#txt-color-fauve').forEach(element => element.addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
@@ -317,6 +485,9 @@ const initHome = async () => {
         colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
          colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     }))
+    */
+
+    /*
     document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
         event.preventDefault()
         colorButtonAction(dock, findProduct('jag-smartdock', 'fauve').image, findProduct('jag-smartdock', 'fauve').price.id )
@@ -347,6 +518,7 @@ const initHome = async () => {
         colorButtonAction(dock, findProduct('jag-smartdock', 'charbon').image, findProduct('jag-smartdock', 'charbon').price.id )
         colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
     })
+    */
    
     collar.setAttribute('data-selected', findProduct('jag', 'fauve').price.id)
     collar.srcset = findProduct('jag', 'fauve').image
@@ -463,6 +635,7 @@ const initNewsLettre = () => {
 }
 
 const initAccessory = () => {
+
     document.querySelector('#acc-coque-fauve-price').innerHTML = document.querySelector('#acc-coque-fauve-price').innerHTML.replace('{price}', findProduct('jag-sock', 'fauve').price.price) 
     document.querySelector('#acc-coque-carbon-price').innerHTML = document.querySelector('#acc-coque-carbon-price').innerHTML.replace('{price}',findProduct('jag-sock', 'charbon').price.price) 
     document.querySelector('#acc-coque-weimar-price').innerHTML = document.querySelector('#acc-coque-weimar-price').innerHTML.replace('{price}', findProduct('jag-sock', 'weimar').price.price) 
@@ -505,24 +678,81 @@ const initAccessory = () => {
     })
 }
 
+const initJagAccessory = () => {
+    
+    console.log(accessory);
+
+    document.getElementById('jl-Accessory-model').style.display = 'none';
+
+    function createAccessoryItem(itemLine) {
+        let element = document.getElementById('jl-Accessory-model') ;
+        
+        let newAccess = element.cloneNode(true);
+        newAccess.setAttribute('id', 'jl-Accessory-item-' + itemLine );
+
+        for (const child of newAccess.childNodes) {
+            if(child.hasChildNodes()) {
+                child.childNodes.forEach((e, i)=>{
+                    if (e.id.startsWith('jl-Accessory-item')) {
+                        e.setAttribute('id', e.id + '-' + itemLine );
+                        }
+                });
+            }
+            else
+            {
+                if (child.id.startsWith('jl-Accessory-item')) {
+                    child.setAttribute('id', child.id + '-' + itemLine );
+                    }
+            }
+        }
+        //console.log(newItem);
+        document.getElementById('jl-Accessory-List').appendChild(newAccess);
+    }
+
+    nbAccess = 1;
+
+    if (accessory.length == 0) {
+        return true;
+    }
+
+    accessory.forEach((access) => {
+
+        //let id = prod.price.id
+        //addHtml(prod, id)
+        //addFunction(prod.id, id)
+
+        console.log(access);
+        createAccessoryItem(nbAccess);
+
+        document.getElementById('jl-Accessory-item-label-' + nbAccess ).innerHTML = access.name ;
+        document.getElementById('jl-Accessory-item-ref-' + nbAccess ).innerHTML = access.metadata.productId;
+        document.getElementById('jl-Accessory-item-Img-' + nbAccess ).src = access.image ;
+        document.getElementById('jl-Accessory-item-Img-' + nbAccess ).removeAttribute('srcset')  ;
+        document.getElementById('jl-Accessory-item-price-' + nbAccess ).innerHTML = (access.price.price).toFixed(2) + ' &euro;'; 
+        
+        document.getElementById('jl-Accessory-item-btn-' + nbAccess).addEventListener('click', (event) => {
+            event.preventDefault();
+            shoppingCart.addItem(access, 1)
+            document.activeElement.blur();
+        });
+
+        document.getElementById('jl-Accessory-item-' + nbAccess ).style.display = 'block';
+    
+        nbAccess++;
+    })
+
+
+}
+
 const loadAbonnement = async () => {
-    loaderContainer.style = null
-
+    //loaderContainer.style = null
+    
     let date = Date.now()
-    if (localStorage.getItem('abonnement') == null) {
-        abonnement = await (await getAbonnementFromStripe()).json()
-        localStorage.setItem('abonnement', JSON.stringify(abonnement))
-        localStorage.setItem('ts-abonnement', date)
-    }
-    else 
-        abonnement = JSON.parse(localStorage.getItem('abonnement'))
-    if (date - JSON.parse(localStorage.getItem('ts-abonnement')) > 600000) {
-        abonnement = await (await getAbonnementFromStripe()).json()
-        localStorage.setItem('ts-abonnement', date)
-        localStorage.setItem('abonnement', JSON.stringify(abonnement))
-    }
-    loaderContainer.style.display = 'none'
 
+    //loaderContainer.style.display = 'none'
+    abonnement = await (await getAbonnementFromStripe()).json()
+    localStorage.setItem('ts-abonnement', date)
+    localStorage.setItem('abonnement', JSON.stringify(abonnement))
 }
 
 const updateTime = (search) => {
@@ -535,9 +765,110 @@ const updateTime = (search) => {
       }
     }
 }
+
+const initAboJag = async() => {
+
+    const switchDisplay = () => {
+        if ( document.getElementById('abo-facture-mois').className == 'abo_btn_on') {
+            toMonth();
+        }
+        if ( document.getElementById('abo-facture-annee').className == 'abo_btn_on') {
+            toYear();
+        }
+        if (document.getElementById('abo-facture-life').className == 'abo_btn_on') {
+            toLife();
+        }
+    }
+
+    const toMonth = () => {
+        document.getElementById('abo-facture-mois').className = 'abo_btn_on' ;
+        document.getElementById('abo-facture-annee').className = 'abo_btn_off' ;
+        document.getElementById('abo-facture-life').className = 'abo_btn_off' ;
+        
+        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "monthly").price) + '€/mois'
+        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "monthly").price) + '€/mois'
+        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "monthly").price) + '€/mois'
+
+        document.getElementById('abo-annee-mois-starter').textContent = 'Sans engagement'
+        document.getElementById('abo-annee-mois-starter-family').textContent = 'Sans engagement'
+        document.getElementById('abo-annee-mois-family-premium').textContent = 'Sans engagement'
+
+        document.querySelector('#total-family-premium').innerHTML = "" ; //"Ou " + findAboType(findAbonnement("premium-family"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + "€</b>/mois"
+        document.querySelector('#total-starter-family').innerHTML = ""; // "Ou " + findAboType(findAbonnement("starter-family"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + "€</b>/mois"
+        document.querySelector('#total-starter').innerHTML = ""; // "Ou " + findAboType(findAbonnement("starter"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2)  + "€</b>/mois"
+        
+        updateTime(false)
+    }
+
+    const toYear = () => {
+        document.getElementById('abo-facture-mois').className = 'abo_btn_off' ;
+        document.getElementById('abo-facture-annee').className = 'abo_btn_on' ;
+        document.getElementById('abo-facture-life').className = 'abo_btn_off' ;
+        
+        
+        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + '€/an'
+        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) + '€/an'
+        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "yearly").price) + '€/an'
+
+        document.getElementById('abo-annee-mois-starter').textContent = '2 mois offerts'
+        document.getElementById('abo-annee-mois-starter-family').textContent = '2 mois offerts'
+        document.getElementById('abo-annee-mois-family-premium').textContent = '2 mois offerts'
+
+        document.getElementById('total-family-premium').innerHTML = "Soit <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + '€ / mois'
+        document.getElementById('total-starter-family').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + '€ / mois'
+        document.getElementById('total-starter').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + '€ / mois'
+        updateTime(false)
+    }
+
+    const toLife = () => {
+        document.getElementById('abo-facture-mois').className = 'abo_btn_off' ;
+        document.getElementById('abo-facture-annee').className = 'abo_btn_off' ;
+        document.getElementById('abo-facture-life').className = 'abo_btn_on' ;
+        
+        document.getElementById('abo-prix-family-premium').textContent =  findAboType(findAbonnement("premium-family"), "life").price + '€'
+        document.getElementById('abo-prix-starter-family').textContent =  findAboType(findAbonnement("starter-family"), "life").price + '€'
+        document.getElementById('abo-prix-starter').textContent = findAboType(findAbonnement("starter"), "life").price + '€'
+
+        document.getElementById('abo-annee-mois-starter').textContent = 'formule au forfait'
+        document.getElementById('abo-annee-mois-starter-family').textContent = 'formule au forfait'
+        document.getElementById('abo-annee-mois-family-premium').textContent = 'formule au forfait'
+
+        document.getElementById('total-family-premium').innerHTML = "Vous payez une seule fois pour toute"
+        document.getElementById('total-starter-family').innerHTML =  "Vous payez une fois pour toute"
+        document.getElementById('total-starter').innerHTML =  "Vous payez une fois pour toute"
+        updateTime(true)
+
+    }
+
+    /*
+    abo-facture-mois
+    abo-facture-annee
+    abo-facture-life
+    */
+
+    document.getElementById('abo-facture-annee').addEventListener('click', (event) => {
+        event.preventDefault();
+        toYear();
+        document.activeElement.blur();
+    });
+    document.getElementById('abo-facture-life').addEventListener('click', (event) => {
+        event.preventDefault();
+        toLife();
+        document.activeElement.blur();
+    });
+    document.getElementById('abo-facture-mois').addEventListener('click', (event) => {
+        event.preventDefault();
+        toMonth();
+        document.activeElement.blur();
+    })
+
+    switchDisplay();
+
+}
 // abo-facture-annee
 const initAbonnement = async () => {
 
+    
     const switchDisplay = () => {
         if ( document.querySelector('#abo-facture-mois').classList.contains('text-selected-abonnement')) {
             toYear();
@@ -627,25 +958,27 @@ const initAbonnement = async () => {
 
 const initResult = async () => {
     shoppingCart.clear()
+    document.getElementById('JL_ORDER').style.display = 'none';
     let id = new URLSearchParams(window.location.search).get('session_id')
+    console.log(id)
     if (id != null) {
         let datas = await loadCart(id)
+        console.log(datas);
         localStorage.setItem('session_id', id)
-        loaderContainer.display = 'none'
-        document.querySelector('#jl-result-id').textContent = document.querySelector('#jl-result-id').textContent.replace('00', '\n' + datas.numOrder)
-        if (datas.cart[0].metadata.productId == 'premium-first')
-            document.querySelector('#jl-result-redirect').parentElement.style.display = 'none'
+        document.getElementById('JL_ORDER_ID').textContent = datas.numOrder
+        document.getElementById('JL_ORDER').style.display = 'flex';
+        
     }
-    document.querySelector('#jl-result-redirect').addEventListener('click', (e) => {
-        e.preventDefault(); 
-        redirectToStripeBis()
-    })
-    // document.querySelector('#jl-result-name').textContent += datas.customer.name[0].toUpperCase() + datas.customer.name.substr(1)
+    
 }
 
 const loadCart = async (id) => {
-    loaderContainer.display = ''
-    return await fetch('https://dev.jagger-tracker.com/stripe/checkout_session/'+id+'/cart').then(res => res.json())
+    try
+    {
+        loaderContainer.display = ''
+    }
+    catch(e) {}
+    return await fetch('https://api.jagger-tracker.com/stripe/checkout_session/'+id+'/cart').then(res => res.json())
 }
 
 function preload(url) {
@@ -656,85 +989,117 @@ function preload(url) {
 const loadData = async () => {
     let date = Date.now()
     let result
-    if (localStorage.getItem('data') == null) {
-        result = await (await getProductsFromStripe()).json()
-        localStorage.setItem('data', JSON.stringify(result))
-        localStorage.setItem('ts', date)
+    let delayDate = 24 * 60 * 60 * 1000;
+    
+    result = await (await getProductsFromStripe()).json()
+    localStorage.setItem('ts', date)
+    localStorage.setItem('data', JSON.stringify(result))
+    
+}
+
+const init = async () => {
+    
+    let date = Date.now()
+    let result
+    let delayDate = 24 * 60 * 60 * 1000;
+    if (localStorage.getItem('data') == null)
+    {
+        lastDate = 0;
     }
-    else 
-        result = JSON.parse(localStorage.getItem('data'))
-    if (date - JSON.parse(localStorage.getItem('ts')) > 600000) {
-        result = await (await getProductsFromStripe()).json()
-        localStorage.setItem('ts', date)
-        localStorage.setItem('data', JSON.stringify(result))
+    else
+    {
+        lastDate = JSON.parse(localStorage.getItem('ts'));
     }
+
+    if ( (date - lastDate) > delayDate) {
+        let loaderContainer = document.createElement('div')
+        loaderContainer.classList.add('jl-loader-container')
+        loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
+        body.insertBefore(loaderContainer, document.body.firstChild);
+        await loadData()
+        await loadAbonnement()
+        loaderContainer.style.display = 'none'
+    }
+
+    result = JSON.parse(localStorage.getItem('data'))
+    abonnement = JSON.parse(localStorage.getItem('abonnement'))
+    
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
+        if ( product.metadata.category == "accessory" )
+        {
+            accessory.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
+        }
     }
+
     preload(findProduct('jag', 'fauve').image)
     preload(findProduct('jag', 'weimar').image)
     preload(findProduct('jag', 'charbon').image)
     preload(findProduct('jag-smartdock', 'fauve').image)
     preload(findProduct('jag-smartdock', 'weimar').image)
     preload(findProduct('jag-smartdock', 'charbon').image)
-}
 
-const init = async () => {
-    await loadData()
-    await loadAbonnement()
-    loaderContainer.style.display = 'none'
+    if (JL_NavBar)
+    {
+        document.getElementById('JL_Basket_Item').style.display = 'none';
+        document.getElementById('JL_Basket_Empty').style.display = 'block';
+        document.getElementById('jl-cart-number').addEventListener('click',(event) => showNewCart(event))
+        document.getElementById('jag-cart').addEventListener('click',(event) => showNewCart(event))
+        document.getElementById('JL_Btn_Close_Basket').addEventListener('click',(event) => hideCart(event))    
+    }
+    
+    if ( document.getElementById('JL_Abonnement_Full_Grille') )
+    {
+        //initAbonnement()
+        initAboJag()
+    }
 
-    let jlCartNumber = document.querySelector('#jl-cart-number')
-   
-    jlCartNumber.setAttribute("data-toggle", "modal")
-    jlCartNumber.setAttribute("data-target", "#cart")
-    jlCartNumber.addEventListener('click',(event) => showCart(event))
+    if ( document.getElementById('JL_Abo_Newsletter')) {
+        initNewsLettre()
+    }
+
+    if ( document.getElementById('jag-smartdock-alone')) {
+        initSmartDockAlone()
+    }
+
+    if ( document.getElementById('jl-collar')) {
+        initJagGPS();
+    }
+
+    if ( document.getElementById('jl-Accessory')) {
+    initJagAccessory();
+    }
+
+    if ( document.getElementById('jl-checkout-redirect')) {
+        initResult();
+    }
+
     setCartNumber();
     page = window.location.href.split('/')[3].split('?')[0];
-    switch(page) {
-        case '' : 
-            initHome()
-            initNewsLettre()
 
-            break;
-        case 'jagger-lewis-smartdock' :
-            initBox()
-            initNewsLettre()
-
-            break;
-        case 'jagger-lewis-jag' :
-            initCollar()
-            break;
-        case 'accessoires-jag-smartdock' :
-            initAccessory()
-            initNewsLettre()
-
-            break;
-        case 'jagger-lewis-abonnement' : 
-            initAbonnement()
-            initNewsLettre()
-
-            break;
-        case 'jagger-lewis-redirect': 
-            initResult()
-            break
-        default : 
-            console.log(page)
-    }
-   
+    console.log(page);
 }
 
-
 const redirectToStripe = async (event) => {
-    event.preventDefault();
+    try {
+        event.preventDefault();
+    }
+    catch(e) {
+        console.log(e);
+    }
+    /*
     if (shoppingCart.countItems() == 0) {
         showSnackBar("Vous n'avez pas d'article", true)
             return
         }
+    */
     const apiRes = await shoppingCart.getCartStripeUrl()
+    console.log(apiRes);
     const apiResJson = await apiRes.json()
+    console.log(apiResJson);
     window.location.href = apiResJson.url
 }
+
 const redirectToStripeBis = async () => {
     let abo = findAboType(findAbonnement('premium-first'), 'life').id;
     const answer = await fetch("https://api.jagger-tracker.com/stripe/checkout_session", {
@@ -746,7 +1111,7 @@ const redirectToStripeBis = async () => {
     window.location.href = apiResJson.url
 }
 
-
+/*
 const addToCart = (event) => {
     event.preventDefault();
     var name = event.target.getAttribute('data-name');
@@ -755,8 +1120,9 @@ const addToCart = (event) => {
     var img = event.target.getAttribute('data-image');
     shoppingCart.addItem(id, 1)
 }
+*/
 
-
+/*
 const showCart = (event) => {
     event.preventDefault();
     
@@ -819,15 +1185,143 @@ const showCart = (event) => {
     }
 
 }
+*/
 
-document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
+const getTrad = (labelFr,labelUs) => {
+    if ( navigator.language.toLowerCase().indexOf('fr') > -1)
+    {
+        goodLabel = labelFr;
+    }
+    else
+    {
+        goodLabel = labelUs;
+    }
+    return goodLabel;
+} 
+
+const showNewCart = (event) => {
+
+    event.preventDefault();
+
+    function clearCart() {
+        const myElement = document.getElementById("JL_Basket_Items");
+        for (const child of myElement.children) {
+            if (child.id != 'JL_Basket_Item') {
+               child.remove();
+            }
+        }
+    }
+    function noItems() {
+        document.getElementById('JL_Basket_Empty').style.display = 'flex';
+        document.getElementById('JL_Basket_Content').style.display = 'none';
+        document.getElementById('JL_Basket_Delivery_Amount').style.display = 'none';
+        document.getElementById('JL_Basket_Info_Abo').style.display = 'none';
+        document.getElementById('JL_Basket_Boutons').style.display = 'none';
+        document.getElementById('JL_Basket').style.display = 'flex';
+        document.getElementById('JL_Basket_Total').style.display = 'none';
+    }
+
+    function createLine(itemLine) {
+        let element = document.getElementById('JL_Basket_Item') ;
+        
+        let newItem = element.cloneNode(true);
+        newItem.setAttribute('id', 'JL_Basket_Item_' + itemLine );
+
+        for (const child of newItem.childNodes) {
+            if(child.hasChildNodes()) {
+                child.childNodes.forEach((e, i)=>{
+                    if (e.id.startsWith('JL_Basket_Item')) {
+                        e.setAttribute('id', e.id + '_' + itemLine );
+                        }
+                });
+            }
+            else
+            {
+                if (child.id.startsWith('JL_Basket_Item')) {
+                    child.setAttribute('id', child.id + '_' + itemLine );
+                    }
+            }
+        }
+        //console.log(newItem);
+        document.getElementById('JL_Basket_Items').appendChild(newItem);
+    }
+    
+    if (shoppingCart.cart.length == 0) {
+        noItems();
+        return true;
+    }
+
+    nbItem = 1;
+
+    clearCart();
+
+    shoppingCart.cart.forEach((prod) => {
+
+        let id = prod.id.price.id
+        //addHtml(prod, id)
+        //addFunction(prod.id, id)
+
+        //console.log(prod);
+        createLine(nbItem);
+
+        document.getElementById('JL_Basket_Item_Label_' + nbItem ).innerHTML = prod.id.name ;
+        let labelQty = getTrad('qté : ','qty : ');
+        document.getElementById('JL_Basket_Item_Ref_' + nbItem ).innerHTML = prod.id.metadata.productId + " (" + labelQty + prod.quantity + ")" ;
+        document.getElementById('JL_Basket_Item_Img_' + nbItem ).src = prod.id.image ;
+        document.getElementById('JL_Basket_Item_Img_' + nbItem ).removeAttribute('srcset')  ;
+        document.getElementById('JL_Basket_Item_Price_' + nbItem ).innerHTML = (prod.quantity * prod.id.price.price).toFixed(2) + ' &euro;'; 
+        
+        document.getElementById('JL_Basket_Item_Trash_Icon_' + nbItem).setAttribute('nbItem', nbItem);
+        document.getElementById('JL_Basket_Item_Trash_Icon_' + nbItem).addEventListener('click', (event) => {
+            event.preventDefault();
+            ligneId = document.getElementById(event.target.id).getAttribute('nbItem');
+            itemLineChild = document.getElementById('JL_Basket_Item_' + ligneId);
+            document.getElementById('JL_Basket_Items').removeChild(itemLineChild);
+            shoppingCart.clearItem(prod.id);
+            shoppingCart.setTotalPrice();
+            if (shoppingCart.cart.length == 0) {
+                noItems();
+            }
+            document.activeElement.blur();
+        });
+
+        document.getElementById('JL_Basket_Item_' + nbItem ).style.display = 'flex';
+    
+        nbItem++;
+    })
+
+    shoppingCart.setTotalPrice();
+
+    document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.90') + "</b>";
+    
+    document.getElementById('JL_Basket_Total').style.display = 'flex';
+    document.getElementById('JL_Basket_Boutons').style.display = 'flex';
+    document.getElementById('JL_Basket_Item').style.display = 'none'; // Ligne vide de modèle
+    document.getElementById('JL_Basket_Empty').style.display = 'none';
+    document.getElementById('JL_Basket_Info_Abo').style.display = 'flex';
+    document.getElementById('JL_Basket').style.display = 'flex';
+    document.getElementById('JL_Basket_Content').style.display = 'block';
+
+}
+
+const hideCart = () => {
+    document.getElementById('JL_Basket').style.display = 'none';
+}
+//document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
 
 const showSnackBar = (text, isError) => {
     document.querySelector('#jl-snack-text-container').textContent = text
     document.querySelector('#jl-snack-icon').src = isError ? 'https://webcart.jagger-lewis.com/asset/icon_error.png' : 'https://webcart.jagger-lewis.com/asset/icon_validate.png'
     snack.className = isError ? 'show jl-snack-red' : 'show jl-snack-green';
     setTimeout(function(){ snack.className = '' }, 3000);
+}
 
+const showAddCart = (text, isError) => {
+    document.getElementById('JL_AddCart_Snack_Label').textContent = text
+    document.getElementById('JL_AddCart_Snack').style.display = 'block';
+    //document.querySelector('#jl-snack-icon').src = isError ? 'https://webcart.jagger-lewis.com/asset/icon_error.png' : 'https://webcart.jagger-lewis.com/asset/icon_validate.png'
+    //snack.className = isError ? 'show jl-snack-red' : 'show jl-snack-green';
+    setTimeout(function(){ document.getElementById('JL_AddCart_Snack').style.display = 'none' }, 3000);
 }
 
 const goToStripe = document.getElementById("validate-cart");
