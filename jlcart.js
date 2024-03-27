@@ -784,13 +784,13 @@ const initAboJag = async() => {
         document.getElementById('abo-facture-annee').className = 'abo_btn_off' ;
         document.getElementById('abo-facture-life').className = 'abo_btn_off' ;
         
-        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "monthly").price) + '€/mois'
-        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "monthly").price) + '€/mois'
-        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "monthly").price) + '€/mois'
+        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "monthly").price) + getTrad('€/mois', '€/month') 
+        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "monthly").price) + getTrad('€/mois', '€/month')
+        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "monthly").price) + getTrad('€/mois', '€/month')
 
-        document.getElementById('abo-annee-mois-starter').textContent = 'Sans engagement'
-        document.getElementById('abo-annee-mois-starter-family').textContent = 'Sans engagement'
-        document.getElementById('abo-annee-mois-family-premium').textContent = 'Sans engagement'
+        document.getElementById('abo-annee-mois-starter').textContent = getTrad('Sans engagement', 'No obligation') 
+        document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('Sans engagement', 'No obligation')
+        document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('Sans engagement', 'No obligation')
 
         document.querySelector('#total-family-premium').innerHTML = "" ; //"Ou " + findAboType(findAbonnement("premium-family"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + "€</b>/mois"
         document.querySelector('#total-starter-family').innerHTML = ""; // "Ou " + findAboType(findAbonnement("starter-family"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + "€</b>/mois"
@@ -805,17 +805,17 @@ const initAboJag = async() => {
         document.getElementById('abo-facture-life').className = 'abo_btn_off' ;
         
         
-        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + '€/an'
-        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) + '€/an'
-        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "yearly").price) + '€/an'
+        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) +  getTrad('€/an', '€/year') 
+        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) +  getTrad('€/an', '€/year') 
+        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "yearly").price) +  getTrad('€/an', '€/year') 
 
         document.getElementById('abo-annee-mois-starter').textContent = '2 mois offerts'
         document.getElementById('abo-annee-mois-starter-family').textContent = '2 mois offerts'
         document.getElementById('abo-annee-mois-family-premium').textContent = '2 mois offerts'
 
-        document.getElementById('total-family-premium').innerHTML = "Soit <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + '€ / mois'
-        document.getElementById('total-starter-family').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + '€ / mois'
-        document.getElementById('total-starter').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + '€ / mois'
+        document.getElementById('total-family-premium').innerHTML = "Soit <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
+        document.getElementById('total-starter-family').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
+        document.getElementById('total-starter').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
         updateTime(false)
     }
 
@@ -828,13 +828,13 @@ const initAboJag = async() => {
         document.getElementById('abo-prix-starter-family').textContent =  findAboType(findAbonnement("starter-family"), "life").price + '€'
         document.getElementById('abo-prix-starter').textContent = findAboType(findAbonnement("starter"), "life").price + '€'
 
-        document.getElementById('abo-annee-mois-starter').textContent = 'formule au forfait'
-        document.getElementById('abo-annee-mois-starter-family').textContent = 'formule au forfait'
-        document.getElementById('abo-annee-mois-family-premium').textContent = 'formule au forfait'
+        document.getElementById('abo-annee-mois-starter').textContent = getTrad('formule au forfait', 'package deal') 
+        document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('formule au forfait', 'package deal') 
+        document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('formule au forfait', 'package deal') 
 
-        document.getElementById('total-family-premium').innerHTML = "Vous payez une seule fois pour toute"
-        document.getElementById('total-starter-family').innerHTML =  "Vous payez une fois pour toute"
-        document.getElementById('total-starter').innerHTML =  "Vous payez une fois pour toute"
+        document.getElementById('total-family-premium').innerHTML = getTrad('Vous payez une seule fois pour toute', 'You pay once for everything') 
+        document.getElementById('total-starter-family').innerHTML = getTrad('Vous payez une seule fois pour toute', 'You pay once for everything') 
+        document.getElementById('total-starter').innerHTML = getTrad('Vous payez une seule fois pour toute', 'You pay once for everything') 
         updateTime(true)
 
     }
