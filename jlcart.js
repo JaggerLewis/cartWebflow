@@ -813,9 +813,9 @@ const initAboJag = async() => {
         document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('2 mois offerts', '2 months free') 
         document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('2 mois offerts', '2 months free') 
 
-        document.getElementById('total-family-premium').innerHTML = "Soit <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
-        document.getElementById('total-starter-family').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
-        document.getElementById('total-starter').innerHTML = "Soit <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
+        document.getElementById('total-family-premium').innerHTML = getTrad('Soit', 'Or')  + " <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
+        document.getElementById('total-starter-family').innerHTML = getTrad('Soit', 'Or')  + " <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
+        document.getElementById('total-starter').innerHTML = getTrad('Soit', 'Or')  + " <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month') 
         updateTime(false)
     }
 
