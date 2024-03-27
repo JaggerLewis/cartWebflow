@@ -1103,7 +1103,7 @@ const showCart = (event) => {
 }
 */
 
-const getTrad = (labelFr,labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelFr : labelUs
+const getTrad = (labelFr,labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelUs : labelFr
 
 const showNewCart = (event) => {
 
