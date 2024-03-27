@@ -29,6 +29,7 @@ body.appendChild(modalDiv)
 
 const capitalise = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
+const getLocalName = (products) => window.location.href.split('/').find((elem) => elem == 'en') ? products.metadata.title_en : products.metadata.title_fr
 
 function displayPrice (price) {
     return  price % 1 == 0 
@@ -726,7 +727,7 @@ const initJagAccessory = () => {
         console.log(access);
         createAccessoryItem(nbAccess);
 
-        document.getElementById('jl-Accessory-item-label-' + nbAccess ).innerHTML = capitalise(access.name) ;
+        document.getElementById('jl-Accessory-item-label-' + nbAccess ).innerHTML = capitalise(getLocalName(access)) ;
         document.getElementById('jl-Accessory-item-ref-' + nbAccess ).innerHTML = access.metadata.productId;
         document.getElementById('jl-Accessory-item-Img-' + nbAccess ).src = access.image ;
         document.getElementById('jl-Accessory-item-Img-' + nbAccess ).removeAttribute('srcset')  ;
