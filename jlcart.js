@@ -1170,7 +1170,7 @@ const showNewCart = (event) => {
         //console.log(prod);
         createLine(nbItem);
 
-        document.getElementById('JL_Basket_Item_Label_' + nbItem ).innerHTML = prod.id.name ;
+        document.getElementById('JL_Basket_Item_Label_' + nbItem ).innerHTML = getLocalName(prod.id) ;
         let labelQty = getTrad('qté : ','qty : ');
         document.getElementById('JL_Basket_Item_Ref_' + nbItem ).innerHTML = prod.id.metadata.productId + " (" + labelQty + prod.quantity + ")" ;
         document.getElementById('JL_Basket_Item_Img_' + nbItem ).src = prod.id.image ;
