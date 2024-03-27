@@ -726,7 +726,6 @@ const initJagAccessory = () => {
 
         console.log(access);
         createAccessoryItem(nbAccess);
-
         document.getElementById('jl-Accessory-item-label-' + nbAccess ).innerHTML = capitalise(getLocalName(access)) ;
         document.getElementById('jl-Accessory-item-ref-' + nbAccess ).innerHTML = access.metadata.productId;
         document.getElementById('jl-Accessory-item-Img-' + nbAccess ).src = access.image ;
@@ -1104,17 +1103,7 @@ const showCart = (event) => {
 }
 */
 
-const getTrad = (labelFr,labelUs) => {
-    if ( navigator.language.toLowerCase().indexOf('fr') > -1)
-    {
-        goodLabel = labelFr;
-    }
-    else
-    {
-        goodLabel = labelUs;
-    }
-    return goodLabel;
-} 
+const getTrad = (labelFr,labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelFr : labelUs
 
 const showNewCart = (event) => {
 
