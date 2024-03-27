@@ -27,7 +27,7 @@ modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div cl
 body.appendChild(modalDiv)
 
 
-const capitalise = (string) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+const capitalise = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
 
 function displayPrice (price) {
