@@ -306,7 +306,6 @@ const getTargetProduct = () => {
 const initJagGPS = async () => {
 
     let collar = document.getElementById('jl-collar')
-    let initialColor = 'fauve' ;
 
     //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
@@ -424,8 +423,6 @@ const switchSmartdock = () => {
         document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
         //console.log(targetProduct,color);
     }
-
-
     
 }
 
@@ -1237,4 +1234,5 @@ goToStripe.onclick = (event) => {
     redirectToStripe(event)
 }
 
+const initialColor = 'fauve' ;
 init()
