@@ -342,7 +342,7 @@ const initJagGPS = async () => {
 
     document.getElementById('btn_add_smartdock').setAttribute('isChecked','yes');
     switchSmartdock();
-    
+
     document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
         event.preventDefault()
         switchSmartdock();
@@ -400,7 +400,7 @@ const switchSmartdock = () => {
     let collar = document.getElementById('jl-collar')
     colors.forEach( (color) => {
         theBtnColor = document.getElementById('btn-color-' + color);
-        console.log(theBtnColor);
+        //console.log(theBtnColor);
 
         if ( theBtnColor.getAttribute('color-selected') == 'true' )
         {
@@ -418,9 +418,9 @@ const switchSmartdock = () => {
         targetProduct = 'jag';
         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id );
         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-        console.log( findProduct(targetProduct, color) );
+        //console.log( findProduct(targetProduct, color) );
         document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
-        console.log(targetProduct,color);
+        //console.log(targetProduct,color);
     }
 
 
