@@ -340,7 +340,7 @@ const initJagGPS = async () => {
         document.activeElement.blur();
     })
 
-    document.getElementById('btn_add_smartdock').setAttribute('isChecked','yes');
+    document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
     switchSmartdock();
 
     document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
@@ -383,7 +383,7 @@ const switchSmartdock = () => {
     smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
 
     console.log('smart', smartboxIsChecked);
-    
+
     if ( smartboxIsChecked == 'yes') {
         document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
         document.getElementById('btn_add_smartdock').classList.remove('add_smartdock_checked');
