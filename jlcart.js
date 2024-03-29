@@ -88,7 +88,7 @@ class ShoppingCart {
     }
 
     findProductIndexById(id) {
-        console.log(this.cart.findIndex(product => {
+        //console.log(this.cart.findIndex(product => {
             product.id.price.id === id.price.id
         }
             
@@ -407,9 +407,9 @@ const switchSmartdock = () => {
             colorChanged = true;
             colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id );
             colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-            console.log( findProduct(targetProduct, color) );
+            //console.log( findProduct(targetProduct, color) );
             document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
-            console.log(targetProduct,color);
+            //console.log(targetProduct,color);
         }
     })
 
@@ -533,7 +533,6 @@ const initCollar = async ()  => {
     document.querySelector('#abo-jag-price').innerHTML = document.querySelector('#abo-jag-price').innerHTML.replace('{price}', findProduct('jag', 'fauve').price.price)
     document.querySelector('#abo-cable-price').innerHTML = document.querySelector('#abo-cable-price').innerHTML.replace('{price}', findProduct('jag-chargingcable').price.price)
     document.querySelector('#abo-coque-price').innerHTML = document.querySelector('#abo-coque-price').innerHTML.replace('{price}', findProduct('jag-sock', 'fauve').price.price)
-    console.log
     document.querySelector('#je-commande-mon-jag').addEventListener('click', (event) => {
         event.preventDefault()
         let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
@@ -678,7 +677,7 @@ const initAccessory = () => {
 
 const initJagAccessory = () => {
     
-    console.log(accessory);
+    //console.log(accessory);
 
     document.getElementById('jl-Accessory-model').style.display = 'none';
 
@@ -719,7 +718,7 @@ const initJagAccessory = () => {
         //addHtml(prod, id)
         //addFunction(prod.id, id)
 
-        console.log(access);
+        //console.log(access);
         createAccessoryItem(nbAccess);
         document.getElementById('jl-Accessory-item-label-' + nbAccess ).innerHTML = capitalise(getLocalName(access)) ;
         document.getElementById('jl-Accessory-item-ref-' + nbAccess ).innerHTML = access.metadata.productId;
@@ -868,10 +867,10 @@ const initResult = async () => {
     shoppingCart.clear()
     document.getElementById('JL_ORDER').style.display = 'none';
     let id = new URLSearchParams(window.location.search).get('session_id')
-    console.log(id)
+    //console.log(id)
     if (id != null) {
         let datas = await loadCart(id)
-        console.log(datas);
+        //console.log(datas);
         localStorage.setItem('session_id', id)
         document.getElementById('JL_ORDER_ID').textContent = datas.numOrder
         document.getElementById('JL_ORDER').style.display = 'flex';
@@ -988,7 +987,7 @@ const init = async () => {
     setCartNumber();
     page = window.location.href.split('/')[3].split('?')[0];
 
-    console.log(page);
+    //console.log(page);
 }
 
 const redirectToStripe = async (event) => {
@@ -1005,9 +1004,9 @@ const redirectToStripe = async (event) => {
         }
     */
     const apiRes = await shoppingCart.getCartStripeUrl()
-    console.log(apiRes);
+    //console.log(apiRes);
     const apiResJson = await apiRes.json()
-    console.log(apiResJson);
+    //console.log(apiResJson);
     window.location.href = apiResJson.url
 }
 
