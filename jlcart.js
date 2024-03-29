@@ -241,7 +241,7 @@ const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
     let btn = document.getElementById( newBtn );
 
     if (btn == null) {
-        console.log('not_find', newBtn);
+        //console.log('not_find', newBtn);
         return false;
     }
 
@@ -280,7 +280,7 @@ const findProduct = (product, color)=> {
 
 const findAbonnement = (product)=> {
     let filtered = abonnement.find(elem => elem.metadata.productId == product)
-    console.log(filtered);
+    //console.log(filtered);
 
     return filtered
 }
@@ -367,7 +367,7 @@ const initSmartDockAlone = async () => {
     if ( !btnAddBasket ) { return false; }
 
     smartdockProduct = findProduct('smartdock');
-    console.log(smartdockProduct);
+    //console.log(smartdockProduct);
 
     priceLabel.innerHTML = smartdockProduct.price.price;
     btnAddBasket.addEventListener('click', (event) => {
@@ -382,6 +382,8 @@ const switchSmartdock = () => {
 
     smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
 
+    console.log('smart', smartboxIsChecked);
+    
     if ( smartboxIsChecked == 'yes') {
         document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
         document.getElementById('btn_add_smartdock').classList.remove('add_smartdock_checked');
