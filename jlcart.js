@@ -88,11 +88,11 @@ class ShoppingCart {
     }
 
     findProductIndexById(id) {
-        //console.log(this.cart.findIndex(product => {
+        /*
+        console.log(this.cart.findIndex(product => {
             product.id.price.id === id.price.id
-        }
-            
-        ))
+        }))*/
+
         return this.cart.findIndex(product => 
              product.id.price.id === id.price.id
         )
