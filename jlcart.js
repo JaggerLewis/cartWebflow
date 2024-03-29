@@ -416,8 +416,8 @@ const switchSmartdock = () => {
     })
 
     if (colorChanged == false) {
-        color = 'fauve';
-        targetProduct = 'jag';
+        color = initialColor;
+        //targetProduct = 'jag';
         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id );
         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
         //console.log( findProduct(targetProduct, color) );
