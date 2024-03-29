@@ -340,7 +340,6 @@ const initJagGPS = async () => {
     })
 
     document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
-    switchSmartdock();
 
     document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
         event.preventDefault()
@@ -353,6 +352,8 @@ const initJagGPS = async () => {
     collar.srcset = findProduct('jag', 'fauve').image
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
 
+    switchSmartdock();
+    
     return true;
 }
 
@@ -416,6 +417,7 @@ const switchSmartdock = () => {
 
     if (colorChanged == false) {
         color = initialColor;
+        console.log(color, targetProduct);
         //targetProduct = 'jag';
         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id );
         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
@@ -423,6 +425,7 @@ const switchSmartdock = () => {
         document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
         //console.log(targetProduct,color);
     }
+
     
 }
 
