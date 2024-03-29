@@ -340,8 +340,9 @@ const initJagGPS = async () => {
         document.activeElement.blur();
     })
 
-    document.getElementById('btn_add_smartdock').setAttribute('isChecked','no');
-
+    document.getElementById('btn_add_smartdock').setAttribute('isChecked','yes');
+    switchSmartdock();
+    
     document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
         event.preventDefault()
         switchSmartdock();
