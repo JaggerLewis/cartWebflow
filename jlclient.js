@@ -13,12 +13,41 @@ const initClient = {
     'jl-collar-autonomy' : (node) => console.log( 'jl-collar-battery'),
     'jl-collar-synchro-date' : (node) => console.log( 'jl-collar-battery'),
     'jl-collar-rescue' : (node) => console.log( 'jl-collar-battery'),
+    'jl-activity-card-container' : (node) => console.log('jl-activity-card-container'),
     'jl-scnackbar' : (node) => console.log('snack-bar')
 }
 
 let user
 let dog
- 
+
+const initActivity = async (node) => {
+    card = document.getElementById('jl-activity-card')
+    // node = document.getElementById('jl-activity-card-container')
+    dog.personalActivities.forEach((activity) => {
+        if (!card['data-id']) {
+            changeChildsId(card, activity._id)
+            card['data-id'] = activity._id
+        }
+        else {
+            newCard = card.cloneNode(true)
+            changeChildsId(card, activity._id)
+            newCard['data-id'] = activity._id
+            node.appendChild(newCard)
+                                     
+        }
+    })
+}
+
+const changeChildsId = (node, suffix) => {
+    node.id = node.id + suffix
+    if(node.hasChildNodes) {
+        var childs = node.childNodes;
+        for(var index=0; index<childs.length; index++) {
+            changeChildsId(childs[index], suffix)
+        }
+    }
+}
+
 const getAll = async () => {
     //INIT LOADER
     let loaderContainer = document.createElement('div')
@@ -32,7 +61,7 @@ const getAll = async () => {
     dog = user.dogs[0]
 
     loaderContainer.style.display = 'none'
-    
+
     setAll()
    }
 
@@ -44,8 +73,6 @@ const setAll = () => {
             initClient[node.id](node)
         else console.log(node.id + ' is not handle :(')
     });
-
-   
 }
 if(!document.getElementById('JL_NavBar')) {
     getAll()
