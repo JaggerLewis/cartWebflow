@@ -58,7 +58,10 @@ const getAll = async () => {
     user = await fetch(baseurl + '/profile/full', header)
             .then(async (res) => await res.json())
             .then((res) => res.user)
-    dog = user.dogs[0]
+    if (user.dogs.length != 0)
+        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', header)
+        .then(async (res) => await res.json())
+        .then((res) => res.dog)
 
     loaderContainer.style.display = 'none'
 
