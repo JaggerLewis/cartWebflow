@@ -21,10 +21,10 @@ let user
 let dog
 
 const initActivity = async (node) => {
-    card = document.getElementById('jl-activity-card')
     // node = document.getElementById('jl-activity-card-container')
     dog.personalActivities.forEach((activity) => {
         if (!card['data-id']) {
+            card = document.getElementById('jl-activity-card')
             changeChildsId(card, '-' +activity._id, 'jl')
             card['data-id'] = activity._id
         }
@@ -40,7 +40,7 @@ const initActivity = async (node) => {
 
 const changeChildsId = (node, suffix, filter) => {
     if (filter) {
-        if (node.id.includes(filter))
+        if (node.id && node.id.includes(filter))
             node.id = node.id + suffix
         }
     else node.id = node.id + suffix
