@@ -13,7 +13,7 @@ const initClient = {
     'jl-collar-autonomy' : (node) => console.log( 'jl-collar-battery'),
     'jl-collar-synchro-date' : (node) => console.log( 'jl-collar-battery'),
     'jl-collar-rescue' : (node) => console.log( 'jl-collar-battery'),
-    'jl-activity-card-container' : (node) => console.log('jl-activity-card-container'),
+    'jl-activity-card-container' : (node) => initActivity(node),
     'jl-scnackbar' : (node) => console.log('snack-bar')
 }
 
