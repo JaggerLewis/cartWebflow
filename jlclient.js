@@ -21,21 +21,14 @@ let user
 let dog
 
 const initActivity = async (node) => {
-    // node = document.getElementById('jl-activity-card-container')
+    card = document.getElementById('jl-activity-card')
     dog.personalActivities.forEach((activity) => {
-        if (!card['data-id']) {
-            card = document.getElementById('jl-activity-card')
-            changeChildsId(card, '-' +activity._id, 'jl')
-            card['data-id'] = activity._id
-        }
-        else {
             newCard = card.cloneNode(true)
             changeChildsId(newCard, '-' + activity._id, 'jl')
             newCard['data-id'] = activity._id
             node.appendChild(newCard)
-                                     
-        }
     })
+    card.style.display = 'none'
 }
 
 const changeChildsId = (node, suffix, filter) => {
