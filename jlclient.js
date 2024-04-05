@@ -34,7 +34,7 @@ const initActivity = async (node) => {
             document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(activity.duration * 1000).toISOString().substring(14, 19)
             distance = activity.distance > 1000 ? activity.distance /1000 + 'km' : activity.distance + 'm'
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
-            document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  (date.getMonth() + 1)
+            document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  (start.getMonth() + 1)
 
           
 
