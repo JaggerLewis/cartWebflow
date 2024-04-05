@@ -25,12 +25,12 @@ const initActivity = async (node) => {
     // node = document.getElementById('jl-activity-card-container')
     dog.personalActivities.forEach((activity) => {
         if (!card['data-id']) {
-            changeChildsId(card, activity._id)
+            changeChildsId(card, '-' +activity._id, 'jl')
             card['data-id'] = activity._id
         }
         else {
             newCard = card.cloneNode(true)
-            changeChildsId(card, '-' + activity._id, 'jl')
+            changeChildsId(newCard, '-' + activity._id, 'jl')
             newCard['data-id'] = activity._id
             node.appendChild(newCard)
                                      
