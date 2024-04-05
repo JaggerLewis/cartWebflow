@@ -30,7 +30,7 @@ const initActivity = async (node) => {
         }
         else {
             newCard = card.cloneNode(true)
-            changeChildsId(card, activity._id)
+            changeChildsId(card, '-' + activity._id, 'jl')
             newCard['data-id'] = activity._id
             node.appendChild(newCard)
                                      
@@ -38,8 +38,12 @@ const initActivity = async (node) => {
     })
 }
 
-const changeChildsId = (node, suffix) => {
-    node.id = node.id + suffix
+const changeChildsId = (node, suffix, filter) => {
+    if (filter) {
+        if (node.id.includes(filter))
+            node.id = node.id + suffix
+        }
+    else node.id = node.id + suffix
     if(node.hasChildNodes) {
         var childs = node.childNodes;
         for(var index=0; index<childs.length; index++) {
