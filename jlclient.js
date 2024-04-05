@@ -10,9 +10,9 @@ const initClient = {
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.id,
     'jl-collar-battery' : (node) => console.log( 'jl-collar-battery'),
-    'jl-collar-autonomy' : (node) => console.log( 'jl-collar-battery'),
-    'jl-collar-synchro-date' : (node) => console.log( 'jl-collar-battery'),
-    'jl-collar-rescue' : (node) => console.log( 'jl-collar-battery'),
+    'jl-collar-autonomy' : (node) => console.log( 'jl-collar-autonomy'),
+    'jl-collar-synchro-date' : (node) => console.log( 'jl-collar-synchro-date'),
+    'jl-collar-rescue' : (node) => console.log( 'jl-collar-rescue'),
     'jl-activity-card-container' : (node) => initActivity(node),
     'jl-scnackbar' : (node) => console.log('snack-bar')
 }
