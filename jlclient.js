@@ -20,7 +20,7 @@ const initClient = {
 let user
 let dog
 
-const getMonth = (month) => {switch (date.getMonth()) {
+const getMonth = (month) => {switch (month) {
     case 0:
         return "janv";
         break;
