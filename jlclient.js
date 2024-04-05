@@ -20,6 +20,47 @@ const initClient = {
 let user
 let dog
 
+const getMonth = (month) => {switch (date.getMonth()) {
+    case 0:
+        return "janv";
+        break;
+    case 1:
+        return "févr";
+        break;
+    case 2:
+        return "mars";
+        break;
+    case 3:
+        return "avri";
+        break;
+    case 4:
+        return "mai";
+        break;
+    case 5:
+        return "juin"
+        break;
+    case 6:
+        return "juil";
+        break;
+    case 7:
+        return "août";
+        break;
+    case 8:
+        return "sept";
+        break;
+    case 9:
+        return "octo";
+        break;
+    case 10:
+        return "nove";
+        break;
+    case 11:
+        return "déce";
+        break;
+    default:
+        return "";
+}}
+
 const initActivity = async (node) => {
     card = document.getElementById('jl-activity-card')
     dog.personalActivities.forEach((activity) => {
@@ -34,7 +75,7 @@ const initActivity = async (node) => {
             document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(activity.duration * 1000).toISOString().substring(14, 19)
             distance = activity.distance > 1000 ? activity.distance /1000 + 'km' : activity.distance + 'm'
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
-            document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  (start.getMonth() + 1)
+            document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  getMonth(start.getMonth() + 1)
 
           
 
