@@ -1238,4 +1238,5 @@ goToStripe.onclick = (event) => {
 }
 
 const initialColor = 'fauve' ;
-init()
+if (document.getElementById('JL_NavBar'))
+    init()
