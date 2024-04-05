@@ -31,6 +31,8 @@ const getAll = async () => {
             .then((res) => res.user)
     dog = user.dogs[0]
 
+    loaderContainer.style.display = 'none'
+    
     setAll()
    }
 
@@ -43,7 +45,7 @@ const setAll = () => {
         else console.log(node.id + ' is not handle :(')
     });
 
-    loaderContainer.style.display = 'none'
+   
 }
 if(!document.getElementById('JL_NavBar')) {
     getAll()
