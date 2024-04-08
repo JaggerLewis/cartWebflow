@@ -1,17 +1,37 @@
 const baseurl = 'https://app-api.mypet.fit'
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NzFkM2RjNzA4M2E3ODg2ZTQzNzNhOCIsInBob25lIjoiMDAzMzYxMjk2NTM5OCIsIm5hbWUiOiJFbGlvdCIsImxhc3RuYW1lIjoiTUFSVElOIiwiZW1haWwiOiJlbGlvdC5tYXJ0aW5AamFnZ2VyLWxld2lzLmNvbSJ9LCJpYXQiOjE3MTIxMzM0Njh9.cfvU9bp8yr8ASiMN5vY9j5mrQH8CfV50m1k3Hny917Y'
+
 const header ={ headers: {
     'Authorization': 'Bearer ' + token,
     'Content-Type': 'application/json' 
   }}
 
 
+const converTimestamp = (timestamp) => {
+    let day = Math.floor(timestamp / (24 * 3600)); 
+    let hour = Math.floor((timestamp % (24 * 3600)) / 3600);
+    let min = Math.floor((timestamp % 3600) / 60);
+
+    let resultat = '';
+    if (day > 0) {
+        resultat += day + ' jour' + (day > 1 ? 's' : '') + ' ';
+    }
+    if (heures > 0) {
+        resultat += hour + ' heure' + (hour > 1 ? 's' : '') + ' ';
+    }
+    if (minutes > 0) {
+        resultat += min + ' minute' + (min > 1 ? 's' : '');
+    }
+
+    return resultat;
+}
+
 const initClient = {
     'jl-profil-dog-picture' : (node) => console.log( 'jl-profil-dog-picture'),
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.id,
-    'jl-collar-battery' : (node) => console.log( 'jl-collar-battery'),
-    'jl-collar-autonomy' : (node) => console.log( 'jl-collar-autonomy'),
+    'jl-collar-battery' : (node) => node.innerHTML = dog.battery.soc+'%',
+    'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + "d'autonomie",
     'jl-collar-synchro-date' : (node) => console.log( 'jl-collar-synchro-date'),
     'jl-collar-rescue' : (node) => console.log( 'jl-collar-rescue'),
     'jl-activity-card-container' : (node) => initActivity(node),
@@ -115,7 +135,9 @@ const getAll = async () => {
         dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', header)
         .then(async (res) => await res.json())
         .then((res) => res.dog)
-    // dog.battery = /collar/:simcardID/battery
+    dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', header)
+    .then(async (res) => await res.json())
+    .then((res) => res.BatteryInfos)
     loaderContainer.style.display = 'none'
 
     setAll()
