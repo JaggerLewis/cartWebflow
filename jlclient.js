@@ -16,10 +16,10 @@ const converTimestamp = (timestamp) => {
     if (day > 0) {
         resultat += day + ' jour' + (day > 1 ? 's' : '') + ' ';
     }
-    if (heures > 0) {
+    if (hour > 0) {
         resultat += hour + ' heure' + (hour > 1 ? 's' : '') + ' ';
     }
-    if (minutes > 0) {
+    if (min > 0) {
         resultat += min + ' minute' + (min > 1 ? 's' : '');
     }
 
