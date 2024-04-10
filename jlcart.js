@@ -189,7 +189,7 @@ class ShoppingCart {
     saveCart({ callApi = true } = {}) {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
-        if (callApi && !this.updateCartTimeout) {
+        if (callApi) {
             this.updateCartTimeout = setTimeout(() => {
                 this.updateCartInDb().then(answer => {
                     answer.json().then(answerJson => {
