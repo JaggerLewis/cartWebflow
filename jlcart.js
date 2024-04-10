@@ -188,12 +188,17 @@ class ShoppingCart {
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
+        console.log("save cart");
         this.updateCartTimeout = setTimeout(() => {
+            console.log("prepare to call api")
             this.updateCartInDb().then(answer => {
+                console.log("api called", answer)
                 answer.json().then(answerJson => {
-                    if (resultJson.success) {
-                        this.orderId = resultJson.orderId
+                    console.log("answer converted", answerJson)
+                    if (answerJson.success) {
+                        this.orderId = answerJson.orderId
                         localStorage.setItem('orderId', this.orderId)
+                        console.log("should be ok")
                     }
                 }).catch(e => {
                     console.error("error parsing", e);
@@ -215,6 +220,7 @@ class ShoppingCart {
     }
 
     updateCartInDb() {
+        console.log("call API : ", `${interfaceUrl}/stripe/cart`, { cart: this.cart, orderId: this.orderId })
         const answer = fetch(`${interfaceUrl}/stripe/cart`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
