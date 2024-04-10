@@ -964,12 +964,18 @@ const init = async () => {
         }
     }
 
-    preload(findProduct('jag', 'fauve').image)
-    preload(findProduct('jag', 'weimar').image)
-    preload(findProduct('jag', 'charbon').image)
-    preload(findProduct('jag-smartdock', 'fauve').image)
-    preload(findProduct('jag-smartdock', 'weimar').image)
-    preload(findProduct('jag-smartdock', 'charbon').image)
+    try {
+        preload(findProduct('jag', 'fauve').image)
+        preload(findProduct('jag', 'weimar').image)
+        preload(findProduct('jag', 'charbon').image)
+        preload(findProduct('jag-smartdock', 'fauve').image)
+        preload(findProduct('jag-smartdock', 'weimar').image)
+        preload(findProduct('jag-smartdock', 'charbon').image)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
 
     if (JL_NavBar) {
         document.getElementById('JL_Basket_Item').style.display = 'none';
