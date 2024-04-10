@@ -464,17 +464,20 @@ const switchSmartdock = () => {
         targetProduct = 'jag-smartdock';
     }
     */
-   
-    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes' )
+    
+    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'no' )
     {
+        // On bascule avec le smartdock
         targetProduct = 'jag-smartdock';
         document.getElementById('jag-without-smartdock').setAttribute('isChecked','no');
         document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_off w-button';
         document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
         document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_on w-button';
     }
-    else
+    
+    if ( document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'no' )
     {
+         // On bascule sur le produit seul
         targetProduct = 'jag';
         document.getElementById('jag-without-smartdock').setAttribute('isChecked','yes');
         document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_on w-button';
@@ -482,6 +485,7 @@ const switchSmartdock = () => {
         document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';
     }
 
+    console.log(targetProduct);
 
     colors = ['fauve', 'weimar', 'charbon'];
     colorChanged = false;
