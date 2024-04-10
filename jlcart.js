@@ -189,7 +189,7 @@ class ShoppingCart {
     saveCart({ callApi = true } = {}) {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
-        if (callApi) {
+        if (callApi && !this.updateCartTimeout) {
             this.updateCartTimeout = setTimeout(() => {
                 this.updateCartInDb().then(answer => {
                     answer.json().then(answerJson => {
@@ -203,7 +203,7 @@ class ShoppingCart {
                 }).catch(e => {
                     console.error("error fetching", e)
                 })
-            }, 2000);
+            }, 500);
         }
     }
 
