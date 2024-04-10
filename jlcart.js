@@ -81,6 +81,7 @@ class ShoppingCart {
             for (const product of cart) {
                 this.cart.push(new ProductCart(product.id, product.quantity))
             }
+            this.orderId = localStorage.getItem("orderId");
         } else {
             this.cart = []
         }
@@ -179,7 +180,7 @@ class ShoppingCart {
     }
 
 
-    clear() {
+    async clear() {
         this.cart = []
         this.saveCart();
     }
@@ -187,6 +188,20 @@ class ShoppingCart {
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
+        this.updateCartTimeout = setTimeout(() => {
+            this.updateCartInDb().then(answer => {
+                answer.json().then(answerJson => {
+                    if (resultJson.success) {
+                        this.orderId = resultJson.orderId
+                        localStorage.setItem('orderId', this.orderId)
+                    }
+                }).catch(e => {
+                    console.error("error parsing", e);
+                })
+            }).catch(e => {
+                console.error("error fetching", e)
+            })
+        }, 500);
     }
 
     getCartStripeUrl() {
@@ -194,7 +209,19 @@ class ShoppingCart {
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: value, mode: 'payment' })
+            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment' })
+        })
+        return answer
+    }
+
+    updateCartInDb() {
+        const answer = fetch(`${interfaceUrl}/stripe/cart`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                cart: this.cart,
+                orderId: this.orderId
+            })
         })
         return answer
     }
