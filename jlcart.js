@@ -184,29 +184,31 @@ class ShoppingCart {
     clear() {
         this.cart = []
         this.orderId = undefined;
-        this.saveCart();
+        this.saveCart({ callApi: false });
     }
 
-    saveCart() {
+    saveCart({ callApi = true } = {}) {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
-        this.updateCartTimeout = setTimeout(() => {
-            this.updateCartInDb().then(answer => {
-                console.log("api called", answer)
-                answer.json().then(answerJson => {
-                    console.log("answer converted", answerJson)
-                    if (answerJson.success) {
-                        this.orderId = answerJson.orderId
-                        localStorage.setItem('orderId', this.orderId)
-                        console.log("should be ok")
-                    }
+        if (callApi) {
+            this.updateCartTimeout = setTimeout(() => {
+                this.updateCartInDb().then(answer => {
+                    console.log("api called", answer)
+                    answer.json().then(answerJson => {
+                        console.log("answer converted", answerJson)
+                        if (answerJson.success) {
+                            this.orderId = answerJson.orderId
+                            localStorage.setItem('orderId', this.orderId)
+                            console.log("should be ok")
+                        }
+                    }).catch(e => {
+                        console.error("error parsing", e);
+                    })
                 }).catch(e => {
-                    console.error("error parsing", e);
+                    console.error("error fetching", e)
                 })
-            }).catch(e => {
-                console.error("error fetching", e)
-            })
-        }, 500);
+            }, 500);
+        }
     }
 
     getCartStripeUrl() {
