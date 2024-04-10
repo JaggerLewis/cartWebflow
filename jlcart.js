@@ -485,7 +485,7 @@ const switchSmartdock = () => {
         document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';
     }
 
-    console.log(targetProduct);
+    console.log("switch", targetProduct);
 
     colors = ['fauve', 'weimar', 'charbon'];
     colorChanged = false;
