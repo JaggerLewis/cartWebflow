@@ -183,8 +183,7 @@ class ShoppingCart {
 
     clear() {
         this.cart = []
-        this.orderId = undefined;
-        this.saveCart({ callApi: false });
+        this.saveCart();
     }
 
     saveCart({ callApi = true } = {}) {
