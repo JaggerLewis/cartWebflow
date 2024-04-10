@@ -81,9 +81,10 @@ class ShoppingCart {
             for (const product of cart) {
                 this.cart.push(new ProductCart(product.id, product.quantity))
             }
-            this.orderId = localStorage.getItem("orderId");
+            this.orderId = localStorage.getItem("orderId") ?? undefined;
         } else {
             this.cart = []
+            this.orderId = undefined;
         }
     }
 
@@ -180,17 +181,16 @@ class ShoppingCart {
     }
 
 
-    async clear() {
+    clear() {
         this.cart = []
+        this.orderId = undefined;
         this.saveCart();
     }
 
     saveCart() {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
-        console.log("save cart");
         this.updateCartTimeout = setTimeout(() => {
-            console.log("prepare to call api")
             this.updateCartInDb().then(answer => {
                 console.log("api called", answer)
                 answer.json().then(answerJson => {
