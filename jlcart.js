@@ -324,6 +324,7 @@ const findAboType = (abo, type) => {
 }
 
 const getTargetProduct = () => {
+    /*
     smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
     if (smartboxIsChecked == 'yes') {
         targetProduct = 'jag-smartdock';
@@ -331,6 +332,20 @@ const getTargetProduct = () => {
     else {
         targetProduct = 'jag';
     }
+    */
+
+    targetProduct = 'jag';
+
+    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes' )
+    {
+        targetProduct = 'jag';
+    }
+
+    if ( document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes' )
+    {
+        targetProduct = 'jag-smartdock';
+    }
+
     return targetProduct;
 }
 
@@ -378,10 +393,33 @@ const initJagGPS = async () => {
         document.activeElement.blur();
     })
 
+    document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
+        event.preventDefault()
+        switchSmartdock();
+        document.activeElement.blur();
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-without-smartdock').className = 'Jag_btn_with_smartdock_on';
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-with-smartdock').className = 'Jag_btn_with_smartdock_off';
+    })
+
+    document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
+        event.preventDefault()
+        switchSmartdock();
+        document.activeElement.blur();
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-without-smartdock').className = 'Jag_btn_with_smartdock_off';
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-with-smartdock').className = 'Jag_btn_with_smartdock_on';
+    })
+
     document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
     collar.setAttribute('data-selected', findProduct('jag', initialColor).price.id)
     collar.srcset = findProduct('jag', 'fauve').image
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
+
+    document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
+    document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
 
     switchSmartdock();
 
@@ -410,6 +448,7 @@ const initSmartDockAlone = async () => {
 
 const switchSmartdock = () => {
 
+    /*
     smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
 
     //console.log('smart', smartboxIsChecked);
@@ -424,6 +463,25 @@ const switchSmartdock = () => {
         document.getElementById('btn_add_smartdock').classList.add('add_smartdock_checked');
         targetProduct = 'jag-smartdock';
     }
+    */
+   
+    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes' )
+    {
+        targetProduct = 'jag-smartdock';
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-without-smartdock').className = 'Jag_btn_with_smartdock_off';
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-with-smartdock').className = 'Jag_btn_with_smartdock_on';
+    }
+    else
+    {
+        targetProduct = 'jag';
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-without-smartdock').className = 'Jag_btn_with_smartdock_on';
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-with-smartdock').className = 'Jag_btn_with_smartdock_off';
+    }
+
 
     colors = ['fauve', 'weimar', 'charbon'];
     colorChanged = false;
