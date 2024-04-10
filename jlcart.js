@@ -187,23 +187,26 @@ class ShoppingCart {
     }
 
     saveCart({ callApi = true } = {}) {
+        console.log("saveCart", callApi)
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
         if (callApi) {
-            this.updateCartTimeout = setTimeout(() => {
-                this.updateCartInDb().then(answer => {
-                    answer.json().then(answerJson => {
-                        if (answerJson.success) {
-                            this.orderId = answerJson.orderId
-                            localStorage.setItem('orderId', this.orderId)
-                        }
-                    }).catch(e => {
-                        console.error("error parsing", e);
-                    })
+            console.log("call API")
+            this.updateCartInDb().then(answer => {
+                console.log("api called", answer)
+                answer.json().then(answerJson => {
+                    console.log("answer json", answerJson)
+                    if (answerJson.success) {
+                        this.orderId = answerJson.orderId
+                        localStorage.setItem('orderId', this.orderId)
+                        console.log("success", this.orderId)
+                    }
                 }).catch(e => {
-                    console.error("error fetching", e)
+                    console.error("error parsing", e);
                 })
-            }, 500);
+            }).catch(e => {
+                console.error("error fetching", e)
+            })
         }
     }
 
