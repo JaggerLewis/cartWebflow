@@ -419,8 +419,8 @@ const initJagGPS = async () => {
     collar.srcset = findProduct('jag', 'fauve').image
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
 
-    document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
-    document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
+    document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
+    document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
 
     switchSmartdock();
 
