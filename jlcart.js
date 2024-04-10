@@ -466,7 +466,7 @@ const switchSmartdock = () => {
     }
     */
     
-    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'no' )
+    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes' )
     {
         // On bascule avec le smartdock
         targetProduct = 'jag-smartdock';
