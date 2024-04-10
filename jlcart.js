@@ -192,13 +192,10 @@ class ShoppingCart {
         if (callApi) {
             this.updateCartTimeout = setTimeout(() => {
                 this.updateCartInDb().then(answer => {
-                    console.log("api called", answer)
                     answer.json().then(answerJson => {
-                        console.log("answer converted", answerJson)
                         if (answerJson.success) {
                             this.orderId = answerJson.orderId
                             localStorage.setItem('orderId', this.orderId)
-                            console.log("should be ok")
                         }
                     }).catch(e => {
                         console.error("error parsing", e);
@@ -206,7 +203,7 @@ class ShoppingCart {
                 }).catch(e => {
                     console.error("error fetching", e)
                 })
-            }, 500);
+            }, 2000);
         }
     }
 
@@ -221,7 +218,6 @@ class ShoppingCart {
     }
 
     updateCartInDb() {
-        console.log("call API : ", `${interfaceUrl}/stripe/cart`, { cart: this.cart, orderId: this.orderId })
         const answer = fetch(`${interfaceUrl}/stripe/cart`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -407,14 +403,13 @@ const initSmartDockAlone = async () => {
         shoppingCart.addItem(smartdockProduct, 1)
         document.activeElement.blur();
     })
-
 }
 
 const switchSmartdock = () => {
 
     smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
 
-    console.log('smart', smartboxIsChecked);
+    //console.log('smart', smartboxIsChecked);
 
     if (smartboxIsChecked == 'yes') {
         document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
