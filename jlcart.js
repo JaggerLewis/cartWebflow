@@ -559,57 +559,6 @@ const initHome = async () => {
         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
     }))
 
-    /*
-    document.querySelectorAll('#txt-color-fauve').forEach(element => element.addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id )
-         colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
-    }))
-    document.querySelectorAll('#txt-color-weimar').forEach(element => element.addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id )
-         colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
-    }))
-    document.querySelectorAll('#txt-color-charbon').forEach(element => element.addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id )
-         colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
-    }))
-    */
-
-    /*
-    document.querySelector('#btn-dock-color-fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, findProduct('jag-smartdock', 'fauve').image, findProduct('jag-smartdock', 'fauve').price.id )
-        colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#btn-dock-color-weimar').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, findProduct('jag-smartdock', 'weimar').image, findProduct('jag-smartdock', 'weimar').price.id )
-        colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#btn-dock-color-charbon').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, findProduct('jag-smartdock', 'charbon').image, findProduct('jag-smartdock', 'charbon').price.id )
-        colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#txt-dock-color-fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, findProduct('jag-smartdock', 'fauve').image, findProduct('jag-smartdock', 'fauve').price.id )
-        colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#txt-dock-color-weimar').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, findProduct('jag-smartdock', 'weimar').image, findProduct('jag-smartdock', 'weimar').price.id )
-        colorButtonSelect('#btn-dock-color-weimar', 'color-dock-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#txt-dock-color-charbon').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(dock, findProduct('jag-smartdock', 'charbon').image, findProduct('jag-smartdock', 'charbon').price.id )
-        colorButtonSelect('#btn-dock-color-charbon', 'color-dock-selected', 'jl-color-selected', true)
-    })
-    */
-
     collar.setAttribute('data-selected', findProduct('jag', 'fauve').price.id)
     collar.srcset = findProduct('jag', 'fauve').image
     dock.setAttribute('data-selected', findProduct('jag-smartdock', 'fauve').price.id)
@@ -1112,81 +1061,6 @@ const redirectToStripeBis = async () => {
     window.location.href = apiResJson.url
 }
 
-/*
-const addToCart = (event) => {
-    event.preventDefault();
-    var name = event.target.getAttribute('data-name');
-    var price = Number(event.target.getAttribute('data-price'));
-    var prices = event.target.getAttribute('data-prices');
-    var img = event.target.getAttribute('data-image');
-    shoppingCart.addItem(id, 1)
-}
-*/
-
-/*
-const showCart = (event) => {
-    event.preventDefault();
-    
-    clearHtml()
-
-    if (shoppingCart.cart.length == 0) {
-        document.querySelector('#jl-no-display').style.display = ''
-    }
-    else {
-        document.querySelector('#jl-no-display').style.display = 'none'
-        shoppingCart.cart.forEach((prod) => {
-            let id = prod.id.price.id
-            addHtml(prod, id)
-            addFunction(prod.id, id)
-        })
-    }
-
-    shoppingCart.setTotalPrice();
-
-    function clearHtml () {
-        document.querySelector('.jl-border-container').innerHTML = '<div id="jl-no-display" class="jl-no-display">Aucun élément sélectionné</div>';
-    } 
-
-    function addHtml(prod, id) {
-        let container = document.querySelector('.jl-border-container')
-        let containerProduct = document.createElement('div')
-        let containerProductText = document.createElement('div')
-        let RowElem1 = document.createElement('div')
-        let RowElem2 = document.createElement('div')
-        let RowElem3 = document.createElement('div')
-        let image = document.createElement('img')
-        RowElem1.classList.add('jl-product-row')
-        RowElem1.innerHTML = "<p class='jl-p jl-product-name'>"+ prod.id.name+"</p><p class='jl-p jl-product-price'>" + displayPrice(prod.id.price.price) + "€</p>"
-        RowElem2.classList.add('jl-product-row')
-        RowElem2.innerHTML = "<p class='jl-p jl-product-quantity'>Qté : "+ prod.quantity + " </p>"
-       
-        
-        RowElem3.classList.add('jl-product-row-end')
-        RowElem3.innerHTML = "<img class='close-button'  src='https://webcart.jagger-lewis.com/asset/icon_info.png'><p class='jl-p jl-text-hint'>Choisissez un abonnement après votre achat. </p> <img class='close-button hover button-small' id='remove-"  + id + "' src='https://webcart.jagger-lewis.com/asset/icon_trash.png'></img >"
-        image.src = prod.id.image
-        image.classList.add('jl-product-img')
-        containerProduct.classList.add('jl-container-product')
-        containerProduct.id = id
-        containerProductText.classList.add('jl-container-product-text')
-        containerProduct.appendChild(image)
-        containerProductText.appendChild(RowElem1)
-        containerProductText.appendChild(RowElem2)
-        containerProductText.appendChild(RowElem3)
-        containerProduct.appendChild(containerProductText)
-        container.appendChild(containerProduct)
-    }
-
-    function addFunction(prod, id) {
-        document.querySelector('#remove-' + id).addEventListener('click', (event) => {
-            event.preventDefault()
-            document.querySelector('.jl-border-container').removeChild(document.querySelector('#' + id))
-            shoppingCart.clearItem(prod);
-            shoppingCart.setTotalPrice();
-        })
-    }
-
-}
-*/
 
 const getTrad = (labelFr, labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelUs : labelFr
 
