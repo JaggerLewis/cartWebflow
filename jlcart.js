@@ -873,13 +873,13 @@ const initAboJag = async () => {
         document.getElementById('abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), "life").price + '€'
         document.getElementById('abo-prix-starter').textContent = findAboType(findAbonnement("starter"), "life").price + '€'
 
-        document.getElementById('abo-annee-mois-starter').textContent = getTrad('formule au forfait', 'package deal')
-        document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('formule au forfait', 'package deal')
-        document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('formule au forfait', 'package deal')
+        document.getElementById('abo-annee-mois-starter').textContent = getTrad('Formule sans abonnement', 'no-subscription formula')
+        document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('Formule sans abonnement', 'no-subscription formula')
+        document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('Formule sans abonnement', 'no-subscription formula')
 
-        document.getElementById('total-family-premium').innerHTML = getTrad('Vous payez une seule fois pour toute', 'You pay once for everything')
-        document.getElementById('total-starter-family').innerHTML = getTrad('Vous payez une seule fois pour toute', 'You pay once for everything')
-        document.getElementById('total-starter').innerHTML = getTrad('Vous payez une seule fois pour toute', 'You pay once for everything')
+        document.getElementById('total-family-premium').innerHTML = getTrad('1 paiement unique', '1 single payment')
+        document.getElementById('total-starter-family').innerHTML = getTrad('1 paiement unique', '1 single payment')
+        document.getElementById('total-starter').innerHTML = getTrad('1 paiement unique', '1 single payment')
         updateTime(true)
 
     }
