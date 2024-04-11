@@ -154,7 +154,7 @@ class ShoppingCart {
             throw new Error();
         }
         this.cart.splice(productIndex, 1)
-        this.saveCart({ event: { type: "clearItem", id: id, count: count } })
+        this.saveCart({ event: { type: "clearItem", id: id } })
     }
 
     countItems() {
