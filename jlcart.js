@@ -841,18 +841,26 @@ const initAboJag = async () => {
         document.getElementById('abo-facture-annee').className = 'abo_btn_on';
         document.getElementById('abo-facture-life').className = 'abo_btn_off';
 
-
+        /*
         document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + getTrad('€/an', '€/year')
         document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) + getTrad('€/an', '€/year')
         document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "yearly").price) + getTrad('€/an', '€/year')
+        document.getElementById('total-family-premium').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
+        document.getElementById('total-starter-family').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
+        document.getElementById('total-starter').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
+        */
 
+        document.getElementById('total-family-premium').textContent = getTrad('Paiement', '') + displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
+        document.getElementById('total-starter-family').textContent = getTrad('Paiement', '') + displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
+        document.getElementById('total-starter').textContent = getTrad('Paiement', '') + displayPrice(findAboType(findAbonnement("starter"), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
+        document.getElementById('abo-prix-family-premium').innerHTML = (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
+        document.getElementById('abo-prix-starter-family').innerHTML = (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
+        document.getElementById('abo-prix-starter').innerHTML = (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
+        
         document.getElementById('abo-annee-mois-starter').textContent = getTrad('2 mois offerts', '2 months free')
         document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('2 mois offerts', '2 months free')
         document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('2 mois offerts', '2 months free')
 
-        document.getElementById('total-family-premium').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        document.getElementById('total-starter-family').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        document.getElementById('total-starter').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
         updateTime(false)
     }
 
@@ -875,12 +883,6 @@ const initAboJag = async () => {
         updateTime(true)
 
     }
-
-    /*
-    abo-facture-mois
-    abo-facture-annee
-    abo-facture-life
-    */
 
     document.getElementById('abo-facture-annee').addEventListener('click', (event) => {
         event.preventDefault();
@@ -914,9 +916,7 @@ const initResult = async () => {
         localStorage.setItem('session_id', id)
         document.getElementById('JL_ORDER_ID').textContent = datas.numOrder
         document.getElementById('JL_ORDER').style.display = 'flex';
-
     }
-
 }
 
 const loadCart = async (id) => {
@@ -935,12 +935,10 @@ function preload(url) {
 const loadData = async () => {
     let date = Date.now()
     let result
-    let delayDate = 24 * 60 * 60 * 1000;
 
     result = await (await getProductsFromStripe()).json()
     localStorage.setItem('ts', date)
     localStorage.setItem('data', JSON.stringify(result))
-
 }
 
 const init = async () => {
@@ -955,7 +953,7 @@ const init = async () => {
         lastDate = JSON.parse(localStorage.getItem('ts'));
     }
 
-    if ((date - lastDate) > delayDate) {
+    //if ((date - lastDate) > delayDate) {
         let loaderContainer = document.createElement('div')
         loaderContainer.classList.add('jl-loader-container')
         loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
@@ -963,7 +961,7 @@ const init = async () => {
         await loadData()
         await loadAbonnement()
         loaderContainer.style.display = 'none'
-    }
+    //}
 
     result = JSON.parse(localStorage.getItem('data'))
     abonnement = JSON.parse(localStorage.getItem('abonnement'))
