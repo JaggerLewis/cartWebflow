@@ -117,7 +117,7 @@ class ShoppingCart {
         } else {
             this.cart[productIndex].quantity++
         }
-        this.saveCart()
+        this.saveCart({ event: { type: "addItem", id: id, count: count } })
     }
 
     removeItem(id, count = 1) {
@@ -129,7 +129,7 @@ class ShoppingCart {
         if (this.cart[productIndex].quantity <= 0) {
             this.clearItem(id);
         }
-        this.saveCart()
+        this.saveCart({ event: { type: "removeItem", id: id, count: count } })
     }
 
     setItemCount(id, count) {
@@ -145,7 +145,7 @@ class ShoppingCart {
         } else {
             this.cart[productIndex].quantity = count
         }
-        this.saveCart()
+        this.saveCart({ event: { type: "setItem", id: id, count: count } })
     }
 
     clearItem(id) {
@@ -154,7 +154,7 @@ class ShoppingCart {
             throw new Error();
         }
         this.cart.splice(productIndex, 1)
-        this.saveCart()
+        this.saveCart({ event: { type: "clearItem", id: id, count: count } })
     }
 
     countItems() {
@@ -183,23 +183,18 @@ class ShoppingCart {
 
     clear() {
         this.cart = []
-        this.saveCart();
+        this.saveCart({ event: { type: "clearCart", id: id, count: count } });
     }
 
-    saveCart({ callApi = true } = {}) {
-        console.log("saveCart", callApi)
+    saveCart({ callApi = true, event } = {}) {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
         if (callApi) {
-            console.log("call API")
-            this.updateCartInDb().then(answer => {
-                console.log("api called", answer)
+            this.updateCartInDb({ event }).then(answer => {
                 answer.json().then(answerJson => {
-                    console.log("answer json", answerJson)
                     if (answerJson.success) {
                         this.orderId = answerJson.orderId
                         localStorage.setItem('orderId', this.orderId)
-                        console.log("success", this.orderId)
                     }
                 }).catch(e => {
                     console.error("error parsing", e);
@@ -220,13 +215,14 @@ class ShoppingCart {
         return answer
     }
 
-    updateCartInDb() {
+    updateCartInDb({ event } = {}) {
         const answer = fetch(`${interfaceUrl}/stripe/cart`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 cart: this.cart,
-                orderId: this.orderId
+                orderId: this.orderId,
+                event: event,
             })
         })
         return answer
@@ -335,13 +331,11 @@ const getTargetProduct = () => {
 
     targetProduct = 'jag';
 
-    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes' )
-    {
+    if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
         targetProduct = 'jag';
     }
 
-    if ( document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes' )
-    {
+    if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
         targetProduct = 'jag-smartdock';
     }
 
@@ -465,23 +459,21 @@ const switchSmartdock = () => {
         targetProduct = 'jag-smartdock';
     }
     */
-    
-    if ( document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes' )
-    {
+
+    if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
         // On bascule avec le smartdock
         targetProduct = 'jag-smartdock';
-        document.getElementById('jag-without-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
         document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_off w-button';
-        document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
         document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_on w-button';
     }
-    else
-    {
-         // On bascule sur le produit seul
+    else {
+        // On bascule sur le produit seul
         targetProduct = 'jag';
-        document.getElementById('jag-without-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
         document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_on w-button';
-        document.getElementById('jag-with-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
         document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';
     }
 
@@ -856,7 +848,7 @@ const initAboJag = async () => {
         document.getElementById('abo-prix-family-premium').innerHTML = (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
         document.getElementById('abo-prix-starter-family').innerHTML = (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
         document.getElementById('abo-prix-starter').innerHTML = (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        
+
         document.getElementById('abo-annee-mois-starter').textContent = getTrad('2 mois offerts', '2 months free')
         document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('2 mois offerts', '2 months free')
         document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('2 mois offerts', '2 months free')
@@ -956,13 +948,13 @@ const init = async () => {
     }
 
     //if ((date - lastDate) > delayDate) {
-        let loaderContainer = document.createElement('div')
-        loaderContainer.classList.add('jl-loader-container')
-        loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
-        body.insertBefore(loaderContainer, document.body.firstChild);
-        await loadData()
-        await loadAbonnement()
-        loaderContainer.style.display = 'none'
+    let loaderContainer = document.createElement('div')
+    loaderContainer.classList.add('jl-loader-container')
+    loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
+    body.insertBefore(loaderContainer, document.body.firstChild);
+    await loadData()
+    await loadAbonnement()
+    loaderContainer.style.display = 'none'
     //}
 
     result = JSON.parse(localStorage.getItem('data'))
@@ -983,8 +975,7 @@ const init = async () => {
         preload(findProduct('jag-smartdock', 'weimar').image)
         preload(findProduct('jag-smartdock', 'charbon').image)
     }
-    catch(e)
-    {
+    catch (e) {
         console.log(e)
     }
 
