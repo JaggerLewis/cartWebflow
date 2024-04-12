@@ -1218,6 +1218,7 @@ if (document.getElementById('encart_jag_gps_s2'))
     } 
 }
 
+console.log(initialDevice, initialColor)
 
 if (document.getElementById('JL_NavBar'))
     init()
