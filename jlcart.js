@@ -297,7 +297,7 @@ let abonnement = []
 let accessory = []
 
 const findProduct = (product, color) => {
-    let filtered = products.filter(elem => elem.metadata.productId == product)
+    let filtered = products.filter(elem => elem.metadata.pId == product)
 
     if (color != null)
         filtered = filtered.filter(elem => elem.metadata.colorId == color)
@@ -306,7 +306,7 @@ const findProduct = (product, color) => {
 }
 
 const findAbonnement = (product) => {
-    let filtered = abonnement.find(elem => elem.metadata.productId == product)
+    let filtered = abonnement.find(elem => elem.metadata.pId == product)
     //console.log(filtered);
 
     return filtered
@@ -580,7 +580,7 @@ const initCollar = async () => {
                 break;
             default:
         }
-        let finalProduct = products.find(elem => elem.metadata.productId == productId && elem.metadata.colorId == color)
+        let finalProduct = products.find(elem => elem.metadata.pId == productId && elem.metadata.colorId == color)
 
         if (finalProduct != null)
             shoppingCart.addItem(finalProduct, 1)
@@ -753,7 +753,7 @@ const initJagAccessory = () => {
         //console.log(access);
         createAccessoryItem(nbAccess);
         document.getElementById('jl-Accessory-item-label-' + nbAccess).innerHTML = capitalise(getLocalName(access));
-        document.getElementById('jl-Accessory-item-ref-' + nbAccess).innerHTML = access.metadata.productId;
+        document.getElementById('jl-Accessory-item-ref-' + nbAccess).innerHTML = access.metadata.pId;
         document.getElementById('jl-Accessory-item-Img-' + nbAccess).src = access.image;
         document.getElementById('jl-Accessory-item-Img-' + nbAccess).removeAttribute('srcset');
         document.getElementById('jl-Accessory-item-price-' + nbAccess).innerHTML = (access.price.price).toFixed(2) + ' &euro;';
@@ -1127,7 +1127,7 @@ const showNewCart = (event) => {
 
         document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML = getLocalName(prod.id);
         let labelQty = getTrad('qté : ', 'qty : ');
-        document.getElementById('JL_Basket_Item_Ref_' + nbItem).innerHTML = prod.id.metadata.productId + " (" + labelQty + prod.quantity + ")";
+        document.getElementById('JL_Basket_Item_Ref_' + nbItem).innerHTML = prod.id.metadata.pId + " (" + labelQty + prod.quantity + ")";
         document.getElementById('JL_Basket_Item_Img_' + nbItem).src = prod.id.image;
         document.getElementById('JL_Basket_Item_Img_' + nbItem).removeAttribute('srcset');
         document.getElementById('JL_Basket_Item_Price_' + nbItem).innerHTML = (prod.quantity * prod.id.price.price).toFixed(2) + ' &euro;';
