@@ -413,9 +413,17 @@ const initJagGPS = async () => {
     collar.srcset = findProduct('jag', 'fauve').image
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
 
-    document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
-    document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
-
+    if (initialDevice == 'jag')
+    {
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
+    }
+    else
+    {
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
+        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
+    }
+    
     switchSmartdock();
 
     return true;
@@ -479,7 +487,6 @@ const switchSmartdock = () => {
 
     console.log("switch", targetProduct);
 
-    colors = ['fauve', 'weimar', 'charbon'];
     colorChanged = false;
 
     let collar = document.getElementById('jl-collar')
@@ -1190,6 +1197,27 @@ goToStripe.onclick = (event) => {
     redirectToStripe(event)
 }
 
-const initialColor = 'fauve';
+var colors = ['fauve', 'weimar', 'charbon'];
+var devices = ['jag', 'jag-smartdock'];
+var initialColor = 'fauve';
+var initialDevice = 'jag';
+
+if (document.getElementById('encart_jag_gps_s2')) 
+{
+    let queryParams = new URLSearchParams(document.location.search);
+    var jagColor = queryParams.get("c")
+    if ( ( jagColor != null) && ( colors.includes(jagColor) ) )
+    {
+        initialColor = jagColor;
+    } 
+    
+    var jagDevice = queryParams.get("d")
+    if ( ( jagDevice != null) && ( devices.includes(jagDevice) ) )
+    {
+        initialDevice = jagDevice;
+    } 
+}
+
+
 if (document.getElementById('JL_NavBar'))
     init()
