@@ -906,18 +906,55 @@ const initAboJag = async () => {
 }
 
 
-const initResult = async () => {
+const refreshOrderInfo = async () => {
     shoppingCart.clear()
     document.getElementById('JL_ORDER').style.display = 'none';
     let id = new URLSearchParams(window.location.search).get('session_id')
     //console.log(id)
     if (id != null) {
         let datas = await loadCart(id)
-        //console.log(datas);
+        console.log(datas);
         localStorage.setItem('session_id', id)
         document.getElementById('JL_ORDER_ID').textContent = datas.numOrder
         document.getElementById('JL_ORDER').style.display = 'flex';
     }
+
+    /*
+    {
+          item_id: "SKU_12345",
+          item_name: "Stan and Friends Tee",
+          affiliation: "Google Merchandise Store",
+          coupon: "SUMMER_FUN",
+          discount: 2.22,
+          index: 0,
+          item_brand: "Google",
+          item_category: "Apparel",
+          item_category2: "Adult",
+          item_category3: "Shirts",
+          item_category4: "Crew",
+          item_category5: "Short sleeve",
+          item_list_id: "related_products",
+          item_list_name: "Related Products",
+          item_variant: "green",
+          location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+          price: 10.01,
+          quantity: 3
+        }
+    */
+    /*
+    gtag("event", "purchase", {
+        transaction_id: datas.numOrder,
+        value: 30.03,
+        tax: 4.90,
+        shipping: 5.99,
+        currency: "EUR",
+        items: [
+         ]
+    });
+
+    */
+
+
 }
 
 const loadCart = async (id) => {
@@ -1019,7 +1056,7 @@ const init = async () => {
     }
 
     if (document.getElementById('jl-checkout-redirect')) {
-        initResult();
+        refreshOrderInfo();
     }
 
     setCartNumber();
@@ -1045,7 +1082,14 @@ const redirectToStripe = async (event) => {
     //console.log(apiRes);
     const apiResJson = await apiRes.json()
     //console.log(apiResJson);
-    window.location.href = apiResJson.url
+
+    //Appel du Tag Manager pour le checkout puis redirection vers stripe
+    gtag("event", "begin_checkout", {
+        event_callback: function () {
+            window.location.href = apiResJson.url
+        },
+    });
+    
 }
 
 const redirectToStripeBis = async () => {
