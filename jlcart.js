@@ -965,6 +965,14 @@ const loadCart = async (id) => {
     return await fetch(`${interfaceUrl}/stripe/checkout_session/` + id + '/cart').then(res => res.json())
 }
 
+const loadOrder = async (id) => {
+    try {
+        loaderContainer.display = ''
+    }
+    catch (e) { }
+    return await fetch(`${interfaceUrl}/order/` + id ).then(res => res.json())
+}
+
 function preload(url) {
     let tmp = new Image();
     tmp.src = url;
