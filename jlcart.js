@@ -174,10 +174,11 @@ class ShoppingCart {
     }
 
     setTotalPrice() {
-        let price = this.getTotalPrice() + 5.99
+        let price = this.getTotalPrice() + 5.90
         //const totalSpan = document.querySelector('#jl-total')
         const totalSpan = document.getElementById('JL_Basket_Total_Amount');
         totalSpan.innerHTML = price.toFixed(2) + " &euro;"
+        return price.toFixed(2);
     }
 
 
@@ -382,22 +383,22 @@ const initJagGPS = async () => {
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
         document.activeElement.blur();
-        gtag("event", "addToCart", {
-            'ecommerce': {
-                'currencyCode': 'EUR',
-                'add': {                                // 'add' actionFieldObject measures.
-                  'products': [{                        //  adding a product to a shopping cart.
-                    'name': 'Triblend Android T-Shirt',
-                    'id': '12345',
-                    'price': '15.25',
-                    'brand': 'Jagger & Lewis',
-                    'variant': 'Gray',
-                    'quantity': 1
-                   }]
-                }
+        gtag("event", "add_to_cart", 
+        {
+            currency: "EUR",
+            value: product.price.price,
+            items: [
+              {
+                item_id: product.metadata.productId,
+                item_name: product.metadata.title_fr,
+                item_brand: "Jagger & Lewis",
+                item_variant: product.colorId,
+                price: product.price.price,
+                quantity: 3
               }
+            ]
         });
-        console.log('addtocart->ok',product)
+        //console.log('addtocart->ok',product)
     })
 
     document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
@@ -1203,6 +1204,8 @@ const showNewCart = (event) => {
 
     clearCart();
 
+    let cart_items = [];
+
     shoppingCart.cart.forEach((prod) => {
 
         let id = prod.id.price.id
@@ -1227,6 +1230,26 @@ const showNewCart = (event) => {
             document.getElementById('JL_Basket_Items').removeChild(itemLineChild);
             shoppingCart.clearItem(prod.id);
             shoppingCart.setTotalPrice();
+            
+            console.log('prod',prod);
+
+            // Add event for google
+            gtag("event", "remove_from_cart", 
+            {
+                'currency': "EUR",
+                'value': prod.price.price,
+                'items': [
+                {
+                    'item_id': prod.metadata.productId,
+                    'item_name': prod.metadata.title_fr,
+                    'item_brand': "Jagger & Lewis",
+                    'item_variant': prod.colorId,
+                    'price': prod.price.price,
+                    'quantity': prod.quantity
+                }
+                ]
+            });
+
             if (shoppingCart.cart.length == 0) {
                 noItems();
             }
@@ -1235,10 +1258,25 @@ const showNewCart = (event) => {
 
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
 
+        cart_items.push({
+                'item_id': prod.metadata.productId,
+                'item_name': prod.metadata.title_fr,
+                'item_brand': "Jagger & Lewis",
+                'item_variant': prod.colorId,
+                'price': prod.price.price,
+                'quantity': prod.quantity
+            });
+
         nbItem++;
     })
 
-    shoppingCart.setTotalPrice();
+    let cart_totalPrice = shoppingCart.setTotalPrice();
+
+    gtag("event", "view_cart", {
+        currency: "EUR",
+        value: cart_totalPrice,
+        items: cart_items,
+      });
 
     document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.90') + "</b>";
 
