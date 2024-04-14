@@ -911,49 +911,52 @@ const refreshOrderInfo = async () => {
     document.getElementById('JL_ORDER').style.display = 'none';
     let id = new URLSearchParams(window.location.search).get('session_id')
     //console.log(id)
-    if (id != null) {
-        let datas = await loadCart(id)
-        console.log(datas);
-        localStorage.setItem('session_id', id)
-        document.getElementById('JL_ORDER_ID').textContent = datas.numOrder
-        document.getElementById('JL_ORDER').style.display = 'flex';
+    if (id == null) {
+        id = "cs_live_a1Rd0HTjHn8zIFgoXlj3wnk0jxW0Krpv5f3W4wjamNnAzytLTq9Px9WYfV"
     }
 
-    /*
+    let datas = await loadCart(id)
+    console.log(datas);
+    localStorage.setItem('session_id', id)
+    document.getElementById('JL_ORDER_ID').textContent = datas.orderNumber
+    document.getElementById('JL_ORDER').style.display = 'flex';
+    
+    let order_total_amount = 0;
+    let order_items = [];
+
+    for (item in datas.aside_data.cart) 
     {
-          item_id: "SKU_12345",
-          item_name: "Stan and Friends Tee",
-          affiliation: "Google Merchandise Store",
-          coupon: "SUMMER_FUN",
-          discount: 2.22,
-          index: 0,
-          item_brand: "Google",
-          item_category: "Apparel",
-          item_category2: "Adult",
-          item_category3: "Shirts",
-          item_category4: "Crew",
-          item_category5: "Short sleeve",
-          item_list_id: "related_products",
-          item_list_name: "Related Products",
-          item_variant: "green",
-          location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
-          price: 10.01,
-          quantity: 3
-        }
-    */
-    /*
+        let itemColor = '';
+        if ( item.description.toLowerCase.indexOf('weimar') > -1 ) itemColor = 'Weimar';
+        if ( item.description.toLowerCase.indexOf('fauve') > -1 ) itemColor = 'Fauve';
+        if ( item.description.toLowerCase.indexOf('charbon') > -1 ) itemColor = 'Charbon';
+
+        newItem = {
+            item_id: "SKU_12345",
+            item_name: item.description,
+            index: 0,
+            item_brand: "Jagger & Lewis",
+            item_variant: itemColor,
+            price: item.amount_total,
+            quantity: item.quantity
+          }
+
+        order_total_amount += item.amount_total;
+        order_items.push(newItem)
+    }
+    
+    order_total_amount = order_total_amount + 5.9;
+    order_total_tax = order_total_amount / 1.2;
+    console.log(order_total_amount,order_total_tax,order_items )
+
     gtag("event", "purchase", {
-        transaction_id: datas.numOrder,
-        value: 30.03,
+        transaction_id: datas.orderNumber,
+        value: order_total_amount,
         tax: 4.90,
-        shipping: 5.99,
+        shipping: 5.90,
         currency: "EUR",
-        items: [
-         ]
+        items: order_items
     });
-
-    */
-
 
 }
 
@@ -963,14 +966,6 @@ const loadCart = async (id) => {
     }
     catch (e) { }
     return await fetch(`${interfaceUrl}/stripe/checkout_session/` + id + '/cart').then(res => res.json())
-}
-
-const loadOrder = async (id) => {
-    try {
-        loaderContainer.display = ''
-    }
-    catch (e) { }
-    return await fetch(`${interfaceUrl}/order/` + id ).then(res => res.json())
 }
 
 function preload(url) {
