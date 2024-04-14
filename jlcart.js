@@ -217,7 +217,7 @@ class ShoppingCart {
 
     updateCartInDb({ event } = {}) {
         try {
-            const answer = fetch(`${interfaceUrl}/order/cart`, {
+            const answer = fetch(`${interfaceUrl}/stripe/cart`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
