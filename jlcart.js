@@ -1212,7 +1212,7 @@ const showNewCart = (event) => {
         //addHtml(prod, id)
         //addFunction(prod.id, id)
 
-        console.log('list_cart',prod);
+        console.log('item_prod',prod);
         createLine(nbItem);
 
         document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML = getLocalName(prod.id);
@@ -1235,7 +1235,7 @@ const showNewCart = (event) => {
             gtag("event", "remove_from_cart", 
             {
                 'currency': "EUR",
-                'value': prod.price.price,
+                'value': prod.id.price.price,
                 'items': [
                 {
                     'item_id': prod.id.metadata.productId,
