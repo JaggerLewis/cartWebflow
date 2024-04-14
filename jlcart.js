@@ -1258,6 +1258,8 @@ const showNewCart = (event) => {
 
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
 
+        console.log(prod);
+        
         cart_items.push({
                 'item_id': prod.metadata.productId,
                 'item_name': prod.metadata.title_fr,
