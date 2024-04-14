@@ -955,7 +955,7 @@ const refreshOrderInfo = async () => {
         order_items.push(newItem)
     }
     
-    order_total_amount = order_total_amount + 5.9;
+    order_total_amount = order_total_amount + 590;
     order_total_tax = order_total_amount / 1.2;
     console.log(order_total_amount,order_total_tax,order_items )
 
