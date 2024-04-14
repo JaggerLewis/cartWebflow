@@ -1212,7 +1212,7 @@ const showNewCart = (event) => {
         //addHtml(prod, id)
         //addFunction(prod.id, id)
 
-        //console.log(prod);
+        console.log('list_cart',prod);
         createLine(nbItem);
 
         document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML = getLocalName(prod.id);
@@ -1230,8 +1230,6 @@ const showNewCart = (event) => {
             document.getElementById('JL_Basket_Items').removeChild(itemLineChild);
             shoppingCart.clearItem(prod.id);
             shoppingCart.setTotalPrice();
-            
-            console.log('prod',prod);
 
             // Add event for google
             gtag("event", "remove_from_cart", 
@@ -1240,11 +1238,11 @@ const showNewCart = (event) => {
                 'value': prod.price.price,
                 'items': [
                 {
-                    'item_id': prod.metadata.productId,
-                    'item_name': prod.metadata.title_fr,
+                    'item_id': prod.id.metadata.productId,
+                    'item_name': prod.id.metadata.title_fr,
                     'item_brand': "Jagger & Lewis",
-                    'item_variant': prod.colorId,
-                    'price': prod.price.price,
+                    'item_variant': prod.id.metadata.colorId,
+                    'price': prod.id.price.price,
                     'quantity': prod.quantity
                 }
                 ]
@@ -1258,14 +1256,12 @@ const showNewCart = (event) => {
 
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
 
-        console.log(prod);
-        
         cart_items.push({
-                'item_id': prod.metadata.productId,
-                'item_name': prod.metadata.title_fr,
+                'item_id': prod.id.metadata.productId,
+                'item_name': prod.id.metadata.title_fr,
                 'item_brand': "Jagger & Lewis",
-                'item_variant': prod.colorId,
-                'price': prod.price.price,
+                'item_variant': prod.id.metadata.colorId,
+                'price': prod.id.price.price,
                 'quantity': prod.quantity
             });
 
