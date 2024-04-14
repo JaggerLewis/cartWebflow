@@ -914,11 +914,12 @@ const refreshOrderInfo = async () => {
     let id = new URLSearchParams(window.location.search).get('session_id')
     //console.log(id)
     if (id == null) {
-        return null
+        id = "cs_live_a1Rd0HTjHn8zIFgoXlj3wnk0jxW0Krpv5f3W4wjamNnAzytLTq9Px9WYfV";
     }
 
     let datas = await loadCart(id)
     console.log(datas);
+
     localStorage.setItem('session_id', id)
     if (document.getElementById('JL_ORDER')) {
         document.getElementById('JL_ORDER_ID').textContent = datas.orderNumber
@@ -930,10 +931,12 @@ const refreshOrderInfo = async () => {
 
     for (item in datas.aside_data.cart) 
     {
+        console.log(item);
+
         let itemColor = '';
-        if ( item.description.toLowerCase.indexOf('weimar') > -1 ) itemColor = 'Weimar';
-        if ( item.description.toLowerCase.indexOf('fauve') > -1 ) itemColor = 'Fauve';
-        if ( item.description.toLowerCase.indexOf('charbon') > -1 ) itemColor = 'Charbon';
+        if ( item.description.toLowerCase.indexOf('weimar') > -1 ) {itemColor = 'Weimar';}
+        if ( item.description.toLowerCase.indexOf('fauve') > -1 ) {itemColor = 'Fauve';}
+        if ( item.description.toLowerCase.indexOf('charbon') > -1 ) {itemColor = 'Charbon';}
 
         newItem = {
             item_id: "SKU_12345",
