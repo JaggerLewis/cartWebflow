@@ -941,7 +941,7 @@ const refreshOrderInfo = async () => {
     }
 
     let datas = await loadCart(id)
-    console.log(datas);
+    //console.log(datas);
 
     localStorage.setItem('session_id', id)
     if (document.getElementById('JL_ORDER')) {
@@ -956,7 +956,7 @@ const refreshOrderInfo = async () => {
     for (i=0; i<items.length ; i++)
     {
         item = datas.aside_data.cart[i];
-        console.log(item);
+        //console.log(item);
 
         let itemColor = '';
         if ( item.description.toLowerCase().indexOf('weimar') > -1 ) {itemColor = 'Weimar';}
@@ -978,7 +978,7 @@ const refreshOrderInfo = async () => {
         order_items.push(newItem)
     }
     
-    shipping_cost = 590;
+    shipping_cost = 599;
     order_total_amount = order_total_amount + shipping_cost;
     order_total_tax = order_total_amount / 1.2;
     //console.log(order_total_amount,order_total_tax,order_items )
@@ -991,6 +991,7 @@ const refreshOrderInfo = async () => {
         currency: "EUR",
         items: order_items
     });
+    console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
 
 }
 
