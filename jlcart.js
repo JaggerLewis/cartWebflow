@@ -382,6 +382,22 @@ const initJagGPS = async () => {
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
         document.activeElement.blur();
+        gtag("event", "addToCart", {
+            'ecommerce': {
+                'currencyCode': 'EUR',
+                'add': {                                // 'add' actionFieldObject measures.
+                  'products': [{                        //  adding a product to a shopping cart.
+                    'name': 'Triblend Android T-Shirt',
+                    'id': '12345',
+                    'price': '15.25',
+                    'brand': 'Jagger & Lewis',
+                    'variant': 'Gray',
+                    'quantity': 1
+                   }]
+                }
+              }
+        });
+        console.log('addtocart->ok',product)
     })
 
     document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
@@ -401,8 +417,6 @@ const initJagGPS = async () => {
         document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';*/
         switchSmartdock();
         document.activeElement.blur();
-
-
     })
 
     document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
@@ -538,23 +552,6 @@ const initHome = async () => {
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
         document.activeElement.blur();
-
-        gtag("event", "addToCart", {
-            'ecommerce': {
-                'currencyCode': 'EUR',
-                'add': {                                // 'add' actionFieldObject measures.
-                  'products': [{                        //  adding a product to a shopping cart.
-                    'name': 'Triblend Android T-Shirt',
-                    'id': '12345',
-                    'price': '15.25',
-                    'brand': 'Jagger & Lewis',
-                    'variant': 'Gray',
-                    'quantity': 1
-                   }]
-                }
-              }
-        });
-        console.log('addtocart->ok',product)
     })
 
     document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
