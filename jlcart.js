@@ -174,7 +174,7 @@ class ShoppingCart {
     }
 
     setTotalPrice() {
-        let price = this.getTotalPrice() + 5.90
+        let price = this.getTotalPrice() + 5.99
         //const totalSpan = document.querySelector('#jl-total')
         const totalSpan = document.getElementById('JL_Basket_Total_Amount');
         totalSpan.innerHTML = price.toFixed(2) + " &euro;"
@@ -1278,7 +1278,7 @@ const showNewCart = (event) => {
         items: cart_items,
       });
 
-    document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.90') + "</b>";
+    document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
 
     document.getElementById('JL_Basket_Total').style.display = 'flex';
     document.getElementById('JL_Basket_Boutons').style.display = 'flex';
