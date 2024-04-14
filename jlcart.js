@@ -950,6 +950,7 @@ const refreshOrderInfo = async () => {
           }
 
         order_total_amount += item.amount_total;
+        console.log(newItem);
         order_items.push(newItem)
     }
     
