@@ -929,8 +929,9 @@ const refreshOrderInfo = async () => {
     let order_total_amount = 0;
     let order_items = [];
 
-    for (item in datas.aside_data.cart) 
+    for (i=0;i++;i< (datas.aside_data.cart).length) 
     {
+        item = datas.aside_data.cart[i];
         console.log(item);
 
         let itemColor = '';
