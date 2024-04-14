@@ -951,19 +951,20 @@ const refreshOrderInfo = async () => {
           }
 
         order_total_amount += item.amount_total;
-        console.log(newItem);
+        //console.log(newItem);
         order_items.push(newItem)
     }
     
-    order_total_amount = order_total_amount + 590;
+    shipping_cost = 590;
+    order_total_amount = order_total_amount + shipping_cost;
     order_total_tax = order_total_amount / 1.2;
-    console.log(order_total_amount,order_total_tax,order_items )
+    //console.log(order_total_amount,order_total_tax,order_items )
 
     gtag("event", "purchase", {
         transaction_id: datas.orderNumber,
-        value: order_total_amount,
-        tax: 4.90,
-        shipping: 5.90,
+        value: order_total_amount/100,
+        tax: order_total_tax/100,
+        shipping: shipping_cost/100,
         currency: "EUR",
         items: order_items
     });
