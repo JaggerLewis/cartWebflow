@@ -183,7 +183,7 @@ class ShoppingCart {
 
     clear() {
         this.cart = []
-        this.saveCart({ event: { type: "clearCart", id: id, count: count } });
+        //this.saveCart({ event: { type: "clearCart", id: id, count: count } });
     }
 
     saveCart({ callApi = true, event } = {}) {
@@ -912,7 +912,7 @@ const refreshOrderInfo = async () => {
     let id = new URLSearchParams(window.location.search).get('session_id')
     //console.log(id)
     if (id == null) {
-        id = "cs_live_a1Rd0HTjHn8zIFgoXlj3wnk0jxW0Krpv5f3W4wjamNnAzytLTq9Px9WYfV"
+        return null
     }
 
     let datas = await loadCart(id)
