@@ -908,7 +908,9 @@ const initAboJag = async () => {
 
 const refreshOrderInfo = async () => {
     shoppingCart.clear()
-    document.getElementById('JL_ORDER').style.display = 'none';
+    if (document.getElementById('JL_ORDER'))
+        document.getElementById('JL_ORDER').style.display = 'none';
+
     let id = new URLSearchParams(window.location.search).get('session_id')
     //console.log(id)
     if (id == null) {
@@ -918,8 +920,10 @@ const refreshOrderInfo = async () => {
     let datas = await loadCart(id)
     console.log(datas);
     localStorage.setItem('session_id', id)
-    document.getElementById('JL_ORDER_ID').textContent = datas.orderNumber
-    document.getElementById('JL_ORDER').style.display = 'flex';
+    if (document.getElementById('JL_ORDER')) {
+        document.getElementById('JL_ORDER_ID').textContent = datas.orderNumber
+        document.getElementById('JL_ORDER').style.display = 'flex';
+    }
     
     let order_total_amount = 0;
     let order_items = [];
