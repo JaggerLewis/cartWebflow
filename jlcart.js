@@ -216,16 +216,22 @@ class ShoppingCart {
     }
 
     updateCartInDb({ event } = {}) {
-        const answer = fetch(`${interfaceUrl}/stripe/cart`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                cart: this.cart,
-                orderId: this.orderId,
-                event: event,
+        try {
+            const answer = fetch(`${interfaceUrl}/order/cart`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    cart: this.cart,
+                    orderId: this.orderId,
+                    event: event,
+                })
             })
-        })
-        return answer
+            return answer
+        }
+        catch(e) {
+            console.log(e)
+            return true
+        }
     }
 }
 
