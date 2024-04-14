@@ -936,9 +936,9 @@ const refreshOrderInfo = async () => {
         console.log(item);
 
         let itemColor = '';
-        if ( item.description.toLowerCase.indexOf('weimar') > -1 ) {itemColor = 'Weimar';}
-        if ( item.description.toLowerCase.indexOf('fauve') > -1 ) {itemColor = 'Fauve';}
-        if ( item.description.toLowerCase.indexOf('charbon') > -1 ) {itemColor = 'Charbon';}
+        if ( item.description.toLowerCase().indexOf('weimar') > -1 ) {itemColor = 'Weimar';}
+        if ( item.description.toLowerCase().indexOf('fauve') > -1 ) {itemColor = 'Fauve';}
+        if ( item.description.toLowerCase().indexOf('charbon') > -1 ) {itemColor = 'Charbon';}
 
         newItem = {
             item_id: "SKU_12345",
