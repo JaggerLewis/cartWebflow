@@ -941,7 +941,7 @@ const refreshOrderInfo = async () => {
         if ( item.description.toLowerCase().indexOf('charbon') > -1 ) {itemColor = 'Charbon';}
 
         newItem = {
-            item_id: "SKU_12345",
+            item_id: item.price.product,
             item_name: item.description,
             index: 0,
             item_brand: "Jagger & Lewis",
