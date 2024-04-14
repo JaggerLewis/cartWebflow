@@ -980,7 +980,7 @@ const refreshOrderInfo = async () => {
     
     shipping_cost = 599;
     order_total_amount = order_total_amount + shipping_cost;
-    order_total_tax = order_total_amount / 1.2;
+    order_total_tax = parseInt(order_total_amount / 1.2);
     //console.log(order_total_amount,order_total_tax,order_items )
 
     gtag("event", "purchase", {
