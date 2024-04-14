@@ -1107,8 +1107,9 @@ const redirectToStripe = async (event) => {
         event.preventDefault();
     }
     catch (e) {
-        console.log(e);
+        //console.log(e);
     }
+
     /*
     if (shoppingCart.countItems() == 0) {
         showSnackBar("Vous n'avez pas d'article", true)
