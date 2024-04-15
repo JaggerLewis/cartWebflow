@@ -122,8 +122,8 @@ const aboAction = () => {
         showSnackBar('Vous devez séléctionner un pack', true)
         return
     }
-    else if (!check || check.checked) {
-        showSnackBar("Vous devez accepter les drais d'activitation", true)
+    else if (!check || !check.checked) {
+        showSnackBar("Vous devez accepter les frais d'activitation", true)
         return
     }
 }
