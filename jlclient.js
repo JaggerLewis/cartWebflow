@@ -1,6 +1,7 @@
 
 
 const baseurl = 'https://app-api.mypet.fit'
+const interfaceUrl = "https://heyjag.mypet.fit";
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NzFkM2RjNzA4M2E3ODg2ZTQzNzNhOCIsInBob25lIjoiMDAzMzYxMjk2NTM5OCIsIm5hbWUiOiJFbGlvdCIsImxhc3RuYW1lIjoiTUFSVElOIiwiZW1haWwiOiJlbGlvdC5tYXJ0aW5AamFnZ2VyLWxld2lzLmNvbSJ9LCJpYXQiOjE3MTIxMzM0Njh9.cfvU9bp8yr8ASiMN5vY9j5mrQH8CfV50m1k3Hny917Y'
 
 const step2 = 'activation-produit-etape02'
@@ -10,7 +11,7 @@ const header ={ headers: {
     'Content-Type': 'application/json' 
   }}
 
-let aboDuration = 'month'
+
 
 
 const converTimestamp = (timestamp) => {
@@ -60,6 +61,8 @@ const initClient = {
 
 let user
 let dog
+let aboDuration = 'month'
+let abonnement = []
 
 const getMonth = (month) => {switch (month) {
     case 0:
@@ -197,14 +200,31 @@ const checkActivation = () => {
     window.open('activation-produit-etape02', '_self')
 }
 
+const getAbonnement = async () => {
+    if (window.localStorage.abonnement) {
+        let data = JSON.parse(window.localStorage.abonnement)
+        if (data.length != 0) {
+            abonnement = data
+            return
+        }
+    }
+    let data = await fetch(`${interfaceUrl}/stripe/products/category/subscription`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    })
+    window.localStorage.setItem('abonnement', JSON.stringify(data))
+    abonnement = data
+}
+
+
 const getAll = async () => {
     //INIT LOADER
     let loaderContainer = document.createElement('div')
-    loadAbonnement()
+    
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
-
+    getAbonnement()
     user = await fetch(baseurl + '/profile/full', header)
             .then(async (res) => await res.json())
             .then((res) => res.user)
