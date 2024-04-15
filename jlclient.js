@@ -48,9 +48,9 @@ const initClient = {
     'jl_Abonnement_Action_month' : (node) =>node.addEventListener('click', () => toMonth()),
     'jl_Abonnement_Action_year' : (node) =>node.addEventListener('click', () => toYear()),
     'jl_Abonnement_Action_life' : (node) =>node.addEventListener('click', () => toLife()),
-    'jl_Abonnement_Starter' : (node) => updateContainerBorder('jl_Abonnement_Starter'),
-    'jl_Abonnement_Family' : (node) => updateContainerBorder('jl_Abonnement_Family'),
-    'jl_Abonnement_Premium' : (node) => updateContainerBorder('jl_Abonnement_Premium'),
+    'jl_Abonnement_Starter' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Starter')),
+    'jl_Abonnement_Family' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Family')),
+    'jl_Abonnement_Premium' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Premium')),
     
 }
 
@@ -110,8 +110,6 @@ const toMonth = () => {
     document.getElementById('jl_Abonnement_Action_life').className = 'my_abo_btn_off';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
-        console.log(findAbonnement(abo))
-        console.log(findAboType(findAbonnement(abo), "monthly"))
         document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('Sans engagement', 'No obligation')
         document.getElementById('jl-abo-'+abo+'-bottom').innerHTML = ''
         document.getElementById('jl-abo-'+abo+'-price').innerHTML = displayPrice(findAboType(findAbonnement(abo), "monthly").price) + getTrad('€/mois', '€/month')
@@ -123,8 +121,6 @@ const toYear = () => {
     document.getElementById('jl_Abonnement_Action_life').className = 'my_abo_btn_off';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
-        console.log(findAbonnement(abo))
-        console.log(findAboType(findAbonnement(abo), "yearly"))
         document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('2 mois offerts', '2 months free')
         document.getElementById('jl-abo-'+abo+'-bottom').innerHTML = getTrad('Paiement de ', '') + displayPrice(findAboType(findAbonnement(abo), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
         document.getElementById('jl-abo-'+abo+'-price').innerHTML =   (findAboType(findAbonnement(abo), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
@@ -136,8 +132,6 @@ const toLife = () => {
     document.getElementById('jl_Abonnement_Action_life').className = 'my_abo_btn_on';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
-        console.log(findAbonnement(abo))
-        console.log(findAboType(findAbonnement(abo), "life"))
         document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('Formule sans abonnement', 'no-subscription formula')
         document.getElementById('jl-abo-'+abo+'-bottom').innerHTML =  getTrad('1 paiement unique', '1 single payment')
         document.getElementById('jl-abo-'+abo+'-price').innerHTML = findAboType(findAbonnement(abo), "life").price + '€'
