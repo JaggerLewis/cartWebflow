@@ -8,6 +8,8 @@ const header ={ headers: {
     'Content-Type': 'application/json' 
   }}
 
+let aboDuration = 'month'
+
 
 const converTimestamp = (timestamp) => {
     let day = Math.floor(timestamp / (24 * 3600)); 
@@ -40,7 +42,17 @@ const initClient = {
     'jl-scnackbar' : (node) => console.log('snack-bar'),
     'jl_Activation_serialNumber' : (node) => document.getElementById('Jag_Activation_Action').addEventListener('click', () => checkActivation()),
     'jl_Activation_phoneNumber' : (node) => null,
-    'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation())
+    'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
+    'jl_Abonnement_Action_month' : (node) => toMonth(),
+    'jl_Abonnement_Action_year' : (node) => toYear(),
+    'jl_Abonnement_Action_life' : (node) => toLife(),
+    'jl_Abonnement_Starter' : (node) => '',
+    'jl_Abonnement_Starter_action' : (node) => '',
+    'jl_Abonnement_Family' : (node) => '',
+    'jl_Abonnement_Family_action' : (node) => '',
+    'jl_Abonnement_Premium' : (node) => '',
+    'jl_Abonnement_Premium_action' : (node) => '',
+    'jl_Abonnement_check' : (node) => '',
     
 }
 
@@ -88,6 +100,37 @@ const getMonth = (month) => {switch (month) {
         return "";
 }}
 
+const toMonth = () => {
+    aboType = ['starter', 'starter-family', 'premium-family']
+    aboType.forEach((abo) => {
+        console.log(findAbonnement(abo))
+        console.log(findAboType(findAbonnement(abo), "monthly"))
+        document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('Sans engagement', 'No obligation')
+        document.getElementById('jl-abo-'+abo+'-bottom').innerHTML = ''
+        document.getElementById('jl-abo-'+abo+'-price').innerHTML = displayPrice(findAboType(findAbonnement(abo), "monthly").price) + getTrad('€/mois', '€/month')
+    })
+}
+const toYear = () => {
+    aboType = ['starter', 'starter-family', 'premium-family']
+    aboType.forEach((abo) => {
+        console.log(findAbonnement(abo))
+        console.log(findAboType(findAbonnement(abo), "yearly"))
+        document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('2 mois offerts', '2 months free')
+        document.getElementById('jl-abo-'+abo+'-bottom').innerHTML = getTrad('Paiement de ', '') + displayPrice(findAboType(findAbonnement(abo), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
+        document.getElementById('jl-abo-'+abo+'-price').innerHTML =   (findAboType(findAbonnement(abo), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
+    })
+}
+const toLife = () => {
+    aboType = ['starter', 'starter-family', 'premium-family']
+    aboType.forEach((abo) => {
+        console.log(findAbonnement(abo))
+        console.log(findAboType(findAbonnement(abo), "life"))
+        document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('Formule sans abonnement', 'no-subscription formula')
+        document.getElementById('jl-abo-'+abo+'-bottom').innerHTML =  getTrad('1 paiement unique', '1 single payment')
+        document.getElementById('jl-abo-'+abo+'-price').innerHTML = findAboType(findAbonnement(abo), "life").price + '€'
+    })
+}
+
 const initActivity = async (node) => {
     card = document.getElementById('jl-activity-card')
     dog.activities.personalActivities.forEach((activity) => {
@@ -111,6 +154,10 @@ const initActivity = async (node) => {
         }
     })
     card.style.display = 'none'
+}
+
+const initAbonnement = (node) => {
+
 }
 
 const changeChildsId = (node, suffix, filter) => {
