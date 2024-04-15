@@ -1340,6 +1340,3 @@ console.log(initialDevice, initialColor)
 
 if (document.getElementById('JL_NavBar'))
     init()
-
-
-export {loadAbonnement as default}
