@@ -1,6 +1,8 @@
 const baseurl = 'https://app-api.mypet.fit'
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NzFkM2RjNzA4M2E3ODg2ZTQzNzNhOCIsInBob25lIjoiMDAzMzYxMjk2NTM5OCIsIm5hbWUiOiJFbGlvdCIsImxhc3RuYW1lIjoiTUFSVElOIiwiZW1haWwiOiJlbGlvdC5tYXJ0aW5AamFnZ2VyLWxld2lzLmNvbSJ9LCJpYXQiOjE3MTIxMzM0Njh9.cfvU9bp8yr8ASiMN5vY9j5mrQH8CfV50m1k3Hny917Y'
 
+const step2 = 'activation-produit-etape02'
+
 const header ={ headers: {
     'Authorization': 'Bearer ' + token,
     'Content-Type': 'application/json' 
@@ -31,11 +33,15 @@ const initClient = {
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.id,
     'jl-collar-battery' : (node) => node.innerHTML = dog.battery.soc+'%',
-    'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + "d'autonomie",
+    'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
     'jl-collar-synchro-date' : (node) => console.log( 'jl-collar-synchro-date'),
     'jl-collar-rescue' : (node) => console.log( 'jl-collar-rescue'),
     'jl-activity-card-container' : (node) => initActivity(node),
-    'jl-scnackbar' : (node) => console.log('snack-bar')
+    'jl-scnackbar' : (node) => console.log('snack-bar'),
+    'jl_Activation_serialNumber' : (node) => null,
+    'jl_Activation_phoneNumber' : (node) => null,
+    'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation())
+    
 }
 
 let user
@@ -119,6 +125,27 @@ const changeChildsId = (node, suffix, filter) => {
             changeChildsId(childs[index], suffix)
         }
     }
+}
+
+const checkActivation = () => {
+    const regexPhone = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'
+    const reglexSerial = 'JL[A-Za-z0-9]-[A-Za-z0-9]{8}'
+
+    let serial = document.getElementById('jl_Activation_serialNumber').value
+    let phone = document.getElementById('jl_Activation_phoneNumber').value
+
+    if (!phone.match(regexPhone)) {
+        showSnackBar('Mauvais téléphone', true)
+        return
+    }
+    if (!serial.match(reglexSerial)) {
+        showSnackBar('Numéro de serie incorrecte (JL-01-0111A11A)', true)
+        return
+    }
+
+    // TODO(dev): add API call
+    window.localStorage.serial = serial
+    window.open('activation-produit-etape02', '_self')
 }
 
 const getAll = async () => {
