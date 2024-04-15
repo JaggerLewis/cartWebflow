@@ -51,6 +51,9 @@ const initClient = {
     'jl_Abonnement_Starter' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Starter')),
     'jl_Abonnement_Family' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Family')),
     'jl_Abonnement_Premium' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Premium')),
+    'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction()),
+    'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction()),
+    'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction()),
     
 }
 
@@ -98,6 +101,31 @@ const getMonth = (month) => {switch (month) {
     default:
         return "";
 }}
+
+
+const aboAction = () => {
+    let duration = document.getElementsByClassName('my_abo_btn_on')[0]
+    let pack = document.getElementsByClassName('abo_border_on')[0]
+    let check = document.getElementById('jl_Abonnement_check')
+    if (pack && duration && check && check.checked) {
+        console.log('MAX')
+        showSnackBar("C'est good on call max")
+        //TODO(dev): call strips
+        return
+    }
+
+    else if (!duration) {
+        showSnackBar('Vous devez séléctionner une durée', true)
+        return
+    }
+    else if (!pack) {
+        showSnackBar('Vous devez séléctionner un pack', true)
+        return
+    }
+    else if (!check || check.checked) {
+        showSnackBar("Vous devez accepter les drais d'activitation", true)
+        return
+    }
 
 const updateContainerBorder = (type) => {
     ['jl_Abonnement_Starter','jl_Abonnement_Family','jl_Abonnement_Premium'].forEach((elem) =>
