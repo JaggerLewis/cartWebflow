@@ -104,6 +104,9 @@ const getMonth = (month) => {switch (month) {
 }}
 
 const toMonth = () => {
+    document.getElementById('jl_Abonnement_Action_month').className = 'abo_btn_on';
+    document.getElementById('jl_Abonnement_Action_year').className = 'abo_btn_off';
+    document.getElementById('jl_Abonnement_Action_life').className = 'abo_btn_off';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
         console.log(findAbonnement(abo))
@@ -114,6 +117,9 @@ const toMonth = () => {
     })
 }
 const toYear = () => {
+    document.getElementById('jl_Abonnement_Action_month').className = 'abo_btn_off';
+    document.getElementById('jl_Abonnement_Action_year').className = 'abo_btn_on';
+    document.getElementById('jl_Abonnement_Action_life').className = 'abo_btn_off';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
         console.log(findAbonnement(abo))
@@ -124,6 +130,9 @@ const toYear = () => {
     })
 }
 const toLife = () => {
+    document.getElementById('jl_Abonnement_Action_month').className = 'abo_btn_off';
+    document.getElementById('jl_Abonnement_Action_year').className = 'abo_btn_off';
+    document.getElementById('jl_Abonnement_Action_life').className = 'abo_btn_on';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
         console.log(findAbonnement(abo))
