@@ -126,6 +126,7 @@ const aboAction = () => {
         showSnackBar("Vous devez accepter les drais d'activitation", true)
         return
     }
+}
 
 const updateContainerBorder = (type) => {
     ['jl_Abonnement_Starter','jl_Abonnement_Family','jl_Abonnement_Premium'].forEach((elem) =>
