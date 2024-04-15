@@ -38,7 +38,7 @@ const initClient = {
     'jl-collar-rescue' : (node) => console.log( 'jl-collar-rescue'),
     'jl-activity-card-container' : (node) => initActivity(node),
     'jl-scnackbar' : (node) => console.log('snack-bar'),
-    'jl_Activation_serialNumber' : (node) => null,
+    'jl_Activation_serialNumber' : (node) => document.getElementById('Jag_Activation_Action').addEventListener('click', () => checkActivation()),
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation())
     
