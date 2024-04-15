@@ -61,7 +61,6 @@ const initClient = {
 let user
 let dog
 let aboDuration = 'month'
-let abonnement = []
 
 const getMonth = (month) => {switch (month) {
     case 0:
