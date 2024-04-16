@@ -45,9 +45,9 @@ const initClient = {
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
-    'jl_Abonnement_Action_month' : (node) =>node.addEventListener('click', () => toMonth()),
-    'jl_Abonnement_Action_year' : (node) =>node.addEventListener('click', () => toYear()),
-    'jl_Abonnement_Action_life' : (node) =>node.addEventListener('click', () => toLife()),
+    'jl_abo-facture-mois' : (node) =>node.addEventListener('click', () => toMonth()),
+    'jl_abo-facture-annee' : (node) =>node.addEventListener('click', () => toYear()),
+    'jl_abo-facture-life' : (node) =>node.addEventListener('click', () => toLife()),
     'jl_Abonnement_Starter' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Starter')),
     'jl_Abonnement_Family' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Family')),
     'jl_Abonnement_Premium' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Premium')),
@@ -55,7 +55,6 @@ const initClient = {
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction()),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction()),
     'jl-abo-starter-name' : (node) => redirectStep2(),
-    
 }
 
 let user

@@ -861,9 +861,9 @@ const initAboJag = async () => {
     }
 
     const toMonth = () => {
-        document.getElementById('abo-facture-mois').className = 'abo_btn_on';
-        document.getElementById('abo-facture-annee').className = 'abo_btn_off';
-        document.getElementById('abo-facture-life').className = 'abo_btn_off';
+        document.getElementById('jl_abo-facture-mois').className = 'abo_btn_on';
+        document.getElementById('jl_abo-facture-annee').className = 'abo_btn_off';
+        document.getElementById('jl_abo-facture-life').className = 'abo_btn_off';
 
         document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "monthly").price) + getTrad('€/mois', '€/month')
         document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "monthly").price) + getTrad('€/mois', '€/month')
@@ -881,9 +881,9 @@ const initAboJag = async () => {
     }
 
     const toYear = () => {
-        document.getElementById('abo-facture-mois').className = 'abo_btn_off';
-        document.getElementById('abo-facture-annee').className = 'abo_btn_on';
-        document.getElementById('abo-facture-life').className = 'abo_btn_off';
+        document.getElementById('jl_abo-facture-mois').className = 'abo_btn_off';
+        document.getElementById('jl_abo-facture-annee').className = 'abo_btn_on';
+        document.getElementById('jl_abo-facture-life').className = 'abo_btn_off';
 
         /*
         document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + getTrad('€/an', '€/year')
@@ -909,9 +909,9 @@ const initAboJag = async () => {
     }
 
     const toLife = () => {
-        document.getElementById('abo-facture-mois').className = 'abo_btn_off';
-        document.getElementById('abo-facture-annee').className = 'abo_btn_off';
-        document.getElementById('abo-facture-life').className = 'abo_btn_on';
+        document.getElementById('jl_abo-facture-mois').className = 'abo_btn_off';
+        document.getElementById('jl_abo-facture-annee').className = 'abo_btn_off';
+        document.getElementById('jl_abo-facture-life').className = 'abo_btn_on';
 
         document.getElementById('abo-prix-family-premium').textContent = findAboType(findAbonnement("premium-family"), "life").price + '€'
         document.getElementById('abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), "life").price + '€'
@@ -928,17 +928,17 @@ const initAboJag = async () => {
 
     }
 
-    document.getElementById('abo-facture-annee').addEventListener('click', (event) => {
+    document.getElementById('jl_abo-facture-annee').addEventListener('click', (event) => {
         event.preventDefault();
         toYear();
         document.activeElement.blur();
     });
-    document.getElementById('abo-facture-life').addEventListener('click', (event) => {
+    document.getElementById('jl_abo-facture-life').addEventListener('click', (event) => {
         event.preventDefault();
         toLife();
         document.activeElement.blur();
     });
-    document.getElementById('abo-facture-mois').addEventListener('click', (event) => {
+    document.getElementById('jl_abo-facture-mois').addEventListener('click', (event) => {
         event.preventDefault();
         toMonth();
         document.activeElement.blur();
