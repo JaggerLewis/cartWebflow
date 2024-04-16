@@ -110,7 +110,7 @@ const redirectStep2 = () => {
 }
 
 const aboAction = async (length) => {
-    let duration = document.getElementsByClassName('my_abo_btn_on')[0]
+    let duration = document.getElementsByClassName('abo_btn_on')[0]
     let check = document.getElementById('jl_Abonnement_check')
     if (duration && check && check.checked) {
         let abo = getRightAbo(pack.id.split('_')[2].toLowerCase())
