@@ -136,10 +136,7 @@ const aboAction = async (type) => {
         showSnackBar('Vous devez séléctionner une durée', true)
         return
     }
-    else if (!pack) {
-        showSnackBar('Vous devez séléctionner un pack', true)
-        return
-    }
+
     else if (!check || !check.checked) {
         showSnackBar("Vous devez accepter les frais d'activitation", true)
         return
