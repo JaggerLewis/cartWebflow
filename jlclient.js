@@ -5,10 +5,10 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NzFk
 
 const step2 = 'activation-produit-etape02'
 
-const header ={ headers: {
+const header = {
     'Authorization': 'Bearer ' + token,
-    'Content-Type': 'application/json' 
-  }}
+    'Content-Type': 'application/json'
+  }
 
 
 
@@ -228,11 +228,11 @@ const checkActivation = async () => {
 
     const result = await fetch(baseurl + '/collar/serialNumber', {
         method: "POST",
-        headers: header,
+        headers : header,
         body: JSON.stringify({
             'serialNumber' : serial,
             'phone' : phone,
-        }), // body data type must match "Content-Type" header
+        }), 
       }).then(async (res) => await res.status) 
     
       switch (result) {
@@ -262,7 +262,7 @@ const getAbonnement = async () => {
     }
     let data = await fetch(`${interfaceUrl}/stripe/products/category/subscription`, {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: header,
     })
     window.localStorage.setItem('abonnement', JSON.stringify(data))
     abonnement = data
@@ -277,14 +277,14 @@ const getAll = async () => {
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
     loadAbonnement()
-    user = await fetch(baseurl + '/profile/full', header)
+    user = await fetch(baseurl + '/profile/full', {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.user)
     if (user.dogs.length != 0)
-        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', header)
+        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', {headers : header})
         .then(async (res) => await res.json())
         .then((res) => res.dog)
-    dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', header)
+    dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
     .then(async (res) => await res.json())
     .then((res) => res.BatteryInfos)
     loaderContainer.style.display = 'none'
