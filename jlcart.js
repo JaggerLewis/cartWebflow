@@ -52,9 +52,9 @@ const getRightAbo = (value) => {
 
 const getRightLenght = (value) => {
     switch (value) {
-        case 'month': 
+        case 'mois': 
              return 'monthly'; 
-        case 'year': 
+        case 'annee': 
             return 'yearly'; 
         default : 
             return value

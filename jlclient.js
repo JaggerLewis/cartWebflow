@@ -109,13 +109,14 @@ const redirectStep2 = () => {
     }
 }
 
-const aboAction = async (length) => {
+const aboAction = async (type) => {
     let duration = document.getElementsByClassName('abo_btn_on')[0]
     let check = document.getElementById('jl_Abonnement_check')
     if (duration && check && check.checked) {
-        let abo = getRightAbo(pack.id.split('_')[2].toLowerCase())
+        console.log(duration)
+        let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
 
-        console.log(findAboType(findAbonnement(abo), length))
+        console.log(findAboType(findAbonnement(type), length))
         showSnackBar("C'est good on call max")
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
@@ -133,6 +134,10 @@ const aboAction = async (length) => {
 
     else if (!duration) {
         showSnackBar('Vous devez séléctionner une durée', true)
+        return
+    }
+    else if (!pack) {
+        showSnackBar('Vous devez séléctionner un pack', true)
         return
     }
     else if (!check || !check.checked) {
