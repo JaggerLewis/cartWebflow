@@ -849,13 +849,13 @@ const updateTime = (search) => {
 const initAboJag = async () => {
 
     const switchDisplay = () => {
-        if (document.getElementById('abo-facture-mois').className == 'abo_btn_on') {
+        if (document.getElementById('jl_abo-facture-mois').className == 'abo_btn_on') {
             toMonth();
         }
-        if (document.getElementById('abo-facture-annee').className == 'abo_btn_on') {
+        if (document.getElementById('jl_abo-facture-annee').className == 'abo_btn_on') {
             toYear();
         }
-        if (document.getElementById('abo-facture-life').className == 'abo_btn_on') {
+        if (document.getElementById('jl_abo-facture-life').className == 'abo_btn_on') {
             toLife();
         }
     }
