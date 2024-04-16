@@ -10,7 +10,7 @@ const header = {
     'Content-Type': 'application/json'
   }
 
-
+let loaderContainer
 
 
 const converTimestamp = (timestamp) => {
@@ -290,7 +290,7 @@ const getAbonnement = async () => {
 
 const getAll = async () => {
     //INIT LOADER
-    let loaderContainer = document.createElement('div')
+    loaderContainer = document.createElement('div')
     
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
