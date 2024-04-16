@@ -156,9 +156,9 @@ const updateContainerBorder = (type) => {
 }
 
 const toMonth = () => {
-    document.getElementById('jl_Abonnement_Action_month').className = 'my_abo_btn_on';
-    document.getElementById('jl_Abonnement_Action_year').className = 'my_abo_btn_off';
-    document.getElementById('jl_Abonnement_Action_life').className = 'my_abo_btn_off';
+    document.getElementById('jl_abo-facture-mois').className = 'my_abo_btn_on';
+    document.getElementById('jl_abo-facture-annee').className = 'my_abo_btn_off';
+    document.getElementById('jl_abo-facture-life').className = 'my_abo_btn_off';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
         document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('Sans engagement', 'No obligation')
@@ -167,9 +167,9 @@ const toMonth = () => {
     })
 }
 const toYear = () => {
-    document.getElementById('jl_Abonnement_Action_month').className = 'my_abo_btn_off';
-    document.getElementById('jl_Abonnement_Action_year').className = 'my_abo_btn_on';
-    document.getElementById('jl_Abonnement_Action_life').className = 'my_abo_btn_off';
+    document.getElementById('jl_abo-facture-mois').className = 'my_abo_btn_off';
+    document.getElementById('jl_abo-facture-annee').className = 'my_abo_btn_on';
+    document.getElementById('jl_abo-facture-life').className = 'my_abo_btn_off';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
         document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('2 mois offerts', '2 months free')
@@ -178,9 +178,9 @@ const toYear = () => {
     })
 }
 const toLife = () => {
-    document.getElementById('jl_Abonnement_Action_month').className = 'my_abo_btn_off';
-    document.getElementById('jl_Abonnement_Action_year').className = 'my_abo_btn_off';
-    document.getElementById('jl_Abonnement_Action_life').className = 'my_abo_btn_on';
+    document.getElementById('jl_abo-facture-mois').className = 'my_abo_btn_off';
+    document.getElementById('jl_abo-facture-annee').className = 'my_abo_btn_off';
+    document.getElementById('jl_abo-facture-life').className = 'my_abo_btn_on';
     aboType = ['starter', 'starter-family', 'premium-family']
     aboType.forEach((abo) => {
         document.getElementById('jl-abo-'+abo+'-top').innerHTML =  getTrad('Formule sans abonnement', 'no-subscription formula')
