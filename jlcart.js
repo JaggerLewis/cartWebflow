@@ -39,6 +39,28 @@ function displayPrice(price) {
             : '' + price
 }
 
+const getRightAbo = (value) => {
+    switch (value) {
+        case 'premium': 
+             return 'premium-family'; 
+        case 'family': 
+            return 'starter-family'; 
+        default :
+            return value
+    }
+}
+
+const getRightLenght = (value) => {
+    switch (value) {
+        case 'month': 
+             return 'monthly'; 
+        case 'year': 
+            return 'yearly'; 
+        default : 
+            return value
+    }
+}
+
 const setCartNumber = () => {
     if (JL_NavBar) {
         let count = 0
