@@ -42,7 +42,7 @@ const initClient = {
     'jl-collar-rescue' : (node) => console.log( 'jl-collar-rescue'),
     'jl-activity-card-container' : (node) => initActivity(node),
     'jl-scnackbar' : (node) => console.log('snack-bar'),
-    'jl_Activation_serialNumber' : (node) => document.getElementById('Jag_Activation_Action').addEventListener('click', () => checkActivation()),
+    'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
     'jl_Abonnement_Action_month' : (node) =>node.addEventListener('click', () => toMonth()),
@@ -218,11 +218,11 @@ const checkActivation = async () => {
     let phone = document.getElementById('jl_Activation_phoneNumber').value
 
     if (!phone.match(regexPhone)) {
-        showSnackBar('Mauvais téléphone', true)
+        showSnackBar('Numéro de téléphone incorrect', true)
         return
     }
     if (!serial.match(reglexSerial)) {
-        showSnackBar('Numéro de serie incorrecte (JL-01-0111A11A)', true)
+        showSnackBar('Numéro de serie incorrect (JL1-1111A11A)', true)
         return
     }
 

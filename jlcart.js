@@ -4,7 +4,7 @@
 
 const interfaceUrl = "https://heyjag.mypet.fit";
 const body = document.querySelector("body");
-const JL_NavBar = document.getElementById('JL_NavBar')
+
 
 if (document.querySelector('#jl-aqua-modal')) {
     document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
