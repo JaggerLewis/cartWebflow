@@ -210,7 +210,7 @@ const changeChildsId = (node, suffix, filter) => {
     }
 }
 
-const checkActivation = () => {
+const checkActivation = async () => {
     const regexPhone = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'
     const reglexSerial = 'JL[A-Za-z0-9]-[A-Za-z0-9]{8}'
 
