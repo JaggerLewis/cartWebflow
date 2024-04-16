@@ -48,12 +48,12 @@ const initClient = {
     'jl_abo-facture-mois' : (node) =>node.addEventListener('click', () => toMonth()),
     'jl_abo-facture-annee' : (node) =>node.addEventListener('click', () => toYear()),
     'jl_abo-facture-life' : (node) =>node.addEventListener('click', () => toLife()),
-    'jl_Abonnement_Starter' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Starter')),
-    'jl_Abonnement_Family' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Family')),
-    'jl_Abonnement_Premium' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Premium')),
-    'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction()),
-    'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction()),
-    'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction()),
+    // 'jl_Abonnement_Starter' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Starter')),
+    // 'jl_Abonnement_Family' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Family')),
+    // 'jl_Abonnement_Premium' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Premium')),
+    'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
+    'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('starter-family')),
+    'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
     'jl-abo-starter-name' : (node) => redirectStep2(),
 }
 
@@ -109,14 +109,11 @@ const redirectStep2 = () => {
     }
 }
 
-const aboAction = async () => {
+const aboAction = async (length) => {
     let duration = document.getElementsByClassName('my_abo_btn_on')[0]
-    let pack = document.getElementsByClassName('abo_border_on')[0]
     let check = document.getElementById('jl_Abonnement_check')
-    if (pack && duration && check && check.checked) {
-        console.log(duration, pack)
+    if (duration && check && check.checked) {
         let abo = getRightAbo(pack.id.split('_')[2].toLowerCase())
-        let length = getRightLenght(duration.id.split('_')[3].toLowerCase())
 
         console.log(findAboType(findAbonnement(abo), length))
         showSnackBar("C'est good on call max")
@@ -136,10 +133,6 @@ const aboAction = async () => {
 
     else if (!duration) {
         showSnackBar('Vous devez séléctionner une durée', true)
-        return
-    }
-    else if (!pack) {
-        showSnackBar('Vous devez séléctionner un pack', true)
         return
     }
     else if (!check || !check.checked) {
