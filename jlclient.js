@@ -226,9 +226,30 @@ const checkActivation = () => {
         return
     }
 
-    // TODO(dev): add API call
-    window.localStorage.serial = serial
-    window.open('activation-produit-etape02', '_self')
+    const result = await fetch(baseurl + '/collar/serialNumber', {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify({
+            'serialNumber' : serial,
+            'phone' : phone,
+        }), // body data type must match "Content-Type" header
+      }).then(async (res) => await res.status) 
+    
+      switch (result) {
+        case 200 : 
+            window.localStorage.serial = serial
+            window.localStorage.phone = phone
+            window.open('activation-produit-etape02', '_self')
+            break
+        case 400 :
+            showSnackBar('Ce boîtier est déjà activé', true)
+            break 
+        case 404 : 
+            showSnackBar('boîtier inconnu', true)
+            break 
+      }
+
+   
 }
 
 const getAbonnement = async () => {
