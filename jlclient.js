@@ -116,8 +116,7 @@ const aboAction = async (type) => {
         console.log(duration)
         let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
 
-        console.log(findAboType(findAbonnement(type), length))
-        showSnackBar("C'est good on call max")
+        loaderContainer.display = ''
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
             headers : header,
@@ -127,18 +126,21 @@ const aboAction = async (type) => {
                 'serialNumber' : window.localStorage.serial
             }), 
           }).then(async (res) => await res.json()) 
-          if (result.url)
+          if (result.url) {
+            loaderContainer.display = ''
             window.open(result.url, '_self')
+          }
+
         return
     }
 
     else if (!duration) {
-        showSnackBar('Vous devez séléctionner une durée', true)
+        showAddCart('Vous devez séléctionner une durée', true)
         return
     }
 
     else if (!check || !check.checked) {
-        showSnackBar("Vous devez accepter les frais d'activitation", true)
+        showAddCart("Vous devez accepter les frais d'activitation", true)
         return
     }
 }
@@ -235,11 +237,11 @@ const checkActivation = async () => {
     let phone = document.getElementById('jl_Activation_phoneNumber').value
 
     if (!phone.match(regexPhone)) {
-        showSnackBar('Numéro de téléphone incorrect', true)
+        showAddCart('Numéro de téléphone incorrect', true)
         return
     }
     if (!serial.match(reglexSerial)) {
-        showSnackBar('Numéro de serie incorrect (JL1-1111A11A)', true)
+        showAddCart('Numéro de serie incorrect (JL1-1111A11A)', true)
         return
     }
 
@@ -259,10 +261,10 @@ const checkActivation = async () => {
             window.open('activation-produit-etape02', '_self')
             break
         case 400 :
-            showSnackBar('Ce boîtier est déjà activé', true)
+            showAddCart('Ce boîtier est déjà activé', true)
             break 
         case 404 : 
-            showSnackBar('boîtier inconnu', true)
+            showAddCart('boîtier inconnu', true)
             break 
       }
 
