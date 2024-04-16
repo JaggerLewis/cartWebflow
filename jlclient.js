@@ -110,7 +110,7 @@ const redirectStep2 = () => {
     }
 }
 
-const aboAction = () => {
+const aboAction = async () => {
     let duration = document.getElementsByClassName('my_abo_btn_on')[0]
     let pack = document.getElementsByClassName('abo_border_on')[0]
     let check = document.getElementById('jl_Abonnement_check')
