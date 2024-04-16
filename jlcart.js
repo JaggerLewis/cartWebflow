@@ -1051,6 +1051,8 @@ const init = async () => {
         lastDate = JSON.parse(localStorage.getItem('ts'));
     }
 
+    console.log( date, lastDate), (date - lastDate);
+
     //if ((date - lastDate) > delayDate) {
     let loaderContainer = document.createElement('div')
     loaderContainer.classList.add('jl-loader-container')
