@@ -46,12 +46,10 @@ const initClient = {
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
     'jl_Abonnement_Starter' : (node) => initAboJag(),
-    // 'jl_Abonnement_Family' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Family')),
-    // 'jl_Abonnement_Premium' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Premium')),
+    'jl_Abonnement_Family' : (node) => redirectStep2(),
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('starter-family')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
-    'jl-abo-starter-name' : (node) => redirectStep2(),
 }
 
 let user
@@ -282,7 +280,7 @@ const getAbonnement = async () => {
 
 
 const getAll = async () => {
-    //INIT LOADER
+   
     loaderContainer = document.createElement('div')
     
     loaderContainer.classList.add('jl-loader-container')
