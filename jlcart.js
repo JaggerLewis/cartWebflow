@@ -342,6 +342,7 @@ const findAbonnement = (product) => {
 }
 
 const findAboType = (abo, type) => {
+    console.log(abo, type)
     let filtered = abo.prices.find(elem => elem.metadata.pricing == type)
 
     return filtered
