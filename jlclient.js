@@ -45,7 +45,7 @@ const initClient = {
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
-    'jl_Abonnement_Starter' : (node) => node.addEventListener('click', () =>   initAboJag()),
+    'jl_Abonnement_Starter' : (node) => initAboJag(),
     // 'jl_Abonnement_Family' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Family')),
     // 'jl_Abonnement_Premium' : (node) => node.addEventListener('click', () =>  updateContainerBorder('jl_Abonnement_Premium')),
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
