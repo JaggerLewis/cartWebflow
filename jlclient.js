@@ -47,8 +47,6 @@ const initClient = {
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
-    'jl_Abonnement_Starter' : (node) => initAboJag(),
-    'jl_Abonnement_Family' : (node) => redirectStep2(),
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('starter-family')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
@@ -105,16 +103,16 @@ const redirectStep2 = () => {
 
 const aboAction = async (type) => {
     let duration = document.getElementsByClassName('abo_btn_on')[0]
-    let check = document.getElementById('jl_Abonnement_check')
+    let check = document.getElementById('jag_Abonnement_check')
     if (duration && check && check.checked) {
         let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
-
+        let subscription = findAboType(findAbonnement(type), duration).id
         loaderContainer.style.display = 'flex'
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
             headers : header,
             body: JSON.stringify({
-                'subscription' : 'price_1OpYb6ADzHYMiB1Y4gko5X4j',
+                'subscription' : subscription,
                 'phone' : window.localStorage.phone,
                 'serialNumber' : window.localStorage.serial
             }), 
@@ -321,11 +319,13 @@ const getAll = async () => {
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
 
-    if (document.getElementById('jl-step-3'))
+    if (document.getElementById('jag-step-3'))
         await getCart();
-    else if (document.getElementById('jl-step-2')) {
+    else if (document.getElementById('jag-step-2')) {
+        redirectStep2();
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
+        initAboJag();
     }
 
   
