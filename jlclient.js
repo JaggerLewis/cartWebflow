@@ -208,10 +208,6 @@ const initActivity = async (node) => {
     card.style.display = 'none'
 }
 
-const initAbonnement = (node) => {
-
-}
-
 const changeChildsId = (node, suffix, filter) => {
     if (filter) {
         if (node.id && node.id.includes(filter))

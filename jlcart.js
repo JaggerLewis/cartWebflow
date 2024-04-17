@@ -847,7 +847,7 @@ const updateTime = (search) => {
 }
 
 const initAboJag = async () => {
-
+    console.log('INIT')
     const switchDisplay = () => {
         if (document.getElementById('jl_abo-facture-mois').className == 'abo_btn_on') {
             toMonth();
