@@ -305,7 +305,7 @@ const getAll = async () => {
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
     loadAbonnement()
-  
+    abonnement = JSON.parse(localStorage.getItem('abonnement'))
     loaderContainer.style.display = 'none'
 
     setAll()
