@@ -10,10 +10,7 @@ if (document.querySelector('#jl-aqua-modal')) {
     document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
 }
 
-let snack = document.createElement('div')
-snack.innerHTML = '<div class="jl-snack-icon-container"><img class="jl-snack-icon" id="jl-snack-icon"></img></div><div class="jl-snack-text-container" id="jl-snack-text-container"></div>'
-snack.id = 'jl-snackbar'
-document.querySelector("body").appendChild(snack)
+
 
 const modalDiv = document.createElement("div");
 modalDiv.setAttribute("id", "cart")
@@ -121,12 +118,10 @@ class ShoppingCart {
     addItem(id, count = 1) {
         let maxProductinCart = 4
         if (this.countItems() >= maxProductinCart) {
-            //showSnackBar('Vous ne pouvez pas ajouter plus de 4 éléments au panier', true)
             let labeltocart = getTrad('Vous ne pouvez pas ajouter plus de ' + maxProductinCart + ' articles au panier', "You can't add more than " + maxProductinCart + " products in your cart");
             showAddCart(labeltocart, true)
             return
         }
-        //showSnackBar(id.name + ' ajouté au panier', false)
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
         const productIndex = this.findProductIndexById(id)
@@ -1308,18 +1303,12 @@ const hideCart = () => {
 }
 //document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
 
-const showSnackBar = (text, isError) => {
-    document.querySelector('#jl-snack-text-container').textContent = text
-    document.querySelector('#jl-snack-icon').src = isError ? 'https://webcart.jagger-lewis.com/asset/icon_error.png' : 'https://webcart.jagger-lewis.com/asset/icon_validate.png'
-    snack.className = isError ? 'show jl-snack-red' : 'show jl-snack-green';
-    setTimeout(function () { snack.className = '' }, 3000);
-}
+
 
 const showAddCart = (text, isError) => {
     document.getElementById('JL_AddCart_Snack_Label').textContent = text
     document.getElementById('JL_AddCart_Snack').style.display = 'block';
-    //document.querySelector('#jl-snack-icon').src = isError ? 'https://webcart.jagger-lewis.com/asset/icon_error.png' : 'https://webcart.jagger-lewis.com/asset/icon_validate.png'
-    //snack.className = isError ? 'show jl-snack-red' : 'show jl-snack-green';
+
     setTimeout(function () { document.getElementById('JL_AddCart_Snack').style.display = 'none' }, 3000);
 }
 

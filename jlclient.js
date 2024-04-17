@@ -97,29 +97,6 @@ const getMonth = (month) => {switch (month) {
         return "";
 }}
 
-
-
-const getCart = async () => {
-    let searchParams = new URLSearchParams(window.location.search);
-
-    if (!searchParams.has('session_id')) {
-          window.open('activation-produit', '_self')
-        return
-    }
-
-    let session_id = searchParams.get('session_id')
-    result =  await fetch('https://app-api.mypet.fit/order/checkout/' + session_id , {
-        method: "GET",
-        headers : header,
-    })
-    
-    if (result.status != 200) {
-        window.open('activation-produit', '_self')
-        return
-    }
-    session = await result.json()
-}
-
 const redirectStep2 = () => {
     if (!window.localStorage.serial || !window.localStorage.phone) {
         window.open('activation-produit', '_self')
@@ -279,8 +256,27 @@ const checkActivation = async () => {
             showAddCart('boîtier inconnu', true)
             break 
       }
+}
 
-   
+const getCart = async () => {
+    let searchParams = new URLSearchParams(window.location.search);
+
+    if (!searchParams.has('session_id')) {
+          window.open('activation-produit', '_self')
+        return
+    }
+
+    let session_id = searchParams.get('session_id')
+    result =  await fetch('https://app-api.mypet.fit/order/checkout/' + session_id , {
+        method: "GET",
+        headers : header,
+    })
+    
+    if (result.status != 200) {
+        window.open('activation-produit', '_self')
+        return
+    }
+    session = await result.json()
 }
 
 const getAbonnement = async () => {
