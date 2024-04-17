@@ -106,7 +106,7 @@ const aboAction = async (type) => {
     let check = document.getElementById('jag_Abonnement_check')
     if (duration && check && check.checked) {
         let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
-        let subscription = findAboType(findAbonnement(type), duration).id
+        let subscription = findAboType(findAbonnement(type), length).id
         loaderContainer.style.display = 'flex'
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
