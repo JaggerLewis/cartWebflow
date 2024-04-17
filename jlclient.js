@@ -35,7 +35,7 @@ const converTimestamp = (timestamp) => {
 }
 
 const initClient = {
-    'jl-step-3' : async (node) => await getCart(),
+    'jl-step-3' :  (node) =>  getCart(),
     'jl-profil-user-name' : (node) => node.innerHTML = session.customer.name,
     'jl-profil-dog-picture' : (node) => null,
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
@@ -336,9 +336,9 @@ const getAll = async () => {
 const setAll = () => {
     var nodes = document.querySelectorAll('[id^="jl"]');
 
-    nodes.forEach(async( node) => {
+    nodes.forEach(( node) => {
         if (initClient[node.id])
-           await initClient[node.id](node)
+            initClient[node.id](node)
         else console.log(node.id + ' is not handle :(')
     });
 }
