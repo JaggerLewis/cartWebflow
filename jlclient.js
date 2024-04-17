@@ -111,7 +111,7 @@ const aboAction = async (type) => {
         console.log(duration)
         let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
 
-        loaderContainer.display = ''
+        loaderContainer.style.display = 'flex'
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
             headers : header,
@@ -122,7 +122,7 @@ const aboAction = async (type) => {
             }), 
           }).then(async (res) => await res.json()) 
           if (result.url) {
-            loaderContainer.display = ''
+            loaderContainer.style.display = 'none'
             window.open(result.url, '_self')
           }
 
