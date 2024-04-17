@@ -111,10 +111,7 @@ class ShoppingCart {
     }
 
     findProductIndexById(id) {
-        /*
-        console.log(this.cart.findIndex(product => {
-            product.id.price.id === id.price.id
-        }))*/
+     
 
         return this.cart.findIndex(product =>
             product.id.price.id === id.price.id
@@ -290,14 +287,12 @@ const colorButtonAction = (elem, image, id) => {
 }
 
 const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
-    //let btn = document.querySelector(newBtn)
 
     newBtn = newBtn.replace('#', '');
 
     let btn = document.getElementById(newBtn);
 
     if (btn == null) {
-        //console.log('not_find', newBtn);
         return false;
     }
 
@@ -336,13 +331,11 @@ const findProduct = (product, color) => {
 
 const findAbonnement = (product) => {
     let filtered = abonnement.find(elem => elem.metadata.pId == product)
-    //console.log(filtered);
 
     return filtered
 }
 
 const findAboType = (abo, type) => {
-    console.log(abo, type)
     let filtered = abo.prices.find(elem => elem.metadata.pricing == type)
 
     return filtered
@@ -421,7 +414,6 @@ const initJagGPS = async () => {
               }
             ]
         });
-        //console.log('addtocart->ok',product)
     })
 
     document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
@@ -531,7 +523,6 @@ const switchSmartdock = () => {
         document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';
     }
 
-    console.log("switch", targetProduct);
 
     colorChanged = false;
 
@@ -552,7 +543,6 @@ const switchSmartdock = () => {
 
     if (colorChanged == false) {
         color = initialColor;
-        console.log(color, targetProduct);
         //targetProduct = 'jag';
         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
@@ -848,7 +838,6 @@ const updateTime = (search) => {
 }
 
 const initAboJag = async () => {
-    console.log('INIT')
     const switchDisplay = () => {
         if (document.getElementById('jl_abo-facture-mois').className == 'abo_btn_on') {
             toMonth();
@@ -1239,7 +1228,6 @@ const showNewCart = (event) => {
         //addHtml(prod, id)
         //addFunction(prod.id, id)
 
-        console.log('item_prod',prod);
         createLine(nbItem);
 
         document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML = getLocalName(prod.id);
@@ -1361,7 +1349,6 @@ if (document.getElementById('encart_jag_gps_s2'))
     } 
 }
 
-console.log(initialDevice, initialColor)
 
 if (document.getElementById('JL_NavBar'))
     init()

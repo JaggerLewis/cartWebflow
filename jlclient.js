@@ -38,10 +38,9 @@ const initClient = {
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.id,
     'jl-collar-battery' : (node) => node.innerHTML = dog.battery.soc+'%',
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
-    'jl-collar-synchro-date' : (node) => console.log( 'jl-collar-synchro-date'),
-    'jl-collar-rescue' : (node) => console.log( 'jl-collar-rescue'),
+    'jl-collar-synchro-date' : (node) => null,
+    'jl-collar-rescue' : (node) => null,
     'jl-activity-card-container' : (node) => initActivity(node),
-    'jl-scnackbar' : (node) => console.log('snack-bar'),
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
@@ -108,7 +107,6 @@ const aboAction = async (type) => {
     let duration = document.getElementsByClassName('abo_btn_on')[0]
     let check = document.getElementById('jl_Abonnement_check')
     if (duration && check && check.checked) {
-        console.log(duration)
         let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
 
         loaderContainer.style.display = 'flex'
