@@ -35,7 +35,6 @@ const converTimestamp = (timestamp) => {
 }
 
 const initClient = {
-    'jl-step-3' :  (node) =>  getCart(),
     'jl-profil-user-name' : (node) => node.innerHTML = session.customer.name,
     'jl-profil-dog-picture' : (node) => null,
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
@@ -322,12 +321,19 @@ const getUser = async () => {
 const getAll = async () => {
    
     loaderContainer = document.createElement('div')
-    
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
-    loadAbonnement()
-    abonnement = JSON.parse(localStorage.getItem('abonnement'))
+
+    if (document.getElementById('jl-step-3'))
+        await getCart();
+    else if (document.getElementById('jl-step-2')) {
+        await loadAbonnement()
+        abonnement = JSON.parse(localStorage.getItem('abonnement'))
+    }
+
+  
+  
     loaderContainer.style.display = 'none'
 
     setAll()
