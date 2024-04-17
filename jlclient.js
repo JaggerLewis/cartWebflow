@@ -100,7 +100,7 @@ const getMonth = (month) => {switch (month) {
 
 
 
-const getCart = () => {
+const getCart = async () => {
     let searchParams = new URLSearchParams(window.location.search);
 
     if (!searchParams.has('session_id')) {
