@@ -333,12 +333,12 @@ const getAll = async () => {
     setAll()
    }
 
-const setAll = () => {
+const setAll = async () => {
     var nodes = document.querySelectorAll('[id^="jl"]');
 
     nodes.forEach(function(node) {
         if (initClient[node.id])
-            initClient[node.id](node)
+           await initClient[node.id](node)
         else console.log(node.id + ' is not handle :(')
     });
 }
