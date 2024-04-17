@@ -11,7 +11,9 @@ const header = {
   }
 
 let loaderContainer
-
+let user
+let dog
+let session
 
 const converTimestamp = (timestamp) => {
     let day = Math.floor(timestamp / (24 * 3600)); 
@@ -33,7 +35,9 @@ const converTimestamp = (timestamp) => {
 }
 
 const initClient = {
-    'jl-profil-dog-picture' : (node) => getUser(),
+    'jl-step-3' : async (node) => await getCart(),
+    'jl-profil-user-name' : (node) => node.innerHTML = session.customer.name,
+    'jl-profil-dog-picture' : (node) => null,
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.id,
     'jl-collar-battery' : (node) => node.innerHTML = dog.battery.soc+'%',
@@ -51,9 +55,7 @@ const initClient = {
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
 }
 
-let user
-let dog
-let aboDuration = 'month'
+
 
 const getMonth = (month) => {switch (month) {
     case 0:
@@ -96,6 +98,28 @@ const getMonth = (month) => {switch (month) {
         return "";
 }}
 
+
+
+const getCart = () => {
+    let searchParams = new URLSearchParams(window.location.search);
+
+    if (!searchParams.has('session_id')) {
+          window.open('activation-produit', '_self')
+        return
+    }
+
+    let session_id = searchParams.get('session_id')
+    result =  await fetch('https://app-api.mypet.fit/order/checkout/' + session_id , {
+        method: "GET",
+        headers : header,
+    })
+    
+    if (result.status != 200) {
+        window.open('activation-produit', '_self')
+        return
+    }
+    session = await result.json()
+}
 
 const redirectStep2 = () => {
     if (!window.localStorage.serial || !window.localStorage.phone) {
