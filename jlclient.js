@@ -33,7 +33,7 @@ const converTimestamp = (timestamp) => {
 }
 
 const initClient = {
-    'jl-profil-dog-picture' : (node) => console.log( 'jl-profil-dog-picture'),
+    'jl-profil-dog-picture' : (node) => getUser(),
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.id,
     'jl-collar-battery' : (node) => node.innerHTML = dog.battery.soc+'%',
@@ -278,6 +278,24 @@ const getAbonnement = async () => {
     abonnement = data
 }
 
+const getUser = async () => {
+    loaderContainer.style.display = 'flex'
+    user = await fetch(baseurl + '/profile/full', {headers : header})
+        .then(async (res) => await res.json())
+        .then((res) => res.user)
+
+    if (user.dogs.length != 0) {
+        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', {headers : header})
+            .then(async (res) => await res.json())
+            .then((res) => res.dog)
+        dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
+            .then(async (res) => await res.json())
+            .then((res) => res.BatteryInfos)
+    }
+    loaderContainer.style.display = 'none'
+
+}
+
 
 const getAll = async () => {
    
@@ -287,16 +305,7 @@ const getAll = async () => {
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
     loadAbonnement()
-    user = await fetch(baseurl + '/profile/full', {headers : header})
-            .then(async (res) => await res.json())
-            .then((res) => res.user)
-    if (user.dogs.length != 0)
-        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', {headers : header})
-        .then(async (res) => await res.json())
-        .then((res) => res.dog)
-    dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
-    .then(async (res) => await res.json())
-    .then((res) => res.BatteryInfos)
+  
     loaderContainer.style.display = 'none'
 
     setAll()
