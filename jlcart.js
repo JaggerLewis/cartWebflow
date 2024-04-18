@@ -814,11 +814,12 @@ const loadAbonnement = async () => {
     //loaderContainer.style = null
 
     let date = Date.now()
-
+    let abonnement
     //loaderContainer.style.display = 'none'
     abonnement = await (await getAbonnementFromStripe()).json()
     localStorage.setItem('ts-abonnement', date)
     localStorage.setItem('abonnement', JSON.stringify(abonnement))
+    return abonnement
 }
 
 const updateTime = (search) => {
@@ -1022,46 +1023,35 @@ const loadData = async () => {
     result = await (await getProductsFromStripe()).json()
     localStorage.setItem('ts', date)
     localStorage.setItem('data', JSON.stringify(result))
+    return result
 }
 
 const init = async () => {
 
     let date = Date.now()
+
     let loaderContainer
-    let result
-    let delayDate = 24 * 60 * 60 * 1000;
-    if (localStorage.getItem('data') == null) {
-        lastDate = Date.now();
-    }
-    else {
-        lastDate = JSON.parse(localStorage.getItem('ts'));
-    }
-
-    console.log( date, lastDate, (date - lastDate));
-
-    if ( ((date - lastDate) > delayDate) ) {
     loaderContainer = document.createElement('div')
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
-    await loadData()
-    await loadAbonnement()
-    
-    }
-
-    result = JSON.parse(localStorage.getItem('data'))
-    abonnement = JSON.parse(localStorage.getItem('abonnement'))
 
 
-    if (!result) {
+    let lastDate = JSON.parse(localStorage.getItem('ts')) || Date.now();
+    let delayDate = 24 * 60 * 60 * 1000;
+
+    let result
+
+    console.log( date, lastDate, (date - lastDate));
+
+    if ((date - lastDate) > delayDate) {
         await loadData()
-        loaderContainer.style.display = 'none'
+        await loadAbonnement()
     }
 
-    if (!abonnement) {
-        await loadAbonnement()
-        loaderContainer.style.display = 'none'
-    }
+    result = JSON.parse(localStorage.getItem('data')) ||  await loadData()
+    abonnement = JSON.parse(localStorage.getItem('abonnement')) ||  await loadAbonnement()
+
 
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
