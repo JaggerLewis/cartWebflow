@@ -15,6 +15,7 @@ let user
 let dog
 let session
 let display
+let option
 
 const converTimestamp = (timestamp) => {
     let day = Math.floor(timestamp / (24 * 3600)); 
@@ -83,6 +84,30 @@ const formulaPageSwitch = (type) => {
         }
 
     })
+}
+// document.getElementById('jag-abo-check-6613e7d05a5dd4990a8711b6').style['background-color'] = 'red'
+const initOption = async () => {
+    let types = ['abo', 'insurance', 'option']
+    types.forEach((type) => {
+        let card = document.getElementById('jag-'+type+'-card')
+        let array = type == 'abo' ? abonnement : option
+        array.forEach((abo) => {
+            newCard = card.cloneNode(true)
+            console.log(abo.metadata.productId)
+            changeChildsId(newCard, '-'+abo.metadata.productId, 'jag-')
+            document.getElementById('jag-'+type+'-container').appendChild(newCard)
+            document.getElementById('jag-'+type+'-name-'+abo.metadata.productId).innerHTML = abo.metadata.title_fr
+            document.getElementById('jag-'+type+'-description-'+abo.metadata.productId).innerHTML = abo.description
+            document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = '00/00/00'
+            document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = '00/00/00'
+            
+            console.log(newCard)
+        
+    })
+        card.style.display = 'none'
+        document.getElementById('jag-'+type+'-container').style.display = 'block'
+    })
+       
 }
 
 
@@ -328,6 +353,23 @@ const getCart = async () => {
     session = await result.json()
 }
 
+const getOption = async () => {
+    if (window.localStorage.getItem('option')) {
+        option = JSON.parse(window.localStorage.getItem('option'))
+        return
+    }
+    result =  await fetch(baseurl + '/collar_options/e-commerce/assurance', {
+      method: "GET",
+      headers : header,
+  })
+  
+  if (result.status != 200) {
+      showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+  }
+  option = await result.json()
+  window.localStorage.setItem('option', JSON.stringify(option))
+}
+
 const getAbonnement = async () => {
     if (window.localStorage.abonnement) {
         let data = JSON.parse(window.localStorage.abonnement)
@@ -380,6 +422,9 @@ const getAll = async () => {
     }
     else if (document.getElementById('jag-formula')) {
         await loadAbonnement()
+        await getOption()
+        await initOption()
+        await getUser()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
     }
 
