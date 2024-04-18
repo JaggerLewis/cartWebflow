@@ -425,10 +425,11 @@ const getAll = async () => {
     }
     else if (document.getElementById('jag-formula')) {
         await loadAbonnement()
-        await getOption()
-        await initOption()
-        await getUser()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
+        await getOption()
+        await getUser()
+
+        await initOption()
     }
 
   
