@@ -98,8 +98,16 @@ const initOption = async () => {
             document.getElementById('jag-'+type+'-container').appendChild(newCard)
             document.getElementById('jag-'+type+'-name-'+abo.metadata.productId).innerHTML = abo.metadata.title_fr
             document.getElementById('jag-'+type+'-description-'+abo.metadata.productId).innerHTML = abo.description
-            document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = '00/00/00'
-            document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = '00/00/00'
+            switch (type) {
+                case 'abo' :
+                    document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'fin : ' + getDate(dog.collar.formula_subscription.timeout)
+                    document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'début : '+ getDate(dog.collar.formula_subscription.subscription_date)
+                default : 
+                  document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'fin : ' + '00/00/00'
+                  document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'début : '+ '00/00/00'
+
+            }
+         
             document.getElementById('jag-'+type+'-pict-'+abo.metadata.productId).src = abo.image
             if (type == 'abo') {
                 if (dog.collar.formula_subscription.formula.product == abo.metadata.productId) {
@@ -114,6 +122,27 @@ const initOption = async () => {
 }
 
 
+const getDate = (ts) => {
+    var date = new Date(ts);
+
+    var jour = date.getDate();
+    var mois = date.getMonth() + 1; // Les mois commencent à partir de 0, donc ajoutez 1
+    var annee = date.getFullYear() % 100; // Obtenez les deux derniers chiffres de l'année
+    
+    if (jour < 10) {
+        jour = '0' + jour;
+    }
+    if (mois < 10) {
+        mois = '0' + mois;
+    }
+    if (annee < 10) {
+        annee = '0' + annee;
+    }
+    
+    var dateFormatted = jour + '/' + mois + '/' + annee;
+    
+    return(dateFormatted);
+}
 
 
 const getMonth = (month) => {switch (month) {
