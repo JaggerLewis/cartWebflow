@@ -100,6 +100,7 @@ const initOption = async () => {
             document.getElementById('jag-'+type+'-description-'+abo.metadata.productId).innerHTML = abo.description
             document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = '00/00/00'
             document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = '00/00/00'
+            document.getElementById('jag-'+type+'-pict-'+abo.metadata.productId).src = abo.image
             if (type == 'abo') {
                 if (dog.collar.formula_subscription.formula.product == abo.metadata.productId) {
                     document.getElementById('jag-abo-check-'+abo.metadata.productId).style['background-color'] = 'green'
