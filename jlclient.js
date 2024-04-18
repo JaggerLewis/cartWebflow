@@ -90,7 +90,7 @@ const initOption = async () => {
     let types = ['abo', 'insurance', 'option']
     types.forEach((type) => {
         let card = document.getElementById('jag-'+type+'-card')
-        let array = type == 'abo' ? abonnement : option
+        let array = type == 'abo' ? abonnement : option.filter((elem) => elem.type == 'insurance')
         array.forEach((abo) => {
             newCard = card.cloneNode(true)
             console.log(abo.metadata.productId)
