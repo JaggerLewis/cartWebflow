@@ -331,7 +331,7 @@ const validateAction = async () => {
         window.open('activation-produit-etape02', '_self')
       }
       else {
-        showAddCart('KODE 1KORAIQUTE', true)
+        showAddCart('Code incorrect', true)
       }
        
       console.log('result', result)
@@ -379,7 +379,7 @@ const checkActivation = async () => {
             showAddCart('Ce boîtier est déjà activé', true)
             break 
         case 404 : 
-            showAddCart('boîtier inconnu', true)
+            showAddCart('Boîtier inconnu', true)
             break 
       }
 }
