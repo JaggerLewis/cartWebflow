@@ -51,7 +51,7 @@ const initClient = {
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('starter-family')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
-    'jl-formula-action' : (node) => node.addEventListener('click', () =>formulaPageSwitch('formula')),
+    'jl-formula-action' : (node) => node.addEventListener('click', () =>formulaPageSwitch('abo')),
     'jl-option-action' : (node) => node.addEventListener('click', () =>formulaPageSwitch('option')),
     'jl-insurance-action' : (node) => node.addEventListener('click', () =>formulaPageSwitch('insurance')),
     'jl-abo-container' : (node) => null,
@@ -64,9 +64,9 @@ const formulaPageSwitch = (type) => {
     display = type;
     console.log(display)
 
-    let template = document.getElementById('jl-'+display+'-action')
+    let template = document.getElementById('jl-'+display+'-container')
     if (!template) {
-console.log('no found :', display)
+        console.log('no found :', display)
         return
     }
     template.style.display == 'block'
