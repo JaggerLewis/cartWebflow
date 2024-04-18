@@ -66,15 +66,23 @@ const hideAll = () => {
 }
 
 const formulaPageSwitch = (type) => {
+    ids = ['abo', 'option', 'insurance']
     display = type;
-    console.log(display)
 
-    let template = document.getElementById('jag-'+display+'-container')
-    if (!template) {
-        console.log('no found :', display)
-        return
-    }
-    template.style.display = 'block'
+    ids.forEach((id) => {
+        let template = document.getElementById('jag-'+id+'-container')
+        if (!template) {
+            console.log('no found :', display)
+            return
+        }
+        else if (id == display) {
+            template.style.display = 'block'
+        }
+        else {
+            template.style.display = 'none'
+        }
+
+    })
 }
 
 
