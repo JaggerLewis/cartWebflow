@@ -57,7 +57,7 @@ const initClient = {
     'jl-abo-container' : (node) => null,
     'jl-insurance-container' : (node) => null,
     'jl-option-container' : (node) => null,
-    'jl_Btn_phoneToken' : (node) => node.addEventListener('click', () => validateAciton()),
+    'jl_Btn_phoneToken' : (node) => node.addEventListener('click', () => validateAction()),
 }
 
 
@@ -69,7 +69,7 @@ const formulaPageSwitch = (type) => {
     display = type;
     console.log(display)
 
-    let template = document.getElementById('jl-'+display+'-container')
+    let template = document.getElementById('jag-'+display+'-container')
     if (!template) {
         console.log('no found :', display)
         return
@@ -237,19 +237,19 @@ const changeChildsId = (node, suffix, filter) => {
     if(node.hasChildNodes) {
         var childs = node.childNodes;
         for(var index=0; index<childs.length; index++) {
-            changeChildsId(childs[index], suffix)
+            changeChildsId(childs[index], suffix, filter)
         }
     }
 }
 
-const validateAciton = async () => {
+const validateAction = async () => {
     let value = document.getElementById('Jag_Activation_phoneToken').value
     if (!value) {
         showAddCart('Oups, une erreur est survenue, rechangez la page', true)
         return
     }
     // TODO(dev): Add call
-    showAddCart('Oups, la suite arrive bientôt; !', true)
+    showAddCart('Oups, la suite arrive bientôt !', true)
     window.localStorage.serial = serial
     window.localStorage.phone = phone
     window.open('activation-produit-etape02', '_self')
