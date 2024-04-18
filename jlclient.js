@@ -347,7 +347,7 @@ const checkActivation = async () => {
         showAddCart('Numéro de serie incorrect (JL1-1111A11A)', true)
         return
     }
-
+    phone = phone.replace('+', '00')
     const result = await fetch(baseurl + '/collar/serialNumber', {
         method: "POST",
         headers : header,
