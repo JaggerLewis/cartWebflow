@@ -69,7 +69,7 @@ const formulaPageSwitch = (type) => {
         console.log('no found :', display)
         return
     }
-    template.style.display == 'block'
+    template.style.display = 'block'
 }
 
 
