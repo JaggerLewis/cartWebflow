@@ -64,7 +64,7 @@ const formulaPageSwitch = (type) => {
     display = type;
     console.log(display)
 
-    let template = document.getElementById('jl-'+dispaly+'-action')
+    let template = document.getElementById('jl-'+display+'-action')
     if (!template)
         return
     template.style.display == 'block'
