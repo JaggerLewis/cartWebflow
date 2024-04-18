@@ -325,10 +325,17 @@ const validateAction = async () => {
             "phoneToken": value
           
         }), 
-      }).then(async (res) => await res.status) 
+      }).then((res) => res.status) 
+      
+      if (result == 200) {
+        window.open('activation-produit-etape02', '_self')
+      }
+      else {
+        showAddCart('KODE 1KORAIQUTE', true)
+      }
+       
       console.log('result', result)
       return
-    window.open('activation-produit-etape02', '_self')
 
 }
 
