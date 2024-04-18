@@ -1052,6 +1052,7 @@ const init = async () => {
     result = JSON.parse(localStorage.getItem('data')) ||  await loadData()
     abonnement = JSON.parse(localStorage.getItem('abonnement')) ||  await loadAbonnement()
 
+    loaderContainer.style.display = 'none'
 
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
