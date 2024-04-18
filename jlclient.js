@@ -100,13 +100,15 @@ const initOption = async () => {
             document.getElementById('jag-'+type+'-description-'+abo.metadata.productId).innerHTML = abo.description
             document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = '00/00/00'
             document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = '00/00/00'
-            
-            console.log(newCard)
-        
+            if (type == 'abo') {
+                if (dog.collar.formula_subscription.formula.product == abo.metadata.productId) {
+                    document.getElementById('jag-abo-check-'+abo.metadata.productId).style['background-color'] = 'green'
+                }
+            }
     })
         card.style.display = 'none'
-        document.getElementById('jag-'+type+'-container').style.display = 'block'
     })
+    document.getElementById('jag-abo-container').style.display = 'block'
        
 }
 
@@ -387,6 +389,7 @@ const getAbonnement = async () => {
 }
 
 const getUser = async () => {
+    //TODO(dev) : get localStorage
     loaderContainer.style.display = 'flex'
     user = await fetch(baseurl + '/profile/full', {headers : header})
         .then(async (res) => await res.json())
