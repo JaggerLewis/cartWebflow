@@ -57,7 +57,7 @@ const initClient = {
     'jl-abo-container' : (node) => null,
     'jl-insurance-container' : (node) => null,
     'jl-option-container' : (node) => null,
-    'Jag_Btn_phoneToken' : (node) => node.addEventListener('click', () => validateAciton()),
+    'jl_Btn_phoneToken' : (node) => node.addEventListener('click', () => validateAciton()),
 }
 
 
