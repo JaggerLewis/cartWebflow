@@ -51,14 +51,19 @@ const initClient = {
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('starter-family')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
-    'jl-formula-action' : (node) => node.addEventListener('click', () =>formulaPageSwitch('abo')),
-    'jl-option-action' : (node) => node.addEventListener('click', () =>formulaPageSwitch('option')),
-    'jl-insurance-action' : (node) => node.addEventListener('click', () =>formulaPageSwitch('insurance')),
+    'jl-formula-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('abo')),
+    'jl-option-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('option')),
+    'jl-insurance-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('insurance')),
     'jl-abo-container' : (node) => null,
     'jl-insurance-container' : (node) => null,
     'jl-option-container' : (node) => null,
+    'Jag_Btn_phoneToken' : (node) => node.addEventListener('click', () => validateAciton()),
 }
 
+
+const hideAll = () => {
+    document.getElementById('jl-abo-container')
+}
 
 const formulaPageSwitch = (type) => {
     display = type;
@@ -237,6 +242,20 @@ const changeChildsId = (node, suffix, filter) => {
     }
 }
 
+const validateAciton = async () => {
+    let value = document.getElementById('Jag_Activation_phoneToken').value
+    if (!value) {
+        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+        return
+    }
+    // TODO(dev): Add call
+    showAddCart('Oups, la suite arrive bientôt; !', true)
+    window.localStorage.serial = serial
+    window.localStorage.phone = phone
+    window.open('activation-produit-etape02', '_self')
+
+}
+
 const checkActivation = async () => {
     const regexPhone = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'
     const reglexSerial = 'JL[A-Za-z0-9]-[A-Za-z0-9]{8}'
@@ -264,9 +283,12 @@ const checkActivation = async () => {
     
       switch (result) {
         case 200 : 
-            window.localStorage.serial = serial
-            window.localStorage.phone = phone
-            window.open('activation-produit-etape02', '_self')
+            if (document.getElementById('Jag_Popup_phoneToken')) {
+                document.getElementById('Jag_Popup_phoneToken').style.display = 'flex'
+            }
+            else {
+                showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+            }
             break
         case 400 :
             showAddCart('Ce boîtier est déjà activé', true)
