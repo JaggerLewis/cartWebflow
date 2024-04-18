@@ -102,6 +102,7 @@ const initOption = async () => {
                 case 'abo' :
                     document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
                     document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
+                    break
                 default : 
                   document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'À renouveler le : ' + '00/00/00'
                   document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'Début le : '+ '00/00/00'
