@@ -316,7 +316,7 @@ const validateAction = async () => {
         showAddCart('Oups, une erreur est survenue, rechangez la page', true)
         return
     }
-    const result = await fetch(baseurl + '/collar/serialNumber', {
+    const result = await fetch(baseurl + '/login/activation', {
         method: "POST",
         headers : header,
         body: JSON.stringify({
