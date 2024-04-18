@@ -1062,7 +1062,7 @@ const init = async () => {
         await loadAbonnement()
         loaderContainer.style.display = 'none'
     }
-‹
+
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
         if (product.metadata.category == "accessory") {
