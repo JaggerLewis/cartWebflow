@@ -310,14 +310,24 @@ const changeChildsId = (node, suffix, filter) => {
 
 const validateAction = async () => {
     let value = document.getElementById('Jag_Activation_phoneToken').value
+    let serial = window.localStorage.getItem('serial')
+    let phone = window.localStorage.getItem('phone')
     if (!value) {
         showAddCart('Oups, une erreur est survenue, rechangez la page', true)
         return
     }
-    // TODO(dev): Add call
-    showAddCart('Oups, la suite arrive bientôt !', true)
-    window.localStorage.serial = serial
-    window.localStorage.phone = phone
+    const result = await fetch(baseurl + '/collar/serialNumber', {
+        method: "POST",
+        headers : header,
+        body: JSON.stringify({
+            "phone": phone,
+            "serialNumber": serial,
+            "phoneToken": value
+          
+        }), 
+      }).then(async (res) => await res.status) 
+      console.log('result', result)
+      return
     window.open('activation-produit-etape02', '_self')
 
 }
@@ -351,6 +361,8 @@ const checkActivation = async () => {
         case 200 : 
             if (document.getElementById('Jag_Popup_phoneToken')) {
                 document.getElementById('Jag_Popup_phoneToken').style.display = 'flex'
+                window.localStorage.serial = serial
+                window.localStorage.phone = phone
             }
             else {
                 showAddCart('Oups, une erreur est survenue, rechangez la page', true)
