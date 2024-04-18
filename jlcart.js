@@ -1027,6 +1027,7 @@ const loadData = async () => {
 const init = async () => {
 
     let date = Date.now()
+    let loaderContainer
     let result
     let delayDate = 24 * 60 * 60 * 1000;
     if (localStorage.getItem('data') == null) {
@@ -1039,7 +1040,7 @@ const init = async () => {
     console.log( date, lastDate, (date - lastDate));
 
     if ( ((date - lastDate) > delayDate) ) {
-    let loaderContainer = document.createElement('div')
+    loaderContainer = document.createElement('div')
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
@@ -1054,12 +1055,14 @@ const init = async () => {
 
     if (!result) {
         await loadData()
+        loaderContainer.style.display = 'none'
     }
 
     if (!abonnement) {
         await loadAbonnement()
+        loaderContainer.style.display = 'none'
     }
-    loaderContainer.style.display = 'none'
+‹
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
         if (product.metadata.category == "accessory") {
