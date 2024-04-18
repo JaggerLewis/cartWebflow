@@ -14,6 +14,7 @@ let loaderContainer
 let user
 let dog
 let session
+let display
 
 const converTimestamp = (timestamp) => {
     let day = Math.floor(timestamp / (24 * 3600)); 
@@ -50,7 +51,25 @@ const initClient = {
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('starter-family')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
+    'jl-formula-action' : (node) => formulaPageSwitch('formula'),
+    'jl-option-action' : (node) => formulaPageSwitch('option'),
+    'jl-insurance-action' : (node) => formulaPageSwitch('insurance'),
+    'jl-abo-container' : (node) => null,
+    'jl-insurance-container' : (node) => null,
+    'jl-option-container' : (node) => null,
 }
+
+
+const formulaPageSwitch = (type) => {
+    display = type;
+    console.log(display)
+
+    let template = document.getElementById('jl-'+dispaly+'-action')
+    if (!template)
+        return
+    template.style.display == 'block'
+}
+
 
 
 
@@ -321,7 +340,7 @@ const getAll = async () => {
 
     if (document.getElementById('jag-step-3'))
         await getCart();
-    else if (document.getElementById('jag-step-2')) {
+    else if (document.getElementById('jag-step-2') || document.getElementById('jag-formula')) {
         redirectStep2();
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
