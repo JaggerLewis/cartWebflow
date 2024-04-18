@@ -360,7 +360,7 @@ const getOption = async () => {
         option = JSON.parse(window.localStorage.getItem('option'))
         return
     }
-    result =  await fetch(baseurl + '/collar_options/e-commerce/assurance', {
+    result =  await fetch(baseurl + '/collar_options/e-commerce/options', {
       method: "GET",
       headers : header,
   })
