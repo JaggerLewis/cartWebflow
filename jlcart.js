@@ -221,11 +221,12 @@ class ShoppingCart {
     }
 
     getCartStripeUrl() {
+        const url = window.location.origin + window.location.pathname;
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } })
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment' })
+            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment', referer: url })
         })
         return answer
     }
@@ -1144,11 +1145,12 @@ const redirectToStripe = async (event) => {
 }
 
 const redirectToStripeBis = async () => {
+    const url = window.location.origin + window.location.pathname;
     let abo = findAboType(findAbonnement('premium-first'), 'life').id;
     const answer = await fetch(`${interfaceUrl}/stripe/checkout_session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart: [{ id: abo, quantity: 1 }], mode: 'payment' })
+        body: JSON.stringify({ cart: [{ id: abo, quantity: 1 }], mode: 'payment', referer: url })
     })
     const apiResJson = await answer.json()
     window.location.href = apiResJson.url

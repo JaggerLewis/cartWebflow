@@ -194,6 +194,7 @@ const redirectStep2 = () => {
 }
 
 const aboAction = async (type) => {
+    const url = window.location.origin + window.location.pathname;
     let duration = document.getElementsByClassName('abo_btn_on')[0]
     let check = document.getElementById('jag_Abonnement_check')
     if (duration && check && check.checked) {
@@ -206,7 +207,8 @@ const aboAction = async (type) => {
             body: JSON.stringify({
                 'subscription' : subscription,
                 'phone' : window.localStorage.phone,
-                'serialNumber' : window.localStorage.serial
+                'serialNumber' : window.localStorage.serial,
+                'referer': url,
             }), 
           }).then(async (res) => await res.json()) 
           if (result.url) {
