@@ -65,7 +65,7 @@ const initClient = {
 
 
 const loginEmail = async () => {
-    let regex = '/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/'
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
     let email = document.getElementById('jag-email').value
     if (email.match(regex)) {
         let result =  await fetch(baseurl + '/login', {
@@ -87,7 +87,7 @@ const loginEmail = async () => {
     }
 }
 const loginCode = async () => {
-    let regex = '/^d{7}$/'
+    let regex = /^d{7}$/
     let code = document.getElementById('Jag_PhoneToken').value
     let email = document.getElementById('jag-email').value
 
