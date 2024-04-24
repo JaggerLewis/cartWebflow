@@ -550,6 +550,6 @@ const setAll = () => {
         else console.log(node.id + ' is not handle :(')
     });
 }
-if(!document.getElementById('MyJaggerLewis')) {
+if(!document.getElementById('JL_NavBar')) {
     getAll()
 }
