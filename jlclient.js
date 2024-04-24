@@ -64,7 +64,7 @@ const initClient = {
 }
 
 
-const loginEmail = () => {
+const loginEmail = async () => {
     let regex = '/^\S+@\S+\.\S+$/'
     let email = document.getElementById('jag-email').value
     if (email.match(regex)) {
@@ -86,7 +86,7 @@ const loginEmail = () => {
         showAddCart('Format email incorrect')
     }
 }
-const loginCode = () => {
+const loginCode = async () => {
     let regex = '/^d{7}$/'
     let code = document.getElementById('Jag_PhoneToken').value
     let email = document.getElementById('jag-email').value
