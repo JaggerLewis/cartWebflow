@@ -59,6 +59,57 @@ const initClient = {
     'jl-insurance-container' : (node) => null,
     'jl-option-container' : (node) => null,
     'jl_Btn_phoneToken' : (node) => node.addEventListener('click', () => validateAction()),
+    'jl-connect-action' : (node) => node.addEventListener('click', () => loginEmail()),
+    'jl-connect-action-bis' : (node) => node.addEventListener('click', () => loginCode()),
+}
+
+
+const loginEmail = () => {
+    let regex = '/^\S+@\S+\.\S+$/'
+    let email = document.getElementById('jag-email').value
+    if (email.match(regex)) {
+        let result =  await fetch(baseurl + '/login', {
+            method: "POST",
+            headers : header,
+            body: JSON.stringify({
+                'email' : email,
+            }), 
+          }).then(async (res) => await res.json()) 
+          if (result.code == '004') {
+            document.getElementById('jag-code-popup').style.display = 'flex'
+          }
+          else {
+            showAddCart('Email inconnu')
+          }
+    }
+    else {
+        showAddCart('Format email incorrect')
+    }
+}
+const loginCode = () => {
+    let regex = '/^d{7}$/'
+    let code = document.getElementById('Jag_PhoneToken').value
+    let email = document.getElementById('jag-email').value
+
+    if (code.match(regex)) {
+        let result =  await fetch(baseurl + '/login', {
+            method: "POST",
+            headers : header,
+            body: JSON.stringify({
+                'email' : email,
+                "phoneToken" : code
+            }), 
+          }).then(async (res) => await res.json()) 
+          if (result.token) {
+            window.open('profil-chien', '_self')
+          }
+          else {
+            showAddCart('Code incorrect')
+          }
+    }
+    else {
+        showAddCart('Le code doit être au format 1234567')
+    }
 }
 
 
