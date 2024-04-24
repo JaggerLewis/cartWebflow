@@ -87,11 +87,10 @@ const loginEmail = async () => {
     }
 }
 const loginCode = async () => {
-    let regex = /^d{7}$/
     let code = document.getElementById('Jag_PhoneToken').value
     let email = document.getElementById('jag-email').value
 
-    if (code.match(regex)) {
+    if (code.length == 7) {
         let result =  await fetch(baseurl + '/login', {
             method: "POST",
             headers : header,
