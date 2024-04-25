@@ -1322,7 +1322,7 @@ goToStripe.onclick = (event) => {
 var colors = ['fauve', 'weimar', 'charbon'];
 var devices = ['jag', 'jag-smartdock'];
 var initialColor = 'fauve';
-var initialDevice = 'jag';
+var initialDevice = 'jag-smartdock';
 
 if (document.getElementById('encart_jag_gps_s2')) 
 {
