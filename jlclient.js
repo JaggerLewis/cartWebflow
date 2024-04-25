@@ -375,7 +375,6 @@ const validateAction = async () => {
             "phone": phone,
             "serialNumber": serial,
             "phoneToken": value
-          
         }), 
       }).then((res) => res.status) 
       

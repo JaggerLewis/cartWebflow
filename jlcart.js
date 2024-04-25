@@ -1041,7 +1041,6 @@ const init = async () => {
     let lastDate = JSON.parse(localStorage.getItem('ts')) || Date.now();
     let delayDate = 24 * 60 * 60 * 1000;
 
-    let result
 
     console.log( date, lastDate, (date - lastDate));
 
@@ -1050,14 +1049,14 @@ const init = async () => {
         await loadAbonnement()
     }
 
-    result = JSON.parse(localStorage.getItem('data')) ||  await loadData()
+    let result = JSON.parse(localStorage.getItem('data')) ||  await loadData()
     abonnement = JSON.parse(localStorage.getItem('abonnement')) ||  await loadAbonnement()
 
     loaderContainer.style.display = 'none'
 
     for (const product of result) {
         products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
-        if (product.metadata.category == "accessory") {
+        if (product.metadata.category == "accessory" || product.metadata.category == "product") {
             accessory.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
         }
     }
