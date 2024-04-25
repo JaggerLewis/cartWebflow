@@ -936,6 +936,13 @@ const initAboJag = async () => {
 
 }
 
+const initAboB = async () => {
+    let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
+    document.getElementById('jl-abo-month-price').innerHTML = formula.prices.find((elem) => elem.metadata.pricing == 'monthly').price + '€' +  getTrad('/mois', '/month')
+    document.getElementById('jl-abo-year-price').innerHTML = formula.prices.find((elem) => elem.metadata.pricing == 'yealy').price + '€' +  getTrad('/mois', '/month')
+    document.getElementById('jl-abo-life-price').innerHTML = formula.prices.find((elem) => elem.metadata.pricing == 'life').price + '€'
+}
+
 const initAccessWidget = async () => {
     let datas = products.filter((elem) => elem.metadata.category == 'product' && !['jag-unlimited', 'jag-smartdock', 'jag-smartdock-unlimited'].includes(elem.metadata.pId))
     let card = document.getElementById('jag-solo-container')
@@ -1140,6 +1147,9 @@ const init = async () => {
     }
     if (document.getElementById('jag-solo')) {
         initAccessWidget();
+    }
+    if (document.getElementById('jag-abo-B-page')) {
+        initAboB();
     }
 
     setCartNumber();
