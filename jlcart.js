@@ -948,6 +948,7 @@ const initAccessWidget = async () => {
         document.getElementById('jag-solo-pict-'+prod.metadata.productId).src = prod.image
         document.getElementById('jag-solo-title-'+prod.metadata.productId).innerHTML = prod.name
         document.getElementById('jag-solo-price-'+prod.metadata.productId).innerHTML = prod.price.price + '€'
+        document.getElementById('jag-solo-action-'+prod.metadata.productId).addEventListener('click', () =>  window.open('accessoires-jag-smartdock', '_self'))
         newCard.style.display = 'flex'
     })
 }
