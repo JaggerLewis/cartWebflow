@@ -1019,6 +1019,20 @@ const refreshOrderInfo = async () => {
 
 }
 
+const changeChildsId = (node, suffix, filter) => {
+    if (filter) {
+        if (node.id && node.id.includes(filter))
+            node.id = node.id + suffix
+        }
+    else node.id = node.id + suffix
+    if(node.hasChildNodes) {
+        var childs = node.childNodes;
+        for(var index=0; index<childs.length; index++) {
+            changeChildsId(childs[index], suffix, filter)
+        }
+    }
+}
+
 const loadCart = async (id) => {
     try {
         loaderContainer.display = ''
