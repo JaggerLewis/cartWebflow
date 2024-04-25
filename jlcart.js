@@ -349,15 +349,17 @@ const getTargetProduct = () => {
     */
 
     targetProduct = 'jag';
+    if (document.getElementById('jag-without-smartdock') && document.getElementById('jag-with-smartdock')) {
 
-    if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
-        targetProduct = 'jag';
+        if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
+            targetProduct = 'jag';
+        }
+        
+        if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
+            targetProduct = 'jag-smartdock';
+        }
+        
     }
-
-    if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
-        targetProduct = 'jag-smartdock';
-    }
-
     return targetProduct;
 }
 
