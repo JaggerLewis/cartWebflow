@@ -807,6 +807,7 @@ const initJagAccessory = () => {
     })
 
 
+
 }
 
 const loadAbonnement = async () => {
@@ -933,6 +934,22 @@ const initAboJag = async () => {
 
     toYear();
 
+}
+
+const initAccessWidget = async () => {
+    let datas = products.filter((elem) => elem.metadata.category == 'product' && !['jag-unlimited', 'jag-smartdock', 'jag-smartdock-unlimited'].includes(elem.metadata.pId))
+    let card = document.getElementById('jag-solo-container')
+    let container = document.getElementById('jag-solo')
+    datas.forEach((prod) => {
+        let newCard = card.cloneNode(true)
+        
+        changeChildsId(newCard, '-'+prod.metadata.productId, 'jag-')
+        container.insertBefore(newCard, container.firstChild)
+        document.getElementById('jag-solo-pict-'+prod.metadata.productId).src = prod.image
+        document.getElementById('jag-solo-title-'+prod.metadata.productId).innerHTML = prod.name
+        document.getElementById('jag-solo-price-'+prod.metadata.productId).innerHTML = prod.price.price + '€'
+        newCard.style.display = 'flex'
+    })
 }
 
 
@@ -1105,6 +1122,9 @@ const init = async () => {
 
     if (document.getElementById('jl-checkout-redirect')) {
         refreshOrderInfo();
+    }
+    if (document.getElementById('jag-solo')) {
+        initAccessWidget();
     }
 
     setCartNumber();
