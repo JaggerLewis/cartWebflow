@@ -348,7 +348,7 @@ const getTargetProduct = () => {
     }
     */
 
-    targetProduct = 'jag';
+    targetProduct = 'jag-smartdock';
     if (document.getElementById('jag-without-smartdock') && document.getElementById('jag-with-smartdock')) {
 
         if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
