@@ -61,6 +61,7 @@ const initClient = {
     'jl_Btn_phoneToken' : (node) => node.addEventListener('click', () => validateAction()),
     'jl-connect-action' : (node) => node.addEventListener('click', () => loginEmail()),
     'jl-connect-action-bis' : (node) => node.addEventListener('click', () => loginCode()),
+    'jl-profil-dog-list': (node) => initDashboard(node),
 }
 
 
@@ -493,12 +494,57 @@ const getUser = async () => {
             .then((res) => res.BatteryInfos)
     }
     loaderContainer.style.display = 'none'
-
 }
 
+const setidentity = () => {
+    let race = dog.race ?? dog.dadRace ?? dog.momRace
+    let food = JSON.parse(dog.food)
+    document.getElementById('jag-profil-identity-pict').src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid 
+    document.getElementById('jag-profil-identity-pict').srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid 
+    document.getElementById('jag-profil-identity-name').innerHTML = dog.name 
+    document.getElementById('jag-profil-identity-Iname').innerHTML = dog.name
+    document.getElementById('jag-profil-identity-id').innerHTML = dog.publicId
+    document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography
+    document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender
+    document.getElementById('jag-profil-identity-birthdate').innerHTML = dog.birthDate
+    document.getElementById('jag-profil-identity-weight').innerHTML = dog.weight
+    document.getElementById('jag-profil-identity-size').innerHTML = dog.size
+    document.getElementById('jag-profil-identity-silouhette').innerHTML = dog.silhouette
+    document.getElementById('jag-profil-identity-breed').innerHTML =race.name
+    document.getElementById('jag-profil-identity-lof').style['background-color'] = dog.isLOF ? 'green' : ''
+    document.getElementById('jag-profil-identity-steril').style['background-color'] = dog.sterilized ? 'green' : ''
+    document.getElementById('jag-profil-food-moring').innerHTML = (food.morning ?? 'X') + ' g'
+    document.getElementById('jag-profil-food-noon').innerHTML = (food.noon ?? 'X') + ' g'
+    document.getElementById('jag-profil-food-night').innerHTML = (food.evening ?? 'X') + ' g'
+    document.getElementById('jag-profil-food-all').innerHTML = ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) == 0 ? 'X' : ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) + 'g'
+    document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : 'fait maison'
+}
+
+const initDashboard = (node) => {
+    let container = document.getElementById('jag-profil-dog-container');
+    user.dogs.forEach((localDog) => {
+                newCard = container.cloneNode(true)
+                newCard.style.display = 'flex'
+                changeChildsId(newCard, '-'+localDog._id, 'jag-')
+                node.appendChild(newCard)
+                document.getElementById('jag-profil-dog-name-'+localDog._id).innerHTML = localDog.name ?? ''
+                document.getElementById('jag-profil-dog-id-'+localDog._id).innerHTML = localDog.publicId ?? ''
+                document.getElementById('jag-profil-dog-pict-'+localDog._id).src = "https://app-api.mypet.fit/img/" + localDog.image.type +"/"+ localDog.image.uuid 
+                document.getElementById('jag-profil-dog-pict-'+localDog._id).srcset = "https://app-api.mypet.fit/img/" + localDog.image.type +"/"+ localDog.image.uuid 
+    
+                newCard.addEventListener('click', async () => {
+                     loaderContainer.style.display = 'flex'
+                  dog = await fetch(baseurl + '/dog/'+ localDog._id +'?activity_limit=5', {headers : header})
+                        .then(async (res) => await res.json())
+                        .then((res) => res.dog)
+                     loaderContainer.style.display = 'none'
+                    setidentity()
+                })
+        })
+    setidentity()
+}
 
 const getAll = async () => {
-   
     loaderContainer = document.createElement('div')
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
@@ -519,8 +565,8 @@ const getAll = async () => {
         await getUser()
 
         await initOption()
+    
     }
-
   
   
     loaderContainer.style.display = 'none'
