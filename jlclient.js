@@ -62,11 +62,18 @@ const initClient = {
     'jl-connect-action' : (node) => node.addEventListener('click', () => loginEmail()),
     'jl-connect-action-bis' : (node) => node.addEventListener('click', () => loginCode()),
     'jl-profil-dog-list': (node) => initDashboard(node),
-    'jl-order-container' : () => intiOrder(),
+    'jl-order-container' : () => initOrder(),
+    'jl-order-order' : () => switchInfo('order'),
+    'jl-order-info' : () => switchInfo('info')
 }
 
 
-const intiOrder = async () => {
+const switchInfo = (type) => {
+    document.getElementById('jag-order-list').style.display = type == 'info' ? 'none' : 'flex'
+    document.getElementById('jl-info-container').style.display = type == 'info' ? 'flex' : 'none'
+}
+
+const initOrder = async () => {
     loaderContainer.style.display = 'flex'
     let orders = await fetch(baseurl + '/user/order', {headers : header})
                         .then(async (res) => await res.json())
@@ -100,8 +107,24 @@ const intiOrder = async () => {
         })
             loaderContainer.style.display = 'none'
         })
-        loaderContainer.style.display = 'none'
+        document.getElementById('jag-order-list').style.display = 'flex'
+        initInfos()
     })
+}
+
+const initInfos = async () => {
+    let infos = await fetch(baseurl + '/user/customer', {headers : header})
+    .then(async (res) => await res.json())
+    .then((res) => res.result)
+
+    document.getElementById('jag-info-name').innerHTML = infos.customer.name
+    document.getElementById('jag-info-firstname').innerHTML = infos.customer.name
+    document.getElementById('jag-info-email').innerHTML = infos.customer.email
+    document.getElementById('jag-info-livraison').innerHTML = infos.customer.address.line1+ ',' + infos.customer.address.city
+    document.getElementById('jag-info-phone').innerHTML = infos.customer.phone
+    document.getElementById('jag-info-facture').innerHTML = infos.customer.address.line1+ ',' + infos.customer.address.city
+
+    loaderContainer.style.display = 'none'
 }
 
 const loginEmail = async () => {
