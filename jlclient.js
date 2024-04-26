@@ -498,7 +498,7 @@ const getUser = async () => {
 
 const setidentity = () => {
     let race = dog.race ?? dog.dadRace ?? dog.momRace
-    let food = JSON.parse(dog.food)
+    let food = JSON.parse(dog.food ?? '{}')
     document.getElementById('jag-profil-identity-pict').src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid 
     document.getElementById('jag-profil-identity-pict').srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid 
     document.getElementById('jag-profil-identity-name').innerHTML = dog.name 
