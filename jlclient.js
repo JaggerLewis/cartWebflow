@@ -513,14 +513,15 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-breed').innerHTML =race.name
     document.getElementById('jag-profil-identity-lof').style['background-color'] = dog.isLOF ? 'green' : ''
     document.getElementById('jag-profil-identity-steril').style['background-color'] = dog.sterilized ? 'green' : ''
-    document.getElementById('jag-profil-food-moring').innerHTML = (food.morning ?? 'X') + ' g'
-    document.getElementById('jag-profil-food-noon').innerHTML = (food.noon ?? 'X') + ' g'
-    document.getElementById('jag-profil-food-night').innerHTML = (food.evening ?? 'X') + ' g'
-    document.getElementById('jag-profil-food-all').innerHTML = ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) == 0 ? 'X' : ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) + 'g'
+    document.getElementById('jag-profil-food-moring').innerHTML = (food.morning ?? '-') + ' g'
+    document.getElementById('jag-profil-food-noon').innerHTML = (food.noon ?? '-') + ' g'
+    document.getElementById('jag-profil-food-night').innerHTML = (food.evening ?? '-') + ' g'
+    document.getElementById('jag-profil-food-all').innerHTML = ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) == 0 ? '-' : ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) + 'g'
     document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : 'fait maison'
 }
 
-const initDashboard = (node) => {
+const initDashboard = async (node) => {
+    await getUser()
     let container = document.getElementById('jag-profil-dog-container');
     user.dogs.forEach((localDog) => {
                 newCard = container.cloneNode(true)
