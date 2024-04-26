@@ -504,15 +504,16 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-name').innerHTML = dog.name 
     document.getElementById('jag-profil-identity-Iname').innerHTML = dog.name
     document.getElementById('jag-profil-identity-id').innerHTML = dog.publicId
-    document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography
+    document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography?? 'Biographie'
     document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender
-    document.getElementById('jag-profil-identity-birthdate').innerHTML = dog.birthDate
+    document.getElementById('jag-profil-identity-birthdate').innerHTML = getDate(dog.birthDate)
     document.getElementById('jag-profil-identity-weight').innerHTML = dog.weight
     document.getElementById('jag-profil-identity-size').innerHTML = dog.size
     document.getElementById('jag-profil-identity-silouhette').innerHTML = dog.silhouette
     document.getElementById('jag-profil-identity-breed').innerHTML =race.name
     document.getElementById('jag-profil-identity-lof').style['background-color'] = dog.isLOF ? 'green' : ''
     document.getElementById('jag-profil-identity-steril').style['background-color'] = dog.sterilized ? 'green' : ''
+    // TODO(dev): add disable state on food
     document.getElementById('jag-profil-food-moring').innerHTML = (food.morning ?? '-') + ' g'
     document.getElementById('jag-profil-food-noon').innerHTML = (food.noon ?? '-') + ' g'
     document.getElementById('jag-profil-food-night').innerHTML = (food.evening ?? '-') + ' g'
