@@ -62,8 +62,47 @@ const initClient = {
     'jl-connect-action' : (node) => node.addEventListener('click', () => loginEmail()),
     'jl-connect-action-bis' : (node) => node.addEventListener('click', () => loginCode()),
     'jl-profil-dog-list': (node) => initDashboard(node),
+    'jl-order-container' : () => intiOrder(),
 }
 
+
+const intiOrder = async () => {
+    loaderContainer.style.display = 'flex'
+    let orders = await fetch(baseurl + '/user/order', {headers : header})
+                        .then(async (res) => await res.json())
+                        .then((res) => res.orders)
+    let container = document.getElementById('jl-order-container')
+    let node = document.getElementById('jag-order-list')
+    orders.forEach((order) => {
+        newCard = container.cloneNode(true)
+        newCard.style.display = 'flex'
+        changeChildsId(newCard, '-'+order._id, 'jag-')
+        node.appendChild(newCard)
+        document.getElementById('jag-order-ref-'+order._id).innerHTML = order.orderNumber
+        document.getElementById('jag-order-date-'+order._id).innerHTML = getDate(order.createdAt)
+        document.getElementById('jag-order-price-'+order._id).innerHTML = order.total.total / 100 + '€'
+        document.getElementById('jag-order-status-'+order._id).innerHTML = order.status
+        document.getElementById('jag-order-action-'+order._id).addEventListener('click', async () => {
+            loaderContainer.style.display = 'flex'
+            fetch(baseurl + '/order/'+ order._id +'/pdf', {
+                method: 'GET',
+                headers: header
+            })
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'jl-facture-'+ order._id+'.pdf'; 
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+            loaderContainer.style.display = 'none'
+        })
+        loaderContainer.style.display = 'none'
+    })
+}
 
 const loginEmail = async () => {
     let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
