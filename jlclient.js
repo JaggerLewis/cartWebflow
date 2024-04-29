@@ -63,8 +63,8 @@ const initClient = {
     'jl-connect-action-bis' : (node) => node.addEventListener('click', () => loginCode()),
     'jl-profil-dog-list': (node) => initDashboard(node),
     'jl-order-container' : () => initOrder(),
-    'jl-order-order' : () => switchInfo('order'),
-    'jl-order-info' : () => switchInfo('info')
+    'jl-order-order' : () => node.addEventListener('click', () => switchInfo('order')),
+    'jl-order-info' : () => node.addEventListener('click', () => switchInfo('info')),
 }
 
 
