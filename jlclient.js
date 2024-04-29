@@ -606,12 +606,11 @@ const initDashboard = async (node) => {
 }
 
 const checkAuth = async () => {
-    if (window.location.host == REDIRECT) {
-        return
-    }
-
     let url = new URL(window.location.href)
 
+    if (url == REDIRECT) {
+        return
+    }
     if (url.searchParams.has('HeyJag')) {
         token = url.searchParams.get('HeyJag')
         header.Authorization = 'Bearer ' + token
