@@ -620,7 +620,7 @@ const checkAuth = async () => {
         header.Authorization = 'Bearer ' + token
     }
     else {
-        window.location.replace(REDIRECT);
+        // window.location.replace(REDIRECT);
     }
 }
 
