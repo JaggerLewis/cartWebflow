@@ -70,7 +70,7 @@ const initClient = {
 
 const switchInfo = (type) => {
     document.getElementById('jag-order-list').style.display = type == 'info' ? 'none' : 'flex'
-    document.getElementById('jl-info-container').style.display = type == 'info' ? 'flex' : 'none'
+    document.getElementById('jag-info-container').style.display = type == 'info' ? 'flex' : 'none'
 }
 
 const initOrder = async () => {
