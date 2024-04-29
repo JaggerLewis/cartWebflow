@@ -665,5 +665,6 @@ const setAll = () => {
     });
 }
 if(!document.getElementById('JL_NavBar')) {
+    checkAuth()
     getAll()
 }
