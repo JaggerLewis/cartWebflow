@@ -4,8 +4,7 @@ const baseurl = 'https://app-api.mypet.fit'
 const REDIRECT = 'https://jagger-lewis.com/my/seconnecter'
 const step2 = 'activation-produit-etape02'
 
-const header = {
-    'Authorization': 'Bearer ' + token,
+let header = {
     'Content-Type': 'application/json'
   }
 
@@ -615,9 +614,11 @@ const checkAuth = async () => {
 
     if (url.searchParams.has('HeyJag')) {
         token = url.searchParams.get('HeyJag')
+        header.Authorization = 'Bearer ' + token
     }
     else if (window.localStorage.getItem('token')) {
         token = window.localStorage.getItem('token')
+        header.Authorization = 'Bearer ' + token
     }
     else {
         window.location.replace(REDIRECT);
