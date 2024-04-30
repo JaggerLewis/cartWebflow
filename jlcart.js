@@ -945,7 +945,7 @@ const initAboB = async () => {
     document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation')
     document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
     let lifePrice36 = (formula.prices.find((elem) => elem.metadata.pricing == 'life').price / 36).toFixed(2) + '€'
-    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '€/month over 3 years' ) 
+    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years' ) 
 }
 
 const initAccessWidget = async () => {
