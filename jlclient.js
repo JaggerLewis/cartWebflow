@@ -74,6 +74,22 @@ const clearFamily = () => {
     }
 }
 
+let initGalery =  () => {
+    let list =  document.getElementById('jag-profil-identity-gallery-container')
+    let img = document.getElementById('jag-profil-identity-gallery-pict')
+    for (let i = 0; i < 3; i++) {
+        let newPict = img.cloneNode(true)
+        let pict = user.galery[i]
+        
+        newPict.style.display = 'flex'
+        changeChildsId(newPict, '-'+pict.image._id, 'jag-')
+        list.appendChild(newPict)
+        console.log(newPict)
+        document.getElementById('jag-profil-identity-gallery-pict-' + pict.image._id).src = "https://app-api.mypet.fit/img/" + pict.image.type +"/"+ pict.image.uuid 
+         document.getElementById('jag-profil-identity-gallery-pict-' + pict.image._id).srcset = "https://app-api.mypet.fit/img/" + pict.image.type +"/"+ pict.image.uuid 
+    }
+}
+
 const initFamily = () => {
     let list = document.getElementById('jl-family-container')
     let card = document.getElementById('jag-family-card')
@@ -97,7 +113,6 @@ const initFamily = () => {
         document.getElementById('jag-family-name-' + membre._id).innerHTML =membre.name
         document.getElementById('jag-family-type-' + membre._id).innerHTML = "Ma Famille"
     })
-
 }
 
 
@@ -621,6 +636,7 @@ const setidentity = () => {
 
 const initDashboard = async (node) => {
     await getUser()
+    initGalery()
     let container = document.getElementById('jag-profil-dog-container');
     user.dogs.forEach((localDog) => {
                 newCard = container.cloneNode(true)
