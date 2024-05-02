@@ -64,7 +64,40 @@ const initClient = {
     'jl-order-container' : () => initOrder(),
     'jl-order-order' : (node) => node.addEventListener('click', () => switchInfo('order')),
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
+    'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccontEmail()),
 }
+const deleteAccontEmail = () => {
+    // TODO(dev) : add id [jl-delete-email]
+    btn.addEventListener('click', async () => {
+        let res = await fetch(baseurl + '/user/delete/email', {
+                    method: 'POST',
+                    headers: header
+                })
+      if (res.status == 200) {
+        showAddCart('Email envoyé')
+      }
+      else {
+        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+      }
+    })
+}
+
+const deleteAccontSms = () => {
+    // TODO(dev) : add id [jl-delete-email]
+    btn.addEventListener('click', async () => {
+        let res = await fetch(baseurl + '/user/delete/email', {
+                    method: 'POST',
+                    headers: header
+                })
+      if (res.status == 200) {
+        showAddCart('Email envoyé')
+      }
+      else {
+        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+      }
+    })
+}
+
 
 const clearFamily = () => {
     let nodes = document.getElementById('jl-family-container').childNodes
