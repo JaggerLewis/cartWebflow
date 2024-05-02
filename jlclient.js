@@ -80,6 +80,9 @@ let initGalery =  () => {
     for (let i = 0; i < 3; i++) {
         let newPict = img.cloneNode(true)
         let pict = user.galery[i]
+        if (!pict) {
+            return
+        }
         
         newPict.style.display = 'flex'
         changeChildsId(newPict, '-'+pict.image._id, 'jag-')
