@@ -82,6 +82,7 @@ const deleteAccountEmail = async () => {
 }
 
 const deleteAccountSms = async () => {
+    // TODO(dev): update id [jl-delete-sms-action]
         let input = document.getElementById('jag-delete-sms-input')
         if (!input) {
             showAddCart('Oups, une erreur est survenue, rechangez la page', true)
@@ -101,7 +102,7 @@ const deleteAccountSms = async () => {
                 })
 
       if (res.status == 200) {
-        window.location.replace('/supprimer-compte')
+        window.location.replace('/seconnecter')
         localStorage.removeItem('token')
         checkAuth()
       }
@@ -306,7 +307,6 @@ const initOption = async () => {
         let array = type == 'abo' ? abonnement : option.filter((elem) => elem.type == type)
         array.forEach((abo) => {
             newCard = card.cloneNode(true)
-            console.log(abo.metadata.productId)
             changeChildsId(newCard, '-'+abo.metadata.productId, 'jag-')
             document.getElementById('jag-'+type+'-container').appendChild(newCard)
             document.getElementById('jag-'+type+'-name-'+abo.metadata.productId).innerHTML = abo.metadata.title_fr
@@ -319,9 +319,7 @@ const initOption = async () => {
                 default : 
                   document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'À renouveler le : ' + '00/00/00'
                   document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'Début le : '+ '00/00/00'
-
             }
-         
             document.getElementById('jag-'+type+'-pict-'+abo.metadata.productId).src = abo.image
             if (type == 'abo') {
                 if (dog.collar.formula_subscription.formula.product == abo.metadata.productId) {
