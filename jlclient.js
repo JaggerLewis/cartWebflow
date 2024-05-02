@@ -102,7 +102,7 @@ const deleteAccountSms = async () => {
 
       if (res.status == 200) {
         window.location.replace('/supprimer-compte')
-        localStorage.removeItem('token')b
+        localStorage.removeItem('token')
         checkAuth()
       }
       else {
