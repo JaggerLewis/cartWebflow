@@ -67,7 +67,7 @@ const initClient = {
     'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
     'jl-delete-sms-action' : (node) => node.addEventListener('click', () => deleteAccountSms()),
 }
-const deleteAccountEmail = () => {
+const deleteAccountEmail = async () => {
 
     let res = await fetch(baseurl + '/user/delete/email', {
                 method: 'POST',
@@ -81,7 +81,7 @@ const deleteAccountEmail = () => {
     }
 }
 
-const deleteAccountSms = () => {
+const deleteAccountSms = async () => {
         let input = document.getElementById('jag-delete-sms-input')
         if (!input) {
             showAddCart('Oups, une erreur est survenue, rechangez la page', true)
