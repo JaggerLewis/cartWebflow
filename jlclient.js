@@ -262,7 +262,13 @@ const loginCode = async () => {
           }).then(async (res) => await res.json()) 
           if (result.token) {
             window.localStorage.setItem('token', result.token)
-            window.open('profil-chien', '_self')
+            let searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('redirect')) {
+                window.location.replace(redirect)
+            }
+            else {
+                window.open('profil-chien', '_self')
+            }
           }
           else {
             showAddCart('Code incorrect')
