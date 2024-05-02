@@ -782,6 +782,9 @@ const initJagAccessory = () => {
     }
 
     accessory.forEach((access) => {
+        if (access.metadata.pId.endsWith('unlimited')) {
+            return;
+        }
 
         //let id = prod.price.id
         //addHtml(prod, id)
