@@ -64,7 +64,6 @@ const initClient = {
     'jl-order-container' : () => initOrder(),
     'jl-order-order' : (node) => node.addEventListener('click', () => switchInfo('order')),
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
-    'jl-family-container' : (node) => node.addEventListener('click', () => initFamily()),
 }
 
 const clearFamily = () => {
