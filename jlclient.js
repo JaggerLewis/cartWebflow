@@ -64,38 +64,51 @@ const initClient = {
     'jl-order-container' : () => initOrder(),
     'jl-order-order' : (node) => node.addEventListener('click', () => switchInfo('order')),
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
-    'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccontEmail()),
+    'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
+    'jl-delete-sms-action' : (node) => node.addEventListener('click', () => deleteAccountSms()),
 }
-const deleteAccontEmail = () => {
-    // TODO(dev) : add id [jl-delete-email]
-    btn.addEventListener('click', async () => {
-        let res = await fetch(baseurl + '/user/delete/email', {
-                    method: 'POST',
-                    headers: header
-                })
-      if (res.status == 200) {
-        showAddCart('Email envoyé')
-      }
-      else {
-        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
-      }
-    })
+const deleteAccountEmail = () => {
+
+    let res = await fetch(baseurl + '/user/delete/email', {
+                method: 'POST',
+                headers: header
+            })
+    if (res.status == 200) {
+    showAddCart('Email envoyé')
+    }
+    else {
+    showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+    }
 }
 
-const deleteAccontSms = () => {
-    // TODO(dev) : add id [jl-delete-email]
-    btn.addEventListener('click', async () => {
-        let res = await fetch(baseurl + '/user/delete/email', {
-                    method: 'POST',
-                    headers: header
+const deleteAccountSms = () => {
+        let input = document.getElementById('jag-delete-sms-input')
+        if (!input) {
+            showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+            return
+        }
+    
+        let value = input.value
+        if(value.length != 7) {
+            showAddCart('Code incorrect', true)
+            return
+        }
+    
+        let res = await fetch(baseurl + '/user/delete/sms', {
+                method: 'POST',
+                headers: header,
+                body : JSON.stringify({"phoneToken": value})
                 })
+
       if (res.status == 200) {
-        showAddCart('Email envoyé')
+        window.location.replace('/supprimer-compte')
+        localStorage.removeItem('token')
+        checkAuth()
       }
       else {
         showAddCart('Oups, une erreur est survenue, rechangez la page', true)
       }
-    })
+
 }
 
 
@@ -218,6 +231,7 @@ const loginEmail = async () => {
             method: "POST",
             headers : header,
             body: JSON.stringify({
+                     
                 'email' : email,
             }), 
           }).then(async (res) => await res.json()) 
@@ -241,6 +255,7 @@ const loginCode = async () => {
             method: "POST",
             headers : header,
             body: JSON.stringify({
+                     
                 'email' : email,
                 "phoneToken" : code
             }), 
@@ -397,6 +412,7 @@ const aboAction = async (type) => {
             method: "POST",
             headers : header,
             body: JSON.stringify({
+                     
                 'subscription' : subscription,
                 'phone' : window.localStorage.phone,
                 'serialNumber' : window.localStorage.serial,
@@ -710,7 +726,7 @@ const checkAuth = async () => {
         header.Authorization = 'Bearer ' + token
     }
     else {
-           window.location.replace(REDIRECT);
+           window.location.replace(REDIRECT+'?redirect='+url.pathname);
     }
 }
 
@@ -719,7 +735,6 @@ const getAll = async () => {
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
-
     if (document.getElementById('jag-step-3'))
         await getCart();
     else if (document.getElementById('jag-step-2')) {
