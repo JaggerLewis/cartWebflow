@@ -264,7 +264,7 @@ const loginCode = async () => {
             window.localStorage.setItem('token', result.token)
             let searchParams = new URLSearchParams(window.location.search);
             if (searchParams.has('redirect')) {
-                window.location.replace(redirect)
+                window.location.replace(searchParams.get('redirect'))
             }
             else {
                 window.open('profil-chien', '_self')
