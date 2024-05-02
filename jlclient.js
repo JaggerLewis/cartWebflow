@@ -64,6 +64,40 @@ const initClient = {
     'jl-order-container' : () => initOrder(),
     'jl-order-order' : (node) => node.addEventListener('click', () => switchInfo('order')),
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
+    'jl-family-container' : (node) => node.addEventListener('click', () => initFamily()),
+}
+
+const clearFamily = () => {
+    let nodes = document.getElementById('jl-family-container').childNodes
+    for (let i = nodes.length - 1; i >= 0; i--) {
+        nodes[i].id.includes('jag-family-card-') ?  nodes[i].remove() : null
+    }
+}
+
+const initFamily = () => {
+    let list = document.getElementById('jl-family-container')
+    let card = document.getElementById('jag-family-card')
+
+    let owerCard = card.cloneNode(true)
+    owerCard.style.display = 'flex'
+    changeChildsId(owerCard, '-'+user._id, 'jag-')
+    list.appendChild(owerCard)
+    document.getElementById('jag-family-pict-' + user._id).src = "https://app-api.mypet.fit/img/" + user.image.type +"/"+ user.image.uuid 
+    document.getElementById('jag-family-pict-' + user._id).srcset = "https://app-api.mypet.fit/img/" + user.image.type +"/"+ user.image.uuid 
+    document.getElementById('jag-family-name-' + user._id).innerHTML =user.name
+    document.getElementById('jag-family-type-' + user._id).innerHTML = "Propriétaire"
+    dog.family.forEach((membre) => {
+        let familyCard = card.cloneNode(true)
+        familyCard.style.display = 'flex'
+        changeChildsId(familyCard, '-'+membre._id, 'jag-')
+        list.appendChild(familyCard)
+        console.log(familyCard)
+        document.getElementById('jag-family-pict-' + membre._id).src = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
+         document.getElementById('jag-family-pict-' + membre._id).srcset = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
+        document.getElementById('jag-family-name-' + membre._id).innerHTML =membre.name
+        document.getElementById('jag-family-type-' + membre._id).innerHTML = "Ma Famille"
+    })
+
 }
 
 
@@ -554,6 +588,7 @@ const getUser = async () => {
 }
 
 const setidentity = () => {
+    initFamily()
     let race = dog.race ?? dog.dadRace ?? dog.momRace
     let food = JSON.parse(dog.food ?? '{}')
     document.getElementById('jag-profil-identity-pict').src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid 
