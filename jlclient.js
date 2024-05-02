@@ -576,6 +576,10 @@ const getUser = async () => {
         .then(async (res) => await res.json())
         .then((res) => res.user)
 
+    user.galery = await fetch(baseurl + '/user/gallery?sharing=false', {headers : header})
+            .then(async (res) => await res.json())
+            .then(async (res) => res.personalActivities)
+
     if (user.dogs.length != 0) {
         dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', {headers : header})
             .then(async (res) => await res.json())
