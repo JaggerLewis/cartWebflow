@@ -86,7 +86,7 @@ let initGalery =  () => {
         
         newPict.style.display = 'flex'
         changeChildsId(newPict, '-'+pict.image._id, 'jag-')
-        list.appendChild(newPict)
+        list.insertBefore(newPict, list.firstChild)
         console.log(newPict)
         document.getElementById('jag-profil-identity-gallery-pict-' + pict.image._id).src = "https://app-api.mypet.fit/img/" + pict.image.type +"/"+ pict.image.uuid 
          document.getElementById('jag-profil-identity-gallery-pict-' + pict.image._id).srcset = "https://app-api.mypet.fit/img/" + pict.image.type +"/"+ pict.image.uuid 
