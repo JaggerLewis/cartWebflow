@@ -94,15 +94,15 @@ const deleteAccountSms = async () => {
             return
         }
     
-        let res = await fetch(baseurl + '/user/delete/sms', {
-                method: 'POST',
+        let res = await fetch(baseurl + '/user/delete', {
+                method: 'DELETE',
                 headers: header,
                 body : JSON.stringify({"phoneToken": value})
                 })
 
       if (res.status == 200) {
         window.location.replace('/supprimer-compte')
-        localStorage.removeItem('token')
+        localStorage.removeItem('token')b
         checkAuth()
       }
       else {
