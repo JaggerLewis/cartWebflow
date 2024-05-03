@@ -66,7 +66,7 @@ const initClient = {
     'jl-order-order' : (node) => node.addEventListener('click', () => switchInfo('order')),
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
     'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
-    'jl-delete-sms-action' : (node) => node.addEventListener('click', () => deleteAccountSms()),
+    'jl-delete-sms-action' : (node) => initDelete(),
     'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScriptionEmail()),
     'jl_switch_month' : (node) =>  node.addEventListener('click', () => changeSubscription('monthly')),
     'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
@@ -86,17 +86,23 @@ const deleteAccountEmail = async () => {
     }
 }
 
-const deleteAccountSms = async () => {
-        let type = new URL(window.location.href).searchParams.get('type')
+initDelete = (node) => {
+    let type = new URL(window.location.href).searchParams.get('type')
 
-        if (type == 'subscription_cancel') {
-            document.getElementById('jag-delete-text-stop').style.display = 'flex'
-            document.getElementById('jag-delete-text-delete').style.display = 'none'
-            await cancelSubScription()
-            return
-        }
-        document.getElementById('jag-delete-text-stop').style.display = 'none'
-        document.getElementById('jag-delete-text-delete').style.display = 'flex'
+    if (type == 'subscription_cancel') {
+        document.getElementById('jag-delete-text-stop').style.display = 'flex'
+        document.getElementById('jag-delete-text-delete').style.display = 'none'
+        node.addEventListener('click', () => cancelSubScription())
+        return
+    }
+    document.getElementById('jag-delete-text-stop').style.display = 'none'
+    document.getElementById('jag-delete-text-delete').style.display = 'flex'
+    node.addEventListener('click', () => deleteAccountSms())
+}
+
+const deleteAccountSms = async () => {
+       
+       
         let input = document.getElementById('jag-delete-sms-input')
         if (!input) {
             showAddCart('Oups, une erreur est survenue, rechangez la page', true)
