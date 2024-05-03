@@ -689,17 +689,11 @@ const getAbonnement = async () => {
     abonnement = data
 }
 
-const getUser = async () => {
-    //TODO(dev) : get localStorage
-    loaderContainer.style.display = 'flex'
-    user = await fetch(baseurl + '/profile/full', {headers : header})
-        .then(async (res) => await res.json())
-        .then((res) => res.user)
-
-    user.galery = await fetch(baseurl + '/user/gallery?sharing=false', {headers : header})
-            .then(async (res) => await res.json())
-            .then(async (res) => res.personalActivities)
-
+const getDog = async () => {
+    dog = localStorage.getItem(dog)
+    if (dog) {
+        return
+    }
     if (user.dogs.length != 0) {
         dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', {headers : header})
             .then(async (res) => await res.json())
@@ -708,7 +702,28 @@ const getUser = async () => {
             .then(async (res) => await res.json())
             .then((res) => res.BatteryInfos)
     }
+}
+
+const getUser = async () => {
+    //TODO(dev) : get localStorage
+    user = localStorage.getItem(user)
+
+    if (user) {
+        return
+    }
+    loaderContainer.style.display = 'flex'
+    user = await fetch(baseurl + '/profile/full', {headers : header})
+        .then(async (res) => await res.json())
+        .then((res) => res.user)
+
+    user.galery = await fetch(baseurl + '/user/gallery?sharing=false', {headers : header})
+            .then(async (res) => await res.json())
+            .then(async (res) => res.personalActivities)
+    window.localStorage.setItem('user', user)
+   
     loaderContainer.style.display = 'none'
+    window.localStorage.setItem('dog', dog)
+
 }
 
 const setidentity = () => {
@@ -741,7 +756,6 @@ const setidentity = () => {
     document.getElementById('jag-profil-welfare-rest').innerHTML = dog.welfareData.global.rest_global ?? '-'
     document.getElementById('jag-profil-welfare-trophy').innerHTML = dog.welfareData.global.trophy_global ?? '-'
     document.getElementById('jag-profil-welfare-welfare').innerHTML = dog.welfareData.global.welfare_global ?? '-'
-
 }
 
 const initDashboard = async (node) => {
