@@ -339,15 +339,16 @@ const cancelSubScription =  async () => {
             })
         })
         .then(async (res) => await res.json())
+        if (result.status == 200) {
+            window.location.replace('/seconnecter')
+            localStorage.removeItem('token')
+            checkAuth()
+          }
+          else {
+            showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+          }
     }
-    if (res.status == 200) {
-        window.location.replace('/seconnecter')
-        localStorage.removeItem('token')
-        checkAuth()
-      }
-      else {
-        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
-      }
+
    
 }
 
