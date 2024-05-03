@@ -842,6 +842,7 @@ const getAll = async () => {
     else if (document.getElementById('jag-switch-abo')) {
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
+        await getUser()
         initAboB()
     }
     //
