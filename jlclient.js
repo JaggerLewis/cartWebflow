@@ -68,6 +68,9 @@ const initClient = {
     'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
     'jl-delete-sms-action' : (node) => node.addEventListener('click', () => deleteAccountSms()),
     'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScription()),
+    'jl_switch_month' : (node) =>  node.addEventListener('click', () => changeSubscription('monthly')),
+    'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
+    'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
 }
 const deleteAccountEmail = async () => {
     // TODO(dev): update id [jl-delete-email]
@@ -326,8 +329,9 @@ const cancelSubScription = async () => {
     }
 }
 
-const changeSubscription = async (sub) => {
+const changeSubscription = async (type) => {
     // TODO(dev) : ADD TO FRONT
+    let sub = findAbonnementSolo(type)
     let result = await fetch(
         baseurl + '/stripe/checkout_session/subscription/update', {
         method: "POST",
@@ -836,6 +840,12 @@ const getAll = async () => {
         await initOption()
     
     }
+    else if (document.getElementById('jag-switch-abo')) {
+        await loadAbonnement()
+        abonnement = JSON.parse(localStorage.getItem('abonnement'))
+        initAboB()
+    }
+    //
   
   
     loaderContainer.style.display = 'none'
