@@ -51,6 +51,7 @@ const initClient = {
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('monthly')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yealry')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('life')),
+    'jl-abo-change' : (node) => window.open('my/choix-abonnement-upgrade-b'),
     'jl-formula-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('abo')),
     'jl-option-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('option')),
     'jl-insurance-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('insurance')),
@@ -362,6 +363,8 @@ const initOption = async () => {
         document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = subFormula.metadata.pricing
         document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
+        document.getElementById('jag-'+type+'-ststopart-'+subFormula.id).addEventListener('click', )
+
         // array.forEach((abo) => {
           
         //     switch (type) {
