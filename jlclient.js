@@ -73,7 +73,6 @@ const initClient = {
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
 }
 const deleteAccountEmail = async () => {
-    // TODO(dev): update id [jl-delete-email]
     let res = await fetch(baseurl + '/user/delete/email', {
                 method: 'POST',
                 headers: header
@@ -101,8 +100,6 @@ initDelete = (node) => {
 }
 
 const deleteAccountSms = async () => {
-       
-       
         let input = document.getElementById('jag-delete-sms-input')
         if (!input) {
             showAddCart('Oups, une erreur est survenue, rechangez la page', true)
@@ -343,6 +340,14 @@ const cancelSubScription =  async () => {
         })
         .then(async (res) => await res.json())
     }
+    if (res.status == 200) {
+        window.location.replace('/seconnecter')
+        localStorage.removeItem('token')
+        checkAuth()
+      }
+      else {
+        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+      }
    
 }
 
@@ -388,7 +393,6 @@ const changeSubscription = async (type) => {
     }
 }
 
-// document.getElementById('jag-abo-check-6613e7d05a5dd4990a8711b6').style['background-color'] = 'red'
 const initOption = async () => {
     let types = ['abo']
     types.forEach((type) => {
