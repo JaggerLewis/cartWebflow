@@ -737,6 +737,11 @@ const setidentity = () => {
     if (food.foodType.type) {
         document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : 'fait maison'
     }
+    document.getElementById('jag-profil-welfare-calory').innerHTML = dog.welfareData.global.calory_global ?? '-'
+    document.getElementById('jag-profil-welfare-rest').innerHTML = dog.welfareData.global.rest_global ?? '-'
+    document.getElementById('jag-profil-welfare-trophy').innerHTML = dog.welfareData.global.trophy_global ?? '-'
+    document.getElementById('jag-profil-welfare-welfare').innerHTML = dog.welfareData.global.welfare_global ?? '-'
+
 }
 
 const initDashboard = async (node) => {
@@ -782,6 +787,16 @@ const checkAuth = async () => {
     else {
            window.location.replace(REDIRECT+'?redirect='+url.pathname);
     }
+}
+
+const welfareData = async () => {
+    let date = 1714734836854
+    let result =  await fetch(baseurl + `/collar/${dog.collar.simcardID}/new_welfare_data/${date}`, {
+        method: "GET",
+        headers : header,
+    }).then(async (res) => res.json())
+
+    dog.welfareData = result
 }
 
 const getAll = async () => {
