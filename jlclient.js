@@ -330,8 +330,7 @@ const cancelSubScription = async () => {
 }
 
 const changeSubscription = async (type) => {
-    // TODO(dev) : ADD TO FRONT
-    let sub = findAbonnementSolo(type)
+    let sub = findAbonnementSolo(type).id
     let result = await fetch(
         baseurl + '/stripe/checkout_session/subscription/update', {
         method: "POST",
