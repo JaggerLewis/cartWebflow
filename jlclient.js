@@ -238,8 +238,8 @@ const loginEmail = async () => {
             body: JSON.stringify({
                 'email' : email,
             }), 
-          }).then(async (res) => await res) 
-          if (result.code == '004' || result.status == 200) {
+          }).then(async (res) => await res.json()) 
+          if (result.code == '004') {
             document.getElementById('jag-code-popup').style.display = 'flex'
           }
           else {
