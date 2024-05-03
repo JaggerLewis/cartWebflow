@@ -302,6 +302,50 @@ const formulaPageSwitch = (type) => {
 
     })
 }
+
+const cancelSubScription = async () => {
+    // TODO(dev) : ADD TO FRONT
+    let sub = dog.collar.formula_subscription._id
+    let result = await fetch(
+        baseurl + `/formula_subscription/${sub}/cancel/email`, {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify( {
+            "subscription" : sub,
+            "collarId" : dog.collar._id
+        })
+    })
+    .then(async (res) => await res.json())
+
+    if (result.success) {
+        showAddCart('Un mail vous à été envoyé', true)
+    }
+    else {
+        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+    }
+}
+
+const changeSubscription = async (sub) => {
+    // TODO(dev) : ADD TO FRONT
+    let result = await fetch(
+        baseurl + '/stripe/checkout_session/subscription/update?livemode=false', {
+        method: "POST",
+        headers: header,
+        body: JSON.stringify( {
+            "subscription" : sub,
+            "collarId" : dog.collar._id
+        })
+    })
+    .then(async (res) => await res.json())
+
+    if (result.url) {
+       window.open(result.url)
+    }
+    else {
+        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+    }
+}
+
 // document.getElementById('jag-abo-check-6613e7d05a5dd4990a8711b6').style['background-color'] = 'red'
 const initOption = async () => {
     let types = ['abo', 'insurance', 'option']
