@@ -317,10 +317,12 @@ let abonnement = []
 let accessory = []
 
 const findProduct = (product, color) => {
-    const filtered = products.find(elem =>
-        elem.metadata.pId === product && color ? elem.metadata.colorId === color : true
-    )
-    return filtered;
+    let filtered = products.filter(elem => elem.metadata.pId == product)
+
+    if (color != null)
+        filtered = filtered.filter(elem => elem.metadata.colorId == color)
+
+    return filtered[0]
 }
 
 const findAbonnement = (product) => {
