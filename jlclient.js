@@ -348,32 +348,37 @@ const changeSubscription = async (sub) => {
 
 // document.getElementById('jag-abo-check-6613e7d05a5dd4990a8711b6').style['background-color'] = 'red'
 const initOption = async () => {
-    let types = ['abo', 'insurance', 'option']
+    let types = ['abo']
     types.forEach((type) => {
         let card = document.getElementById('jag-'+type+'-card')
         let array = type == 'abo' ? abonnement : option.filter((elem) => elem.type == type)
-        array.forEach((abo) => {
-            newCard = card.cloneNode(true)
-            changeChildsId(newCard, '-'+abo.metadata.productId, 'jag-')
-            document.getElementById('jag-'+type+'-container').appendChild(newCard)
-            document.getElementById('jag-'+type+'-name-'+abo.metadata.productId).innerHTML = abo.metadata.title_fr
-            document.getElementById('jag-'+type+'-description-'+abo.metadata.productId).innerHTML = abo.description
-            switch (type) {
-                case 'abo' :
-                    document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
-                    document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
-                    break
-                default : 
-                  document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'À renouveler le : ' + '00/00/00'
-                  document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'Début le : '+ '00/00/00'
-            }
-            document.getElementById('jag-'+type+'-pict-'+abo.metadata.productId).src = abo.image
-            if (type == 'abo') {
-                if (dog.collar.formula_subscription.formula.product == abo.metadata.productId) {
-                    document.getElementById('jag-abo-check-'+abo.metadata.productId).style['background-color'] = 'green'
-                }
-            }
-    })
+        // TODO(dev): check formula in dog.collar.formula_subscription
+        let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
+        let subFormula = findAbonnementSolo('life')
+        newCard = card.cloneNode(true)
+        changeChildsId(newCard, '-'+subFormula.id, 'jag-')
+        document.getElementById('jag-'+type+'-container').appendChild(newCard)
+        document.getElementById('jag-'+type+'-name-'+subFormula.id).innerHTML = formula.name
+        document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = subFormula.metadata.pricing
+        document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
+        document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
+        // array.forEach((abo) => {
+          
+        //     switch (type) {
+        //         case 'abo' :
+                  
+        //             break
+        //         default : 
+        //           document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'À renouveler le : ' + '00/00/00'
+        //           document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'Début le : '+ '00/00/00'
+        //     }
+        //     document.getElementById('jag-'+type+'-pict-'+abo.metadata.productId).src = abo.image
+        //     if (type == 'abo') {
+        //         if (dog.collar.formula_subscription.formula.product == abo.metadata.productId) {
+        //             document.getElementById('jag-abo-check-'+abo.metadata.productId).style['background-color'] = 'green'
+        //         }
+        //     }
+    // })
         card.style.display = 'none'
     })
     document.getElementById('jag-abo-container').style.display = 'block'
