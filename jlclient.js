@@ -218,10 +218,16 @@ const initOrder = async () => {
 }
 
 const initInfos = async () => {
-    let infos = await fetch(baseurl + '/user/customer', {headers : header})
-    .then(async (res) => await res.json())
-    .then((res) => res.result)
+    let res = await fetch(baseurl + '/user/customer', {headers : header})
 
+    if (res.status == 404) {
+        showAddCart('Utilisateur introuvable...')
+        setTimeout(() => {
+            history.back()
+          }, "1000");
+    }
+
+    if (infos)
     document.getElementById('jag-info-name').innerHTML = infos.customer.name
     document.getElementById('jag-info-firstname').innerHTML = infos.customer.name
     document.getElementById('jag-info-email').innerHTML = infos.customer.email
