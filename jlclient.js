@@ -713,6 +713,13 @@ const getDog = async () => {
     window.localStorage.setItem('dog', JSON.stringify(dog))
 }
 
+let getNewAbo = () => {
+    if (dog.collar.formula_subscription.formula.name) {
+        return findAbonnementSolo('life')
+    }
+    return dog.collar.formula_subscription.formula
+}
+
 const getUser = async () => {
     user = JSON.parse(localStorage.getItem('user'))
 
@@ -824,6 +831,25 @@ const getWelfareData = async () => {
     dog.welfareData = result
 }
 
+const disableButton = () => {
+    let id = 'month'
+    switch(getNewAbo().metadata.pricing) {
+        case 'monthly' :
+        id =  'month'
+            break
+        case 'yealy' :
+        id =   'year'
+            break
+        case 'life' :
+        id =   'life'
+            break
+    }
+    let btn = document.getElementById('jl_switch_' + id)
+    btn.innerHTML = 'Votre abonnement'
+    let newBtn = btn.cloneNode(true)
+    btn.parentElement.replaceChild(btnBtn, btn)
+}
+
 const getAll = async () => {
     loaderContainer = document.createElement('div')
     loaderContainer.classList.add('jl-loader-container')
@@ -850,12 +876,14 @@ const getAll = async () => {
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
+
         initAboB()
     }
     else if (document.getElementById('jag-abo-stop')) {
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
+        disableButton()
     }
     //
   
