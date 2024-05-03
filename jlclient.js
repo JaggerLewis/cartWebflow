@@ -458,8 +458,7 @@ const findAbonnementSolo = (type) => {
 const aboAction = async (type) => {
     const url = window.location.origin + window.location.pathname;
     let check = document.getElementById('jag_Abonnement_check')
-    if (duration && check && check.checked) {
-        let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
+    if (check && check.checked) {
         let subscription = findAbonnementSolo(type).id
         loaderContainer.style.display = 'flex'
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
@@ -477,11 +476,6 @@ const aboAction = async (type) => {
             loaderContainer.style.display = 'none'
             window.open(result.url, '_self')
           }
-        return
-    }
-
-    else if (!duration) {
-        showAddCart('Vous devez séléctionner une durée', true)
         return
     }
 
