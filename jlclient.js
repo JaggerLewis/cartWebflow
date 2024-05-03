@@ -140,6 +140,7 @@ let initGalery =  () => {
 }
 
 const initFamily = () => {
+    clearFamily()
     let list = document.getElementById('jl-family-container')
     let card = document.getElementById('jag-family-card')
 
