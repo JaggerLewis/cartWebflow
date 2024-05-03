@@ -1105,7 +1105,7 @@ const init = async () => {
     }
 
     try {
-        preload(findProduct('jag', 'fauve').image)
+        findProduct('jag', 'fauve').image = preload(findProduct('jag', 'fauve').image).src
         preload(findProduct('jag', 'weimar').image)
         preload(findProduct('jag', 'charbon').image)
         preload(findProduct('jag-smartdock', 'fauve').image)
