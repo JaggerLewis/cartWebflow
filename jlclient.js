@@ -770,6 +770,7 @@ const initDashboard = async (node) => {
     await getUser()
   
     initGalery()
+    loaderContainer.style.display = 'flex'
     let container = document.getElementById('jag-profil-dog-container');
     user.dogs.forEach((localDog) => {
                 newCard = container.cloneNode(true)
@@ -791,6 +792,7 @@ const initDashboard = async (node) => {
                 })
         })
     setidentity()
+    loaderContainer.style.display = 'none'
 }
 
 const checkAuth = async () => {
