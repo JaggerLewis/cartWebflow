@@ -452,7 +452,7 @@ const redirectStep2 = () => {
 }
 
 const findAbonnementSolo = (type) => {
-    return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'monthly')
+    return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == type)
 }
 
 const aboAction = async (type) => {
