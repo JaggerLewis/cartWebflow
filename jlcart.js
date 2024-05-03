@@ -38,22 +38,22 @@ function displayPrice(price) {
 
 const getRightAbo = (value) => {
     switch (value) {
-        case 'premium': 
-             return 'premium-family'; 
-        case 'family': 
-            return 'starter-family'; 
-        default :
+        case 'premium':
+            return 'premium-family';
+        case 'family':
+            return 'starter-family';
+        default:
             return value
     }
 }
 
 const getRightLenght = (value) => {
     switch (value) {
-        case 'mois': 
-             return 'monthly'; 
-        case 'annee': 
-            return 'yearly'; 
-        default : 
+        case 'mois':
+            return 'monthly';
+        case 'annee':
+            return 'yearly';
+        default:
             return value
     }
 }
@@ -108,7 +108,7 @@ class ShoppingCart {
     }
 
     findProductIndexById(id) {
-     
+
 
         return this.cart.findIndex(product =>
             product.id.price.id === id.price.id
@@ -244,7 +244,7 @@ class ShoppingCart {
             })
             return answer
         }
-        catch(e) {
+        catch (e) {
             console.log(e)
             return true
         }
@@ -317,12 +317,10 @@ let abonnement = []
 let accessory = []
 
 const findProduct = (product, color) => {
-    let filtered = products.filter(elem => elem.metadata.pId == product)
-
-    if (color != null)
-        filtered = filtered.filter(elem => elem.metadata.colorId == color)
-
-    return filtered[0]
+    const filtered = products.find(elem =>
+        elem.metadata.pId === product && color ? elem.metadata.colorId === color : true
+    )
+    return filtered;
 }
 
 const findAbonnement = (product) => {
@@ -350,14 +348,14 @@ const getTargetProduct = () => {
 
     targetProduct = 'jag-smartdock';
 
-        if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
-            targetProduct = 'jag';
-        }
-        
-        if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
-            targetProduct = 'jag-smartdock';
-        }
-        
+    if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
+        targetProduct = 'jag';
+    }
+
+    if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
+        targetProduct = 'jag-smartdock';
+    }
+
     return targetProduct;
 }
 
@@ -395,21 +393,21 @@ const initJagGPS = async () => {
         let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
         shoppingCart.addItem(product, 1)
         document.activeElement.blur();
-        gtag("event", "add_to_cart", 
-        {
-            currency: "EUR",
-            value: product.price.price,
-            items: [
-              {
-                item_id: product.metadata.productId,
-                item_name: product.metadata.title_fr,
-                item_brand: "Jagger & Lewis",
-                item_variant: product.colorId,
-                price: product.price.price,
-                quantity: 3
-              }
-            ]
-        });
+        gtag("event", "add_to_cart",
+            {
+                currency: "EUR",
+                value: product.price.price,
+                items: [
+                    {
+                        item_id: product.metadata.productId,
+                        item_name: product.metadata.title_fr,
+                        item_brand: "Jagger & Lewis",
+                        item_variant: product.colorId,
+                        price: product.price.price,
+                        quantity: 3
+                    }
+                ]
+            });
     })
 
     document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
@@ -419,43 +417,41 @@ const initJagGPS = async () => {
         switchSmartdock();
         document.activeElement.blur();
     })
-        document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
-            event.preventDefault()
-            /*document.getElementById('jag-without-smartdock').setAttribute('isChecked','yes');
-            document.getElementById('jag-with-smartdock').setAttribute('isChecked','no');
-            document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_on w-button';
-            document.getElementById('jag-with-smartdock').setAttribute('isChecked','no');
-            document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';*/
-            switchSmartdock();
-            document.activeElement.blur();
-        })
-        document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
-            event.preventDefault()
-            switchSmartdock();
-            document.activeElement.blur();
-            /*document.getElementById('jag-without-smartdock').setAttribute('isChecked','no');
-            document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
-            document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_off w-button';
-            document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
-            document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_on w-button';*/
-        })
+    document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
+        event.preventDefault()
+        /*document.getElementById('jag-without-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_on w-button';
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';*/
+        switchSmartdock();
+        document.activeElement.blur();
+    })
+    document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
+        event.preventDefault()
+        switchSmartdock();
+        document.activeElement.blur();
+        /*document.getElementById('jag-without-smartdock').setAttribute('isChecked','no');
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_off w-button';
+        document.getElementById('jag-with-smartdock').setAttribute('isChecked','yes');
+        document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_on w-button';*/
+    })
 
     document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
     collar.setAttribute('data-selected', findProduct('jag', initialColor).price.id)
     collar.srcset = findProduct('jag', 'fauve').image
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
 
-    if (initialDevice == 'jag')
-    {
+    if (initialDevice == 'jag') {
         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
     }
-    else
-    {
+    else {
         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
     }
-    
+
     switchSmartdock();
 
     return true;
@@ -941,16 +937,16 @@ const initAboJag = async () => {
 
 const initAboB = async () => {
     let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
-    document.getElementById('jl-abo-month-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'monthly').price).toFixed(2) + '€' +  getTrad('/mois', '/month')
-    document.getElementById('jl-abo-year-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'yearly').price /12).toFixed(2) + '€' +  getTrad('/mois', '/month')
+    document.getElementById('jl-abo-month-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'monthly').price).toFixed(2) + '€' + getTrad('/mois', '/month')
+    document.getElementById('jl-abo-year-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'yearly').price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
     document.getElementById('jl-abo-life-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'life').price).toFixed(2) + '€'
 
     document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation')
     //document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
-    let annualPrice = (formula.prices.find((elem) => elem.metadata.pricing == 'yearly').price).toFixed(2) + '€' 
+    let annualPrice = (formula.prices.find((elem) => elem.metadata.pricing == 'yearly').price).toFixed(2) + '€'
     document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit ' + annualPrice + ' par an', 'or ' + annualPrice + ' per year')
     let lifePrice36 = (formula.prices.find((elem) => elem.metadata.pricing == 'life').price / 36).toFixed(2) + '€'
-    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years' ) 
+    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')
 }
 
 const initAccessWidget = async () => {
@@ -959,13 +955,13 @@ const initAccessWidget = async () => {
     let container = document.getElementById('jag-solo')
     datas.forEach((prod) => {
         let newCard = card.cloneNode(true)
-        
-        changeChildsId(newCard, '-'+prod.metadata.productId, 'jag-')
+
+        changeChildsId(newCard, '-' + prod.metadata.productId, 'jag-')
         container.insertBefore(newCard, container.firstChild)
-        document.getElementById('jag-solo-pict-'+prod.metadata.productId).src = prod.image
-        document.getElementById('jag-solo-title-'+prod.metadata.productId).innerHTML = prod.name
-        document.getElementById('jag-solo-price-'+prod.metadata.productId).innerHTML = prod.price.price + '€'
-        document.getElementById('jag-solo-action-'+prod.metadata.productId).addEventListener('click', () =>  shoppingCart.addItem(prod, 1))
+        document.getElementById('jag-solo-pict-' + prod.metadata.productId).src = prod.image
+        document.getElementById('jag-solo-title-' + prod.metadata.productId).innerHTML = prod.name
+        document.getElementById('jag-solo-price-' + prod.metadata.productId).innerHTML = prod.price.price + '€'
+        document.getElementById('jag-solo-action-' + prod.metadata.productId).addEventListener('click', () => shoppingCart.addItem(prod, 1))
         newCard.style.display = 'flex'
     })
 }
@@ -990,20 +986,19 @@ const refreshOrderInfo = async () => {
         document.getElementById('JL_ORDER_ID').textContent = datas.orderNumber
         document.getElementById('JL_ORDER').style.display = 'flex';
     }
-    
+
     let order_total_amount = 0;
     let order_items = [];
     let items = datas.aside_data.cart;
 
-    for (i=0; i<items.length ; i++)
-    {
+    for (i = 0; i < items.length; i++) {
         item = datas.aside_data.cart[i];
         //console.log(item);
 
         let itemColor = '';
-        if ( item.description.toLowerCase().indexOf('weimar') > -1 ) {itemColor = 'Weimar';}
-        if ( item.description.toLowerCase().indexOf('fauve') > -1 ) {itemColor = 'Fauve';}
-        if ( item.description.toLowerCase().indexOf('charbon') > -1 ) {itemColor = 'Charbon';}
+        if (item.description.toLowerCase().indexOf('weimar') > -1) { itemColor = 'Weimar'; }
+        if (item.description.toLowerCase().indexOf('fauve') > -1) { itemColor = 'Fauve'; }
+        if (item.description.toLowerCase().indexOf('charbon') > -1) { itemColor = 'Charbon'; }
 
         newItem = {
             item_id: item.price.product,
@@ -1013,13 +1008,13 @@ const refreshOrderInfo = async () => {
             item_variant: itemColor,
             price: item.amount_total,
             quantity: item.quantity
-          }
+        }
 
         order_total_amount += item.amount_total;
         //console.log(newItem);
         order_items.push(newItem)
     }
-    
+
     shipping_cost = 599;
     order_total_amount = order_total_amount + shipping_cost;
     order_total_tax = parseInt(order_total_amount / 1.2);
@@ -1027,9 +1022,9 @@ const refreshOrderInfo = async () => {
 
     gtag("event", "purchase", {
         transaction_id: datas.orderNumber,
-        value: order_total_amount/100,
-        tax: order_total_tax/100,
-        shipping: shipping_cost/100,
+        value: order_total_amount / 100,
+        tax: order_total_tax / 100,
+        shipping: shipping_cost / 100,
         currency: "EUR",
         items: order_items
     });
@@ -1041,11 +1036,11 @@ const changeChildsId = (node, suffix, filter) => {
     if (filter) {
         if (node.id && node.id.includes(filter))
             node.id = node.id + suffix
-        }
+    }
     else node.id = node.id + suffix
-    if(node.hasChildNodes) {
+    if (node.hasChildNodes) {
         var childs = node.childNodes;
-        for(var index=0; index<childs.length; index++) {
+        for (var index = 0; index < childs.length; index++) {
             changeChildsId(childs[index], suffix, filter)
         }
     }
@@ -1089,15 +1084,15 @@ const init = async () => {
     let delayDate = 24 * 60 * 60 * 1000;
 
 
-    console.log( date, lastDate, (date - lastDate));
+    console.log(date, lastDate, (date - lastDate));
 
     if ((date - lastDate) > delayDate) {
         await loadData()
         await loadAbonnement()
     }
 
-    let result = JSON.parse(localStorage.getItem('data')) ||  await loadData()
-    abonnement = JSON.parse(localStorage.getItem('abonnement')) ||  await loadAbonnement()
+    let result = JSON.parse(localStorage.getItem('data')) || await loadData()
+    abonnement = JSON.parse(localStorage.getItem('abonnement')) || await loadAbonnement()
 
     loaderContainer.style.display = 'none'
 
@@ -1193,7 +1188,7 @@ const redirectToStripe = async (event) => {
             window.location.href = apiResJson.url
         },
     });
-    
+
 }
 
 const redirectToStripeBis = async () => {
@@ -1299,21 +1294,21 @@ const showNewCart = (event) => {
             shoppingCart.setTotalPrice();
 
             // Add event for google
-            gtag("event", "remove_from_cart", 
-            {
-                'currency': "EUR",
-                'value': prod.id.price.price,
-                'items': [
+            gtag("event", "remove_from_cart",
                 {
-                    'item_id': prod.id.metadata.productId,
-                    'item_name': prod.id.metadata.title_fr,
-                    'item_brand': "Jagger & Lewis",
-                    'item_variant': prod.id.metadata.colorId,
-                    'price': prod.id.price.price,
-                    'quantity': prod.quantity
-                }
-                ]
-            });
+                    'currency': "EUR",
+                    'value': prod.id.price.price,
+                    'items': [
+                        {
+                            'item_id': prod.id.metadata.productId,
+                            'item_name': prod.id.metadata.title_fr,
+                            'item_brand': "Jagger & Lewis",
+                            'item_variant': prod.id.metadata.colorId,
+                            'price': prod.id.price.price,
+                            'quantity': prod.quantity
+                        }
+                    ]
+                });
 
             if (shoppingCart.cart.length == 0) {
                 noItems();
@@ -1324,13 +1319,13 @@ const showNewCart = (event) => {
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
 
         cart_items.push({
-                'item_id': prod.id.metadata.productId,
-                'item_name': prod.id.metadata.title_fr,
-                'item_brand': "Jagger & Lewis",
-                'item_variant': prod.id.metadata.colorId,
-                'price': prod.id.price.price,
-                'quantity': prod.quantity
-            });
+            'item_id': prod.id.metadata.productId,
+            'item_name': prod.id.metadata.title_fr,
+            'item_brand': "Jagger & Lewis",
+            'item_variant': prod.id.metadata.colorId,
+            'price': prod.id.price.price,
+            'quantity': prod.quantity
+        });
 
         nbItem++;
     })
@@ -1341,7 +1336,7 @@ const showNewCart = (event) => {
         currency: "EUR",
         value: cart_totalPrice,
         items: cart_items,
-      });
+    });
 
     document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
 
@@ -1379,20 +1374,17 @@ var devices = ['jag', 'jag-smartdock'];
 var initialColor = 'fauve';
 var initialDevice = 'jag-smartdock';
 
-if (document.getElementById('encart_jag_gps_s2')) 
-{
+if (document.getElementById('encart_jag_gps_s2')) {
     let queryParams = new URLSearchParams(document.location.search);
     var jagColor = queryParams.get("c")
-    if ( ( jagColor != null) && ( colors.includes(jagColor) ) )
-    {
+    if ((jagColor != null) && (colors.includes(jagColor))) {
         initialColor = jagColor;
-    } 
-    
+    }
+
     var jagDevice = queryParams.get("d")
-    if ( ( jagDevice != null) && ( devices.includes(jagDevice) ) )
-    {
+    if ((jagDevice != null) && (devices.includes(jagDevice))) {
         initialDevice = jagDevice;
-    } 
+    }
 }
 
 
