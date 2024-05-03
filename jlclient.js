@@ -363,7 +363,7 @@ const initOption = async () => {
         document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = subFormula.metadata.pricing
         document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
-        document.getElementById('jag-'+type+'-ststopart-'+subFormula.id).addEventListener('click', )
+        document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', )
 
         // array.forEach((abo) => {
           
