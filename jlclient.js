@@ -876,14 +876,13 @@ const getAll = async () => {
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
-
         initAboB()
+        disableButton()
     }
     else if (document.getElementById('jag-abo-stop')) {
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
-        disableButton()
     }
     //
   
