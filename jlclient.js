@@ -68,16 +68,16 @@ const initClient = {
     'jl-delete-sms-action' : (node) => node.addEventListener('click', () => deleteAccountSms()),
 }
 const deleteAccountEmail = async () => {
-
+    // TODO(dev): update id [jl-delete-email]
     let res = await fetch(baseurl + '/user/delete/email', {
                 method: 'POST',
                 headers: header
             })
     if (res.status == 200) {
-    showAddCart('Email envoyé')
+        showAddCart('Email envoyé')
     }
     else {
-    showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
     }
 }
 
@@ -451,6 +451,10 @@ const redirectStep2 = () => {
     }
 }
 
+const findAbonnementSolo = (type) => {
+    return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'monthly')
+}
+
 const aboAction = async (type) => {
     const url = window.location.origin + window.location.pathname;
     let duration = document.getElementsByClassName('abo_btn_on')[0]
@@ -576,14 +580,12 @@ const validateAction = async () => {
       }).then((res) => res.status) 
       
       if (result == 200) {
-        // TODO(dev): redirect to abo B
         window.open('activation-produit-etape02-copy', '_self')
       }
       else {
         showAddCart('Code incorrect', true)
       }
        
-      console.log('result', result)
       return
 
 }
