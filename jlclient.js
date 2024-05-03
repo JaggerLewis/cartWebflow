@@ -721,10 +721,11 @@ const getUser = async () => {
             .then(async (res) => await res.json())
             .then(async (res) => res.personalActivities)
     window.localStorage.setItem('user', user)
+   
+    await getDog()
     if (!user.welfareData) {
         await getWelfareData()
     }
-    await getDog()
     loaderContainer.style.display = 'none'
     
 
