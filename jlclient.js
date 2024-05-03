@@ -702,6 +702,7 @@ const getDog = async () => {
             .then(async (res) => await res.json())
             .then((res) => res.BatteryInfos)
     }
+    window.localStorage.setItem('dog', dog)
 }
 
 const getUser = async () => {
@@ -720,9 +721,12 @@ const getUser = async () => {
             .then(async (res) => await res.json())
             .then(async (res) => res.personalActivities)
     window.localStorage.setItem('user', user)
-   
+    if (!user.welfareData) {
+        await getWelfareData()
+    }
+    await getDog()
     loaderContainer.style.display = 'none'
-    window.localStorage.setItem('dog', dog)
+    
 
 }
 
@@ -752,10 +756,10 @@ const setidentity = () => {
     if (food.foodType.type) {
         document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : 'fait maison'
     }
-    document.getElementById('jag-profil-welfare-calory').innerHTML = dog.welfareData.global.calory_global ?? '-'
-    document.getElementById('jag-profil-welfare-rest').innerHTML = dog.welfareData.global.rest_global ?? '-'
-    document.getElementById('jag-profil-welfare-trophy').innerHTML = dog.welfareData.global.trophy_global ?? '-'
-    document.getElementById('jag-profil-welfare-welfare').innerHTML = dog.welfareData.global.welfare_global ?? '-'
+    // document.getElementById('jag-profil-welfare-calory').innerHTML = dog.welfareData.global.calory_global ?? '-'
+    // document.getElementById('jag-profil-welfare-rest').innerHTML = dog.welfareData.global.rest_global ?? '-'
+    // document.getElementById('jag-profil-welfare-trophy').innerHTML = dog.welfareData.global.trophy_global ?? '-'
+    // document.getElementById('jag-profil-welfare-welfare').innerHTML = dog.welfareData.global.welfare_global ?? '-'
 }
 
 const initDashboard = async (node) => {
@@ -803,8 +807,8 @@ const checkAuth = async () => {
     }
 }
 
-const welfareData = async () => {
-    let date = 1714734836854
+const getWelfareData = async () => {
+    let date = Date.now()
     let result =  await fetch(baseurl + `/collar/${dog.collar.simcardID}/new_welfare_data/${date}`, {
         method: "GET",
         headers : header,
