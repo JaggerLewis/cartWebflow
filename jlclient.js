@@ -690,7 +690,7 @@ const getAbonnement = async () => {
 }
 
 const getDog = async () => {
-    dog = localStorage.getItem(dog)
+    dog = JSON.parse(localStorage.getItem(dog))
     if (dog) {
         return
     }
@@ -702,12 +702,12 @@ const getDog = async () => {
             .then(async (res) => await res.json())
             .then((res) => res.BatteryInfos)
     }
-    window.localStorage.setItem('dog', dog)
+    window.localStorage.setItem('dog', JSON.stringify(dog))
 }
 
 const getUser = async () => {
     //TODO(dev) : get localStorage
-    user = localStorage.getItem(user)
+    user = JSON.parse(localStorage.getItem(user))
 
     if (user) {
         return
@@ -720,7 +720,7 @@ const getUser = async () => {
     user.galery = await fetch(baseurl + '/user/gallery?sharing=false', {headers : header})
             .then(async (res) => await res.json())
             .then(async (res) => res.personalActivities)
-    window.localStorage.setItem('user', user)
+    window.localStorage.setItem('user',JSON.stringify(user))
    
     await getDog()
     if (!user.welfareData) {
