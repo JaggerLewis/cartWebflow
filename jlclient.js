@@ -314,7 +314,6 @@ const formulaPageSwitch = (type) => {
 }
 
 const cancelSubScription = async () => {
-    // TODO(dev) : ADD TO FRONT
     let sub = dog.collar.formula_subscription._id
     let result = await fetch(
         baseurl + `/formula_subscription/${sub}/cancel/email`, {
@@ -850,6 +849,11 @@ const getAll = async () => {
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
         initAboB()
+    }
+    else if (document.getElementById('jag-abo-stop')) {
+        await loadAbonnement()
+        abonnement = JSON.parse(localStorage.getItem('abonnement'))
+        await getUser()
     }
     //
   
