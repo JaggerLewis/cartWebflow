@@ -338,7 +338,6 @@ const cancelSubScription =  async () => {
                 "phoneToken" : code.value,
             })
         })
-        .then(async (res) => await res.json())
         if (result.status == 200) {
             window.location.replace('/seconnecter')
             localStorage.removeItem('token')
