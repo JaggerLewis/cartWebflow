@@ -67,7 +67,7 @@ const initClient = {
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
     'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
     'jl-delete-sms-action' : (node) => node.addEventListener('click', () => deleteAccountSms()),
-    'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScription()),
+    'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScriptionEmail()),
     'jl_switch_month' : (node) =>  node.addEventListener('click', () => changeSubscription('monthly')),
     'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
@@ -87,7 +87,16 @@ const deleteAccountEmail = async () => {
 }
 
 const deleteAccountSms = async () => {
-    // TODO(dev): update id [jl-delete-sms-action]
+        let type = new URL(window.location.href).searchParams.get('type')
+
+        if (type == 'subscription_cancel') {
+            document.getElementById('jag-delete-text-stop').style.display = 'flex'
+            document.getElementById('jag-delete-text-delete').style.display = 'none'
+            await cancelSubScription()
+            return
+        }
+        document.getElementById('jag-delete-text-stop').style.display = 'none'
+        document.getElementById('jag-delete-text-delete').style.display = 'flex'
         let input = document.getElementById('jag-delete-sms-input')
         if (!input) {
             showAddCart('Oups, une erreur est survenue, rechangez la page', true)
@@ -313,7 +322,25 @@ const formulaPageSwitch = (type) => {
     })
 }
 
-const cancelSubScription = async () => {
+const cancelSubScription =  async () => {
+    let code = document.getElementById('jag-delete-sms-input')
+    let sub = dog.collar.formula_subscription._id
+
+    if (code && code.value.length == 7) {
+        let result = await fetch(
+            baseurl + `/formula_subscription/${sub}/cancel`, {
+            method: "POST",
+            headers: header,
+            body: JSON.stringify( {
+                "phoneToken" : code.value,
+            })
+        })
+        .then(async (res) => await res.json())
+    }
+   
+}
+
+const cancelSubScriptionEmail = async () => {
     let sub = dog.collar.formula_subscription._id
     let result = await fetch(
         baseurl + `/formula_subscription/${sub}/cancel/email`, {
