@@ -750,8 +750,8 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-size').innerHTML = dog.size
     document.getElementById('jag-profil-identity-silouhette').innerHTML = dog.silhouette
     document.getElementById('jag-profil-identity-breed').innerHTML =race.name
-    document.getElementById('jag-profil-identity-lof').style['background-color'] = dog.isLOF ? 'green' : ''
-    document.getElementById('jag-profil-identity-steril').style['background-color'] = dog.sterilized ? 'green' : ''
+    document.getElementById('jag-profil-identity-lof').firstChild.style['background-color'] = dog.isLOF ? '' : 'grey'
+    document.getElementById('jag-profil-identity-steril').firstChild.style['background-color'] = dog.sterilized ? '' : 'grey'
     // TODO(dev): add disable state on food
     document.getElementById('jag-profil-food-moring').innerHTML = (food.morning ?? '-') + ' g'
     document.getElementById('jag-profil-food-noon').innerHTML = (food.noon ?? '-') + ' g'
