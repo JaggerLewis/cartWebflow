@@ -151,6 +151,9 @@ const initFamily = () => {
     document.getElementById('jag-family-pict-' + user._id).srcset = "https://app-api.mypet.fit/img/" + user.image.type +"/"+ user.image.uuid 
     document.getElementById('jag-family-name-' + user._id).innerHTML =user.name
     document.getElementById('jag-family-type-' + user._id).innerHTML = "Propriétaire"
+    if (!dog.family) {
+        return
+    }
     dog.family.forEach((membre) => {
         let familyCard = card.cloneNode(true)
         familyCard.style.display = 'flex'
@@ -232,11 +235,10 @@ const loginEmail = async () => {
             method: "POST",
             headers : header,
             body: JSON.stringify({
-                     
                 'email' : email,
             }), 
-          }).then(async (res) => await res.json()) 
-          if (result.code == '004') {
+          }).then(async (res) => await res) 
+          if (result.code == '004' || result.status == 200) {
             document.getElementById('jag-code-popup').style.display = 'flex'
           }
           else {
