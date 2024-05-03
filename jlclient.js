@@ -238,7 +238,7 @@ const loginEmail = async () => {
             body: JSON.stringify({
                 'email' : email,
             }), 
-          }).then(async (res) => await res.json()) 
+          }).then(async (res) => await res.json) 
           if (result.code == '004') {
             document.getElementById('jag-code-popup').style.display = 'flex'
           }
@@ -328,7 +328,7 @@ const cancelSubScription = async () => {
 const changeSubscription = async (sub) => {
     // TODO(dev) : ADD TO FRONT
     let result = await fetch(
-        baseurl + '/stripe/checkout_session/subscription/update?livemode=false', {
+        baseurl + '/stripe/checkout_session/subscription/update', {
         method: "POST",
         headers: header,
         body: JSON.stringify( {
