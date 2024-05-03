@@ -1055,8 +1055,9 @@ const loadCart = async (id) => {
 }
 
 function preload(url) {
-    let tmp = new Image();
-    tmp.src = url;
+    let image = new Image();
+    image.src = url;
+    return image;
 }
 
 const loadData = async () => {
