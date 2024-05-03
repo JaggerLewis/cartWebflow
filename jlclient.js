@@ -576,7 +576,8 @@ const validateAction = async () => {
       }).then((res) => res.status) 
       
       if (result == 200) {
-        window.open('activation-produit-etape02', '_self')
+        // TODO(dev): redirect to abo B
+        window.open('activation-produit-etape02-copy', '_self')
       }
       else {
         showAddCart('Code incorrect', true)
