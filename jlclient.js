@@ -67,6 +67,7 @@ const initClient = {
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
     'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
     'jl-delete-sms-action' : (node) => node.addEventListener('click', () => deleteAccountSms()),
+    'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScription()),
 }
 const deleteAccountEmail = async () => {
     // TODO(dev): update id [jl-delete-email]
