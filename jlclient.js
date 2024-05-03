@@ -690,7 +690,7 @@ const getAbonnement = async () => {
 }
 
 const getDog = async () => {
-    dog = JSON.parse(localStorage.getItem(dog))
+    dog = JSON.parse(localStorage.getItem('dog'))
     if (dog) {
         return
     }
@@ -706,8 +706,7 @@ const getDog = async () => {
 }
 
 const getUser = async () => {
-    //TODO(dev) : get localStorage
-    user = JSON.parse(localStorage.getItem(user))
+    user = JSON.parse(localStorage.getItem('user'))
 
     if (user) {
         return
