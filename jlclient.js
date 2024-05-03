@@ -708,26 +708,22 @@ const getDog = async () => {
 const getUser = async () => {
     user = JSON.parse(localStorage.getItem('user'))
 
-    if (user) {
-        return
-    }
-    loaderContainer.style.display = 'flex'
-    user = await fetch(baseurl + '/profile/full', {headers : header})
+    if (!user) {
+        loaderContainer.style.display = 'flex'
+        user = await fetch(baseurl + '/profile/full', {headers : header})
         .then(async (res) => await res.json())
         .then((res) => res.user)
-
-    user.galery = await fetch(baseurl + '/user/gallery?sharing=false', {headers : header})
-            .then(async (res) => await res.json())
-            .then(async (res) => res.personalActivities)
-    window.localStorage.setItem('user',JSON.stringify(user))
-   
+        
+        user.galery = await fetch(baseurl + '/user/gallery?sharing=false', {headers : header})
+        .then(async (res) => await res.json())
+        .then(async (res) => res.personalActivities)
+        window.localStorage.setItem('user',JSON.stringify(user))
+    }
     await getDog()
     if (!user.welfareData) {
         await getWelfareData()
     }
     loaderContainer.style.display = 'none'
-    
-
 }
 
 const setidentity = () => {
@@ -764,6 +760,7 @@ const setidentity = () => {
 
 const initDashboard = async (node) => {
     await getUser()
+  
     initGalery()
     let container = document.getElementById('jag-profil-dog-container');
     user.dogs.forEach((localDog) => {
