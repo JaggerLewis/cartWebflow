@@ -66,7 +66,7 @@ const initClient = {
     'jl-order-order' : (node) => node.addEventListener('click', () => switchInfo('order')),
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
     'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
-    'jl-delete-sms-action' : (node) => initDelete(),
+    'jl-delete-sms-action' : (node) => initDelete(node),
     'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScriptionEmail()),
     'jl_switch_month' : (node) =>  node.addEventListener('click', () => changeSubscription('monthly')),
     'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
