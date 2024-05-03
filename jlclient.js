@@ -48,9 +48,9 @@ const initClient = {
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
-    'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('starter')),
-    'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('starter-family')),
-    'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('premium-family')),
+    'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('monthly')),
+    'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yealry')),
+    'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('life')),
     'jl-formula-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('abo')),
     'jl-option-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('option')),
     'jl-insurance-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('insurance')),
@@ -457,11 +457,10 @@ const findAbonnementSolo = (type) => {
 
 const aboAction = async (type) => {
     const url = window.location.origin + window.location.pathname;
-    let duration = document.getElementsByClassName('abo_btn_on')[0]
     let check = document.getElementById('jag_Abonnement_check')
     if (duration && check && check.checked) {
         let length = getRightLenght(duration.id.split('-')[2].toLowerCase())
-        let subscription = findAboType(findAbonnement(type), length).id
+        let subscription = findAbonnementSolo(type).id
         loaderContainer.style.display = 'flex'
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
@@ -478,7 +477,6 @@ const aboAction = async (type) => {
             loaderContainer.style.display = 'none'
             window.open(result.url, '_self')
           }
-
         return
     }
 
@@ -825,7 +823,7 @@ const getAll = async () => {
         redirectStep2();
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
-        initAboJag();
+        initAboB()
     }
     else if (document.getElementById('jag-formula')) {
         await loadAbonnement()
