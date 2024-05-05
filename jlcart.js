@@ -359,8 +359,10 @@ const getTargetProduct = () => {
     return targetProduct;
 }
 
+
 const initJagGPS = async () => {
 
+    /*
     let collar = document.getElementById('jl-collar')
 
     //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
@@ -387,6 +389,7 @@ const initJagGPS = async () => {
         colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
         document.activeElement.blur();
     })
+    */
 
     document.getElementById('jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
@@ -421,7 +424,7 @@ const initJagGPS = async () => {
     */
 
     console.log('ici');
-    
+
     document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
         event.preventDefault()
         switchSmartdock();
