@@ -367,7 +367,6 @@ const SlideToColor = (ColorProduct) => {
 
     for (const child of slides.children) {
         console.log(child.id, (nbSlide * withSlide).toString());
-        console.log(document.getElementById(child.id))
         targetSlide = child.id
         try {
             document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px);';
