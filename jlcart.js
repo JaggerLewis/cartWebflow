@@ -366,10 +366,15 @@ const SlideToColor = (ColorProduct) => {
     console.log('nbSlide',nbSlide)
 
     for (const child of slides.children) {
-        console.log(child.id);
+        console.log(child.id, (nbSlide * withSlide).toString());
         console.log(document.getElementById(child.id))
         targetSlide = child.id
-        document.getElementById(targetSlide).style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
+        try {
+            document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px);';
+        }
+        catch {
+            
+        }
     }
 
     navSlide = document.getElementById('jl-slide-nav-product');
