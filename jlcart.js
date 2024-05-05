@@ -357,7 +357,9 @@ const SlideToColor = (ColorProduct) => {
     withSlide = slides.offsetWidth;
     for (const child of slides.children) {
         targetSlide = child.id
-        document.getElementById(targetSlide).style.transform = 'translateX(1000px);';
+        if (document.getElementById(targetSlide)) {
+            document.getElementById(targetSlide).style.transform = 'translateX(1000px);';
+        }
     }
 
     if (ColorProduct == 'fauve') {nbSlide = 0};
@@ -369,11 +371,8 @@ const SlideToColor = (ColorProduct) => {
     for (const child of slides.children) {
         targetSlide = child.id
         console.log(targetSlide, (nbSlide * withSlide).toString());
-        try {
+        if (document.getElementById(targetSlide)) {
             document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px);';
-        }
-        catch {
-            
         }
     }
 
