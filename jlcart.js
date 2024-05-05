@@ -433,7 +433,7 @@ const initJagGPS = async () => {
 
     document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
     collar.setAttribute('data-selected', findProduct('jag', initialColor).price.id)
-    collar.srcset = findProduct('jag', 'fauve').image
+    collar.srcset = findProduct('jag', initialColor).image
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
 
     if (initialDevice == 'jag') {
@@ -490,6 +490,8 @@ const switchSmartdock = () => {
     }
 
     colorChanged = false;
+
+    console.log(targetProduct);
 
     let collar = document.getElementById('jl-collar')
     colors.forEach((color) => {
