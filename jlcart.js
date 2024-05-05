@@ -429,12 +429,12 @@ const initJagGPS = async () => {
 
     document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
         event.preventDefault()
-        switchSmartdock();
+        switchSmartdock('jag');
         document.activeElement.blur();
     })
     document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
         event.preventDefault()
-        switchSmartdock();
+        switchSmartdock('jag-smartdock');
         document.activeElement.blur();
     })
 
@@ -446,20 +446,7 @@ const initJagGPS = async () => {
     
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
 
-    if (initialDevice == 'jag') {
-        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
-        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
-        document.getElementById('jag-without-smartdock').className = 'jl-jag-encart selected';
-        document.getElementById('jag-with-smartdock').className = 'jl-jag-encart';
-    }
-    else {
-        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
-        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
-        document.getElementById('jag-without-smartdock').className = 'jl-jag-encart';
-        document.getElementById('jag-with-smartdock').className = 'jl-jag-encart selected';
-    }
-
-    //switchSmartdock();
+    switchSmartdock(initialDevice);
 
     return true;
 }
@@ -484,30 +471,29 @@ const initSmartDockAlone = async () => {
     })
 }
 
-const switchSmartdock = () => {
+const switchSmartdock = (targetProduct) => {
 
-    if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
+    if (targetProduct == 'jag-smartdock') {
         // On bascule avec le smartdock
-        targetProduct = 'jag-smartdock';
         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
         document.getElementById('jag-without-smartdock').className = 'jl-jag-encart';
         document.getElementById('jag-with-smartdock').className = 'jl-jag-encart selected';
     }
-    else {
+    
+    if (targetProduct == 'jag') {
         // On bascule sur le produit seul
-        targetProduct = 'jag';
         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
         document.getElementById('jag-without-smartdock').className = 'jl-jag-encart selected';
         document.getElementById('jag-with-smartdock').className = 'jl-jag-encart';
     }
 
-    colorChanged = false;
+    //colorChanged = false;
 
     console.log(targetProduct);
 
-    let collar = document.getElementById('jl-collar')
+    //let collar = document.getElementById('jl-collar')
 
     /*
     colors.forEach((color) => {
