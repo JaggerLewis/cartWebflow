@@ -363,14 +363,15 @@ const SlideToColor = (ColorProduct) => {
     if (ColorProduct == 'charbon') {nbSlide = 2};
 
     console.log('nbSlide',nbSlide)
-    
+
     for (const child of slides.children) {
         child.style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
     }
 
     navSlide = document.getElementById('jl-slide-nav-product');
-
-
+    for (const child of navSlide.children) {
+        console.log(child.id)
+    }
 
 
 }
