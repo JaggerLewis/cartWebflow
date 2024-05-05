@@ -367,7 +367,9 @@ const SlideToColor = (ColorProduct) => {
 
     for (const child of slides.children) {
         console.log(child.id);
-        document.getElementById(child.id).style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
+        console.log(document.getElementById(child.id))
+        targetSlide = child.id
+        document.getElementById(targetSlide).style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
     }
 
     navSlide = document.getElementById('jl-slide-nav-product');
