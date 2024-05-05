@@ -362,6 +362,8 @@ const SlideToColor = (ColorProduct) => {
     if (ColorProduct == 'weimar') {nbSlide = 1};
     if (ColorProduct == 'charbon') {nbSlide = 2};
 
+    console.log('nbSlide',nbSlide)
+    
     for (const child of slides.children) {
         child.style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
     }
