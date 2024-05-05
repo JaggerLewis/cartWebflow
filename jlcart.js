@@ -420,6 +420,8 @@ const initJagGPS = async () => {
     })
     */
 
+    console.log('ici');
+    
     document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
         event.preventDefault()
         switchSmartdock();
