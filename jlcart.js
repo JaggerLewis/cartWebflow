@@ -366,7 +366,7 @@ const SlideToColor = (ColorProduct) => {
     console.log('nbSlide',nbSlide)
 
     for (const child of slides.children) {
-        console.log(child.style.transform );
+        console.log(child.id);
         document.getElementById(child.id).style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
     }
 
