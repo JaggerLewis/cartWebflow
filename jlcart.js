@@ -486,34 +486,24 @@ const switchSmartdock = (targetProduct) => {
         document.getElementById('jag-with-smartdock').className = 'jl-jag-encart';
     }
 
-    //colorChanged = false;
-
-    console.log(targetProduct);
-
     let collar = document.getElementById('jl-collar')
+    colorChanged = false;
 
     colors.forEach((color) => {
         theBtnColor = document.getElementById('btn-color-' + color);
-        console.log(theBtnColor);
-
         if (theBtnColor.getAttribute('color-selected') == 'true') {
             colorChanged = true;
             colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
             colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-            //console.log( findProduct(targetProduct, color) );
-            //document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
-            //console.log(targetProduct,color);
+            document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
         }
     })
 
     if (colorChanged == false) {
         color = initialColor;
-        //targetProduct = 'jag';
         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-        //console.log( findProduct(targetProduct, color) );
-        //document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
-        //console.log(targetProduct,color);
+        document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
     }
     
     collar.setAttribute('data-selected', findProduct(targetProduct, initialColor).price.id)
