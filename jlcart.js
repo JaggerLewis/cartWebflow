@@ -355,14 +355,15 @@ const SlideToColor = (ColorProduct) => {
     // Permet de faire bouger le slider
     slides = document.getElementById('jl-slide-mask-product');
     withSlide = slides.offsetWidth;
-    indexSlide = 0;
+    for (const child of slides.children) {
+        child.style.transform = 'translateX(0px);';
+    }
+    if (ColorProduct == 'fauve') {nbSlide = 0};
+    if (ColorProduct == 'weimar') {nbSlide = 1};
+    if (ColorProduct == 'charbon') {nbSlide = 2};
 
     for (const child of slides.children) {
-        console.log(child.id);
-        indexSlide++;
-        if (child.id.indexOf(ColorProduct) > -1) {
-            console.log(child.id, indexSlide);
-        }
+        child.style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
     }
 
     navSlide = document.getElementById('jl-slide-nav-product');
