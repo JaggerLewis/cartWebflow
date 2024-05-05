@@ -508,6 +508,8 @@ const switchSmartdock = () => {
     console.log(targetProduct);
 
     let collar = document.getElementById('jl-collar')
+
+    /*
     colors.forEach((color) => {
         theBtnColor = document.getElementById('btn-color-' + color);
         //console.log(theBtnColor);
@@ -531,6 +533,7 @@ const switchSmartdock = () => {
         document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
         //console.log(targetProduct,color);
     }
+    */
 
 
 }
