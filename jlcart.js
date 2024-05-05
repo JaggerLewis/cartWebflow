@@ -277,7 +277,6 @@ const getAbonnementFromStripe = async () => {
 const shoppingCart = new ShoppingCart();
 
 const colorButtonAction = (elem, image, id) => {
-    console.log('colorButtonAction', elem, image, id );
     //elem.srcset = image
     elem.setAttribute('data-selected', id)
     elem.src = image
@@ -367,7 +366,6 @@ const initJagGPS = async () => {
     
     let collar = document.getElementById('jl-collar')
 
-    /*
     //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
         event.preventDefault()
@@ -392,7 +390,6 @@ const initJagGPS = async () => {
         colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
         document.activeElement.blur();
     })
-    */
 
     document.getElementById('jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
