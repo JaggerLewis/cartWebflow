@@ -358,6 +358,7 @@ const SlideToColor = (ColorProduct) => {
     for (const child of slides.children) {
         child.style.transform = 'translateX(0px);';
     }
+
     if (ColorProduct == 'fauve') {nbSlide = 0};
     if (ColorProduct == 'weimar') {nbSlide = 1};
     if (ColorProduct == 'charbon') {nbSlide = 2};
@@ -365,7 +366,8 @@ const SlideToColor = (ColorProduct) => {
     console.log('nbSlide',nbSlide)
 
     for (const child of slides.children) {
-        child.style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
+        console.log(child.style.transform );
+        document.getElementById(child.id).style.transform = 'translateX(-' + nbSlide * withSlide + 'px);';
     }
 
     navSlide = document.getElementById('jl-slide-nav-product');
