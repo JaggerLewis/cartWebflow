@@ -355,12 +355,14 @@ const SlideToColor = (ColorProduct) => {
     // Permet de faire bouger le slider
     slides = document.getElementById('jl-slide-mask-product');
     withSlide = slides.offsetWidth;
-    for (const child of slides.children) {
-        targetSlide = child.id
+
+    for (let i = 0; i < slides.children.length; i++) {
+        console.log(slides.children[i].id);
+        targetSlide = slides.children[i].id
         if (document.getElementById(targetSlide)) {
             document.getElementById(targetSlide).style.transform = 'translateX(1000px);';
         }
-    }
+      }
 
     if (ColorProduct == 'fauve') {nbSlide = 0};
     if (ColorProduct == 'weimar') {nbSlide = 1};
