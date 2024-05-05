@@ -277,6 +277,7 @@ const getAbonnementFromStripe = async () => {
 const shoppingCart = new ShoppingCart();
 
 const colorButtonAction = (elem, image, id) => {
+    console.log('colorButtonAction', elem, image, id );
     //elem.srcset = image
     elem.setAttribute('data-selected', id)
     elem.src = image
