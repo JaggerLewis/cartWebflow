@@ -277,7 +277,7 @@ const getAbonnementFromStripe = async () => {
 const shoppingCart = new ShoppingCart();
 
 const colorButtonAction = (elem, image, id) => {
-    elem.srcset = image
+    //elem.srcset = image
     elem.setAttribute('data-selected', id)
     elem.src = image
 }
@@ -490,17 +490,17 @@ const switchSmartdock = () => {
         // On bascule avec le smartdock
         targetProduct = 'jag-smartdock';
         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
-        document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_off w-button';
         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
-        document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_on w-button';
+        document.getElementById('jag-without-smartdock').className = 'jl-jag-encart';
+        document.getElementById('jag-with-smartdock').className = 'jl-jag-encart selected';
     }
     else {
         // On bascule sur le produit seul
         targetProduct = 'jag';
         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
-        document.getElementById('jag-without-smartdock').className = 'jag_btn_with_smartdock_on w-button';
         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
-        document.getElementById('jag-with-smartdock').className = 'jag_btn_with_smartdock_off w-button';
+        document.getElementById('jag-without-smartdock').className = 'jl-jag-encart selected';
+        document.getElementById('jag-with-smartdock').className = 'jl-jag-encart';
     }
 
     colorChanged = false;
@@ -1095,6 +1095,7 @@ const init = async () => {
         }
     }
 
+    /*
     try {
         preload(findProduct('jag', 'fauve').image)
         preload(findProduct('jag', 'weimar').image)
@@ -1106,6 +1107,7 @@ const init = async () => {
     catch (e) {
         console.log(e)
     }
+    */
 
     if (JL_NavBar) {
         document.getElementById('JL_Basket_Item').style.display = 'none';
