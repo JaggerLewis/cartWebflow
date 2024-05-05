@@ -364,9 +364,9 @@ const initJagGPS = async () => {
 
     console.log('start');
     
-    /*
     let collar = document.getElementById('jl-collar')
 
+    /*
     //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
         event.preventDefault()
@@ -441,7 +441,6 @@ const initJagGPS = async () => {
     document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
     document.getElementById('price-jag-smartdock').innerHTML = findProduct('jag-smartdock', initialColor).price.price;
     
-    //collar.setAttribute('data-selected', findProduct('jag', initialColor).price.id)
     //collar.srcset = findProduct('jag', initialColor).image
     
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
@@ -493,19 +492,18 @@ const switchSmartdock = (targetProduct) => {
 
     console.log(targetProduct);
 
-    //let collar = document.getElementById('jl-collar')
+    let collar = document.getElementById('jl-collar')
 
-    /*
     colors.forEach((color) => {
         theBtnColor = document.getElementById('btn-color-' + color);
-        //console.log(theBtnColor);
+        console.log(theBtnColor);
 
         if (theBtnColor.getAttribute('color-selected') == 'true') {
             colorChanged = true;
             colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
             colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
             //console.log( findProduct(targetProduct, color) );
-            document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
+            //document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
             //console.log(targetProduct,color);
         }
     })
@@ -516,11 +514,11 @@ const switchSmartdock = (targetProduct) => {
         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
         //console.log( findProduct(targetProduct, color) );
-        document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
+        //document.getElementById('price-jag').innerHTML = findProduct(targetProduct, color).price.price;
         //console.log(targetProduct,color);
     }
-    */
-
+    
+    collar.setAttribute('data-selected', findProduct(targetProduct, initialColor).price.id)
 
 }
 
