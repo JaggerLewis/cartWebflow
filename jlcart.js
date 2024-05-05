@@ -336,15 +336,6 @@ const findAboType = (abo, type) => {
 }
 
 const getTargetProduct = () => {
-    /*
-    smartboxIsChecked = document.getElementById('btn_add_smartdock').getAttribute('isChecked');
-    if (smartboxIsChecked == 'yes') {
-        targetProduct = 'jag-smartdock';
-    }
-    else {
-        targetProduct = 'jag';
-    }
-    */
 
     targetProduct = 'jag-smartdock';
 
@@ -359,6 +350,21 @@ const getTargetProduct = () => {
     return targetProduct;
 }
 
+const SlideToColor = (ColorProduct) => {
+
+    // Permet de faire bouger le slider
+    slides = document.getElementById('jl-slide-mask-product');
+    
+    for (const child of slides.children) {
+        console.log(child.id);
+    }
+
+    navSlide = document.getElementById('jl-slide-nav-product');
+
+
+
+
+}
 
 const initJagGPS = async () => {
 
@@ -372,6 +378,7 @@ const initJagGPS = async () => {
         let targetProduct = getTargetProduct();
         colorButtonAction(collar, findProduct(targetProduct, 'fauve').image, findProduct(targetProduct, 'fauve').price.id)
         colorButtonSelect('btn-color-fauve', 'color-selected', 'txt-color-selected', true)
+        SlideToColor('fauve');
         document.activeElement.blur();
     })
     //document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
@@ -380,6 +387,7 @@ const initJagGPS = async () => {
         let targetProduct = getTargetProduct();
         colorButtonAction(collar, findProduct(targetProduct, 'weimar').image, findProduct(targetProduct, 'weimar').price.id)
         colorButtonSelect('btn-color-weimar', 'color-selected', 'txt-color-selected', true)
+        SlideToColor('weimar');
         document.activeElement.blur();
     })
     //document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
@@ -388,6 +396,7 @@ const initJagGPS = async () => {
         let targetProduct = getTargetProduct();
         colorButtonAction(collar, findProduct(targetProduct, 'charbon').image, findProduct(targetProduct, 'charbon').price.id)
         colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
+        SlideToColor('charbon');
         document.activeElement.blur();
     })
 
@@ -415,10 +424,9 @@ const initJagGPS = async () => {
 
     /*
     document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
-
     document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
         event.preventDefault()
-        switchSmartdock();
+        switchProduct();
         document.activeElement.blur();
     })
     */
@@ -427,12 +435,12 @@ const initJagGPS = async () => {
 
     document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
         event.preventDefault()
-        switchSmartdock('jag');
+        switchProduct('jag');
         document.activeElement.blur();
     })
     document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
         event.preventDefault()
-        switchSmartdock('jag-smartdock');
+        switchProduct('jag-smartdock');
         document.activeElement.blur();
     })
 
@@ -442,8 +450,7 @@ const initJagGPS = async () => {
     //collar.srcset = findProduct('jag', initialColor).image
     
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
-
-    switchSmartdock(initialDevice);
+    switchProduct(initialDevice);
 
     return true;
 }
@@ -468,7 +475,7 @@ const initSmartDockAlone = async () => {
     })
 }
 
-const switchSmartdock = (targetProduct) => {
+const switchProduct = (targetProduct) => {
 
     if (targetProduct == 'jag-smartdock') {
         // On bascule avec le smartdock
