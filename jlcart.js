@@ -354,9 +354,15 @@ const SlideToColor = (ColorProduct) => {
 
     // Permet de faire bouger le slider
     slides = document.getElementById('jl-slide-mask-product');
-    
+    withSlide = slides.offsetWidth;
+    indexSlide = 0;
+
     for (const child of slides.children) {
         console.log(child.id);
+        indexSlide++;
+        if (child.id.indexOf(ColorProduct) > -1) {
+            console.log(child.id, indexSlide);
+        }
     }
 
     navSlide = document.getElementById('jl-slide-nav-product');
