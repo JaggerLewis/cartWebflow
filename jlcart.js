@@ -362,6 +362,8 @@ const getTargetProduct = () => {
 
 const initJagGPS = async () => {
 
+    console.log('start');
+    
     /*
     let collar = document.getElementById('jl-collar')
 
