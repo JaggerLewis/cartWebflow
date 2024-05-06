@@ -586,7 +586,7 @@ const toLife = () => {
 
 const initActivity = async (node) => {
     card = document.getElementById('jag-activity-card')
-    dog.activities.personalActivities.forEach((activity) => {
+    dog.activities.moments.forEach((activity) => {
         if (activity.start_timestamp && activity.end_timestamp && activity.distance) {
             newCard = card.cloneNode(true)
             changeChildsId(newCard, '-' + activity._id, 'jl')
