@@ -366,7 +366,7 @@ const SlideToColor = (ColorProduct) => {
         targetSlide = child.id
         console.log(targetSlide, (nbSlide * withSlide).toString());
         if (document.getElementById(targetSlide)) {
-            document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px);';
+            document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px)';
         }
     }
 
@@ -375,7 +375,7 @@ const SlideToColor = (ColorProduct) => {
         console.log(child.id)
     }
 
-    document.getElementById('slide_jag_gps_chien_fauve').style.transform = 'translateX(-2500px)';
+    //document.getElementById('slide_jag_gps_chien_fauve').style.transform = 'translateX(-2500px)';
 
 
 }
