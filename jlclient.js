@@ -644,7 +644,7 @@ const initActivity = (type) => {
 
 const setMap = async (activity) => {
     console.log('1')
-    let datas =  await fetch(baseurl + '/personal_activity/' + activity.id, {headers : header}).then(async (res) => await res.json())
+    let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())
     console.log(datas)
     if (!datas.data.gps_data) {
         showAddCart('Oups pas de données')
