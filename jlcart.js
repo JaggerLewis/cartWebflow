@@ -542,7 +542,7 @@ const initHome = async () => {
     let collar = document.querySelector('#jl-collar')
     let dock = document.querySelector('#jl-dock')
     document.querySelector('#price-jag').innerHTML = document.querySelector('#price-jag').innerHTML.replace('{price}', findProduct('jag', 'fauve').price.price)
-    document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "monthly").price).toFixed(2)
+    document.querySelector('#jl-price-month').textContent =  findAbonnementSolo('monthly').price.toFixed(2)
 
     document.querySelector('#jag-jag').addEventListener('click', (event) => {
         event.preventDefault()
@@ -1137,7 +1137,7 @@ const init = async () => {
     }
 
     if (document.getElementById('jl-price-month')) {
-        document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "monthly").price).toFixed(2)
+        document.querySelector('#jl-price-month').textContent = findAbonnementSolo('monthly').price.toFixed(2)
     }
 
     if (document.getElementById('jl-Accessory')) {
