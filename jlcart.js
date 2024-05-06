@@ -745,21 +745,21 @@ const initJagAccessory = () => {
 
         let newAccess = element.cloneNode(true);
         newAccess.setAttribute('id', 'jl-Accessory-item-' + itemLine);
-
-        for (const child of newAccess.childNodes) {
-            if (child.hasChildNodes()) {
-                child.childNodes.forEach((e, i) => {
-                    if (e.id.startsWith('jl-Accessory-item')) {
-                        e.setAttribute('id', e.id + '-' + itemLine);
-                    }
-                });
-            }
-            else {
-                if (child.id.startsWith('jl-Accessory-item')) {
-                    child.setAttribute('id', child.id + '-' + itemLine);
-                }
-            }
-        }
+        changeChildsId(newAccess, '-' + itemLine, 'jl-Accessory-item')
+        // for (const child of newAccess.childNodes) {
+        //     if (child.hasChildNodes()) {
+        //         child.childNodes.forEach((e, i) => {
+        //             if (e.id.startsWith('jl-Accessory-item')) {
+        //                 e.setAttribute('id', e.id + '-' + itemLine);
+        //             }
+        //         });
+        //     }
+        //     else {
+        //         if (child.id.startsWith('jl-Accessory-item')) {
+        //             child.setAttribute('id', child.id + '-' + itemLine);
+        //         }
+        //     }
+        // }
         //console.log(newItem);
         document.getElementById('jl-Accessory-List').appendChild(newAccess);
     }
