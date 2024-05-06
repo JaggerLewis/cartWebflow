@@ -938,6 +938,9 @@ const getAll = async () => {
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
     }
+    else if (document.getElementById('jl-profil-dog-name')) {
+        await getDog()
+    }
     //
   
   
