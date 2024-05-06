@@ -591,7 +591,7 @@ const initActivity = async (type) => {
     let card = document.getElementById('jag-activity-card')
     let array = type == 'moment' ? dog.activities.moments : type == 'activity' ? dog.activities.personalActivities : dog.activities.rescues
     array.forEach((activity) => {
-        if (activity.start_timestamp && activity.end_timestamp && activity.distance) {
+        if (activity.start_timestamp && activity.end_timestamp) {
             newCard = card.cloneNode(true)
             changeChildsId(newCard, '-' + activity._id, 'jl')
             newCard['data-id'] = activity._id
@@ -601,10 +601,12 @@ const initActivity = async (type) => {
             end = new Date(activity.end_timestamp);
             if (activity.start_timestamp && activity.end_timestamp) {
                 document.getElementById('jl-activity-card-time-' + activity._id).innerHTML =  'De ' + (start.getHours() < 10 ? "0" +  start.getHours() : start.getHours()) + "h" + (start.getMinutes() < 10 ? "0" +  start.getMinutes() : start.getMinutes()) + ' à '  + (end.getHours() < 10 ? "0" +  end.getHours() : end.getHours()) + "h" + (end.getMinutes() < 10 ? "0" +  end.getMinutes() : end.getMinutes())
-                document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(activity.duration * 1000).toISOString().substring(14, 19)
+                if (activity.duration) {
+                    document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(activity.duration * 1000).toISOString().substring(14, 19)
+                }
                 document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  getMonth(start.getMonth())
             }
-            if (type == 'activity' && activity.distance) {
+            if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'km' : activity.distance + 'm'
                 document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
             }
