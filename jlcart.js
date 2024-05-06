@@ -372,21 +372,17 @@ const SlideToColor = (ColorProduct) => {
 
     navSlide = document.getElementById('jl-slide-nav-product');
     for (const child of navSlide.children) {
-        targetSlide = child.id
-        console.log(targetSlide);
-        if (document.getElementById(targetSlide)) {
-            if ( document.getElementById(targetSlide).getAttribute('aria-label').indexOf(nbSlide+1) > 0 ) {
-                document.getElementById(targetSlide).className = 'w-slider-dot w-active';
-                document.getElementById(targetSlide).setAttribute('aria-pressed',true);
-                document.getElementById(targetSlide).setAttribute('tabindex',0);
+            if ( child.getAttribute('aria-label').indexOf(nbSlide+1) > 0 ) {
+                child.className = 'w-slider-dot w-active';
+                child.setAttribute('aria-pressed',true);
+                child.setAttribute('tabindex',0);
             }
             else
             {
-                document.getElementById(targetSlide).className = 'w-slider-dot';
-                document.getElementById(targetSlide).setAttribute('aria-pressed',false);
-                document.getElementById(targetSlide).setAttribute('tabindex',-1);
+                child.className = 'w-slider-dot';
+                child.setAttribute('aria-pressed',false);
+                child.setAttribute('tabindex',-1);
             }
-        }
     }
 
     //document.getElementById('slide_jag_gps_chien_fauve').style.transform = 'translateX(-2500px)';
