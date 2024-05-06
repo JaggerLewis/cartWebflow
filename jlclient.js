@@ -593,8 +593,8 @@ const initActivity = (type) => {
 
     let container = document.getElementById('jl-activity-card-container')
 
-    for (let i = container.length - 1; i >= 1; i--) {
-        nodes[i].remove()
+    for (let i = container.childNodes.length - 1; i >= 1; i--) {
+        container.childNodes[i].remove()
     }
 
     let card = document.getElementById('jag-activity-card')
