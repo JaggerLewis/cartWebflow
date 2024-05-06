@@ -48,7 +48,9 @@ const initClient = {
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
     'jl-collar-synchro-date' : (node) => null,
     'jl-collar-rescue' : (node) => null,
-    'jl-activity-card-container' : (node) => initActivity(node),
+    // 'jl-activity-card-container' : (node) => initActivity(node),
+    'jl-is-moments' : (node) => initActivity('moment'),
+    'jl-is-activity' : (node) =>  initActivity('activity'),
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
@@ -584,9 +586,11 @@ const toLife = () => {
     })
 }
 
-const initActivity = async (node) => {
-    card = document.getElementById('jag-activity-card')
-    dog.activities.moments.forEach((activity) => {
+const initActivity = async (type) => {
+    let container = document.getElementById('jl-activity-card-container')
+    let card = document.getElementById('jag-activity-card')
+    let array = type == 'moment' ? dog.activities.moments : type == 'activity' ? dog.activities.personalActivities : dog.activities.rescues
+    array.forEach((activity) => {
         if (activity.start_timestamp && activity.end_timestamp && activity.distance) {
             newCard = card.cloneNode(true)
             changeChildsId(newCard, '-' + activity._id, 'jl')
@@ -600,7 +604,7 @@ const initActivity = async (node) => {
                 document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(activity.duration * 1000).toISOString().substring(14, 19)
                 document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  getMonth(start.getMonth())
             }
-            if (activity.distance) {
+            if (type == 'activity' && activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'km' : activity.distance + 'm'
                 document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
             }
