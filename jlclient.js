@@ -806,7 +806,7 @@ const setidentity = () => {
     document.getElementById('jag-profil-food-noon').innerHTML = (food.noon ?? '-') + ' g'
     document.getElementById('jag-profil-food-night').innerHTML = (food.evening ?? '-') + ' g'
     document.getElementById('jag-profil-food-all').innerHTML = ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) == 0 ? '-' : ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) + 'g'
-    if (food.foodType.type) {
+    if (food.foodType && food.foodType.type) {
         document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : 'fait maison'
     }
     document.getElementById('jag-profil-welfare-calory').innerHTML = dog.welfareData.global.calory_global ?? '-'
