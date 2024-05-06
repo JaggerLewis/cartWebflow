@@ -756,10 +756,10 @@ const getDog = async () => {
 }
 
 let getNewAbo = () => {
-    if (dog.collar.formula_subscription.formula.name) {
+    if (dog.collar.formula_subscription.type) {
         return findAbonnementSolo('life')
     }
-    return dog.collar.formula_subscription.formula
+    return dog.collar.formula_subscription.type
 }
 
 const getUser = async () => {
@@ -884,7 +884,7 @@ const getWelfareData = async () => {
 
 const disableButton = () => {
     let id = 'month'
-    switch(getNewAbo().metadata.pricing) {
+    switch(getNewAbo()) {
         case 'monthly' :
         id =  'month'
             break
@@ -897,7 +897,7 @@ const disableButton = () => {
     }
     let btn = document.getElementById('jl_switch_' + id)
     btn.innerHTML = 'Formule actuelle'
-    let newBtn = btn.cloneNode(true)
+    let newBtn = btn.cloneNode()
     btn.parentElement.replaceChild(newBtn, btn)
 }
 
