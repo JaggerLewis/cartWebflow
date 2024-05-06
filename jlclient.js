@@ -50,6 +50,8 @@ const initClient = {
     'jl-collar-rescue' : (node) => null,
     // 'jl-activity-card-container' : (node) => initActivity(node),
     'jl-is-moment' : (node) => initActivity('moment'),
+    'jl-activity-activity' : (node) => initActivity('activity'),
+    'jl-activity-rescue' : (node) => initActivity('rescue'),
     'jl-is-activity' : (node) =>  initActivity('activity'),
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
@@ -586,8 +588,15 @@ const toLife = () => {
     })
 }
 
-const initActivity = async (type) => {
+const initActivity = (type) => {
+   
+
     let container = document.getElementById('jl-activity-card-container')
+
+    for (let i = container.length - 1; i >= 1; i--) {
+        nodes[i].remove()
+    }
+
     let card = document.getElementById('jag-activity-card')
     let array = type == 'moment' ? dog.activities.moments : type == 'activity' ? dog.activities.personalActivities : dog.activities.rescues
     array.forEach((activity) => {
@@ -596,6 +605,7 @@ const initActivity = async (type) => {
             changeChildsId(newCard, '-' + activity._id, 'jl')
             newCard['data-id'] = activity._id
             container.appendChild(newCard)
+            newCard.style.display = 'flex'
             document.getElementById('jl-activity-card-type-' + activity._id).innerHTML = activity.activity_id
             start =  new Date(activity.start_timestamp);
             end = new Date(activity.end_timestamp);
