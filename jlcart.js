@@ -373,8 +373,9 @@ const SlideToColor = (ColorProduct) => {
     navSlide = document.getElementById('jl-slide-nav-product');
     for (const child of navSlide.children) {
         targetSlide = child.id
+        console.log(targetSlide);
         if (document.getElementById(targetSlide)) {
-            if ( document.getElementById(targetSlide).getAttribute('aria-label').indexOf(nbSlide) > 0 ) {
+            if ( document.getElementById(targetSlide).getAttribute('aria-label').indexOf(nbSlide+1) > 0 ) {
                 document.getElementById(targetSlide).className = 'w-slider-dot w-active';
                 document.getElementById(targetSlide).setAttribute('aria-pressed',true);
                 document.getElementById(targetSlide).setAttribute('tabindex',0);
