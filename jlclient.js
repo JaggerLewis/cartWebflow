@@ -15,6 +15,7 @@ let session
 let display
 let option
 let token
+let map
 
 const findAbonnementSolo = (type) => {
     return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == type)
@@ -48,6 +49,7 @@ const initClient = {
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
     'jl-collar-synchro-date' : (node) => null,
     'jl-collar-rescue' : (node) => null,
+    'jl-map' : (node) => initMap(node),
     'jl-is-moment' : (node) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
@@ -587,6 +589,20 @@ const toLife = () => {
     })
 }
 
+const initMap = async (node) => {
+      const position = { lat: 50.64144516315174, lng: 3.045265016887294 };
+      
+      const { Map } = await google.maps.importLibrary("maps");
+    
+      map = new Map(node, {
+        zoom: 10,
+        center: position,
+        mapId: "DEMO_MAP_ID",
+      });
+    
+
+}
+
 const initActivity = (type) => {
     let container = document.getElementById('jl-activity-card-container')
 
@@ -618,10 +634,25 @@ const initActivity = (type) => {
                 document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
             }
         }
+        if (type == 'activity') {
+            newCard.addEventListener('click', () => setMap(activity));
+        }
     })
     card.style.display = 'none'
 }
 
+
+const setMap = async (activity) => {
+    console.log('1')
+    let datas =  await fetch(baseurl + '/personal_activity/' + activity.id, {headers : header}).then(async (res) => await res.json())
+    console.log(datas)
+    if (!datas.data.gps_data) {
+        showAddCart('Oups pas de données')
+        return
+    }
+    let line = JSON.parse(infos.gps_data).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
+    console.log(line)
+}
 
 
 const validateAction = async () => {
