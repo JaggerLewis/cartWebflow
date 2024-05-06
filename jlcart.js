@@ -367,6 +367,7 @@ const SlideToColor = (ColorProduct) => {
         console.log(targetSlide, (nbSlide * withSlide).toString());
         if (document.getElementById(targetSlide)) {
             document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px)';
+            document.getElementById(targetSlide).style.transition = 'transform 500ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s';
         }
     }
 
