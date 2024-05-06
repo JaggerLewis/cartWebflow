@@ -16,6 +16,10 @@ let display
 let option
 let token
 
+const findAbonnementSolo = (type) => {
+    return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == type)
+}
+
 const converTimestamp = (timestamp) => {
     let day = Math.floor(timestamp / (24 * 3600)); 
     let hour = Math.floor((timestamp % (24 * 3600)) / 3600);
@@ -507,10 +511,6 @@ const redirectStep2 = () => {
     if (!window.localStorage.serial || !window.localStorage.phone) {
         window.open('activation-produit', '_self')
     }
-}
-
-const findAbonnementSolo = (type) => {
-    return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == type)
 }
 
 const aboAction = async (type) => {
