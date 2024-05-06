@@ -852,6 +852,7 @@ const checkAuth = async () => {
         let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'profil-chien'
         let token = localStorage.getItem('token') ?? url.searchParams.get('HeyJag')
         if (token) {
+            localStorage.setItem('token') 
             header.Authorization = 'Bearer ' + token
             window.open(goTo, '_self')
             return
