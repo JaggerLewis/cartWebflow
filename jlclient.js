@@ -650,7 +650,15 @@ const setMap = async (activity) => {
         showAddCart('Oups pas de données')
         return
     }
-    let line = JSON.parse(infos.gps_data).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
+    let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
+    const flightPath = new google.maps.Polyline({
+        path: line,
+        geodesic: true,
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2,
+      });
+    flightPath.setMap(map)
     console.log(line)
 }
 
