@@ -856,7 +856,7 @@ const checkAuth = async () => {
             return
         }
     } else {
-        if (localStorage.getItem(token)) {
+        if (localStorage.getItem('token')) {
             token = window.localStorage.getItem('token')
             header.Authorization = 'Bearer ' + token
             return
