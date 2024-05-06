@@ -49,7 +49,7 @@ const initClient = {
     'jl-collar-synchro-date' : (node) => null,
     'jl-collar-rescue' : (node) => null,
     // 'jl-activity-card-container' : (node) => initActivity(node),
-    'jl-is-moments' : (node) => initActivity('moment'),
+    'jl-is-moment' : (node) => initActivity('moment'),
     'jl-is-activity' : (node) =>  initActivity('activity'),
     'jl_Activation_serialNumber' : (node) => null,
     'jl_Activation_phoneNumber' : (node) => null,
@@ -595,7 +595,7 @@ const initActivity = async (type) => {
             newCard = card.cloneNode(true)
             changeChildsId(newCard, '-' + activity._id, 'jl')
             newCard['data-id'] = activity._id
-            node.appendChild(newCard)
+            container.appendChild(newCard)
             document.getElementById('jl-activity-card-type-' + activity._id).innerHTML = activity.activity_id
             start =  new Date(activity.start_timestamp);
             end = new Date(activity.end_timestamp);
