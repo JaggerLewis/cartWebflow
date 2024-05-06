@@ -850,7 +850,7 @@ const checkAuth = async () => {
 
     if (url.pathname == REDIRECT) {
         let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'profil-chien'
-        let token = localStorage.getItem(token) ?? url.searchParams.get('HeyJag')
+        let token = localStorage.getItem('token') ?? url.searchParams.get('HeyJag')
         if (token) {
             window.open(goTo, '_self')
             return
