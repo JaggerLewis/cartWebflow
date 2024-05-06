@@ -231,6 +231,7 @@ const initOrder = async () => {
 
 const initInfos = async () => {
     let res = await fetch(baseurl + '/user/customer', {headers : header})
+    let infos
 
     if (res.status == 404) {
         showAddCart('Utilisateur introuvable...')
@@ -238,14 +239,17 @@ const initInfos = async () => {
             history.back()
           }, "1000");
     }
+    else {
+        infos = await res.json()
+    }
 
     if (infos)
-    document.getElementById('jag-info-name').innerHTML = infos.customer.name
-    document.getElementById('jag-info-firstname').innerHTML = infos.customer.name
-    document.getElementById('jag-info-email').innerHTML = infos.customer.email
-    document.getElementById('jag-info-livraison').innerHTML = infos.customer.address.line1+ ',' + infos.customer.address.city
-    document.getElementById('jag-info-phone').innerHTML = infos.customer.phone
-    document.getElementById('jag-info-facture').innerHTML = infos.customer.address.line1+ ',' + infos.customer.address.city
+    document.getElementById('jag-info-name').innerHTML = infos.result.customer.name
+    document.getElementById('jag-info-firstname').innerHTML = infos.result.customer.name
+    document.getElementById('jag-info-email').innerHTML = infos.result.customer.email
+    document.getElementById('jag-info-livraison').innerHTML = infos.result.customer.address.line1+ ',' + infos.result.customer.address.city
+    document.getElementById('jag-info-phone').innerHTML = infos.result.customer.phone
+    document.getElementById('jag-info-facture').innerHTML = infos.result.customer.address.line1+ ',' + infos.result.customer.address.city
 
     loaderContainer.style.display = 'none'
 }
