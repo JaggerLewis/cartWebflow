@@ -41,9 +41,9 @@ const converTimestamp = (timestamp) => {
 
 const initClient = {
     'jl-profil-user-name' : (node) => node.innerHTML = session.customer.name,
-    'jl-profil-dog-picture' : (node) => null,
+    'jl-profil-dog-picture' : (node) =>  node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid ,
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
-    'jl-profil-dog-id' : (node) => node.innerHTML = dog.id,
+    'jl-profil-dog-id' : (node) => node.innerHTML = dog.publicId,
     'jl-collar-battery' : (node) => node.innerHTML = dog.battery.soc+'%',
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
     'jl-collar-synchro-date' : (node) => null,
