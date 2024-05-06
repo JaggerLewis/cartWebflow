@@ -843,7 +843,16 @@ const checkAuth = async () => {
     let url = new URL(window.location.href)
 
     if (url.pathname == REDIRECT) {
-        return
+        if (window.localStorage.getItem('token')) {
+            let searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has('redirect')) {
+                window.location.replace(searchParams.get('redirect'))
+            }
+            else {
+                window.open('profil-chien', '_self')
+            }
+            return
+        }
     }
     if (url.searchParams.has('HeyJag')) {
         token = url.searchParams.get('HeyJag')
