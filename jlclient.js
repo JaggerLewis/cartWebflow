@@ -645,7 +645,7 @@ const checkActivation = async () => {
     const reglexSerial = 'JL[A-Za-z0-9]-[A-Za-z0-9]{8}'
 
     let serial = document.getElementById('jl_Activation_serialNumber').value
-    let phone = document.getElementById('jl_Activation_phoneNumber').value
+    let phone = document.getElementById('jl_Activation_phoneNumber').value.replaceAll(' ', '')
 
     if (!phone.match(regexPhone)) {
         showAddCart('Numéro de téléphone incorrect', true)
