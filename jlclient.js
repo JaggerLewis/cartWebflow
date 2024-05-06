@@ -845,12 +845,12 @@ const checkAuth = async () => {
     if (url.pathname == REDIRECT) {
         if (window.localStorage.getItem('token')) {
             let searchParams = new URLSearchParams(window.location.search);
-            if (searchParams.has('redirect')) {
-                window.location.replace(searchParams.get('redirect'))
-            }
-            else {
-                window.open('profil-chien', '_self')
-            }
+            // if (searchParams.has('redirect')) {
+            //     window.location.replace(searchParams.get('redirect'))
+            // }
+            // else {
+            //     window.open('profil-chien', '_self')
+            // }
             return
         }
     }
