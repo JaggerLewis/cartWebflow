@@ -782,6 +782,7 @@ const initJagAccessory = () => {
         //console.log(access);
         createAccessoryItem(nbAccess);
         document.getElementById('jl-Accessory-item-label-' + nbAccess).innerHTML = capitalise(getLocalName(access));
+        document.getElementById('jl-Accessory-item-desc-' + nbAccess).innerHTML = access.description
         document.getElementById('jl-Accessory-item-ref-' + nbAccess).innerHTML = access.metadata.pId;
         document.getElementById('jl-Accessory-item-Img-' + nbAccess).src = access.image;
         document.getElementById('jl-Accessory-item-Img-' + nbAccess).removeAttribute('srcset');
