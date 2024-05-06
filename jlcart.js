@@ -356,14 +356,6 @@ const SlideToColor = (ColorProduct) => {
     slides = document.getElementById('jl-slide-mask-product');
     withSlide = slides.offsetWidth;
 
-    for (let i = 0; i < slides.children.length; i++) {
-        console.log(slides.children[i].id);
-        targetSlide = slides.children[i].id
-        if (document.getElementById(targetSlide)) {
-            document.getElementById(targetSlide).style.transform = 'translateX(1000px);';
-        }
-      }
-
     if (ColorProduct == 'fauve') {nbSlide = 0};
     if (ColorProduct == 'weimar') {nbSlide = 1};
     if (ColorProduct == 'charbon') {nbSlide = 2};
@@ -382,6 +374,8 @@ const SlideToColor = (ColorProduct) => {
     for (const child of navSlide.children) {
         console.log(child.id)
     }
+
+    document.getElementById('slide_jag_gps_chien_fauve').style.transform = 'translateX(-2500px)';
 
 
 }
