@@ -744,7 +744,7 @@ const initJagAccessory = () => {
         let element = document.getElementById('jl-Accessory-model');
 
         let newAccess = element.cloneNode(true);
-        newAccess.setAttribute('id', 'jl-Accessory-item-' + itemLine);
+        // newAccess.setAttribute('id', 'jl-Accessory-item-' + itemLine);
         changeChildsId(newAccess, '-' + itemLine, 'jl-Accessory-item')
         // for (const child of newAccess.childNodes) {
         //     if (child.hasChildNodes()) {
