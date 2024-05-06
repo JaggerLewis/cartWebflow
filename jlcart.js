@@ -1131,9 +1131,9 @@ const init = async () => {
         initSmartDockAlone()
     }
 
-    //if (document.getElementById('jl-collar')) {
+    if (document.getElementById('jl-collar')) {
         initJagGPS();
-    //}
+    }
 
     if (document.getElementById('jl-price-month')) {
         document.querySelector('#jl-price-month').textContent = (findAboType(findAbonnement("starter"), "monthly").price).toFixed(2)
