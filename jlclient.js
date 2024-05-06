@@ -81,7 +81,7 @@ const deleteAccountEmail = async () => {
         showAddCart('Email envoyé')
     }
     else {
-        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
     }
 }
 
@@ -102,7 +102,7 @@ initDelete = (node) => {
 const deleteAccountSms = async () => {
         let input = document.getElementById('jag-delete-sms-input')
         if (!input) {
-            showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+            showAddCart('Oups, une erreur est survenue, rechargez la page', true)
             return
         }
     
@@ -124,7 +124,7 @@ const deleteAccountSms = async () => {
         checkAuth()
       }
       else {
-        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
       }
 
 }
@@ -348,7 +348,7 @@ const cancelSubScription =  async () => {
             checkAuth()
           }
           else {
-            showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+            showAddCart('Oups, une erreur est survenue, rechargez la page', true)
           }
     }
 
@@ -372,7 +372,7 @@ const cancelSubScriptionEmail = async () => {
         showAddCart('Un mail vous à été envoyé', true)
     }
     else {
-        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
     }
 }
 
@@ -393,7 +393,7 @@ const changeSubscription = async (type) => {
        window.open(result.url)
     }
     else {
-        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
     }
 }
 
@@ -404,7 +404,8 @@ const initOption = async () => {
         let array = type == 'abo' ? abonnement : option.filter((elem) => elem.type == type)
         // TODO(dev): check formula in dog.collar.formula_subscription
         let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
-        let subFormula = findAbonnementSolo('life')
+        
+        let subFormula = findAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
         newCard = card.cloneNode(true)
         changeChildsId(newCard, '-'+subFormula.id, 'jag-')
         document.getElementById('jag-'+type+'-container').appendChild(newCard)
@@ -615,7 +616,7 @@ const validateAction = async () => {
     let serial = window.localStorage.getItem('serial')
     let phone = window.localStorage.getItem('phone')
     if (!value) {
-        showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
         return
     }
     const result = await fetch(baseurl + '/login/activation', {
@@ -672,7 +673,7 @@ const checkActivation = async () => {
                 window.localStorage.phone = phone
             }
             else {
-                showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+                showAddCart('Oups, une erreur est survenue, rechargez la page', true)
             }
             break
         case 400 :
@@ -716,7 +717,7 @@ const getOption = async () => {
   })
   
   if (result.status != 200) {
-      showAddCart('Oups, une erreur est survenue, rechangez la page', true)
+      showAddCart('Oups, une erreur est survenue, rechargez la page', true)
   }
   option = await result.json()
   window.localStorage.setItem('option', JSON.stringify(option))
