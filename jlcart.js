@@ -1141,9 +1141,9 @@ const init = async () => {
     }
 
     if (document.getElementById('jl-price-month')) {
-        let abo = abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'monthly')
+        let abo = abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'life')
         console.log(abonnement, abo)
-        document.querySelector('#jl-price-month').textContent = abo.price.toFixed(2)
+        document.querySelector('#jl-price-month').textContent = (abo.price / 36).toFixed(2)
     }
 
     if (document.getElementById('jl-Accessory')) {

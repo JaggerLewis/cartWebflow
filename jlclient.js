@@ -48,7 +48,6 @@ const initClient = {
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
     'jl-collar-synchro-date' : (node) => null,
     'jl-collar-rescue' : (node) => null,
-    // 'jl-activity-card-container' : (node) => initActivity(node),
     'jl-is-moment' : (node) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
@@ -589,8 +588,6 @@ const toLife = () => {
 }
 
 const initActivity = (type) => {
-   
-
     let container = document.getElementById('jl-activity-card-container')
 
     for (let i = container.childNodes.length - 1; i >= 1; i--) {
