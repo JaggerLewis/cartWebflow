@@ -787,11 +787,11 @@ const initJagAccessory = () => {
         document.getElementById('jl-Accessory-item-Img-' + nbAccess).removeAttribute('srcset');
         document.getElementById('jl-Accessory-item-price-' + nbAccess).innerHTML = (access.price.price).toFixed(2) + ' &euro;';
 
-        document.getElementById('jl-Accessory-item-btn-' + nbAccess).addEventListener('click', (event) => {
-            event.preventDefault();
-            shoppingCart.addItem(access, 1)
-            document.activeElement.blur();
-        });
+        // document.getElementById('jl-Accessory-item-btn-' + nbAccess).addEventListener('click', (event) => {
+        //     event.preventDefault();
+        //     shoppingCart.addItem(access, 1)
+        //     document.activeElement.blur();
+        // });
 
         document.getElementById('jl-Accessory-item-' + nbAccess).style.display = 'block';
 
