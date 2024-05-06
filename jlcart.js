@@ -1131,7 +1131,9 @@ const init = async () => {
     }
 
     if (document.getElementById('jl-price-month')) {
-        document.querySelector('#jl-price-month').textContent = findAbonnementSolo('monthly').price.toFixed(2)
+        let abo = abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'monthly')
+        console.log(abonnement, abo)
+        document.querySelector('#jl-price-month').textContent = abo.price.toFixed(2)
     }
 
     if (document.getElementById('jl-Accessory')) {
