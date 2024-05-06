@@ -364,7 +364,6 @@ const SlideToColor = (ColorProduct) => {
 
     for (const child of slides.children) {
         targetSlide = child.id
-        console.log(targetSlide, (nbSlide * withSlide).toString());
         if (document.getElementById(targetSlide)) {
             document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px)';
             document.getElementById(targetSlide).style.transition = 'transform 500ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s';
@@ -373,7 +372,20 @@ const SlideToColor = (ColorProduct) => {
 
     navSlide = document.getElementById('jl-slide-nav-product');
     for (const child of navSlide.children) {
-        console.log(child.id)
+        targetSlide = child.id
+        if (document.getElementById(targetSlide)) {
+            if ( document.getElementById(targetSlide).getAttribute('aria-label').indexOf(nbSlide) > 0 ) {
+                document.getElementById(targetSlide).className = 'w-slider-dot w-active';
+                document.getElementById(targetSlide).setAttribute('aria-pressed',true);
+                document.getElementById(targetSlide).setAttribute('tabindex',0);
+            }
+            else
+            {
+                document.getElementById(targetSlide).className = 'w-slider-dot';
+                document.getElementById(targetSlide).setAttribute('aria-pressed',false);
+                document.getElementById(targetSlide).setAttribute('tabindex',-1);
+            }
+        }
     }
 
     //document.getElementById('slide_jag_gps_chien_fauve').style.transform = 'translateX(-2500px)';
