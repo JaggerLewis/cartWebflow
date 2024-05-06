@@ -846,29 +846,30 @@ const initDashboard = async (node) => {
 
 const checkAuth = async () => {
     let url = new URL(window.location.href)
+    let searchParams = new URLSearchParams(window.location.search);
 
     if (url.pathname == REDIRECT) {
-        if (window.localStorage.getItem('token')) {
-            let searchParams = new URLSearchParams(window.location.search);
-            if (searchParams.has('redirect')) {
-                window.location.replace(searchParams.get('redirect'))
-            }
-            else {
-                window.open('profil-chien', '_self')
-            }
+        let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'profil-chien'
+        let token = localStorage.getItem(token) ?? url.searchParams.get('HeyJag')
+        if (token) {
+            window.open(goTo, '_self')
+            return
         }
-        return
-    }
-    if (url.searchParams.has('HeyJag')) {
-        token = url.searchParams.get('HeyJag')
-        header.Authorization = 'Bearer ' + token
-    }
-    else if (window.localStorage.getItem('token')) {
-        token = window.localStorage.getItem('token')
-        header.Authorization = 'Bearer ' + token
-    }
-    else {
-           window.location.replace(REDIRECT+'?redirect='+url.pathname);
+    } else {
+        if (localStorage.getItem(token)) {
+            token = window.localStorage.getItem('token')
+            header.Authorization = 'Bearer ' + token
+            return
+        }
+        else if (url.searchParams.has('HeyJag')) {
+            token = url.searchParams.get('HeyJag')
+            header.Authorization = 'Bearer ' + token
+            localStorage.setItem('token', token)
+            return
+        }
+        else {
+            window.location.replace(REDIRECT+'?redirect='+url.pathname);
+        }
     }
 }
 
