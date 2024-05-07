@@ -39,7 +39,7 @@ const startRescue = async (btn) => {
 
     let newBtn = switchBtn('jl-rescue-action', () => stopRescue(key) )
 
-    let timer = setInterval(function(){
+    timer = setInterval(() => {
         tracks(key)
      }, 1000);
 }
