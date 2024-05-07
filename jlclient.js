@@ -600,8 +600,8 @@ const initMap = async (node) => {
     let position
     let data = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {headers : header}).then(async (res) => res.json())
     console.log('data => ', data)
-    if (data.getLastPos.lat && data.getLastPos.lon) {
-        position = { lat: data.getLastPos.lat, lng: data.getLastPos.lon };
+    if (data.CellTower) {
+        position = { lat: data.CellTower.lat ?? 50.64144516315174, lng: data.CellTower.lon ?? 3.045265016887294 };
     } else {
         position =  { lat: 50.64144516315174, lng: 3.045265016887294 };
     }
@@ -612,8 +612,6 @@ const initMap = async (node) => {
         center: position,
         mapId: "DEMO_MAP_ID",
       });
-    
-
 }
 
 const initActivity = (type) => {
