@@ -972,7 +972,7 @@ const disableButton = () => {
             break
     }
     let btn = document.getElementById('jl_switch_' + id)
-    let newBtn = btn.cloneNode(true)
+    let newBtn =  document.createElement('div')
     newBtn.innerHTML = 'Formule actuelle'
     console.log('newBtn => ' + newBtn)
     btn.parentElement.appendChild(newBtn)
