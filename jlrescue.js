@@ -65,7 +65,7 @@ const tracks = async (key) => {
             position: pos,
             title: "",
           });
-        markers.add(tmp)
+        markers.push(tmp)
     });
 }
 
