@@ -46,18 +46,19 @@ const startRescue = async (btn) => {
 }
 
 const tracks = async (key) => {
-    markers.forEach((elem) => {
-        elem.setMap(null)
-    })
-    markers = []
+
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
         headers: header
     }).then(async (value) => await value.json());
-    console.log('tracks', res)
     if (!res.Tracks) {
         return;
     }
+
+    markers.forEach((elem) => {
+        elem.setMap(null)
+    })
+    markers = []
     res.Tracks.forEach(marker => {
         let pos =  {lat : marker.lat, lng : marker.lon}
         let tmp = new google.maps.Marker({
