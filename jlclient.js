@@ -827,7 +827,7 @@ const getDog = async () => {
 
 let getNewAbo = () => {
     if (dog.collar.formula_subscription.type) {
-        return findAbonnementSolo('life')
+        return findAbonnementSolo(dog.collar.formula_subscription.type)
     }
     return dog.collar.formula_subscription.type
 }
