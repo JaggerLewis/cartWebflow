@@ -1,6 +1,17 @@
 let timer
 
 
+const switchBtn = (btnId, func) => {
+    let btn = document.getElementById(btnId)
+    let newBtn = btn.cloneNode(true)
+
+    newBtn.addEventListener('click', () => func())
+    btn.parentElement.appendChild(newBtn)
+    btn.remove()
+
+    return newBtn
+}
+
 const startRescue = async (btn) => {
     let body = {
         'activity_id': 'rescue',
@@ -25,18 +36,16 @@ const startRescue = async (btn) => {
         }).then(async (value) => await value.json());
 
     btn.innerHTML = 'Arreter la géolocalisation'
-    let newBtn = btn.cloneNode(true)
-    newBtn.addEventListener('click', () => stopRescue(key))
-    btn.parentElement.appendChild(newBtn)
-    btn.remove()
-    let a = setInterval(function(){
+
+    let newBtn = switchBtn('jl-rescue-action', () => stopRescue(key) )
+
+    let timer = setInterval(function(){
         tracks(key)
      }, 1000);
-    console.log('start => ', res, res2)
 }
 
 const tracks = async (key) => {
-    let res = await fetch(`https://app-api.mypet.fit/personal_activity/${simcardID}/${key}/rescue/tracks`, {
+    let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
         headers: header
     }).then(async (value) => await value.json());
@@ -45,7 +54,7 @@ const tracks = async (key) => {
 }
 
 const stopRescue = async (key) => {
-
+    clearInterval(timer);
     let res = await fetch(`https://app-api.mypet.fit/collar/${dog.collar.simcardID}/rescue`,
         {
             method: 'POST',
@@ -53,7 +62,7 @@ const stopRescue = async (key) => {
             body: JSON.stringify({ 'mode': 'stop_follow', 'key': key })
         }).then(async (value) => await value.json());
 
-    console.log('stop', res)
+    let newBtn = switchBtn(() => initRescue(document.getElementById('jl-rescue-action')))
 }
 
 const initRescue = (btn) => {
