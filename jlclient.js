@@ -639,6 +639,7 @@ const initActivity = (type) => {
         if (type == 'activity') {
             if (!activity.duration || !activity.distance) {
                 newCard.style.color = "#00000036"
+                newCard.style.opacity = 0.5
             }
             else {
                 newCard.addEventListener('click', () => setMap(activity));
