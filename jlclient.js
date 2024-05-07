@@ -430,7 +430,14 @@ const initOption = async () => {
         document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = subFormula.metadata.pricing
         document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
-        document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b', '_self'))
+        if (dog.collar.formula_subscription.type == 'life') {
+            document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
+            document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
+            
+        } else {
+
+            document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b', '_self'))
+        }
         if (dog.collar.formula_subscription.status == 'resilied') {
             let oldNode =  document.getElementById('jag-'+type+'-stop-'+subFormula.id)
             let node =  document.createElement('div')
