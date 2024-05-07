@@ -603,7 +603,7 @@ const initMap = async (node) => {
       const { Map } = await google.maps.importLibrary("maps");
     
       map = new Map(node, {
-        zoom: 10,
+        zoom: 14,
         center: data.getLastPos ??  position,
         mapId: "DEMO_MAP_ID",
       });
