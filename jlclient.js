@@ -674,7 +674,7 @@ const setMap = async (activity) => {
     document.getElementById('jag-detail-activity-lenght').innerHTML = datas.data.distance > 1000 ? datas.data.distance /1000 : datas.data.distance
     document.getElementById('jag-detail-activity-lenght-id').innerHTML = datas.data.distance > 1000 ? 'Km' : 'm'
     document.getElementById('jag-detail-activity-time').innerHTML = new Date(datas.data.duration * 1000).toISOString().substring(14, 19)
-    document.getElementById('jag-detail-activity-speed').innerHTML = ((datas.data.distance /1000) / (datas.data.duration ?? 1)).substring(0,3)
+    document.getElementById('jag-detail-activity-speed').innerHTML = `${((datas.data.distance /1000) / (datas.data.duration ?? 1))}`.substring(0,3)
 }
 
 
