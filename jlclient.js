@@ -353,8 +353,9 @@ const cancelSubScription =  async () => {
             })
         })
         if (result.status == 200) {
-            window.location.replace('/seconnecter')
-            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            localStorage.removeItem('dog')
+            window.location.replace('/dog-dashboard')
             checkAuth()
           }
           else {
@@ -424,24 +425,13 @@ const initOption = async () => {
         document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
         document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b', '_self'))
-
-        // array.forEach((abo) => {
-          
-        //     switch (type) {
-        //         case 'abo' :
-                  
-        //             break
-        //         default : 
-        //           document.getElementById('jag-'+type+'-renew-'+abo.metadata.productId).innerHTML = 'À renouveler le : ' + '00/00/00'
-        //           document.getElementById('jag-'+type+'-start-'+abo.metadata.productId).innerHTML = 'Début le : '+ '00/00/00'
-        //     }
-        //     document.getElementById('jag-'+type+'-pict-'+abo.metadata.productId).src = abo.image
-        //     if (type == 'abo') {
-        //         if (dog.collar.formula_subscription.formula.product == abo.metadata.productId) {
-        //             document.getElementById('jag-abo-check-'+abo.metadata.productId).style['background-color'] = 'green'
-        //         }
-        //     }
-    // })
+        if (dog.collar.formula_subscription.status == 'resilied') {
+            document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
+            let node =  document.createElement('div')
+            node.innerHTML = 'Résilié'
+            document.getElementById('jag-'+type+'-stop-'+subFormula.id).parentElement.appendChild(node)
+            
+        }
         card.style.display = 'none'
     })
     document.getElementById('jag-abo-container').style.display = 'block'
