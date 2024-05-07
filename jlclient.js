@@ -16,6 +16,7 @@ let display
 let option
 let token
 let map
+let path
 
 const findAbonnementSolo = (type) => {
     return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == type)
@@ -636,7 +637,7 @@ const initActivity = (type) => {
             }
         }
         if (type == 'activity') {
-            if (activity.duration == 0 || activity.distance == 0) {
+            if (!activity.duration || !activity.distance) {
                 newCard.style['backgroud-color'] = 'grey'
             }
             else {
@@ -649,7 +650,7 @@ const initActivity = (type) => {
 
 
 const setMap = async (activity) => {
-    console.log('1')
+    path.setMap(null)
     let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())
     console.log(datas)
     if (!datas.data.gps_data) {
@@ -657,18 +658,17 @@ const setMap = async (activity) => {
         return
     }
     let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
-    const flightPath = new google.maps.Polyline({
+    path = new google.maps.Polyline({
         path: line,
         geodesic: true,
         strokeColor: "#FF0000",
         strokeOpacity: 1.0,
         strokeWeight: 2,
       });
-    flightPath.setMap(map)
+    path.setMap(map)
     document.getElementById('jag-detail-activity-lenght').innerHTML(datas.distance ?? 0)
     document.getElementById('jag-detail-activity-time').innerHTML(datas.duration ?? 0)
     document.getElementById('jag-detail-activity-speed').innerHTML((datas.distance ?? 0) / (datas.duration ?? 1))
-    console.log(line)
 }
 
 
