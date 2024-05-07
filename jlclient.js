@@ -598,7 +598,7 @@ const toLife = () => {
 
 const initMap = async (node) => {
     let position
-    let data = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {headers : header}).then(async (res) => res.json())
+    let data = dog.geolocation
     console.log('data => ', data)
     if (data.CellTower) {
         position = { lat: data.CellTower.lat ?? 50.64144516315174, lng: data.CellTower.lon ?? 3.045265016887294 };
@@ -822,12 +822,22 @@ const getDog = async () => {
         return
     }
     if (user.dogs.length != 0) {
-        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id +'?activity_limit=5', {headers : header})
+        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id, {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
         dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.BatteryInfos)
+        dog.flash = await fetch(`https://app-api.mypet.fit/collar/${dog.collar.simcardID}/flash`, {
+            method: 'GET',
+            headers: header
+        }).then(async (value) => await value.json());
+        dog.geolocation = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
+            method: 'GET',
+            headers : header
+        }).then(async (res) => res.json())
+
+
     }
     window.localStorage.setItem('dog', JSON.stringify(dog))
 }
