@@ -965,7 +965,8 @@ const getWelfareData = async () => {
 }
 
 const disableButton = () => {
-    let newBtn = document.getElementById('jag-my-formula').style.display = 'none'
+    let newBtn = document.getElementById('jag-my-formula')
+    newBtn.style.display = 'none'
     let id = 'month'
     switch(getNewAbo().metadata.pricing) {
         case 'monthly' :
