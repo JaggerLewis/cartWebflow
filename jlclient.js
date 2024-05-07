@@ -664,9 +664,8 @@ const setMap = async (activity) => {
     path = new google.maps.Polyline({
         path: line,
         geodesic: true,
-        strokeColor: "#FF0000",
-        strokeOpacity: 1.0,
-        strokeWeight: 2,
+        color: Color(0xFF5663FF),
+        width: 5,
       });
     path.setMap(map)
     document.getElementById('jag-detail-activity-lenght').innerHTML = (datas.distance ?? 0)
