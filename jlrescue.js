@@ -1,3 +1,6 @@
+let timer
+
+
 const startRescue = async (btn) => {
     let body = {
         'activity_id': 'rescue',
@@ -26,11 +29,14 @@ const startRescue = async (btn) => {
     newBtn.addEventListener('click', () => stopRescue(key))
     btn.parentElement.appendChild(newBtn)
     btn.remove()
+    let a = setInterval(function(){
+        tracks(key)
+     }, 1000);
     console.log('start => ', res, res2)
 }
 
 const tracks = async (key) => {
-    let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue`, {
+    let res = await fetch(`https://app-api.mypet.fit/personal_activity/${simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
         headers: header
     }).then(async (value) => await value.json());
