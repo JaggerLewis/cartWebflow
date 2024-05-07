@@ -363,11 +363,8 @@ const SlideToColor = (ColorProduct) => {
     console.log('nbSlide',nbSlide)
 
     for (const child of slides.children) {
-        targetSlide = child.id
-        if (document.getElementById(targetSlide)) {
-            document.getElementById(targetSlide).style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px)';
-            document.getElementById(targetSlide).style.transition = 'transform 500ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s';
-        }
+        child.style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px)';
+        child.style.transition = 'transform 500ms cubic-bezier(0.55, 0.085, 0.68, 0.53) 0s';
     }
 
     navSlide = document.getElementById('jl-slide-nav-product');
@@ -384,9 +381,6 @@ const SlideToColor = (ColorProduct) => {
                 child.setAttribute('tabindex',-1);
             }
     }
-
-    //document.getElementById('slide_jag_gps_chien_fauve').style.transform = 'translateX(-2500px)';
-
 
 }
 
