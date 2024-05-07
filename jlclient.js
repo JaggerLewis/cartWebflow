@@ -965,6 +965,7 @@ const getWelfareData = async () => {
 }
 
 const disableButton = () => {
+    let newBtn = document.getElementById('jag-my-formula').style.display = 'none'
     let id = 'month'
     switch(getNewAbo().metadata.pricing) {
         case 'monthly' :
@@ -977,10 +978,7 @@ const disableButton = () => {
             id =   'life'
             break
     }
-    let btn = document.getElementById('jl_switch_' + id)
-    let newBtn =  document.createElement('div')
-    newBtn.innerHTML = 'Formule actuelle'
-    console.log('newBtn => ' + newBtn)
+    let btn = document.getElementById('jl_switch_' + id).style.display = 'none'
     btn.parentElement.appendChild(newBtn)
     btn.remove()
 }
