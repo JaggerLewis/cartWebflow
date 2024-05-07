@@ -361,7 +361,7 @@ const cancelSubScription =  async () => {
             })
         })
         if (result.status == 200) {
-            window.location.replace('/confirmation-de-resiliation')
+            window.location.replace('my/confirmation-de-resiliation')
             checkAuth()
           }
           else {
@@ -1004,7 +1004,6 @@ const getAll = async () => {
     else if (document.getElementById('jl-profil-dog-name')) {
         await getUser()
     }
-    //
   
   
     loaderContainer.style.display = 'none'
