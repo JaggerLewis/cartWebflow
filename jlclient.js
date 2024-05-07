@@ -667,6 +667,9 @@ const setMap = async (activity) => {
         color: '#4287f5',
         width: 5,
       });
+      console.log(Object.values(JSON.parse(datas.data.gps_data))[0])
+    map.setCenter(Object.values(JSON.parse(datas.data.gps_data))[0])
+    map.setZoom(14)
     path.setMap(map)
     document.getElementById('jag-detail-activity-lenght').innerHTML = datas.data.distance > 1000 ? datas.data.distance /1000 : datas.data.distance
     document.getElementById('jag-detail-activity-lenght-id').innerHTML = datas.data.distance > 1000 ? 'Km' : 'm'
