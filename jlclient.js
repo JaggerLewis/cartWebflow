@@ -598,7 +598,10 @@ const toLife = () => {
 
 const initMap = async (node) => {
     let position
-    let data = dog.geolocation
+    let data = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
+        method: 'GET',
+        headers : header
+    }).then(async (res) => res.json())
     console.log('data => ', data)
     if (data.CellTower) {
         position = { lat: data.CellTower.lat ?? 50.64144516315174, lng: data.CellTower.lon ?? 3.045265016887294 };
