@@ -426,10 +426,10 @@ const initOption = async () => {
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
         document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b', '_self'))
         if (dog.collar.formula_subscription.status == 'resilied') {
-            document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
+            let oldNode =  document.getElementById('jag-'+type+'-stop-'+subFormula.id)
             let node =  document.createElement('div')
             node.innerHTML = 'Résilié'
-            document.getElementById('jag-'+type+'-stop-'+subFormula.id).parentElement.appendChild(node)
+            oldNode.parentElement.replaceChild(node, oldNode)
             
         }
         card.style.display = 'none'
