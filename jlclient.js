@@ -651,7 +651,9 @@ const initActivity = (type) => {
 
 
 const setMap = async (activity) => {
-    path.setMap(null)
+    if(path) {
+        path.setMap(null)
+    }
     let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())
     console.log(datas)
     if (!datas.data.gps_data) {
