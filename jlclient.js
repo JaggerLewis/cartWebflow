@@ -99,7 +99,7 @@ const deleteAccountEmail = async () => {
 const redirectAbo = () => {
     localStorage.removeItem('user')
     localStorage.removeItem('dog')
-    window.location.replace('/dog-dashboard')
+    window.location.replace('my/dog-dashboard')
     checkAuth()
 }
 
@@ -361,9 +361,7 @@ const cancelSubScription =  async () => {
             })
         })
         if (result.status == 200) {
-            localStorage.removeItem('user')
-            localStorage.removeItem('dog')
-            window.location.replace('/dog-dashboard')
+            window.location.replace('/confirmation-de-resiliation')
             checkAuth()
           }
           else {
@@ -1004,7 +1002,7 @@ const getAll = async () => {
         await getUser()
     }
     else if (document.getElementById('jl-profil-dog-name')) {
-        await getDog()
+        await getUser()
     }
     //
   
