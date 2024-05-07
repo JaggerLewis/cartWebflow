@@ -78,6 +78,7 @@ const initClient = {
     'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
     'jl-delete-sms-action' : (node) => initDelete(node),
     'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScriptionEmail()),
+    'jl-formula-good-action' : (node) =>  node.addEventListener('click', () => redirectAbo()),
     'jl_switch_month' : (node) =>  node.addEventListener('click', () => changeSubscription('monthly')),
     'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
@@ -95,7 +96,14 @@ const deleteAccountEmail = async () => {
     }
 }
 
-initDelete = (node) => {
+const redirectAbo = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('dog')
+    window.location.replace('/dog-dashboard')
+    checkAuth()
+}
+
+const initDelete = (node) => {
     let type = new URL(window.location.href).searchParams.get('type')
 
     if (type == 'subscription_cancel') {
