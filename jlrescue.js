@@ -62,7 +62,7 @@ const stopRescue = async (key) => {
             body: JSON.stringify({ 'mode': 'stop_follow', 'key': key })
         }).then(async (value) => await value.json());
 
-    let newBtn = switchBtn(() => initRescue(document.getElementById('jl-rescue-action')))
+    let newBtn = switchBtn('jl-rescue-action', () => initRescue(document.getElementById('jl-rescue-action')))
 }
 
 const initRescue = (btn) => {
