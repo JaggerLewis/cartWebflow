@@ -56,11 +56,6 @@ const stopRescue = async (key) => {
     console.log('stop', res)
 }
 
-
-document.getElementById('start').addEventListener('click', () => start());
-document.getElementById('tracks').addEventListener('click', () => tracks());
-document.getElementById('stop').addEventListener('click', () => stop());
-
 const initRescue = (btn) => {
     btn.addEventListener('click', () => startRescue(btn))
     console.log('rescue', btn)
