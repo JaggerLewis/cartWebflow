@@ -972,10 +972,11 @@ const disableButton = () => {
             break
     }
     let btn = document.getElementById('jl_switch_' + id)
-    btn.innerHTML = 'Formule actuelle'
     let newBtn = btn.cloneNode(true)
+    newBtn.innerHTML = 'Formule actuelle'
     console.log('newBtn => ' + newBtn)
-    btn.parentElement.replaceChild(newBtn, btn)
+    btn.parentElement.appendChild(newBtn)
+    btn.remove()
 }
 
 const getAll = async () => {
