@@ -664,7 +664,7 @@ const setMap = async (activity) => {
     path = new google.maps.Polyline({
         path: line,
         geodesic: true,
-        color: '#FF5663FF',
+        color: '#4287f5',
         width: 5,
       });
     path.setMap(map)
