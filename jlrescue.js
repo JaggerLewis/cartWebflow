@@ -1,5 +1,5 @@
 let timer
-let tracks
+let tracksLog
 
 const switchBtn = (btnId, func) => {
     let btn = document.getElementById(btnId)
@@ -49,7 +49,7 @@ const tracks = async (key) => {
         method: 'GET',
         headers: header
     }).then(async (value) => await value.json());
-    traks = res.Tracks
+    traksLog = res.Tracks
     console.log('tracks', res)
 }
 
