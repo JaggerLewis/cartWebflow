@@ -99,7 +99,7 @@ const deleteAccountEmail = async () => {
 const redirectAbo = () => {
     localStorage.removeItem('user')
     localStorage.removeItem('dog')
-    window.location.replace('my/dog-dashboard')
+    window.open('/my/dog-dashboard', '_self')
     checkAuth()
 }
 
@@ -361,7 +361,7 @@ const cancelSubScription =  async () => {
             })
         })
         if (result.status == 200) {
-            window.location.replace('my/confirmation-de-resiliation')
+            window.open('/my/confirmation-de-resiliation', '_self'))
             checkAuth()
           }
           else {
@@ -433,9 +433,7 @@ const initOption = async () => {
         if (dog.collar.formula_subscription.type == 'life') {
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
-            
         } else {
-
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b', '_self'))
         }
         if (dog.collar.formula_subscription.status == 'resilied') {
