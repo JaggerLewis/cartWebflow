@@ -964,7 +964,7 @@ const disableButton = () => {
         case 'monthly' :
             id =  'month'
             break
-        case 'yealy' :
+        case 'yearly' :
             id =   'year'
             break
         case 'life' :
