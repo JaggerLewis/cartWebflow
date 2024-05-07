@@ -1,5 +1,6 @@
 let timer
 let tracksLog
+let markers = []
 
 const switchBtn = (btnId, func) => {
     let btn = document.getElementById(btnId)
@@ -45,12 +46,27 @@ const startRescue = async (btn) => {
 }
 
 const tracks = async (key) => {
+    markers.forEach((elem) => {
+        elem.setMap(null)
+    })
+    markers = []
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
         headers: header
     }).then(async (value) => await value.json());
-    traksLog = res.Tracks
     console.log('tracks', res)
+    if (!res.Tracks) {
+        return;
+    }
+    res.Tracks.forEach(marker => {
+        let pos =  {lat : marker.lat, lng : marker.lon}
+        let tmp = new google.maps.Marker({
+            map: map,
+            position: pos,
+            title: "",
+          });
+        markers.add(tmp)
+    });
 }
 
 const stopRescue = async (key) => {
