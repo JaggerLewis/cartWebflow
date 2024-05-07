@@ -361,7 +361,7 @@ const cancelSubScription =  async () => {
             })
         })
         if (result.status == 200) {
-            window.open('/my/confirmation-de-resiliation', '_self'))
+            window.open('/my/confirmation-de-resiliation', '_self')
             checkAuth()
           }
           else {
