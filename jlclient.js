@@ -978,8 +978,11 @@ const disableButton = () => {
             id =   'life'
             break
     }
-    let btn = document.getElementById('jl_switch_' + id).style.display = 'none'
+    let btn = document.getElementById('jl_switch_' + id)
+    btn.style.display = 'none'
+    newBtn.style.display = 'block'
     btn.parentElement.appendChild(newBtn)
+
     btn.remove()
 }
 
