@@ -669,9 +669,9 @@ const setMap = async (activity) => {
         strokeWeight: 2,
       });
     path.setMap(map)
-    document.getElementById('jag-detail-activity-lenght').innerHTML(datas.distance ?? 0)
-    document.getElementById('jag-detail-activity-time').innerHTML(datas.duration ?? 0)
-    document.getElementById('jag-detail-activity-speed').innerHTML((datas.distance ?? 0) / (datas.duration ?? 1))
+    document.getElementById('jag-detail-activity-lenght').innerHTML = (datas.distance ?? 0)
+    document.getElementById('jag-detail-activity-time').innerHTML = (datas.duration ?? 0)
+    document.getElementById('jag-detail-activity-speed').innerHTML = ((datas.distance ?? 0) / (datas.duration ?? 1))
 }
 
 
