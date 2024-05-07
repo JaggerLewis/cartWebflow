@@ -597,12 +597,13 @@ const toLife = () => {
 }
 
 const initMap = async (node) => {
+    let position
     let data = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {headers : header}).then(async (res) => res.json())
     console.log('data => ', data)
     if (data.getLastPos.lat && data.getLastPos.lon) {
-        let position = { lat: data.getLastPos.lat, lng: data.getLastPos.lon };
+        position = { lat: data.getLastPos.lat, lng: data.getLastPos.lon };
     } else {
-        let position =  { lat: 50.64144516315174, lng: 3.045265016887294 };
+        position =  { lat: 50.64144516315174, lng: 3.045265016887294 };
     }
     const { Map } = await google.maps.importLibrary("maps");
         console.log(position)
