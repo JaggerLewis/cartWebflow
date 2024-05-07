@@ -368,6 +368,9 @@ const cancelSubScription =  async () => {
             showAddCart('Oups, une erreur est survenue, rechargez la page', true)
           }
     }
+    else {
+        showAddCart('Code Incorrect', true)
+      }
 
    
 }
@@ -433,6 +436,8 @@ const initOption = async () => {
         if (dog.collar.formula_subscription.type == 'life') {
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
+            document.getElementById('jl-abo-change').style.display = 'none'
+           
         } else {
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b', '_self'))
         }
