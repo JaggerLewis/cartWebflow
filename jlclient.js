@@ -950,15 +950,15 @@ const getWelfareData = async () => {
 
 const disableButton = () => {
     let id = 'month'
-    switch(getNewAbo()) {
+    switch(getNewAbo().metadata.pricing) {
         case 'monthly' :
-        id =  'month'
+            id =  'month'
             break
         case 'yealy' :
-        id =   'year'
+            id =   'year'
             break
         case 'life' :
-        id =   'life'
+            id =   'life'
             break
     }
     let btn = document.getElementById('jl_switch_' + id)
