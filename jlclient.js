@@ -620,6 +620,7 @@ const initActivity = (type) => {
             container.appendChild(newCard)
             newCard.style.display = 'flex'
             document.getElementById('jl-activity-card-type-' + activity._id).innerHTML = activity.activity_id
+           
             start =  new Date(activity.start_timestamp);
             end = new Date(activity.end_timestamp);
             if (activity.start_timestamp && activity.end_timestamp) {
@@ -635,7 +636,12 @@ const initActivity = (type) => {
             }
         }
         if (type == 'activity') {
-            newCard.addEventListener('click', () => setMap(activity));
+            if (activity.duration == 0 || activity.distance == 0) {
+                newCard.style['backgroud-color'] = 'grey'
+            }
+            else {
+                newCard.addEventListener('click', () => setMap(activity));
+            }
         }
     })
     card.style.display = 'none'
@@ -659,6 +665,9 @@ const setMap = async (activity) => {
         strokeWeight: 2,
       });
     flightPath.setMap(map)
+    document.getElementById('jag-detail-activity-lenght').innerHTML(datas.distance ?? 0)
+    document.getElementById('jag-detail-activity-time').innerHTML(datas.duration ?? 0)
+    document.getElementById('jag-detail-activity-speed').innerHTML((datas.distance ?? 0) / (datas.duration ?? 1))
     console.log(line)
 }
 
