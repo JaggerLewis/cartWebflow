@@ -105,6 +105,9 @@ const initGeoFencingSwitch = (node) => {
             method : 'POST',
             body : JSON.stringify({'field': ['geofencing'], 'value': [JSON.stringify(data)]}),
         }).then(async (res) => res.json())
+        if (res.code == '001') {
+            document.getElementById('jl-geofencing-label').innerHTML = `${data.active ? 'Active' : 'Désactié'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
+        }
     })
  }
 const deleteAccountEmail = async () => {
