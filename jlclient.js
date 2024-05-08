@@ -57,7 +57,7 @@ const initClient = {
     'jl-map' : (node) => initMap(node),
     'jl-geofencing-label' : (node) => initGeoFencingLabel(node,),
     'jl-geofencing-switch' : (node) => initGeoFencingSwitch(node),
-    'jl-smartdock-card' : (node) => dog.docks.length == 0 ? node.style.display == 'none' : null,
+    'jl-smartdock-card' : (node) => dog.docks?.length == 0 ? node.style.display = 'none' : null,
     'jl-is-moment' : (node) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
