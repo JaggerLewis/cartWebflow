@@ -869,7 +869,7 @@ const getUser = async () => {
         window.localStorage.setItem('user',JSON.stringify(user))
     }
     await getDog()
-    if (!user.welfareData) {
+    if (!dog.welfareData) {
         await getWelfareData()
     }
     loaderContainer.style.display = 'none'
@@ -1034,7 +1034,7 @@ const getAll = async () => {
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
     }
-    else if (document.getElementById('jl-profil-dog-name')) {
+    else if (document.getElementById('jl-profil-dog-name') || document.getElementById('jl-collar-battery') ) {
         await getUser()
     }
   
