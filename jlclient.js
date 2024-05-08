@@ -878,13 +878,13 @@ const getAbonnement = async () => {
     abonnement = data
 }
 
-const getDog = async () => {
+const getDog = async (id) => {
     dog = JSON.parse(localStorage.getItem('dog'))
-    if (dog) {
+    if (dog && !id) {
         return
     }
     if (user.dogs.length != 0) {
-        dog = await fetch(baseurl + '/dog/'+ user.dogs[0]._id, {headers : header})
+        dog = await fetch(baseurl + '/dog/'+ id ?? user.dogs[0]._id, {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
         dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
@@ -898,6 +898,7 @@ const getDog = async () => {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
+        console.log()
         if (!dog.welfareData) {
             await getWelfareData()
         }
@@ -982,9 +983,8 @@ const initDashboard = async (node) => {
     
                 newCard.addEventListener('click', async () => {
                      loaderContainer.style.display = 'flex'
-                  dog = await fetch(baseurl + '/dog/'+ localDog._id +'?activity_limit=5', {headers : header})
-                        .then(async (res) => await res.json())
-                        .then((res) => res.dog)
+                     await getDog(localDog._id)
+                
                      loaderContainer.style.display = 'none'
                     setidentity()
                 })
