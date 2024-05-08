@@ -47,7 +47,7 @@ const initClient = {
     'jl-profil-dog-picture' : (node) => { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.publicId,
-    'jl-collar-battery' : (node) => node.innerHTML = dog.battery.soc+'%',
+    'jl-collar-battery' : (node) => node.innerHTML = (dog.battery.soc ?? '0') +'%',
     'jl-collar-serial' : (node) => node.innerHTML = dog.collar.serialNumber,
     'jl-collar-id' : (node) => node.innerHTML = dog.collar.name,
     'jl-collar-activation' : (node) => node.innerHTML = getDate(dog.collar.activationDate),
@@ -90,6 +90,10 @@ const initClient = {
 
 
 const initGeoFencingLabel = (node) => {
+    if (!dog.collar.settings.geofencing) {
+        node.innerHTML = 'Non configurée'
+        return
+    }
     let data = JSON.parse(dog.collar.settings.geofencing)
     if (data.label == "") {
         document.getElementById('jag-geofencing-card').style.display = 'none'
@@ -98,6 +102,9 @@ const initGeoFencingLabel = (node) => {
 }
 
 const initGeoFencingSwitch = (node) => {
+    if (!dog.collar.settings.geofencing) {
+        return
+    }
     let data = JSON.parse(dog.collar.settings.geofencing)
     node.innerHTML = `<label class="switch"><input type="checkbox" id="jag-geofencing-slider" ><span class="slider round" ></span></label>`
     let slider = document.getElementById('jag-geofencing-slider')
