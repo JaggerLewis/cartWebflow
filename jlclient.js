@@ -53,9 +53,10 @@ const initClient = {
     'jl-collar-activation' : (node) => node.innerHTML = getDate(dog.collar.activationDate),
     'jl-collar-version' : (node) => node.innerHTML = dog.collar.firmwareVersion,
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
-    'jl-collar-synchro-date' : (node) => node.innerHTML = 'Dernière mise à jour :' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')),
+    'jl-collar-synchro-date' : (node) => node.innerHTML = 'Dernière mise à jour: ' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')),
     'jl-map' : (node) => initMap(node),
-    'jl-geofencing-label' : (node) => initGeoFencing(node),
+    'jl-geofencing-label' : (node) => initGeoFencingLabel(node,),
+    'jl-geofencing-switch' : (node) => initGeoFencingSwitch(node),
     'jl-is-moment' : (node) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
@@ -87,8 +88,14 @@ const initClient = {
 }
 
 
-const initGeoFencing = (node) => {
+const initGeoFencingLabel = (node) => {
     let data = JSON.parse(dog.collar.settings.geofencing)
+    node.innerHTML = `${data.active ? 'Active' : 'Désactié'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
+}
+
+const initGeoFencingSwitch = (node) => {
+    let data = JSON.parse(dog.collar.settings.geofencing)
+    node.innerHTML = `<label class="switch"><input type="checkbox"><span class="slider round" id="jag-geofencing-slider" selected="${data.active == true}"></span></label>`
     node.innerHTML = `${data.active ? 'Active' : 'Désactié'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
 }
 const deleteAccountEmail = async () => {
