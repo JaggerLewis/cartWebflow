@@ -68,7 +68,9 @@ const tracks = async (key) => {
 }
 
 const clearMap = () => {
-    path.setMap(null)
+    if (path) {
+        path.setMap(null)
+    }
     markers.forEach((elem) => {
         elem.setMap(null)
     })
