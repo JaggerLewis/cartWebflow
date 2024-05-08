@@ -55,10 +55,7 @@ const tracks = async (key) => {
         return;
     }
 
-    markers.forEach((elem) => {
-        elem.setMap(null)
-    })
-    markers = []
+    clearMap()
     res.Tracks.forEach(marker => {
         let pos =  {lat : marker.lat, lng : marker.lon}
         let tmp = new google.maps.Marker({
@@ -68,6 +65,14 @@ const tracks = async (key) => {
           });
         markers.push(tmp)
     });
+}
+
+const clearMap = () => {
+    path.setMap(null)
+    markers.forEach((elem) => {
+        elem.setMap(null)
+    })
+    markers = []
 }
 
 const stopRescue = async (key) => {
