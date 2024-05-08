@@ -729,7 +729,7 @@ const initActivity = (type) => {
                 document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  getMonth(start.getMonth())
             }
             if (activity.distance) {
-                distance = activity.distance > 1000 ? activity.distance /1000 + 'km' : activity.distance + 'm'
+                distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
                 document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
             }
         }
