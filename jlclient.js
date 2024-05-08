@@ -468,7 +468,7 @@ const initOption = async () => {
         changeChildsId(newCard, '-'+subFormula.id, 'jag-')
         document.getElementById('jag-'+type+'-container').appendChild(newCard)
         document.getElementById('jag-'+type+'-name-'+subFormula.id).innerHTML = formula.name
-        document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = subFormula.metadata.pricing
+        document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = getAboType(subFormula.metadata.pricing)
         document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
         if (dog.collar.formula_subscription.type == 'life') {
@@ -541,6 +541,17 @@ const getSilhouette = (silhouete) => {
              return 'En surpoids'
         default : 
              return 'Idéal'
+    }
+}
+
+const getAboType = (type) => {
+    switch(type) {
+        case 'monthly' :
+             return 'Chaque mois' 
+        case 'yearly' :
+             return 'Chaque an'  
+        default : 
+             return 'À vie'
     }
 }
 
