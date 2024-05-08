@@ -508,6 +508,35 @@ const getDate = (ts) => {
     return(dateFormatted);
 }
 
+const getSize = (size) => {
+    switch(size) {
+        case 'verySmall' :
+             return 'Très petite' 
+        case 'small' :
+             return 'Petite'  
+        case 'tall' :
+             return 'Grande'  
+        case 'veryTall' :
+             return 'Très grande'
+        default : 
+             return 'Moyenne'
+    }
+}
+const getSilhouette = (silhouete) => {
+    switch(silhouete) {
+        case 'verySkinny' :
+             return 'Très maigre' 
+        case 'skinny' :
+             return 'Maigre'  
+        case 'Maigre' :
+             return 'Excès de poids'  
+        case 'obese' :
+             return 'En surpoids'
+        default : 
+             return 'Idéal'
+    }
+}
+
 
 const getMonth = (month) => {switch (month) {
     case 0:
@@ -913,11 +942,11 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-Iname').innerHTML = dog.name
     document.getElementById('jag-profil-identity-id').innerHTML = dog.publicId
     document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography?? 'Biographie'
-    document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender
+    document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender == 'male' ? 'Mâle' : 'Femelle'
     document.getElementById('jag-profil-identity-birthdate').innerHTML = getDate(dog.birthDate)
     document.getElementById('jag-profil-identity-weight').innerHTML = dog.weight
-    document.getElementById('jag-profil-identity-size').innerHTML = dog.size
-    document.getElementById('jag-profil-identity-silouhette').innerHTML = dog.silhouette
+    document.getElementById('jag-profil-identity-size').innerHTML = getSize(dog.size)
+    document.getElementById('jag-profil-identity-silouhette').innerHTML = getSilhouette(dog.silhouette)
     document.getElementById('jag-profil-identity-breed').innerHTML =race.name
     document.getElementById('jag-profil-identity-lof').firstChild.style['background-color'] = dog.isLOF ? '' : 'grey'
     document.getElementById('jag-profil-identity-steril').firstChild.style['background-color'] = dog.sterilized ? '' : 'grey'
