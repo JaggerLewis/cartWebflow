@@ -84,8 +84,12 @@ const stopRescue = async (key) => {
 }
 
 const initRescue = (btn) => {
-    btn.addEventListener('click', () => startRescue(btn))
-    console.log('rescue', btn)
+    if (dog.personalActivities.find((elem) => !elem.end_timestamp)) {
+        btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en court !'))
+    }
+    else {
+        btn.addEventListener('click', () => startRescue(btn))
+    }
 }
 
 if (document.getElementById('jl-rescue-action')) {
