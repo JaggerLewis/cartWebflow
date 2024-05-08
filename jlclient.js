@@ -55,6 +55,7 @@ const initClient = {
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
     'jl-collar-synchro-date' : (node) => node.innerHTML = 'Dernière mise à jour :' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')),
     'jl-map' : (node) => initMap(node),
+    'jl-geofencing-labal' : (node) => initGeoFencing(node),
     'jl-is-moment' : (node) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
@@ -83,6 +84,12 @@ const initClient = {
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
     'jl-collar-synchro-state' : (node) => node.innerHTML = dog.geolocation.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille',
     'jl-collar-synchro-last-date' : (node) => node.innerHTML = getDate(dog.flash.tmsLastInfo)
+}
+
+
+const initGeoFencing = (node) => {
+    let data = JSON.parse(dog.collar.settings.geofencing)
+    node.innerHTML = `${data.active ? 'Active' : 'Désactié'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
 }
 const deleteAccountEmail = async () => {
     let res = await fetch(baseurl + '/user/delete/email', {
