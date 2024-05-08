@@ -85,7 +85,25 @@ const initClient = {
     'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
     'jl-collar-synchro-state' : (node) => node.innerHTML = dog.geolocation.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille',
-    'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé'
+    'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé',
+    'jl-galery-list-0' : intiPict()
+}
+
+
+
+let setContainer = (index, url) => {
+    let container = document.getElementById('jag-pict-container')
+    let pict = container.cloneNode(true)
+    pict.src = url
+    pict.srcset = url
+    pict.style.display = 'flex'
+
+    document.getElementById('jl-galery-list-' +index).appendChild(pict)
+}
+
+let intiPict = async () => {
+    await getUser()
+    user.galery.forEach((elem) => setContainer(new Date(elem.timestamp).getMonth(), "https://app-api.mypet.fit/img/" + elem.image.type +"/"+ elem.image.uuid ))
 }
 
 
