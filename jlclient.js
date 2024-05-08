@@ -85,7 +85,7 @@ const initClient = {
     'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
     'jl-collar-synchro-state' : (node) => node.innerHTML = dog.geolocation.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille',
-    'jl-collar-synchro-last-date' : (node) => node.innerHTML = getDate(dog.flash.tmsLastInfo)
+    'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé'
 }
 
 
