@@ -898,7 +898,9 @@ const getDog = async () => {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
-
+        if (!dog.welfareData) {
+            await getWelfareData()
+        }
 
     }
     window.localStorage.setItem('dog', JSON.stringify(dog))
@@ -926,9 +928,7 @@ const getUser = async () => {
         window.localStorage.setItem('user',JSON.stringify(user))
     }
     await getDog()
-    if (!dog.welfareData) {
-        await getWelfareData()
-    }
+   
     loaderContainer.style.display = 'none'
 }
 
