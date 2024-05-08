@@ -299,15 +299,21 @@ const initInfos = async () => {
         infos = await res.json()
     }
 
-    if (infos)
-    document.getElementById('jag-info-name').innerHTML = infos.result.customer.name
-    document.getElementById('jag-info-firstname').innerHTML = infos.result.customer.name
-    document.getElementById('jag-info-email').innerHTML = infos.result.customer.email
-    document.getElementById('jag-info-livraison').innerHTML = infos.result.customer.address.line1+ ',' + infos.result.customer.address.city
-    document.getElementById('jag-info-phone').innerHTML = infos.result.customer.phone
-    document.getElementById('jag-info-facture').innerHTML = infos.result.customer.address.line1+ ',' + infos.result.customer.address.city
-
-    loaderContainer.style.display = 'none'
+    if (infos) {
+        document.getElementById('jag-info-name').innerHTML = infos.result.customer.name
+        document.getElementById('jag-info-firstname').innerHTML = infos.result.customer.name
+        document.getElementById('jag-info-email').innerHTML = infos.result.customer.email
+        document.getElementById('jag-info-livraison').innerHTML = infos.result.customer.address.line1+ ',' + infos.result.customer.address.city
+        document.getElementById('jag-info-phone').innerHTML = infos.result.customer.phone
+        document.getElementById('jag-info-facture').innerHTML = infos.result.customer.address.line1+ ',' + infos.result.customer.address.city
+        loaderContainer.style.display = 'none'
+    }
+    else {
+        showAddCart('Utilisateur introuvable...')
+        setTimeout(() => {
+            history.back()
+          }, "1000");
+    }
 }
 
 const loginEmail = async () => {
