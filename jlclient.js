@@ -884,6 +884,7 @@ const getDog = async (id) => {
         return
     }
     if (user.dogs.length != 0) {
+        console.log('id ==> ' + id, id ?? 'user.dogs[0]._id')
         dog = await fetch(baseurl + '/dog/'+ id ?? user.dogs[0]._id, {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
