@@ -83,7 +83,8 @@ const stopRescue = async (key) => {
     newBtn.innerHTML = 'Lancer un localisation'
 }
 
-const initRescue = (btn) => {
+const initRescue = async (btn) => {
+    await getDog()
     if (dog.personalActivities.find((elem) => !elem.end_timestamp)) {
         btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en court !'))
     }
