@@ -95,7 +95,9 @@ const initGeoFencingLabel = (node) => {
 
 const initGeoFencingSwitch = (node) => {
     let data = JSON.parse(dog.collar.settings.geofencing)
-    node.innerHTML = `<label class="switch"><input type="checkbox"><span class="slider round" id="jag-geofencing-slider" selected="${data.active == true}"></span></label>`
+    node.innerHTML = `<label class="switch"><input type="checkbox"><span class="slider round" id="jag-geofencing-slider" selected=${data.active == true}></span></label>`
+    let select = document.getElementById('jag-geofencing-slider')
+    node.addEventListener('click', () => select.setAttribute('selected', !select.getAttribute('selected')) )
 }
 const deleteAccountEmail = async () => {
     let res = await fetch(baseurl + '/user/delete/email', {
