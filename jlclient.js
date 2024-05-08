@@ -91,6 +91,9 @@ const initClient = {
 
 const initGeoFencingLabel = (node) => {
     let data = JSON.parse(dog.collar.settings.geofencing)
+    if (data.label == "") {
+        document.getElementById('jag-geofencing-card').style.display = 'none'
+    }
     node.innerHTML = `${data.active ? 'Active' : 'Désactié'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
 }
 
