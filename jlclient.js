@@ -55,7 +55,7 @@ const initClient = {
     'jl-collar-autonomy' : (node) => node.innerHTML = 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie",
     'jl-collar-synchro-date' : (node) => node.innerHTML = 'Dernière mise à jour :' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')),
     'jl-map' : (node) => initMap(node),
-    'jl-geofencing-labal' : (node) => initGeoFencing(node),
+    'jl-geofencing-label' : (node) => initGeoFencing(node),
     'jl-is-moment' : (node) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
