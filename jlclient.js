@@ -561,6 +561,30 @@ const getAboType = (type) => {
     }
 }
 
+const getActivity = (name) => {
+    switch(name) {
+        case 'footing' :
+            return 'CaniCross' 
+        case 'chasse' :
+            return 'Chasse'
+        case 'bike' :
+            return 'CaniVTT'
+        case 'crossfit' :
+            return 'Parcours libre'
+        case 'promenade' :
+            return 'Balade'
+        case 'city_dogsitting' :
+            return 'DogSitting'  
+        case 'cani_rando' :
+            return 'CaniRando'  
+        case 'away' :
+            return 'Absence'  
+        default : 
+             return `Autre (${name})`
+    }
+}
+
+
 
 const getMonth = (month) => {switch (month) {
     case 0:
@@ -717,7 +741,7 @@ const initActivity = (type) => {
             newCard['data-id'] = activity._id
             container.appendChild(newCard)
             newCard.style.display = 'flex'
-            document.getElementById('jl-activity-card-type-' + activity._id).innerHTML = activity.activity_id
+            document.getElementById('jl-activity-card-type-' + activity._id).innerHTML = getActivity(activity.activity_id)
            
             start =  new Date(activity.start_timestamp);
             end = new Date(activity.end_timestamp);
