@@ -762,8 +762,7 @@ const initActivity = (type) => {
     let card = document.getElementById('jag-activity-card')
     let array = type == 'moment' ? dog.activities.moments : type == 'activity' ? dog.activities.personalActivities : dog.activities.rescues
     array.forEach((activity) => {
-        let distance = 0
-        let duration = '0m'
+        let distance
         if (activity.start_timestamp && activity.end_timestamp) {
             newCard = card.cloneNode(true)
             changeChildsId(newCard, '-' + activity._id, 'jl')
@@ -787,7 +786,7 @@ const initActivity = (type) => {
             if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
             }
-            document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
+            document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance ?? '0m'
         }
         if (type == 'activity') {
             if (activity.duration && activity.distance) {
