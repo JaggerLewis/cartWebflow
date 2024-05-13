@@ -95,8 +95,18 @@ const stopRescue = async (key) => {
 
 const initRescue = async (btn) => {
     await getDog()
-    if (dog.personalActivities.find((elem) => !elem.end_timestamp)) {
-        btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en court !'))
+    let acti = dog.personalActivities.find((elem) => !elem.end_timestamp)
+    if (acti) {
+        if (acti.type == 'rescue') {
+            let btn = switchBtn('jl-rescue-action', () => stopRescue(acti.timestamp_key) )
+            btn.innerHTML = 'Arreter la géolocalisation'
+            timer = setInterval(() => {
+                tracks(acti.timestamp_key)
+             }, 1000);
+        }
+        else if (acti.type == 'activity') {
+            btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en court !'))
+        }
     }
     else {
         btn.addEventListener('click', () => startRescue(btn))
