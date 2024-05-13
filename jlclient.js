@@ -976,7 +976,7 @@ const getDog = async (id) => {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
-        dog.dock = await fetch(baseurl + `/collar/${dog.collar.simcardID}/dock`, {
+        dog.dock = await fetch(baseurl + `/collar/${dog.collar._id}/dock`, {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
