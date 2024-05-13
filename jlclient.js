@@ -44,7 +44,7 @@ const converTimestamp = (timestamp) => {
 const initClient = {
 
     'jl-profil-user-name' : (node) => node.innerHTML = session.customer.name,
-    // 'jl-nav-dog-name' : (node) => node.innerHTML = dog.name,
+    'jl-nav-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-picture' : (node) => { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.publicId,
@@ -804,6 +804,7 @@ const initActivity = (type) => {
 
 
 const setMap = async (activity) => {
+    document.getElementById('jag-detail-activity').style.display = 'flex'
     clearMap()
 
     let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())
@@ -1155,7 +1156,6 @@ const getAll = async () => {
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getOption()
-        await getUser()
 
         await initOption()
     
@@ -1175,6 +1175,10 @@ const getAll = async () => {
     else if (document.getElementById('jl-profil-dog-name') || document.getElementById('jl-collar-battery')  ||  document.getElementById('jl-galery-list-0') ) {
         await getUser()
     }
+    else {
+        await getUser()
+    }
+
   
   
     loaderContainer.style.display = 'none'
