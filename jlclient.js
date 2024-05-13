@@ -762,6 +762,8 @@ const initActivity = (type) => {
     let card = document.getElementById('jag-activity-card')
     let array = type == 'moment' ? dog.activities.moments : type == 'activity' ? dog.activities.personalActivities : dog.activities.rescues
     array.forEach((activity) => {
+        let distance = 0
+        let duration = '0m'
         if (activity.start_timestamp && activity.end_timestamp) {
             newCard = card.cloneNode(true)
             changeChildsId(newCard, '-' + activity._id, 'jl')
@@ -777,15 +779,18 @@ const initActivity = (type) => {
                 if (activity.duration) {
                     document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(activity.duration * 1000).toISOString().substring(14, 19)
                 }
+                else {
+                    document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(0).toISOString().substring(14, 19)
+                }
                 document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  getMonth(start.getMonth())
             }
             if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
-                document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
             }
+            document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance
         }
         if (type == 'activity') {
-            if (!activity.duration || !activity.distance) {
+            if (activity.duration && activity.distance) {
                 newCard.style.color = "#00000036"
                 newCard.style.opacity = 0.5
             }
