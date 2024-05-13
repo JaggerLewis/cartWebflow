@@ -56,8 +56,9 @@ const tracks = async (key) => {
     }
 
     clearMap()
+    let pos;
     res.Tracks.forEach(marker => {
-        let pos =  {lat : marker.lat, lng : marker.lon}
+        pos =  {lat : marker.lat, lng : marker.lon}
         let tmp = new google.maps.Marker({
             map: map,
             position: pos,
@@ -65,6 +66,8 @@ const tracks = async (key) => {
           });
         markers.push(tmp)
     });
+    console.log(pos)
+    map.setCenter(pos)
 }
 
 const clearMap = () => {
