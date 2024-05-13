@@ -741,6 +741,16 @@ const initMap = async (node) => {
 }
 
 const initActivity = (type) => {
+    let color = ['var(--main)', 'var(--gristypofaible)']
+
+    if (type == 'rescue') {
+        color = color.reverse()
+    }
+
+    document.getElementById('jl-activity-activity').style.color = color[0]
+    document.getElementById('jl-activity-rescue').style.color = color[1]
+    
+
     let container = document.getElementById('jl-activity-card-container')
 
     for (let i = container.childNodes.length - 1; i >= 1; i--) {
