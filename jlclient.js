@@ -1171,7 +1171,7 @@ const getAll = async () => {
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getOption()
-
+        await getUser()
         await initOption()
     
     }
@@ -1187,7 +1187,7 @@ const getAll = async () => {
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
     }
-    else if (document.getElementById('jl-profil-dog-name') || document.getElementById('jl-collar-battery')  ||  document.getElementById('jl-galery-list-0') ) {
+    else if (document.getElementById('jag-profil-dog-name') || document.getElementById('jl-collar-battery')  ||  document.getElementById('jl-galery-list-0') ) {
         await getUser()
     }
 
