@@ -64,7 +64,7 @@ const initClient = {
     'jl-is-activity' : (node) =>  initActivity('activity'),
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('monthly')),
-    'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yealry')),
+    'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yearly')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('life')),
     'jl-abo-change' : (node) => node.addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b')),
     'jl-formula-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('abo')),
@@ -248,7 +248,6 @@ const initFamily = () => {
         familyCard.style.display = 'flex'
         changeChildsId(familyCard, '-'+membre._id, 'jag-')
         list.appendChild(familyCard)
-        console.log(familyCard)
         document.getElementById('jag-family-pict-' + membre._id).src = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
          document.getElementById('jag-family-pict-' + membre._id).srcset = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
         document.getElementById('jag-family-name-' + membre._id).innerHTML =membre.name
@@ -728,14 +727,12 @@ const initMap = async (node) => {
         method: 'GET',
         headers : header
     }).then(async (res) => res.json())
-    console.log('data => ', data)
     if (data.CellTower) {
         position = { lat: data.CellTower.lat ?? 50.64144516315174, lng: data.CellTower.lon ?? 3.045265016887294 };
     } else {
         position =  { lat: 50.64144516315174, lng: 3.045265016887294 };
     }
     const { Map } = await google.maps.importLibrary("maps");
-        console.log(position)
       map = new Map(node, {
         zoom: 14,
         center: position,
@@ -793,7 +790,6 @@ const setMap = async (activity) => {
     clearMap()
 
     let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())
-    console.log(datas)
     if (!datas.data.gps_data) {
         showAddCart('Oups pas de données')
         return
@@ -805,7 +801,6 @@ const setMap = async (activity) => {
         color: '#4287f5',
         width: 5,
       });
-      console.log(Object.values(JSON.parse(datas.data.gps_data))[0])
     map.setCenter(Object.values(JSON.parse(datas.data.gps_data))[0])
     map.setZoom(14)
     path.setMap(map)
@@ -950,7 +945,6 @@ const getDog = async (id) => {
         return
     }
     if (user.dogs.length != 0) {
-        console.log('id ==> ' + id, id ?? 'user.dogs[0]._id')
         dog = await fetch(baseurl + '/dog/'+ (id ?? user.dogs[0]._id), {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
@@ -965,7 +959,6 @@ const getDog = async (id) => {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
-        console.log()
         if (!dog.welfareData) {
             await getWelfareData()
         }
