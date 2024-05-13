@@ -131,7 +131,7 @@ const initGeoFencingSwitch = (node) => {
         let res = await fetch(baseurl + `/collar/${dog.collar.simcardID}/settings`, {
             headers : header,
             method : 'POST',
-            body : JSON.stringify({'field': ['geofencing'], 'value': [JSON.stringify(data)]}),
+            body : JSON.stringify({'field': ['geofencing'], 'value': [JSON.stringify({active: slider.checked})]}),
         }).then(async (res) => res.json())
         if (res.code == '001') {
             document.getElementById('jl-geofencing-label').innerHTML = `${data.active ? 'Active' : 'Désactié'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
