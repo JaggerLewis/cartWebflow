@@ -109,6 +109,7 @@ const initRescue = async (btn) => {
         }
     }
     else {
+        btn.parentElement.style.backgroundColor = 'grey'
         btn.addEventListener('click', () => startRescue(btn))
     }
 }
