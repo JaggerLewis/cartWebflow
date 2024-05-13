@@ -95,7 +95,11 @@ const stopRescue = async (key) => {
 
 const initRescue = async (btn) => {
     await getDog()
-    let acti = dog.personalActivities.find((elem) => !elem.end_timestamp)
+    let activities =  await fetch(`https://app-api.mypet.fit/personal_activities/${dog._id}?mock=true`, {
+        method: 'GET',
+        headers: header
+    }).then(async (value) => await value.json());
+    let acti = activities.data.find((elem) => !elem.end_timestamp)
     if (acti) {
         if (acti.type == 'rescue') {
             let btn = switchBtn('jl-rescue-action', () => stopRescue(acti.timestamp_key) )
