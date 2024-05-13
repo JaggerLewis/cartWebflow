@@ -743,6 +743,7 @@ const initMap = async (node) => {
 
 const initActivity = (type) => {
     let color = ['var(--main)', 'var(--gristypofaible)']
+    document.getElementById('jag-detail-activity').style.display = type == 'none'
 
     if (type == 'rescue') {
         color = color.reverse()
