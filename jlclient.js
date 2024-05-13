@@ -789,6 +789,7 @@ const initActivity = (type) => {
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + distance ?? '0m'
         }
         if (type == 'activity') {
+            console.log(activity.duration, activity.distance)
             if (activity.duration && activity.distance) {
                 newCard.style.color = "#00000036"
                 newCard.style.opacity = 0.5
