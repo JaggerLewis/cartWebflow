@@ -115,7 +115,7 @@ const initGeoFencingLabel = (node) => {
     if (data.label == "") {
         document.getElementById('jag-geofencing-card').style.display = 'none'
     }
-    node.innerHTML = `${data.active ? 'Active' : 'Désactié'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
+    node.innerHTML = `${data.active ? 'Activée' : 'Désactivée'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
 }
 
 const initGeoFencingSwitch = (node) => {
