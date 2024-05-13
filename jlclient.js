@@ -107,7 +107,7 @@ let intiPict = () => {
 
 
 const initSmartDock = (node) => {
-    let assigned = dog.dock.result.assigned
+    let assigned = dog.dock?.result?.assigned
 
     if (assigned == undefined) {
         node.style.display = 'none'
