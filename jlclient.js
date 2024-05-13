@@ -1190,9 +1190,7 @@ const getAll = async () => {
     else if (document.getElementById('jl-profil-dog-name') || document.getElementById('jl-collar-battery')  ||  document.getElementById('jl-galery-list-0') ) {
         await getUser()
     }
-    else {
-        await getUser()
-    }
+
 
   
   
