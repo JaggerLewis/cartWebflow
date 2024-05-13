@@ -762,6 +762,9 @@ const initActivity = (type) => {
 
     let card = document.getElementById('jag-activity-card')
     let array = type == 'moment' ? dog.activities.moments : type == 'activity' ? dog.activities.personalActivities : dog.activities.rescues
+    array.sort(function(a,b){
+        return new Date(b.start_timestamp) - new Date(a.start_timestamp);
+      });
     array.forEach((activity) => {
         let distance
         if (activity.start_timestamp && activity.end_timestamp) {
