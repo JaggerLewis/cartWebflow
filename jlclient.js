@@ -58,11 +58,11 @@ const initClient = {
     'jl-map' : (node) => initMap(node),
     'jl-geofencing-label' : (node) => initGeoFencingLabel(node,),
     'jl-geofencing-switch' : (node) => initGeoFencingSwitch(node),
-    'jl-smartdock-card' : (node) => dog.docks?.length == 0 ? node.style.display = 'none' : null,
+    'jl-smartdock-card' : (node) => initSmartDock(node), 
     'jl-is-moment' : (node) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
-    'jl-is-activity' : (node) =>  initActivity('activity'),
+    'jl-is-activity' : () =>  initActivity('activity'),
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('monthly')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yearly')),
@@ -105,6 +105,17 @@ let intiPict = () => {
     })
 }
 
+
+const initSmartDock = (node) => {
+    let assigned = dog.dock.result.assigned
+
+    if (assigned == undefined) {
+        node.style.display = 'none'
+        return
+    }
+    document.getElementById('jl-smartdock-desc').innerHTML = assigned ? 'Smartdock appareillé' : 'Smartdock non-appareillé'
+    
+}
 
 const initGeoFencingLabel = (node) => {
     if (!dog.collar.settings.geofencing) {
