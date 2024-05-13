@@ -90,7 +90,7 @@ const stopRescue = async (key) => {
         }).then(async (value) => await value.json());
 
     let newBtn = switchBtn('jl-rescue-action', () => initRescue(document.getElementById('jl-rescue-action')))
-    newBtn.innerHTML = 'Lancer un localisation'
+    newBtn.innerHTML = 'Lancer une localisation'
 }
 
 const initRescue = async (btn) => {
