@@ -951,9 +951,9 @@ const getAbonnement = async () => {
     abonnement = data
 }
 
-const getDog = async (id) => {
+const getDog = async (id, force) => {
     dog = JSON.parse(localStorage.getItem('dog'))
-    if (dog && !id) {
+    if (dog && !id && !force) {
         return
     }
     if (user.dogs.length != 0) {
