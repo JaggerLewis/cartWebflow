@@ -44,6 +44,7 @@ const converTimestamp = (timestamp) => {
 const initClient = {
 
     'jl-profil-user-name' : (node) => node.innerHTML = session.customer.name,
+    'jl-nav-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-picture' : (node) => { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.publicId,
