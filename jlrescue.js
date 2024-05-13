@@ -105,11 +105,11 @@ const initRescue = async (btn) => {
              }, 1000);
         }
         else if (acti.type == 'activity') {
+            btn.parentElement.style.backgroundColor = 'grey'
             btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en court !'))
         }
     }
     else {
-        btn.parentElement.style.backgroundColor = 'grey'
         btn.addEventListener('click', () => startRescue(btn))
     }
 }
