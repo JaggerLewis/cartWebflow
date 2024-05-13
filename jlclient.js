@@ -594,7 +594,7 @@ const getActivity = (name) => {
             return 'CaniRando'  
         case 'away' :
             return 'Absence'  
-        case 'recsue' : 
+        case 'rescue' : 
             return 'Localisation'
         default : 
              return `Autre (${name})`
