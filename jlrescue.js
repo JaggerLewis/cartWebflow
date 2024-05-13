@@ -36,7 +36,7 @@ const startRescue = async (btn) => {
             body: JSON.stringify({ 'mode': 'standard_follow', 'key': key })
         }).then(async (value) => await value.json());
 
-    btn.innerHTML = 'Arreter la géolocalisation'
+    btn.innerHTML = 'Arrêter la géolocalisation'
 
     let newBtn = switchBtn('jl-rescue-action', () => stopRescue(key) )
 
@@ -99,7 +99,7 @@ const initRescue = async (btn) => {
     if (acti) {
         if (acti.type == 'rescue') {
             let btn = switchBtn('jl-rescue-action', () => stopRescue(acti.timestamp_key) )
-            btn.innerHTML = 'Arreter la géolocalisation'
+            btn.innerHTML = 'Arrêter la géolocalisation'
             timer = setInterval(() => {
                 tracks(acti.timestamp_key)
              }, 1000);
