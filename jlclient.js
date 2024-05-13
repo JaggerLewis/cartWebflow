@@ -749,7 +749,7 @@ const initActivity = (type) => {
 
     document.getElementById('jl-activity-activity').style.color = color[0]
     document.getElementById('jl-activity-activity').style.borderColor = color[0]
-    document.getElementById('jl-activity-activity').style.color = color[0]
+    document.getElementById('jl-activity-rescue').style.color = color[1]
     document.getElementById('jl-activity-rescue').style.borderColor = color[1]
     
 
