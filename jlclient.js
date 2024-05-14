@@ -852,7 +852,7 @@ const setMap = async (activity) => {
     path = new google.maps.Polyline({
         path: line,
         geodesic: true,
-        color: '#4287f5',
+        strokeColor: '#4287f5',
         width: 5,
       });
     map.setCenter(Object.values(JSON.parse(datas.data.gps_data))[0])
