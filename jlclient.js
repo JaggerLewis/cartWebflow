@@ -403,7 +403,8 @@ const loginCode = async () => {
             window.localStorage.setItem('token', result.token)
             let searchParams = new URLSearchParams(window.location.search);
             if (searchParams.has('redirect')) {
-                let goTo = REDIRECT[searchParams.get('redirect')]
+                let goTo = searchParams.get('redirect')
+                 goTo = REDIRECT[goTo] ?? REDIRECT.dashboard
                 window.location.replace(goTo)
             }
             else {
