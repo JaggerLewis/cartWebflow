@@ -123,7 +123,7 @@ const initSmartDock = (node) => {
 
     document.getElementById('jl-smartdock-title').innerHTML = assigned ? 'Smartdock appairé' : 'Smartdock non-appairé'
     if (!assigned) {
-        document.getElementById('jl-smartdock-desc').innerHTML = "Appairé sur l'application"
+        document.getElementById('jl-smartdock-desc').innerHTML = "Configurez-le sur l'application"
     }
     else {
         let connected = dog.dock?.data?.dock_status?.isConnected ?? false
