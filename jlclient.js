@@ -1,7 +1,16 @@
 
 
 const baseurl = 'https://app-api.mypet.fit'
-const REDIRECT = '/my/seconnecter'
+const REDIRECT = {
+    login : 'seconnecter',
+    dashboard : 'profil-chien',
+    abo : 'choix-abonnement-upgrade-b',
+    stop : 'confirmation-de-resiliation',
+    active : 'activation-produit',
+    active_2 : 'activation-produit-etape02-copy',
+}
+
+
 const step2 = 'activation-produit-etape02'
 
 let header = {
@@ -59,7 +68,7 @@ const initClient = {
     'jl-geofencing-label' : (node) => initGeoFencingLabel(node,),
     'jl-geofencing-switch' : (node) => initGeoFencingSwitch(node),
     'jl-smartdock-card' : (node) => initSmartDock(node), 
-    'jl-is-moment' : (node) =>  initActivity('moment'),
+    'jl-is-moment' : (_) =>  initActivity('moment'),
     'jl-activity-activity' : (node) => node.addEventListener('click', () => initActivity('activity')),
     'jl-activity-rescue' : (node) => node.addEventListener('click', () => initActivity('rescue')),
     'jl-is-activity' : () =>  initActivity('activity'),
@@ -67,7 +76,7 @@ const initClient = {
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('monthly')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yearly')),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('life')),
-    'jl-abo-change' : (node) => node.addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b')),
+    'jl-abo-change' : (node) => node.addEventListener('click', () => window.open(REDIRECT.abo)),
     'jl-formula-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('abo')),
     'jl-option-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('option')),
     'jl-insurance-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('insurance')),
@@ -165,7 +174,7 @@ const deleteAccountEmail = async () => {
 const redirectAbo = () => {
     localStorage.removeItem('user')
     localStorage.removeItem('dog')
-    window.open('/my/dog-dashboard', '_self')
+    window.open(REDIRECT.dashboard, '_self')
     checkAuth()
 }
 
@@ -386,7 +395,7 @@ const loginCode = async () => {
                 window.location.replace(searchParams.get('redirect'))
             }
             else {
-                window.open('profil-chien', '_self')
+                window.open(REDIRECT.dashboard, '_self')
             }
           }
           else {
@@ -432,7 +441,7 @@ const cancelSubScription =  async () => {
             })
         })
         if (result.status == 200) {
-            window.open('/my/confirmation-de-resiliation', '_self')
+            window.open(REDIRECT.stop, '_self')
             checkAuth()
           }
           else {
@@ -510,7 +519,7 @@ const initOption = async () => {
             document.getElementById('jl-abo-change').style.display = 'none'
            
         } else {
-            document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open('/my/choix-abonnement-upgrade-b', '_self'))
+            document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
         }
         if (dog.collar.formula_subscription.status == 'resilied') {
             let oldNode =  document.getElementById('jag-'+type+'-stop-'+subFormula.id)
@@ -658,7 +667,7 @@ const getMonth = (month) => {switch (month) {
 
 const redirectStep2 = () => {
     if (!window.localStorage.serial || !window.localStorage.phone) {
-        window.open('activation-produit', '_self')
+        window.open(REDIRECT.active, '_self')
     }
 }
 
@@ -863,7 +872,7 @@ const validateAction = async () => {
       }).then((res) => res.status) 
       
       if (result == 200) {
-        window.open('activation-produit-etape02-copy', '_self')
+        window.open(REDIRECT.active_2, '_self')
       }
       else {
         showAddCart('Code incorrect', true)
@@ -911,6 +920,9 @@ const checkActivation = async () => {
             break
         case 400 :
             showAddCart('Ce boîtier est déjà activé', true)
+            setTimeout(() => {
+                window.open(REDIRECT.login, '_self')
+              }, "1000");
             break 
         case 404 : 
             showAddCart('Boîtier inconnu', true)
@@ -922,7 +934,7 @@ const getCart = async () => {
     let searchParams = new URLSearchParams(window.location.search);
 
     if (!searchParams.has('session_id')) {
-          window.open('activation-produit', '_self')
+          window.open(REDIRECT.active, '_self')
         return
     }
 
@@ -933,7 +945,7 @@ const getCart = async () => {
     })
     
     if (result.status != 200) {
-        window.open('activation-produit', '_self')
+        window.open(REDIRECT.active, '_self')
         return
     }
     session = await result.json()
@@ -1094,7 +1106,7 @@ const checkAuth = async () => {
     let url = new URL(window.location.href)
     let searchParams = new URLSearchParams(window.location.search);
 
-    if (url.pathname == REDIRECT) {
+    if (url.pathname == ('/my/'+ REDIRECT.login)) {
         let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'profil-chien'
         let token = localStorage.getItem('token') ?? url.searchParams.get('HeyJag')
         if (token) {
@@ -1116,7 +1128,7 @@ const checkAuth = async () => {
             return
         }
         else {
-            window.location.replace(REDIRECT+'?redirect='+url.pathname);
+            window.open(REDIRECT.login +'?redirect='+url.pathname, '_self');
         }
     }
 }
