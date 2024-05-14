@@ -6,7 +6,7 @@ const REDIRECT = {
     dashboard : 'profil-chien',
     abo : 'choix-abonnement-upgrade-b',
     stop : 'confirmation-de-resiliation',
-    active : 'activation-produit',
+    active : 'activation-1-3',
     active_2 : 'activation-produit-etape02-copy',
 }
 
