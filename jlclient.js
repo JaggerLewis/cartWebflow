@@ -858,7 +858,7 @@ const setMap = async (activity) => {
     map.setCenter(Object.values(JSON.parse(datas.data.gps_data))[0])
     map.setZoom(16)
     path.setMap(map)
-    document.getElementById('jag-detail-activity-lenght').innerHTML = datas.data.distance > 1000 ? datas.data.distance /1000 : datas.data.distance
+    document.getElementById('jag-detail-activity-lenght').innerHTML = (datas.data.distance > 1000 ? datas.data.distance /1000 : datas.data.distance).toFixed(2)
     document.getElementById('jag-detail-activity-lenght-id').innerHTML = datas.data.distance > 1000 ? 'Km' : 'm'
     document.getElementById('jag-detail-activity-time').innerHTML = new Date(datas.data.duration * 1000).toISOString().substring(14, 19)
     document.getElementById('jag-detail-activity-speed').innerHTML = `${((datas.data.distance /1000) / (datas.data.duration ?? 1))}`.substring(0,3)
