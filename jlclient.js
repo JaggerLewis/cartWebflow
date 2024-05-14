@@ -810,14 +810,14 @@ const initActivity = (type) => {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
             }
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + (distance ?? '0m')
-        }
-        if (type == 'activity') {
-            if (!activity.duration || !activity.distance) {
-                newCard.style.color = "#00000036"
-                newCard.style.opacity = 0.5
-            }
-            else {
-                newCard.addEventListener('click', () => setMap(activity));
+            if (type == 'activity') {
+                if (!activity.duration || !activity.distance) {
+                    newCard.style.color = "#00000036"
+                    newCard.style.opacity = 0.5
+                }
+                else {
+                    newCard.addEventListener('click', () => setMap(activity));
+                }
             }
         }
     })
