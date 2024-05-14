@@ -787,18 +787,21 @@ const initMap = async (node) => {
 }
 
 const initActivity = (type) => {
-    let color = ['var(--main)', 'var(--gristypofaible)']
-    document.getElementById('jag-detail-activity').style.display = type == 'none'
+    if (type != 'moment') {
 
-    if (type == 'rescue') {
-        color = color.reverse()
+        let color = ['var(--main)', 'var(--gristypofaible)']
+        document.getElementById('jag-detail-activity').style.display = type == 'none'
+        
+        if (type == 'rescue') {
+            color = color.reverse()
+        }
+        
+        document.getElementById('jl-activity-activity').style.color = color[0]
+        document.getElementById('jl-activity-activity').style.borderColor = color[0]
+        document.getElementById('jl-activity-rescue').style.color = color[1]
+        document.getElementById('jl-activity-rescue').style.borderColor = color[1]
+        
     }
-
-    document.getElementById('jl-activity-activity').style.color = color[0]
-    document.getElementById('jl-activity-activity').style.borderColor = color[0]
-    document.getElementById('jl-activity-rescue').style.color = color[1]
-    document.getElementById('jl-activity-rescue').style.borderColor = color[1]
-    
 
     let container = document.getElementById('jl-activity-card-container')
 
