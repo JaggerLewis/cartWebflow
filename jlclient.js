@@ -11,8 +11,6 @@ const REDIRECT = {
 }
 
 
-const step2 = 'activation-produit-etape02'
-
 let header = {
     'Content-Type': 'application/json'
   }
@@ -392,7 +390,8 @@ const loginCode = async () => {
             window.localStorage.setItem('token', result.token)
             let searchParams = new URLSearchParams(window.location.search);
             if (searchParams.has('redirect')) {
-                window.location.replace(searchParams.get('redirect'))
+                let goTo = REDIRECT[searchParams.get('redirect')]
+                window.location.replace(goTo)
             }
             else {
                 window.open(REDIRECT.dashboard, '_self')
