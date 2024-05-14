@@ -120,7 +120,20 @@ const initSmartDock = (node) => {
         node.style.display = 'none'
         return
     }
-    document.getElementById('jl-smartdock-desc').innerHTML = assigned ? 'Smartdock appareillé' : 'Smartdock non-appareillé'
+
+    document.getElementById('jl-smartdock-title').innerHTML = assigned ? 'Smartdock appairé' : 'Smartdock non-appairé'
+    if (!assigned) {
+        document.getElementById('jl-smartdock-desc').innerHTML = "Appairé sur l'application"
+    }
+    else {
+        let connected = dog.dock?.data?.dock_status?.isConnected ?? false
+        document.getElementById('jl-smartdock-desc').innerHTML = connected ? 'Connecté' : 'Non-Connecté'
+        if (!connected) {
+            document.getElementById('jl-smartdock-pic-activate').parentElement.style.display = 'none'
+            document.getElementById('jl-smartdock-pic-desactivate').parentElement.style.display = 'flex'
+            
+        }
+    }
     
 }
 
