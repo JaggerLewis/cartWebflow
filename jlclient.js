@@ -328,6 +328,7 @@ const initOrder = async () => {
             loaderContainer.style.display = 'none'
         })
         document.getElementById('jag-order-list').style.display = 'flex'
+        container.style.display = 'none'
         initInfos()
     })
 }
