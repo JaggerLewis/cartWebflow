@@ -372,7 +372,6 @@ const loginEmail = async () => {
         showAddCart('Format email incorrect')
     }
 }
-//mini
 const loginCode = async () => {
     let code = document.getElementById('Jag_PhoneToken').value
     let email = document.getElementById('jag-email').value
@@ -502,7 +501,6 @@ const initOption = async () => {
     types.forEach((type) => {
         let card = document.getElementById('jag-'+type+'-card')
         let array = type == 'abo' ? abonnement : option.filter((elem) => elem.type == type)
-        // TODO(dev): check formula in dog.collar.formula_subscription
         let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
         
         let subFormula = findAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
@@ -513,7 +511,7 @@ const initOption = async () => {
         document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = getAboType(subFormula.metadata.pricing)
         document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
-        if (dog.collar.formula_subscription.type == 'life') {
+        if (subFormula.metadata.pricing == 'life') {
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
             document.getElementById('jl-abo-change').style.display = 'none'
