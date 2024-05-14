@@ -839,6 +839,7 @@ const initActivity = (type) => {
             if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
             }
+            if (type != 'moment')
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + (distance ?? '0m')
             if (type == 'activity') {
                 if (!activity.duration || !activity.distance) {
