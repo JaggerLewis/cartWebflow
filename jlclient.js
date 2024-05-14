@@ -92,6 +92,8 @@ const initClient = {
     'jl_switch_month' : (node) =>  node.addEventListener('click', () => changeSubscription('monthly')),
     'jl_switch_year' : (node) =>  node.addEventListener('click', () => changeSubscription('yearly')),
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
+    'jl-activation-resend-code' : (node) => node.addEventListener('click', () => resendActivationCode()),
+    'jl-resend-code' : (node) => node.addEventListener('click', () => resendCode()),
     'jl-collar-synchro-state' : (node) => node.innerHTML = dog.geolocation.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille',
     'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé',
     'jl-galery-list-0' : () => intiPict()
@@ -294,6 +296,16 @@ const switchInfo = (type) => {
 }
 
 const initOrder = async () => {
+
+    const getorderStatus = (status) => {
+        switch (status) {
+            case 'new' : 
+                return 'En cours de traitement'
+            default :
+            return `(${status})`
+        }
+    }
+
     loaderContainer.style.display = 'flex'
     let orders = await fetch(baseurl + '/user/order', {headers : header})
                         .then(async (res) => await res.json())
@@ -308,7 +320,7 @@ const initOrder = async () => {
         document.getElementById('jag-order-ref-'+order._id).innerHTML = order.orderNumber
         document.getElementById('jag-order-date-'+order._id).innerHTML = getDate(order.createdAt)
         document.getElementById('jag-order-price-'+order._id).innerHTML = order.total.total / 100 + '€'
-        document.getElementById('jag-order-status-'+order._id).innerHTML = order.status
+        document.getElementById('jag-order-status-'+order._id).innerHTML = getorderStatus(order.status)
         document.getElementById('jag-order-action-'+order._id).addEventListener('click', async () => {
             loaderContainer.style.display = 'flex'
             fetch(baseurl + '/order/'+ order._id +'/pdf', {
@@ -865,6 +877,56 @@ const setMap = async (activity) => {
     document.getElementById('jag-detail-activity-speed').innerHTML = `${((datas.data.distance /1000) / (datas.data.duration ?? 1))}`.substring(0,3)
 }
 
+const resendActivationCode = async () => {
+    let serial = window.localStorage.getItem('serial')
+    let phone = window.localStorage.getItem('phone')
+    if (!serial || !phone) {
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
+        return
+    }
+    const result = await fetch(baseurl + '/event/resend_activation_token', {
+        method: "POST",
+        headers : header,
+        body: JSON.stringify({
+            "phone": phone,
+            "serialNumber": serial,
+        }), 
+      }).then((res) => res.status) 
+      
+      if (result == 200) {
+        showAddCart('Le code a été ré-envoyé', true)
+      }
+      else {
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
+      }
+
+      return
+}
+const resendCode = async () => {
+    let email = document.getElementById('jag-email').value
+
+    if (!email) {
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
+        return
+    }
+    const result = await fetch(baseurl + '/resend_token', {
+        method: "POST",
+        headers : header,
+        body: JSON.stringify({
+            "email": email,
+            "type": 'sms',
+        }), 
+      }).then((res) => res.status) 
+      
+      if (result == 200) {
+        showAddCart('Le code a été ré-envoyé', true)
+      }
+      else {
+        showAddCart('Oups, une erreur est survenue, rechargez la page', true)
+      }
+
+      return
+}
 
 const validateAction = async () => {
     let value = document.getElementById('Jag_Activation_phoneToken').value
