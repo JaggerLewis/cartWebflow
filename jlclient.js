@@ -1107,7 +1107,8 @@ const checkAuth = async () => {
     let searchParams = new URLSearchParams(window.location.search);
 
     if (url.pathname == ('/my/'+ REDIRECT.login)) {
-        let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'profil-chien'
+        let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'dashboard'
+        goTo = REDIRECT[goTo]
         let token = localStorage.getItem('token') ?? url.searchParams.get('HeyJag')
         if (token) {
             localStorage.setItem('token', token) 
@@ -1128,7 +1129,8 @@ const checkAuth = async () => {
             return
         }
         else {
-            window.open(REDIRECT.login +'?redirect='+url.pathname, '_self');
+            let goTo = Object.keys(REDIRECT).find(key => REDIRECT[key] === url.pathname.split('/').pop());
+            window.open(REDIRECT.login +'?redirect='+goTo, '_self');
         }
     }
 }
