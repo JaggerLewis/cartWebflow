@@ -1,0 +1,27 @@
+name: CI
+on:
+  push:
+    branches:
+      - mini
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Building Artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+  
+      - name: Minify Action
+        uses: anthonyftwang/minify-action@v1.0.1
+  
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-site
+          path: public
+          retention-days: 1
