@@ -352,7 +352,7 @@ const initInfos = async () => {
         document.getElementById('jag-info-email').innerHTML = infos.result.customer.email
         document.getElementById('jag-info-livraison').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : 'Inconnue'
         document.getElementById('jag-info-phone').innerHTML = infos.result.customer.phone
-        document.getElementById('jag-info-facture').innerHTML = infos.result.customer.address.line1+ ',' + infos.result.customer.address.city
+        document.getElementById('jag-info-facture').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : 'Inconnue'
         loaderContainer.style.display = 'none'
     }
     else {
