@@ -372,6 +372,7 @@ const loginEmail = async () => {
         showAddCart('Format email incorrect')
     }
 }
+//mini
 const loginCode = async () => {
     let code = document.getElementById('Jag_PhoneToken').value
     let email = document.getElementById('jag-email').value
