@@ -1189,7 +1189,10 @@ const initDashboard = async (node) => {
 const checkAuth = async () => {
     let url = new URL(window.location.href)
     let searchParams = new URLSearchParams(window.location.search);
-    if (document.querySelectorAll("[jl-auth='false']")) {
+    // if (document.querySelectorAll("[jl-auth='false']")) {
+        
+    // }
+    if (url.pathname == ('/my/'+ REDIRECT.login)) {
         let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'dashboard'
         goTo = REDIRECT[goTo]
         let token = localStorage.getItem('token') ?? url.searchParams.get('HeyJag')
