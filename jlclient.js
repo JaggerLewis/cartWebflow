@@ -622,9 +622,9 @@ const getSilhouette = (silhouete) => {
 const getAboType = (type) => {
     switch(type) {
         case 'monthly' :
-             return 'Chaque mois' 
+             return 'Paiement mensuel' 
         case 'yearly' :
-             return 'Chaque an'  
+             return 'Paiement annuel'  
         default : 
              return 'À vie'
     }
