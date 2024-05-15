@@ -1217,7 +1217,7 @@ const checkAuth = async () => {
             return
         }
         else {
-            let goTo = Object.keys(REDIRECT).find(key => REDIRECT[key] === url.pathname.split('/').pop());
+            let goTo = Object.keys(REDIRECT).find(key => REDIRECT[key] === url.pathname.split('/').pop()) ?? REDIRECT.dashboard
             window.open(REDIRECT.login +'?redirect='+goTo, '_self');
         }
     }
