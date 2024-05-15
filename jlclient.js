@@ -906,7 +906,7 @@ const resendActivationCode = async () => {
       }).then((res) => res.status) 
       
       if (result == 200) {
-        showAddCart('Le code a été ré-envoyé', true)
+        showAddCart('Le code a été renvoyé', true)
       }
       else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
@@ -931,7 +931,7 @@ const resendCode = async () => {
       }).then((res) => res.status) 
       
       if (result == 200) {
-        showAddCart('Le code a été ré-envoyé', true)
+        showAddCart('Le code a été renvoyé', true)
       }
       else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
