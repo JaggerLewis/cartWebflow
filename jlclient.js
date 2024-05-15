@@ -372,7 +372,7 @@ const initInfos = async () => {
         document.getElementById('jag-info-firstname').innerHTML = infos.result.customer.name
         document.getElementById('jag-info-email').innerHTML = infos.result.customer.email
         document.getElementById('jag-info-livraison').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : 'Inconnue'
-        document.getElementById('jag-info-phone').innerHTML = infos.result.customer.phone
+        document.getElementById('jag-info-phone').innerHTML = infos.result.customer.phone.replace('0033', '0')
         document.getElementById('jag-info-facture').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : 'Inconnue'
         loaderContainer.style.display = 'none'
     }
@@ -1161,7 +1161,7 @@ const setidentity = () => {
         document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : 'fait maison'
     }
     document.getElementById('jag-profil-welfare-calory').innerHTML = dog.welfareData?.global?.calory_global ?? '-'
-    document.getElementById('jag-profil-welfare-rest').innerHTML = dog.welfareData?.global?.rest_global ?? '-'
+    document.getElementById('jag-profil-welfare-rest').innerHTML = dog.welfareData?.global?.rest_global ?? '-' // TODO(dev) hh h mm
     document.getElementById('jag-profil-welfare-trophy').innerHTML = dog.welfareData?.global?.trophy_global ?? '-'
     document.getElementById('jag-profil-welfare-welfare').innerHTML = dog.welfareData?.global?.welfare_global ?? '-'
 }
