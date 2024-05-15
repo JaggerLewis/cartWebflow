@@ -105,7 +105,7 @@ const initClient = {
 
 const logout = () => {
     window.localStorage.clear()
-    window.open(REDIRECT.dashboard, '_self')
+    window.open(REDIRECT.login, '_self')
 }
 
 let intiPict = () => {
@@ -1197,8 +1197,6 @@ const initDashboard = async (node) => {
 const checkAuth = async () => {
     let url = new URL(window.location.href)
     let searchParams = new URLSearchParams(window.location.search);
-    console.log(document.querySelectorAll("[jl-auth='false']").length),
-    console.log(document.querySelectorAll("[jl-auth='login']").length);
     if(document.querySelectorAll("[jl-auth='false']").length) {
         return;
     }
