@@ -615,7 +615,7 @@ const getSilhouette = (silhouete) => {
         case 'obese' :
              return 'En surpoids'
         default : 
-             return 'Idéal'
+             return 'Idéale'
     }
 }
 
@@ -1146,7 +1146,7 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography?? 'Biographie'
     document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender == 'male' ? 'Mâle' : 'Femelle'
     document.getElementById('jag-profil-identity-birthdate').innerHTML = getDate(dog.birthDate)
-    document.getElementById('jag-profil-identity-weight').innerHTML = dog.weight
+    document.getElementById('jag-profil-identity-weight').innerHTML = dog.weight + 'Kg'
     document.getElementById('jag-profil-identity-size').innerHTML = getSize(dog.size)
     document.getElementById('jag-profil-identity-silouhette').innerHTML = getSilhouette(dog.silhouette)
     document.getElementById('jag-profil-identity-breed').innerHTML =race.name
