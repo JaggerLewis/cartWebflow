@@ -51,7 +51,7 @@ const converTimestamp = (timestamp) => {
 const initClient = {
 
     'jl-profil-user-name' : (node) => node.innerHTML = session.customer.name,
-    'jl-nav-dog-name' : (node) => node.innerHTML = dog?.name ?? 'votre chien',
+    'jl-nav-dog-name' : (node) => node.innerHTML = dog?.name ?? '',
     'jl-profil-dog-picture' : (node) => { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.publicId,
@@ -62,6 +62,7 @@ const initClient = {
     'jl-collar-version' : (node) => node.innerHTML = dog.collar.firmwareVersion,
     'jl-collar-autonomy' : (node) => node.innerHTML = dog.battery.estimated != -1 ? 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie" : '',
     'jl-collar-synchro-date' : (node) => node.innerHTML = dog.geolocation.LastConnect ? 'Dernière mise à jour: ' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')) : '',
+    'jl_Activation_serialNumber' : (node) => node.value = new URLSearchParams(window.location.search).get('ns'),
     'jl-map' : (node) => initMap(node),
     'jl-geofencing-label' : (node) => initGeoFencingLabel(node,),
     'jl-geofencing-switch' : (node) => initGeoFencingSwitch(node),
