@@ -55,6 +55,7 @@ const initClient = {
     'jl-profil-dog-picture' : (node) => { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.publicId,
+    'jl-logout' : (node) => node.addEventListener('click', () => logout()),
     'jl-collar-battery' : (node) => node.innerHTML = (dog.battery.soc ?? '0') +'%',
     'jl-collar-serial' : (node) => node.innerHTML = dog.collar.serialNumber,
     'jl-collar-id' : (node) => node.innerHTML = dog.collar.name,
@@ -101,6 +102,11 @@ const initClient = {
     'jl-galery-list-0' : () => intiPict()
 }
 
+
+const logout = () => {
+    window.localStorage.clear()
+    window.open(REDIRECT.dashboard, '_self')
+}
 
 let intiPict = () => {
     let container = document.getElementById('jag-pict-container')
