@@ -73,6 +73,7 @@ const initClient = {
     'jl_Activation_Action' : (node) => node.addEventListener('click', () => checkActivation()),
     'jl_Abonnement_starter_action' : (node) => node.addEventListener('click', () => aboAction('monthly')),
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yearly')),
+    'jl-galerie-link' : (node) => node.innerHTML = node.innerHTML.replace('{{nameDog}}', dog.name),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('life')),
     'jl-abo-change' : (node) => node.addEventListener('click', () => window.open(REDIRECT.abo)),
     'jl-formula-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('abo')),
