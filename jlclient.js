@@ -572,8 +572,8 @@ const getDate = (ts) => {
     var date = new Date(ts);
 
     var jour = date.getDate();
-    var mois = date.getMonth() + 1; // Les mois commencent à partir de 0, donc ajoutez 1
-    var annee = date.getFullYear() % 100; // Obtenez les deux derniers chiffres de l'année
+    var mois = date.getMonth() + 1;
+    var annee = date.getFullYear() % 100;
     
     if (jour < 10) {
         jour = '0' + jour;
@@ -842,7 +842,7 @@ const initActivity = (type) => {
                 else {
                     document.getElementById('jl-activity-card-duration-' + activity._id).innerHTML = new Date(0).toISOString().substring(14, 19)
                 }
-                document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDay() + ' ' +  getMonth(start.getMonth())
+                document.getElementById('jl-activity-card-date-' + activity._id).innerHTML = start.getDate() + ' ' +  getMonth(start.getMonth())
             }
             if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
