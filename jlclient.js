@@ -970,14 +970,14 @@ const validateAction = async () => {
 }
 
 const checkActivation = async () => {
-    const regexPhone = '^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'
+    const regexPhone = '^0[6-8]{1}[0-9]{8}'
     const reglexSerial = 'JL[A-Za-z0-9]-[A-Za-z0-9]{8}'
 
     let serial = document.getElementById('jl_Activation_serialNumber').value
     let phone = document.getElementById('jl_Activation_phoneNumber').value.replaceAll(' ', '')
 
     if (!phone.match(regexPhone)) {
-        showAddCart('Numéro de téléphone incorrect', true)
+        showAddCart('Numéro de téléphone incorrect (0612345678)', true)
         return
     }
     if (!serial.match(reglexSerial)) {
@@ -990,7 +990,7 @@ const checkActivation = async () => {
         headers : header,
         body: JSON.stringify({
             'serialNumber' : serial,
-            'phone' : phone,
+            'phone' : phone.replace('0', '0033'),
         }), 
       }).then(async (res) => await res.status) 
     
