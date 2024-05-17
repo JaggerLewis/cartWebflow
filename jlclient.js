@@ -900,7 +900,7 @@ const resendActivationCode = async () => {
         method: "POST",
         headers : header,
         body: JSON.stringify({
-            "phone": phone,
+            "phone": phone.replace('0', '0033'),
             "serialNumber": serial,
         }), 
       }).then((res) => res.status) 
