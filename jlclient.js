@@ -544,7 +544,12 @@ const initOption = async () => {
         document.getElementById('jag-'+type+'-container').appendChild(newCard)
         document.getElementById('jag-'+type+'-name-'+subFormula.id).innerHTML = formula.name
         document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = getAboType(subFormula.metadata.pricing)
-        document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
+        if( dog.collar.formula_subscription.type == 'life') {
+            document.getElementById('jag-'+type+'-renew-'+subFormula.id).style.display = 'none'
+        }
+        else {
+            document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
+        }
         document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
         if (subFormula.metadata.pricing == 'life') {
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
