@@ -1211,7 +1211,7 @@ const checkAuth = async () => {
     }
 
     if (document.querySelectorAll("[jl-auth='login']").length) {
-        let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : 'dashboard'
+        let goTo = searchParams.has('redirect') ? searchParams.get('redirect') : REDIRECT.home
         goTo = REDIRECT[goTo]
         let token = localStorage.getItem('token') ?? url.searchParams.get('HeyJag')
         if (token) {
