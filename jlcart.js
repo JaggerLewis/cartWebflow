@@ -928,7 +928,7 @@ const initAboJag = async () => {
 }
 
 const initAboB = async () => {
-    let formula = abonnement.find((elem) => elem.metadata.pId.includes('formula_unique_'))
+    let formula = abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_'))
     document.getElementById('jl-abo-month-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].price.toFixed(2) + '€' + getTrad('/mois', '/month')
     document.getElementById('jl-abo-year-price').innerHTML = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
     document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
