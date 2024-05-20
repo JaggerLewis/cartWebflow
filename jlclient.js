@@ -4,6 +4,7 @@ const baseurl = 'https://app-api.mypet.fit'
 const REDIRECT = {
     login : 'seconnecter',
     dashboard : 'profil-chien',
+    home : 'localisation-activite',
     abo : 'choix-abonnement-upgrade-b',
     stop : 'confirmation-de-resiliation',
     active : 'activation-1-3',
@@ -195,7 +196,7 @@ const deleteAccountEmail = async () => {
 const redirectAbo = () => {
     localStorage.removeItem('user')
     localStorage.removeItem('dog')
-    window.open(REDIRECT.dashboard, '_self')
+    window.open(REDIRECT.home, '_self')
     checkAuth()
 }
 
@@ -425,11 +426,11 @@ const loginCode = async () => {
             let searchParams = new URLSearchParams(window.location.search);
             if (searchParams.has('redirect')) {
                 let goTo = searchParams.get('redirect')
-                 goTo = REDIRECT[goTo] ?? REDIRECT.dashboard
+                 goTo = REDIRECT[goTo] ?? REDIRECT.home
                 window.location.replace(goTo)
             }
             else {
-                window.open(REDIRECT.dashboard, '_self')
+                window.open(REDIRECT.home, '_self')
             }
           }
           else {
@@ -1232,7 +1233,7 @@ const checkAuth = async () => {
             return
         }
         else {
-            let goTo = Object.keys(REDIRECT).find(key => REDIRECT[key] === url.pathname.split('/').pop()) ?? REDIRECT.dashboard
+            let goTo = Object.keys(REDIRECT).find(key => REDIRECT[key] === url.pathname.split('/').pop()) ?? REDIRECT.home
             window.open(REDIRECT.login +'?redirect='+goTo, '_self');
         }
     }
