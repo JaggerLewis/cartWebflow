@@ -928,16 +928,16 @@ const initAboJag = async () => {
 }
 
 const initAboB = async () => {
-    let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
-    document.getElementById('jl-abo-month-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'monthly').price).toFixed(2) + '€' + getTrad('/mois', '/month')
-    document.getElementById('jl-abo-year-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'yearly').price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
-    document.getElementById('jl-abo-life-price').innerHTML = (formula.prices.find((elem) => elem.metadata.pricing == 'life').price).toFixed(2) + '€'
+    let formula = abonnement.find((elem) => elem.metadata.pId.includes('formula_unique_'))
+    document.getElementById('jl-abo-month-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].price.toFixed(2) + '€' + getTrad('/mois', '/month')
+    document.getElementById('jl-abo-year-price').innerHTML = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
+    document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
 
     document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation')
     //document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
-    let annualPrice = (formula.prices.find((elem) => elem.metadata.pricing == 'yearly').price).toFixed(2) + '€'
+    let annualPrice = formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price.toFixed(2) + '€'
     document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit ' + annualPrice + ' par an', 'or ' + annualPrice + ' per year')
-    let lifePrice36 = (formula.prices.find((elem) => elem.metadata.pricing == 'life').price / 36).toFixed(2) + '€'
+    let lifePrice36 = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price / 36).toFixed(2) + '€'
     document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')
 }
 
