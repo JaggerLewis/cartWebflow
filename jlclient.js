@@ -1284,7 +1284,7 @@ const getAll = async () => {
     if (document.getElementById('jag-step-3'))
         await getCart();
     else if (document.getElementById('jag-step-2')) {
-        // redirectStep2();
+        redirectStep2();
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         initAboB()
