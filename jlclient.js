@@ -788,16 +788,18 @@ const initMap = async (node) => {
         headers : header
     }).then(async (res) => res.json())
     if (data.CellTower) {
-        position = { lat: data.CellTower.lat ?? 50.64144516315174, lng: data.CellTower.lon ?? 3.045265016887294 };
-    } else {
-        position =  { lat: 50.64144516315174, lng: 3.045265016887294 };
+        position = { lat: data.CellTower.lat, lng: data.CellTower.lon};
+        const { Map } = await google.maps.importLibrary("maps");
+        map = new Map(node, {
+            zoom: 14,
+            center: position,
+            mapId: "DEMO_MAP_ID",
+        });
+    } 
+    else {
+        setTimeout(() => initMap(node), 20000)
     }
-    const { Map } = await google.maps.importLibrary("maps");
-      map = new Map(node, {
-        zoom: 14,
-        center: position,
-        mapId: "DEMO_MAP_ID",
-      });
+    
 }
 
 const initActivity = (type) => {
@@ -906,7 +908,7 @@ const resendActivationCode = async () => {
         method: "POST",
         headers : header,
         body: JSON.stringify({
-            "phone": phone.replace('0', '0033'),
+            "phone": res = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9),
             "serialNumber": serial,
         }), 
       }).then((res) => res.status) 
@@ -958,7 +960,7 @@ const validateAction = async () => {
         method: "POST",
         headers : header,
         body: JSON.stringify({
-            "phone": phone.replace('0', '0033'),
+            "phone": res = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9),
             "serialNumber": serial,
             "phoneToken": value
         }), 
@@ -996,7 +998,7 @@ const checkActivation = async () => {
         headers : header,
         body: JSON.stringify({
             'serialNumber' : serial,
-            'phone' : phone.replace('0', '0033'),
+            'phone' : res = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9),
         }), 
       }).then(async (res) => await res.status) 
     
