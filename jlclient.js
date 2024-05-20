@@ -978,7 +978,7 @@ const validateAction = async () => {
 }
 
 const checkActivation = async () => {
-    const regexPhone = '^0[6-8]{1}[0-9]{8}'
+    const regexPhone = /\+[0-9]{2,3}[0-9]{9}/
     const reglexSerial = 'JL[A-Za-z0-9]-[A-Za-z0-9]{8}'
 
     let serial = document.getElementById('jl_Activation_serialNumber').value
