@@ -987,7 +987,6 @@ const checkActivation = async () => {
         showAddCart('Numéro de serie incorrect (JL1-1111A11A)', true)
         return
     }
-    phone = phone.replace('+', '00')
     const result = await fetch(baseurl + '/collar/serialNumber', {
         method: "POST",
         headers : header,
@@ -995,7 +994,7 @@ const checkActivation = async () => {
             'serialNumber' : serial,
             'phone' : res = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9),
         }), 
-      }).then(async (res) => await res.status) 
+      }).then(async (res) => res.status) 
     
       switch (result) {
         case 200 : 
@@ -1017,6 +1016,9 @@ const checkActivation = async () => {
         case 404 : 
             showAddCart('Boîtier inconnu', true)
             break 
+        case 403 :
+            showAddCart("Le numéro de téléphone ne correspond pas à l'acheteur du collier", true)
+            break  
       }
 }
 
@@ -1277,7 +1279,7 @@ const getAll = async () => {
     if (document.getElementById('jag-step-3'))
         await getCart();
     else if (document.getElementById('jag-step-2')) {
-        redirectStep2();
+        // redirectStep2();
         await loadAbonnement()
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         initAboB()
