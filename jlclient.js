@@ -30,6 +30,10 @@ let path
 const findAbonnementSolo = (type) => {
     return abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == type)
 }
+ // TODO(dev): migrate findAbonnementSolo to use findNewAbonnementSolo
+const findNewAbonnementSolo = (type) => {
+    return abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_')).find((elem) => elem.metadata.pricing == type)
+}
 
 const converTimestamp = (timestamp) => {
     let day = Math.floor(timestamp / (24 * 3600)); 
@@ -513,7 +517,7 @@ const cancelSubScriptionEmail = async () => {
 }
 
 const changeSubscription = async (type) => {
-    let sub = findAbonnementSolo(type).id
+    let sub = findNewAbonnementSolo(type).prices[0].id
     let result = await fetch(
         baseurl + '/stripe/checkout_session/subscription/update', {
         method: "POST",
@@ -540,7 +544,7 @@ const initOption = async () => {
         let array = type == 'abo' ? abonnement : option.filter((elem) => elem.type == type)
         let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
         
-        let subFormula = findAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
+        let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life').prices[0]
         newCard = card.cloneNode(true)
         changeChildsId(newCard, '-'+subFormula.id, 'jag-')
         document.getElementById('jag-'+type+'-container').appendChild(newCard)
@@ -703,7 +707,7 @@ const aboAction = async (type) => {
     const url = window.location.origin + window.location.pathname;
     let check = document.getElementById('jag_Abonnement_check')
     if (check && check.checked) {
-        let subscription = findAbonnementSolo(type).id
+        let subscription = findNewAbonnementSolo(type).prices[0].id
         loaderContainer.style.display = 'flex'
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
@@ -1115,7 +1119,7 @@ const getDog = async (id) => {
 
 let getNewAbo = () => {
     if (dog.collar.formula_subscription.type) {
-        return findAbonnementSolo(dog.collar.formula_subscription.type)
+        return findNewAbonnementSolo(dog.collar.formula_subscription.type).prices[0]
     }
     return dog.collar.formula_subscription.type
 }
