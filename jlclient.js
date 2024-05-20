@@ -985,7 +985,7 @@ const checkActivation = async () => {
     let phone = document.getElementById('jl_Activation_phoneNumber').value.replaceAll(' ', '')
 
     if (!phone.match(regexPhone)) {
-        showAddCart('Numéro de téléphone incorrect (0612345678)', true)
+        showAddCart('Numéro de téléphone incorrect (+33612345678)', true)
         return
     }
     if (!serial.match(reglexSerial)) {
