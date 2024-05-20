@@ -9,6 +9,7 @@ const REDIRECT = {
     stop : 'confirmation-de-resiliation',
     active : 'activation-1-3',
     active_2 : 'activation-produit-etape02-copy',
+    active_3 : 'activation-3-3',
 }
 
 
@@ -666,40 +667,28 @@ const getActivity = (name) => {
 const getMonth = (month) => {switch (month) {
     case 0:
         return "janv";
-        break;
     case 1:
         return "févr";
-        break;
     case 2:
         return "mars";
-        break;
     case 3:
         return "avri";
-        break;
     case 4:
         return "mai";
-        break;
     case 5:
         return "juin"
-        break;
     case 6:
         return "juil";
-        break;
     case 7:
         return "août";
-        break;
     case 8:
         return "sept";
-        break;
     case 9:
         return "octo";
-        break;
     case 10:
         return "nove";
-        break;
     case 11:
         return "déce";
-        break;
     default:
         return "";
 }}
@@ -964,10 +953,16 @@ const validateAction = async () => {
             "serialNumber": serial,
             "phoneToken": value
         }), 
-      }).then((res) => res.status) 
+      }) 
       
-      if (result == 200) {
-        window.open(REDIRECT.active_2, '_self')
+      if (result.status == 200) {
+        let json = await result.json() 
+        if (json.activated) {
+            window.open(REDIRECT.active_3, '_self')
+        }
+        else {
+            window.open(REDIRECT.active_2, '_self')
+        }
       }
       else {
         showAddCart('Code incorrect', true)
