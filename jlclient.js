@@ -1148,7 +1148,7 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-pict').srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid 
     document.getElementById('jag-profil-identity-name').innerHTML = dog.name 
     document.getElementById('jag-profil-identity-Iname').innerHTML = dog.name
-    document.getElementById('jag-profil-identity-id').innerHTML = dog.publicId
+    document.getElementById('jag-profil-identity-id').innerHTML =  dog.publicId[0] == '@' ? dog.publicId : `@${dog.publicId}`,
     document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography?? 'Biographie'
     document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender == 'male' ? 'Mâle' : 'Femelle'
     document.getElementById('jag-profil-identity-birthdate').innerHTML = getDate(dog.birthDate)
