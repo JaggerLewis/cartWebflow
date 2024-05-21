@@ -68,7 +68,7 @@ const tracks = async (key) => {
                     fillColor: 'var(--main)',
                     fillOpacity: 0.35,
                     map,
-                    center: position,
+                    center: pos,
                     radius: data.CellTower?.accuracy ?? 500,
                 });
                 break
