@@ -879,6 +879,8 @@ const initActivity = (type) => {
 
 const setMap = async (activity) => {
     document.getElementById('jag-detail-activity').style.display = 'flex'
+    document.getElementById(' jag-detail-rescue').style.display = 'none'
+   
     clearMap()
 
     let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())

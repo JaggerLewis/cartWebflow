@@ -41,7 +41,9 @@ const startRescue = async (btn) => {
     btn.innerHTML = 'Arrêter la géolocalisation'
 
     switchBtn('jl-rescue-action', () => stopRescue(key) )
-    loaderContainer.style.display = 'none' 
+    loaderContainer.style.display = 'none'
+    document.getElementById('jag-detail-activity').style.display = 'none'
+    document.getElementById(' jag-detail-rescue').style.display = 'flex'
     timer = setInterval(() => {
         tracks(key)
      }, 1000);
