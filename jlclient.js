@@ -876,6 +876,25 @@ const initActivity = (type) => {
     card.style.display = 'none'
 }
 
+const setBound = () => {
+    let bounds = new google.maps.LatLngBounds();
+    let newPath = path.getPath();
+
+    let slat, blat = newPath.getAt(0).lat();
+    let slng, blng = newPath.getAt(0).lng();
+
+    for(let i = 1; i < newPath.getLength(); i++)
+    {
+        let e = newPath.getAt(i);
+        slat = ((slat < e.lat()) ? slat : e.lat());
+        blat = ((blat > e.lat()) ? blat : e.lat());
+        slng = ((slng < e.lng()) ? slng : e.lng());
+        blng = ((blng > e.lng()) ? blng : e.lng());
+    }
+
+    bounds.extend(new google.maps.LatLng(slat, slng));
+    bounds.extend(new google.maps.LatLng(blat, blng));
+}
 
 const setMap = async (activity) => {
     document.getElementById('jag-detail-activity').style.display = 'flex'
@@ -896,13 +915,14 @@ const setMap = async (activity) => {
             mapId: "DEMO_MAP_ID",
         });
     }
+
     path = new google.maps.Polyline({
         path: line,
         geodesic: true,
         strokeColor: '#4287f5',
         width: 5,
       });
-    map.setZoom(16)
+    setBound()
     path.setMap(map)
     document.getElementById('jag-detail-activity-lenght').innerHTML = (datas.data.distance > 1000 ? datas.data.distance /1000 : datas.data.distance).toFixed(2)
     document.getElementById('jag-detail-activity-lenght-id').innerHTML = datas.data.distance > 1000 ? 'Km' : 'm'
