@@ -877,6 +877,9 @@ const initActivity = (type) => {
 }
 
 const setBound = () => {
+    if (!map || !path) {
+        return
+    }
     let bounds = new google.maps.LatLngBounds();
     let newPath = path.getPath();
 
@@ -894,6 +897,7 @@ const setBound = () => {
 
     bounds.extend(new google.maps.LatLng(slat, slng));
     bounds.extend(new google.maps.LatLng(blat, blng));
+    map.fitBounds(bounds)
 }
 
 const setMap = async (activity) => {
