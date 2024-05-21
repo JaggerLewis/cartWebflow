@@ -48,6 +48,7 @@ const startRescue = async (btn) => {
 }
 
 const tracks = async (key) => {
+    let pos;
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
         headers: header
@@ -57,15 +58,12 @@ const tracks = async (key) => {
     }
 
     clearMap()
-    let pos;
-    circle.setMap(map)
     res.Tracks.reverse().forEach(marker => {
         pos =  {lat : marker.lat, lng : marker.lon}
         switch (marker.tracking_cmd) {
             case 0 : 
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
-                circle.setMap(null)
                 circle.setMap(map)
                 break
             case 1 : 
@@ -77,6 +75,7 @@ const tracks = async (key) => {
                     icon : `https://app-api.mypet.fit/img/${dog.image.type}/${dog.image.uuid}`
                 });
                 markers.push(tmp)
+                break
             case 2 : 
             default :
             console.log('marker => ', marker)
