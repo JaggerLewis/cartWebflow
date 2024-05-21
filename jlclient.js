@@ -360,6 +360,7 @@ const initOrder = async () => {
 }
 
 const initInfos = async () => {
+    document.getElementById('jag-info-container').style.display = 'none'
     let res = await fetch(baseurl + '/user/customer', {headers : header})
     let infos
 
