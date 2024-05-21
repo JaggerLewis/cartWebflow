@@ -53,11 +53,13 @@ const tracks = async (key) => {
         method: 'GET',
         headers: header
     }).then(async (value) => await value.json());
+    clearMap()
+
     if (!res.Tracks) {
+        circle.setMap(map)
         return;
     }
 
-    clearMap()
     res.Tracks.reverse().forEach(marker => {
         pos =  {lat : marker.lat, lng : marker.lon}
         switch (marker.tracking_cmd) {
@@ -83,7 +85,6 @@ const tracks = async (key) => {
      
      
     });
-    console.log(pos)
     map.setCenter(pos)
 }
 
