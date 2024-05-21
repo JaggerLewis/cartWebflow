@@ -926,8 +926,8 @@ const setMap = async (activity) => {
         strokeColor: '#4287f5',
         width: 5,
       });
-    setBound()
     path.setMap(map)
+    setBound()
     document.getElementById('jag-detail-activity-lenght').innerHTML = (datas.data.distance > 1000 ? datas.data.distance /1000 : datas.data.distance).toFixed(2)
     document.getElementById('jag-detail-activity-lenght-id').innerHTML = datas.data.distance > 1000 ? 'Km' : 'm'
     document.getElementById('jag-detail-activity-time').innerHTML = new Date(datas.data.duration * 1000).toISOString().substring(14, 19)
