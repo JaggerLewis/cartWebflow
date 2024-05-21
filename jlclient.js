@@ -555,9 +555,9 @@ const initOption = async () => {
             document.getElementById('jag-'+type+'-renew-'+subFormula.id).style.display = 'none'
         }
         else {
-            document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'À renouveler le : ' + getDate(dog.collar.formula_subscription.timeout)
+            document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'Au ' + getDate(dog.collar.formula_subscription.timeout)
         }
-        document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Début le : '+ getDate(dog.collar.formula_subscription.subscription_date)
+        document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Du '+ getDate(dog.collar.formula_subscription.subscription_date)
         if (subFormula.metadata.pricing == 'life') {
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
             document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
@@ -1347,8 +1347,4 @@ const setAll = () => {
             initClient[node.id](node)
         else console.log(node.id + ' is not handle :(')
     });
-}
-if(!document.getElementById('JL_NavBar')) {
-    checkAuth()
-    getAll()
 }
