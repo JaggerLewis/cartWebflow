@@ -14,6 +14,7 @@ const switchBtn = (btnId, func) => {
 }
 
 const startRescue = async (btn) => {
+    loaderContainer.style.display = 'flex'
     let body = {
         'activity_id': 'rescue',
         'start_timestamp': Date.now(),
@@ -38,8 +39,8 @@ const startRescue = async (btn) => {
 
     btn.innerHTML = 'Arrêter la géolocalisation'
 
-    let newBtn = switchBtn('jl-rescue-action', () => stopRescue(key) )
-
+    switchBtn('jl-rescue-action', () => stopRescue(key) )
+    loaderContainer.style.display = 'none' 
     timer = setInterval(() => {
         tracks(key)
      }, 1000);
