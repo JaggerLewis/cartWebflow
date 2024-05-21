@@ -56,7 +56,7 @@ const converTimestamp = (timestamp) => {
 
 const initClient = {
 
-    'jl-profil-user-name' : (node) => node.innerHTML = session?.customer?.name ?? '',
+    'jl-profil-user-name' : (node) => node.innerHTML = session?.order?.customer?.name ?? '',
     'jl-nav-dog-name' : (node) => node.innerHTML = dog?.name ?? '',
     'jl-profil-dog-picture' : (node) => { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
@@ -1103,7 +1103,8 @@ const getCart = async () => {
     if (session_id != '725') {
 
     }
-    session = await result.json()
+    const checkoutOrder = await result.json();
+    session = checkoutOrder?.result;
 }
 
 const getOption = async () => {
