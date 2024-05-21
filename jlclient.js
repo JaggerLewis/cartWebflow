@@ -25,6 +25,7 @@ let display
 let option
 let token
 let map
+let cirlce
 let path
 
 const findAbonnementSolo = (type) => {
@@ -783,11 +784,23 @@ const initMap = async (node) => {
     if (data.CellTower) {
         position = { lat: data.CellTower.lat, lng: data.CellTower.lon};
         const { Map } = await google.maps.importLibrary("maps");
+        const { Circle } = await google.maps.importLibrary("Circle");
         map = new Map(node, {
             zoom: 14,
             center: position,
             mapId: "DEMO_MAP_ID",
         });
+        cirlce = new google.maps.Circle({
+            strokeColor: '#4287f5',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: position,
+            radius: 20,
+          });
+ 
     } 
     else {
         setTimeout(() => initMap(node), 20000)
