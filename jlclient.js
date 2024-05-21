@@ -1088,7 +1088,8 @@ const getCart = async () => {
         method: "GET",
         headers : header,
     })
-    
+    console.log(session_id);
+    return
     if (result.status != 200 && session_id != '725') {
         window.open(REDIRECT.active, '_self')
         return
