@@ -9,7 +9,7 @@ const REDIRECT = {
     stop : 'confirmation-de-resiliation',
     active : 'activation-1-3',
     active_2 : 'activation-produit-etape02-copy',
-    active_3 : 'activation-3-3',
+    active_3 : 'step3',
 }
 
 
@@ -1089,7 +1089,6 @@ const getCart = async () => {
         headers : header,
     })
     console.log(session_id);
-    return
     if (result.status != 200 && session_id != '725') {
         window.open(REDIRECT.active, '_self')
         return
