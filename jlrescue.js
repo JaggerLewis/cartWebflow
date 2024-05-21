@@ -76,7 +76,7 @@ const tracks = async (key) => {
                     map: map,
                     position: pos,
                     title: "",
-                    icon : `https://app-api.mypet.fit/img/${dog.image.type}/${dog.image.uuid}`
+                    icon : `https://assets-global.website-files.com/6549f4ba8294cf140608d893/6617bddf381409947dbd68e7_Capture%20d%E2%80%99e%CC%81cran%202024-04-11%20a%CC%80%2012.36.54.png`
                 });
                 markers.push(tmp)
                 break
