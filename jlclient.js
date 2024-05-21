@@ -16,7 +16,6 @@ const REDIRECT = {
 let header = {
     'Content-Type': 'application/json'
   }
-const { Map } = await google.maps.importLibrary("maps");
 let loaderContainer
 let user
 let dog
@@ -781,6 +780,8 @@ const initMap = async (node) => {
         method: 'GET',
         headers : header
     }).then(async (res) => res.json())
+    const { Map } = await google.maps.importLibrary("maps");
+
     if (data.CellTower) {
         position = { lat: data.CellTower.lat, lng: data.CellTower.lon};
         map = new Map(node, {
