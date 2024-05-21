@@ -2,6 +2,7 @@ let timer
 let tracksLog
 let markers = []
 
+
 const switchBtn = (btnId, func) => {
     let btn = document.getElementById(btnId)
     let newBtn = btn.cloneNode(true)
@@ -57,12 +58,14 @@ const tracks = async (key) => {
 
     clearMap()
     let pos;
+    circle.setMap(map)
     res.Tracks.reverse().forEach(marker => {
         pos =  {lat : marker.lat, lng : marker.lon}
         switch (marker.tracking_cmd) {
             case 0 : 
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
+                circle.setMap(null)
                 circle.setMap(map)
                 break
             case 1 : 
@@ -71,6 +74,7 @@ const tracks = async (key) => {
                     map: map,
                     position: pos,
                     title: "",
+                    icon : `https://app-api.mypet.fit/img/${dog.image.type}/${dog.image.uuid}`
                 });
                 markers.push(tmp)
             case 2 : 
