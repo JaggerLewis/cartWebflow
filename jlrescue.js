@@ -141,10 +141,6 @@ const initRescue = async (btn) => {
 if(!document.getElementById('JL_NavBar')) {
     checkAuth()
     getAll()
-
-    if (document.getElementById('jl-rescue-action')) {
-        initRescue(document.getElementById('jl-rescue-action'))
-    }
     
 }
 

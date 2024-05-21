@@ -1369,6 +1369,9 @@ const getAll = async () => {
     if (document.getElementById('jl-collar-battery')) {
         await getDog(dog._id)
     }
+    if (document.getElementById('jl-rescue-action')) {
+        initRescue(document.getElementById('jl-rescue-action'))
+    }
     loaderContainer.style.display = 'none'
 
 
