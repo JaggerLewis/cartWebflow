@@ -784,7 +784,6 @@ const initMap = async (node) => {
     if (data.CellTower) {
         position = { lat: data.CellTower.lat, lng: data.CellTower.lon};
         const { Map } = await google.maps.importLibrary("maps");
-        const { Circle } = await google.maps.importLibrary("Circle");
         map = new Map(node, {
             zoom: 14,
             center: position,
