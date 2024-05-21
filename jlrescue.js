@@ -30,7 +30,7 @@ const startRescue = async (btn) => {
         }).then(async (value) => await value.json());
 
     let key = res.timestamp_key
-    let res2 = await fetch(`https://app-api.mypet.fit/collar/${dog.collar.simcardID}/rescue`,
+    await fetch(`https://app-api.mypet.fit/collar/${dog.collar.simcardID}/rescue`,
         {
             method: 'POST',
             headers: header,
@@ -59,12 +59,32 @@ const tracks = async (key) => {
     let pos;
     res.Tracks.reverse().forEach(marker => {
         pos =  {lat : marker.lat, lng : marker.lon}
-        let tmp = new google.maps.Marker({
-            map: map,
-            position: pos,
-            title: "",
-          });
-        markers.push(tmp)
+        switch (marker.tracking_cmd) {
+            case 0 : 
+                cirlce = new google.maps.Circle({
+                    strokeColor: 'var(--main)',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: 'var(--main)',
+                    fillOpacity: 0.35,
+                    map,
+                    center: position,
+                    radius: data.CellTower?.accuracy ?? 500,
+                });
+                break
+            case 1 : 
+                let tmp = new google.maps.Marker({
+                    map: map,
+                    position: pos,
+                    title: "",
+                });
+                markers.push(tmp)
+            case 2 : 
+            default :
+            console.log('marker => ', marker)
+        }
+     
+     
     });
     console.log(pos)
     map.setCenter(pos)
@@ -73,10 +93,14 @@ const tracks = async (key) => {
 const clearMap = () => {
     if (path) {
         path.setMap(null)
+    } if (cirlce) {
+        cirlce.setMap(null)
     }
     markers.forEach((elem) => {
         elem.setMap(null)
     })
+
+
     markers = []
 }
 
