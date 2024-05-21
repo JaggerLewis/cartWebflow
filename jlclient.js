@@ -1369,15 +1369,14 @@ const getAll = async () => {
     if (document.getElementById('jl-collar-battery')) {
         await getDog(dog._id)
     }
+    loaderContainer.style.display = 'none'
     if (document.getElementById('jl-rescue-action')) {
         initRescue(document.getElementById('jl-rescue-action'))
     }
-    loaderContainer.style.display = 'none'
 
 
   
   
-    loaderContainer.style.display = 'none'
 
     setAll()
    }
