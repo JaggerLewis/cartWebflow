@@ -719,10 +719,16 @@ const aboAction = async (type) => {
                 'serialNumber' : window.localStorage.serial,
                 'referer': url,
             }), 
-          }).then(async (res) => await res.json()) 
+          }).then(async (res) => await res?.json()) 
           if (result.url) {
             loaderContainer.style.display = 'none'
             window.open(result.url, '_self')
+          }
+          else {
+            showAddCart('Oups, une erreur est survenue, rechargez la page', true)
+            setTimeout(() => {
+                window.open(REDIRECT.active, '_self')
+              }, "1000");
           }
         return
     }
