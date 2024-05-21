@@ -1006,7 +1006,7 @@ const validateAction = async () => {
             "serialNumber": serial,
             "phoneToken": value
         }), 
-      }).then(async (res) => res?.json())
+      }).then(async (res) => await res?.json())
       
       if (result) {
         if (result.activated) {
