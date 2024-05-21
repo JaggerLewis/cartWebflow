@@ -1018,11 +1018,11 @@ const validateAction = async () => {
             return
             window.open(REDIRECT.active_2, '_self')
         }
+        console.log(json);
       }
       else {
         showAddCart('Code incorrect', true)
       }
-       console.log(json);
       return
 
 }
