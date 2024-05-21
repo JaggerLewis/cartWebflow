@@ -796,8 +796,8 @@ const initMap = async (node) => {
             fillColor: "grey",
             fillOpacity: 0.35,
             map,
-            center: data.CellTower?.accuracy ?? 500,
-            radius: 20,
+            center: position,
+            radius: data.CellTower?.accuracy ?? 500,
           });
  
     } 
