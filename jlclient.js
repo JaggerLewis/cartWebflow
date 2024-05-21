@@ -781,9 +781,9 @@ const initMap = async (node) => {
         method: 'GET',
         headers : header
     }).then(async (res) => res.json())
+    const { Map } = await google.maps.importLibrary("maps");
     if (data.CellTower) {
         position = { lat: data.CellTower.lat, lng: data.CellTower.lon};
-        const { Map } = await google.maps.importLibrary("maps");
         map = new Map(node, {
             zoom: 14,
             center: position,
