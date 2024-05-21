@@ -43,7 +43,7 @@ const startRescue = async (btn) => {
     switchBtn('jl-rescue-action', () => stopRescue(key) )
     loaderContainer.style.display = 'none'
     document.getElementById('jag-detail-activity').style.display = 'none'
-    document.getElementById(' jag-detail-rescue').style.display = 'flex'
+    document.getElementById('jag-detail-rescue').style.display = 'flex'
     timer = setInterval(() => {
         tracks(key)
      }, 1000);
