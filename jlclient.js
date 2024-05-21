@@ -1008,8 +1008,8 @@ const validateAction = async () => {
         }), 
       }).then(async (res) => await res?.json())
       console.log(result)
-      if (result) {
-        if (result.activated) {
+      if (result.result) {
+        if (result.result.activated) {
             window.open(REDIRECT.active_3 + '?session_id=725', '_self')
         }
         else {
