@@ -790,13 +790,13 @@ const initMap = async (node) => {
             mapId: "DEMO_MAP_ID",
         });
         cirlce = new google.maps.Circle({
-            strokeColor: '#4287f5',
+            strokeColor: 'grey',
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "#FF0000",
+            fillColor: "grey",
             fillOpacity: 0.35,
             map,
-            center: position,
+            center: data.CellTower?.accuracy ?? 500,
             radius: 20,
           });
  
