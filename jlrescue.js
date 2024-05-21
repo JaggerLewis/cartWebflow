@@ -61,12 +61,12 @@ const tracks = async (key) => {
         pos =  {lat : marker.lat, lng : marker.lon}
         switch (marker.tracking_cmd) {
             case 0 : 
-                cirlce.fillColor = '#4287f5'
-                cirlce.strokeColor = '#4287f5'
-                cirlce.setMap(map)
+                circle.fillColor = '#4287f5'
+                circle.strokeColor = '#4287f5'
+                circle.setMap(map)
                 break
             case 1 : 
-                cirlce.setMap(null)
+                circle.setMap(null)
                 let tmp = new google.maps.Marker({
                     map: map,
                     position: pos,
@@ -87,8 +87,8 @@ const tracks = async (key) => {
 const clearMap = () => {
     if (path) {
         path.setMap(null)
-    } if (cirlce) {
-        cirlce.setMap(null)
+    } if (circle) {
+        circle.setMap(null)
     }
     markers.forEach((elem) => {
         elem.setMap(null)

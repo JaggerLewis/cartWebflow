@@ -25,7 +25,7 @@ let display
 let option
 let token
 let map
-let cirlce
+let circle
 let path
 
 const findAbonnementSolo = (type) => {
@@ -789,7 +789,7 @@ const initMap = async (node) => {
             center: position,
             mapId: "DEMO_MAP_ID",
         });
-        cirlce = new google.maps.Circle({
+        circle = new google.maps.Circle({
             strokeColor: 'grey',
             strokeOpacity: 0.8,
             strokeWeight: 2,
