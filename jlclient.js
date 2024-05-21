@@ -326,7 +326,7 @@ const initOrder = async () => {
                         .then((res) => res.orders)
     let container = document.getElementById('jl-order-container')
     let node = document.getElementById('jag-order-list')
-    orders.forEach((order) => {
+    orders.filter((elem) => elem.type == 'product').forEach((order) => {
         newCard = container.cloneNode(true)
         newCard.style.display = 'flex'
         changeChildsId(newCard, '-'+order._id, 'jag-')
@@ -1098,10 +1098,6 @@ const getCart = async () => {
     if (result.status != 200 && session_id != '725') {
         window.open(REDIRECT.active, '_self')
         return
-    }
-
-    if (session_id != '725') {
-
     }
     const checkoutOrder = await result.json();
     session = checkoutOrder?.result;
