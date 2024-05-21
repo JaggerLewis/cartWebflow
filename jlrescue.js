@@ -46,7 +46,6 @@ const startRescue = async (btn) => {
 }
 
 const tracks = async (key) => {
-
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
         headers: header
@@ -57,7 +56,7 @@ const tracks = async (key) => {
 
     clearMap()
     let pos;
-    res.Tracks.forEach(marker => {
+    res.Tracks.reverse().forEach(marker => {
         pos =  {lat : marker.lat, lng : marker.lon}
         let tmp = new google.maps.Marker({
             map: map,
