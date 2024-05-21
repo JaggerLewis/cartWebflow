@@ -549,7 +549,6 @@ const initOption = async () => {
         changeChildsId(newCard, '-'+subFormula.id, 'jag-')
         document.getElementById('jag-'+type+'-container').appendChild(newCard)
         document.getElementById('jag-'+type+'-name-'+subFormula.id).innerHTML = formula.name
-        document.getElementById('jag-'+type+'-description-'+subFormula.id).innerHTML = getAboType(subFormula.metadata.pricing)
         if( dog.collar.formula_subscription.type == 'life') {
             document.getElementById('jag-'+type+'-renew-'+subFormula.id).style.display = 'none'
         }
