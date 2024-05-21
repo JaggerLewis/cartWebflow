@@ -913,11 +913,16 @@ const setMap = async (activity) => {
     }
     let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
     if (!map) {
-        map = new Map(document.getElementById('jl-map'), {
-            zoom: 14,
-            center: line[0],
-            mapId: "DEMO_MAP_ID",
-        });
+        try {
+            map = new Map(document.getElementById('jl-map'), {
+                zoom: 14,
+                center: line[0],
+                mapId: "DEMO_MAP_ID",
+            });
+        }
+        catch (e) {
+            showAddCart('Oups, une erreur est survenue, rechargez la page', true)
+        }
     }
 
     path = new google.maps.Polyline({
