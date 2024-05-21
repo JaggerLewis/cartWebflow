@@ -787,7 +787,7 @@ const initMap = async (node) => {
         map = new Map(node, {
             zoom: 14,
             center: position,
-            mapId: "DEMO_MAP_ID",
+            mapId: "map",
         });
         circle = new google.maps.Circle({
             strokeColor: 'grey',
@@ -889,6 +889,13 @@ const setMap = async (activity) => {
         return
     }
     let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
+    if (!map) {
+        map = new Map(node, {
+            zoom: 14,
+            center: line[0],
+            mapId: "DEMO_MAP_ID",
+        });
+    }
     path = new google.maps.Polyline({
         path: line,
         geodesic: true,
