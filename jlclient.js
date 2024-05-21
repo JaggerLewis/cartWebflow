@@ -542,28 +542,27 @@ const initOption = async () => {
     let types = ['abo']
     types.forEach((type) => {
         let card = document.getElementById('jag-'+type+'-card')
-        let array = type == 'abo' ? abonnement : option.filter((elem) => elem.type == type)
         let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
         
-        let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life').prices[0]
+        let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
         newCard = card.cloneNode(true)
-        changeChildsId(newCard, '-'+subFormula.id, 'jag-')
+        changeChildsId(newCard, '-'+subFormula.price[0].id, 'jag-')
         document.getElementById('jag-'+type+'-container').appendChild(newCard)
-        document.getElementById('jag-'+type+'-name-'+subFormula.id).innerHTML = formula.name
+        document.getElementById('jag-'+type+'-name-'+subFormula.price[0].id).innerHTML = subFormula.name
         if( dog.collar.formula_subscription.type == 'life') {
-            document.getElementById('jag-'+type+'-renew-'+subFormula.id).style.display = 'none'
+            document.getElementById('jag-'+type+'-renew-'+subFormula.price[0].id).style.display = 'none'
         }
         else {
-            document.getElementById('jag-'+type+'-renew-'+subFormula.id).innerHTML = 'Au ' + getDate(dog.collar.formula_subscription.timeout)
+            document.getElementById('jag-'+type+'-renew-'+subFormula.price[0].id).innerHTML = 'Au ' + getDate(dog.collar.formula_subscription.timeout)
         }
-        document.getElementById('jag-'+type+'-start-'+subFormula.id).innerHTML = 'Du '+ getDate(dog.collar.formula_subscription.subscription_date)
-        if (subFormula.metadata.pricing == 'life') {
-            document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
-            document.getElementById('jag-'+type+'-stop-'+subFormula.id).style.display = 'none'
+        document.getElementById('jag-'+type+'-start-'+subFormula.price[0].id).innerHTML = 'Du '+ getDate(dog.collar.formula_subscription.subscription_date)
+        if (subFormula.price[0].metadata.pricing == 'life') {
+            document.getElementById('jag-'+type+'-stop-'+subFormula.price[0].id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
+            document.getElementById('jag-'+type+'-stop-'+subFormula.price[0].id).style.display = 'none'
             document.getElementById('jl-abo-change').style.display = 'none'
            
         } else {
-            document.getElementById('jag-'+type+'-stop-'+subFormula.id).addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
+            document.getElementById('jag-'+type+'-stop-'+subFormula.price[0].id).addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
         }
         if (dog.collar.formula_subscription.status == 'resilied') {
             let oldNode =  document.getElementById('jag-'+type+'-stop-'+subFormula.id)
