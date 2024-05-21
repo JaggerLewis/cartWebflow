@@ -895,9 +895,6 @@ const setMap = async (activity) => {
         strokeColor: '#4287f5',
         width: 5,
       });
-      let lats = {max : Math.max(...Object.values(JSON.parse(datas.data.gps_data)).map((line) => res.lat)) , min : Math.min(...Object.values(JSON.parse(datas.data.gps_data)).map((line) => res.lat))}
-      let lngs = {max : Math.max(...Object.values(JSON.parse(datas.data.gps_data)).map((line) => res.lng)) , min : Math.min(...Object.values(JSON.parse(datas.data.gps_data)).map((line) => res.lng))}
-    map.setCenter({lat = lats.max + lats.min / 2, lng = lngs.max + lngs.min / 2})
     map.setZoom(16)
     path.setMap(map)
     document.getElementById('jag-detail-activity-lenght').innerHTML = (datas.data.distance > 1000 ? datas.data.distance /1000 : datas.data.distance).toFixed(2)
