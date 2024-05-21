@@ -70,6 +70,7 @@ const initClient = {
     'jl-collar-autonomy' : (node) => node.innerHTML = dog.battery.estimated != -1 ? 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie" : '',
     'jl-collar-synchro-date' : (node) => node.innerHTML = dog.geolocation.LastConnect ? 'Dernière mise à jour: ' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')) : '',
     'jl_Activation_serialNumber' : (node) => node.value = new URLSearchParams(window.location.search).get('sn'),
+    'jl_Activation_phoneNumber' : (_) => checkActivationToken(),
     'jl-map' : (node) => initMap(node),
     'jl-geofencing-label' : (node) => initGeoFencingLabel(node,),
     'jl-geofencing-switch' : (node) => initGeoFencingSwitch(node),
@@ -107,7 +108,6 @@ const initClient = {
     'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé',
     'jl-galery-list-0' : () => intiPict()
 }
-
 
 const logout = () => {
     window.localStorage.clear()
@@ -1018,7 +1018,6 @@ const validateAction = async () => {
             window.open(REDIRECT.active_3 + '?session_id=725', '_self')
         }
         else {
-            return
             window.open(REDIRECT.active_2, '_self')
         }
       }
@@ -1028,6 +1027,35 @@ const validateAction = async () => {
       return
 
 }
+
+const checkActivationToken = async () => {
+    let token =  new URLSearchParams(window.location.search).get('HeyJag')
+    let serial =   new URLSearchParams(window.location.search).get('sn')
+
+    if (!token || !serial) {
+        return
+    }
+
+    header.Authorization = 'Bearer ' + token
+    const result = await fetch(baseurl + '/login/activation/token', {
+        method: "POST",
+        headers : header,
+        body: JSON.stringify({
+            'serialNumber' : serial,
+        }), 
+    }).then(async (res) => await res?.json())
+    console.log(result)
+    if (result.result) {
+      if (result.result.activated) {
+          window.open(REDIRECT.active_3 + '?session_id=725', '_self')
+      }
+      else {
+          window.open(REDIRECT.active_2, '_self')
+      }
+    }
+
+}
+
 
 const checkActivation = async () => {
     const regexPhone = /\+[0-9]{2,3}[0-9]{9}/
