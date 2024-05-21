@@ -1011,18 +1011,18 @@ const validateAction = async () => {
       if (result.status == 200) {
         let json = await result.json()
         console.log(json)
-        await alert('stop' + json.activated)
         if (json.activated) {
             window.open(REDIRECT.active_3 + '?session_id=725', '_self')
         }
         else {
+            return
             window.open(REDIRECT.active_2, '_self')
         }
       }
       else {
         showAddCart('Code incorrect', true)
       }
-       
+       console.log(json);
       return
 
 }
