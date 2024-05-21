@@ -1007,7 +1007,7 @@ const validateAction = async () => {
             "phoneToken": value
         }), 
       }).then(async (res) => await res?.json())
-      
+      console.log(result)
       if (result) {
         if (result.activated) {
             window.open(REDIRECT.active_3 + '?session_id=725', '_self')
