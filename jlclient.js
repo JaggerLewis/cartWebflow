@@ -1182,7 +1182,7 @@ const getUser = async () => {
     user = JSON.parse(localStorage.getItem('user'))
 
     if (!user) {
-        loaderContainer.style.display = 'flex'
+       
         user = await fetch(baseurl + '/profile/full', {headers : header})
         .then(async (res) => await res.json())
         .then((res) => res.user)
@@ -1193,8 +1193,6 @@ const getUser = async () => {
         window.localStorage.setItem('user',JSON.stringify(user))
     }
     await getDog()
-   
-    loaderContainer.style.display = 'none'
 }
 
 const setidentity = () => {
@@ -1336,6 +1334,7 @@ const getAll = async () => {
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
+    loaderContainer.style.display = 'flex'
     if (document.getElementById('jag-step-3'))
         await getCart();
     else if (document.getElementById('jag-step-2')) {
@@ -1367,6 +1366,10 @@ const getAll = async () => {
     else if (document.getElementById('jag-profil-dog-name') || document.getElementById('jl-collar-battery')  ||  document.getElementById('jl-galery-list-0') ) {
         await getUser()
     }
+    if (document.getElementById('jl-collar-battery')) {
+        await getDog()
+    }
+    loaderContainer.style.display = 'none'
 
 
   
