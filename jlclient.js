@@ -554,7 +554,6 @@ const initOption = async () => {
     let types = ['abo']
     types.forEach((type) => {
         let card = document.getElementById('jag-'+type+'-card')
-        let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
         
         let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
         
@@ -564,6 +563,9 @@ const initOption = async () => {
                 document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-stop-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-resilli-text-'+ subFormula.prices[0].id).innerHTML = dog.collar.formula_subscription.subscription_date - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.subscription_date) :  'Votre abonnement est résilié.<br>Il se termine le ' + getDate(dog.collar.formula_subscription.subscription_date)
+                //jag-abo-stoped-action-price_1PGi5NADzHYMiB1YOZyMegDH
+                //https://www.notion.so/jaggerlewis/On-peut-relancer-un-abonnement-lorsque-celui-ci-est-r-sili-e05dcf030d2440d2be1fa34d0ca840ee?pvs=4
                 break;
             case 'active':
                 document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
@@ -579,8 +581,8 @@ const initOption = async () => {
                 card.style.display = 'none'
                 break;
         }
-        return
         document.getElementById('jag-'+type+'-name-'+subFormula.prices[0].id).innerHTML = subFormula.name
+        return
         if( dog.collar.formula_subscription.type == 'life') {
             document.getElementById('jag-'+type+'-renew-'+subFormula.prices[0].id).style.display = 'none'
         }
