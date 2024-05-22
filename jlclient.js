@@ -1246,7 +1246,12 @@ const getDog = async (id) => {
         dog.geolocation =  fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
             method: 'GET',
             headers : header
-        }).then(async (res) => res.json())
+        }).then(async (res) => res.json()).then((res) => {
+            if (document.getElementById('jl-collar-synchro-state')) {
+                document.getElementById('jl-collar-synchro-state').innerHTML = res.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille'
+            }
+            return res;
+        })
         dog.dock = await fetch(baseurl + `/collar/${dog.collar.simcardID}/dock`, {
             method: 'GET',
             headers : header
