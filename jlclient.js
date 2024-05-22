@@ -596,7 +596,7 @@ const initOption = async () => {
                 card.style.display = 'none'
                 break;
         }
-        document.getElementById('jag-'+type+'-name-'+subFormula.prices[0].id).innerHTML = subFormula.name
+        document.getElementById('jag-'+type+'-name').innerHTML = subFormula.name
         
         switch (dog.collar.formula_subscription.type) {
             case 'life':
