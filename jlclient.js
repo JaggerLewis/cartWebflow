@@ -563,6 +563,7 @@ const initOption = async () => {
             case 'resilied':
                 document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = 'flex'
                 document.getElementById('jag-abo-stop-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-resilli-text-'+ subFormula.prices[0].id).innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.timeout) :  'Votre abonnement est résilié.<br>Il se termine le ' + getDate(dog.collar.formula_subscription.timeout)
                 document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = dog.collar.formula_subscription.timeout - Date.now() ? 'none' : 'flex'
@@ -573,6 +574,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'flex'
                 document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-stop-' + subFormula.prices[0].id ).style.display = 'flex'
                 document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-'+type+'-actif-start-'+subFormula.prices[0].id).innerHTML = 'Abonnement actif depuis le '+ getDate(dog.collar.formula_subscription.subscription_date)
                 document.getElementById('jag-'+type+'-actif-end-'+subFormula.prices[0].id).innerHTML = "Jusqu'au " + getDate(dog.collar.formula_subscription.timeout)
