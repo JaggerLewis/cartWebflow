@@ -611,9 +611,6 @@ const initOption = async () => {
         
         
         switch (dog.collar.formula_subscription.type) {
-            case 'life':
-                document.getElementById('jl-abo-change').style.display = 'none'
-                break;
             case 'yearly':
                 document.getElementById('jl-abo-change').innerHTML = 'Passer à vie'
                 document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.formula_life, '_self'))
@@ -624,6 +621,7 @@ const initOption = async () => {
                 
                 break;
             default:
+                document.getElementById('jl-abo-change').style.display = 'none'
                 break;
         }
     })
@@ -1396,8 +1394,8 @@ const getWelfareData = async () => {
 const disableButton = () => {
     let newBtn = document.getElementById('jag-my-formula')
     newBtn.style.display = 'none'
-    let id = 'month'
-    switch(getNewAbo().metadata.pricing) {
+    let id
+    switch(getNewAbo()?.metadata?.pricing) {
         case 'monthly' :
             id =  'month'
             break
@@ -1408,12 +1406,14 @@ const disableButton = () => {
             id =   'life'
             break
     }
-    let btn = document.getElementById('jl_switch_' + id)
-    btn.style.display = 'none'
-    newBtn.style.display = 'block'
-    btn.parentElement.appendChild(newBtn)
+    if (id) {
+        let btn = document.getElementById('jl_switch_' + id)
+        btn.style.display = 'none'
+        newBtn.style.display = 'block'
+        btn.parentElement.appendChild(newBtn)
+        btn.remove()
+    }
 
-    btn.remove()
 }
 
 const getAll = async () => {
