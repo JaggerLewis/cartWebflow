@@ -615,22 +615,6 @@ const initOption = async () => {
             default:
                 break;
         }
-        if (subFormula.prices[0].metadata.pricing == 'life') {
-            document.getElementById('jag-'+type+'-stop-'+subFormula.prices[0].id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
-            document.getElementById('jag-'+type+'-stop-'+subFormula.prices[0].id).style.display = 'none'
-            document.getElementById('jl-abo-change').style.display = 'none'
-           
-        } else {
-            document.getElementById('jag-'+type+'-stop-'+subFormula.prices[0].id).addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
-        }
-        if (dog.collar.formula_subscription.status == 'resilied') {
-            return;
-            let oldNode =  document.getElementById('jag-'+type+'-stop-'+subFormula.id)
-            let node =  document.createElement('div')
-            node.innerHTML = 'Résilié'
-            oldNode.parentElement.replaceChild(node, oldNode)
-            
-        }
     })
     document.getElementById('jag-abo-container').style.display = 'block'
        
