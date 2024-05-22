@@ -573,8 +573,8 @@ const initOption = async () => {
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'flex'
                 document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-'+type+'-start-'+subFormula.prices[0].id).innerHTML = 'Abonnement actif depuis le '+ getDate(dog.collar.formula_subscription.subscription_date)
-                document.getElementById('jag-'+type+'-end-'+subFormula.prices[0].id).innerHTML = "Jusqu'au " + getDate(dog.collar.formula_subscription.timeout)
+                document.getElementById('jag-'+type+'-actif-start-'+subFormula.prices[0].id).innerHTML = 'Abonnement actif depuis le '+ getDate(dog.collar.formula_subscription.subscription_date)
+                document.getElementById('jag-'+type+'-actif-end-'+subFormula.prices[0].id).innerHTML = "Jusqu'au " + getDate(dog.collar.formula_subscription.timeout)
                 break;
             case 'refused':
                 document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
