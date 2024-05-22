@@ -554,7 +554,8 @@ const changeSubscription = async (type) => {
 const initOption = async () => {
 
     const restartAbo = () => {
-        const result = await fetch(baseurl  +`/formula_subscription/${dog.collar.formula_subscription._id}/uncancel`, {
+        loaderContainer.style.display = 'flex'
+        await fetch(baseurl  +`/formula_subscription/${dog.collar.formula_subscription._id}/uncancel`, {
             method: "POST",
             headers : header,
           })
@@ -576,8 +577,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-stop-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-resilli-text-'+ subFormula.prices[0].id).innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.timeout) :  'Votre abonnement est résilié.<br>Il se termine le ' + getDate(dog.collar.formula_subscription.timeout)
                 document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
-                //jag-abo-stoped-action-price_1PGi5NADzHYMiB1YOZyMegDH
-                //https://www.notion.so/jaggerlewis/On-peut-relancer-un-abonnement-lorsque-celui-ci-est-r-sili-e05dcf030d2440d2be1fa34d0ca840ee?pvs=4
+                document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).addEventListener('click', () => restartAbo())
                 break;
             case 'active':
                 document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
