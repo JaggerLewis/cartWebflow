@@ -57,7 +57,7 @@ const tracks = async (key) => {
     }).then(async (value) => await value.json());
     clearMap()
 
-    if (!(res.Tracks && res.Tracks.lenght)) {
+    if (!(res.Tracks && res.Tracks.lenght != 0)) {
         circle.setMap(map)
         return;
     }
