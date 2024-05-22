@@ -1,6 +1,7 @@
 let timer
 let tracksLog
 let markers = []
+let icon
 
 
 const switchBtn = (btnId, func) => {
@@ -15,6 +16,12 @@ const switchBtn = (btnId, func) => {
 }
 
 const startRescue = async (btn) => {
+    icon = {
+        url: "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid,
+        scaledSize: new google.maps.Size(50, 50), 
+        origin: new google.maps.Point(0,0),
+        anchor: new google.maps.Point(0, 0)
+    };
     loaderContainer.style.display = 'flex'
     let body = {
         'activity_id': 'rescue',
@@ -76,7 +83,7 @@ const tracks = async (key) => {
                     map: map,
                     position: pos,
                     title: "",
-                    icon : `https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c893a5d2b02d82784dbdc_imagedog.png`
+                    icon : icon ?? `https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c893a5d2b02d82784dbdc_imagedog.png`
                 });
                 markers.push(tmp)
                 break
