@@ -58,6 +58,7 @@ const initClient = {
 
     'jl-profil-user-name' : (node) => node.innerHTML = session?.order?.customer?.name ?? '',
     'jl-nav-dog-name' : (node) => node.innerHTML = dog?.name ?? '',
+    'jl-nav-dog-pict' : (node) =>  { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-picture' : (node) => { node.src = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid; node.srcset = "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid  },
     'jl-profil-dog-name' : (node) => node.innerHTML = dog.name,
     'jl-profil-dog-id' : (node) => node.innerHTML = dog.publicId[0] == '@' ? dog.publicId : `@${dog.publicId}`,
