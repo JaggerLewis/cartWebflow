@@ -573,6 +573,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
                 break;
             default:
+                document.getElementById('jag-abo-container').innerHTML = "Vous n'avez pas d'abonnement"
                 card.style.display = 'none'
                 break;
         }
