@@ -577,6 +577,7 @@ const initOption = async () => {
             document.getElementById('jag-'+type+'-stop-'+subFormula.prices[0].id).addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
         }
         if (dog.collar.formula_subscription.status == 'resilied') {
+            return;
             let oldNode =  document.getElementById('jag-'+type+'-stop-'+subFormula.id)
             let node =  document.createElement('div')
             node.innerHTML = 'Résilié'
