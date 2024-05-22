@@ -569,8 +569,8 @@ const initOption = async () => {
                 //https://www.notion.so/jaggerlewis/On-peut-relancer-un-abonnement-lorsque-celui-ci-est-r-sili-e05dcf030d2440d2be1fa34d0ca840ee?pvs=4
                 break;
             case 'active':
+                document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = 'none'
                 break;
             case 'refused':
