@@ -560,7 +560,7 @@ const initOption = async () => {
         
         changeChildsId(card, '-'+subFormula.prices[0].id, 'jag-')
         switch (dog.collar.formula_subscription.status) {
-            case 'resiled':
+            case 'resilied':
                 document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
                 break;
