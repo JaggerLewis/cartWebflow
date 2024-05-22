@@ -13,7 +13,7 @@ const REDIRECT = {
 }
 
 const ACTIVITY_PICT = {
-    bike
+    bike : '',
 }
 
 
