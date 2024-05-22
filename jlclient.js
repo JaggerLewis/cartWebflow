@@ -1182,6 +1182,9 @@ const getCart = async () => {
         window.open(REDIRECT.active, '_self')
         return
     }
+    if (session_id == '725') {
+        document.getElementById('jag-active-store').style.display = 'none'
+    }
     const checkoutOrder = await result.json();
     session = checkoutOrder?.result;
 }
