@@ -553,7 +553,7 @@ const changeSubscription = async (type) => {
 
 const initOption = async () => {
 
-    const restartAbo = () => {
+    const restartAbo = async () => {
         loaderContainer.style.display = 'flex'
         await fetch(baseurl  +`/formula_subscription/${dog.collar.formula_subscription._id}/uncancel`, {
             method: "POST",
