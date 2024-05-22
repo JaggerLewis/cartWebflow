@@ -557,9 +557,26 @@ const initOption = async () => {
         let formula = abonnement.find((elem) => elem.metadata.pId == 'formula_unique')
         
         let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
-        newCard = card.cloneNode(true)
-        changeChildsId(newCard, '-'+subFormula.prices[0].id, 'jag-')
-        document.getElementById('jag-'+type+'-container').appendChild(newCard)
+        
+        changeChildsId(card, '-'+subFormula.prices[0].id, 'jag-')
+        switch (dog.collar.formula_subscription.status) {
+            case 'resiled':
+                document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
+                break;
+            case 'active':
+                document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
+            break;
+            case 'refused':
+                document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
+                break;
+            default:
+                card.style.display = 'none'
+                break;
+        }
+        return
         document.getElementById('jag-'+type+'-name-'+subFormula.prices[0].id).innerHTML = subFormula.name
         if( dog.collar.formula_subscription.type == 'life') {
             document.getElementById('jag-'+type+'-renew-'+subFormula.prices[0].id).style.display = 'none'
@@ -584,7 +601,6 @@ const initOption = async () => {
             oldNode.parentElement.replaceChild(node, oldNode)
             
         }
-        card.style.display = 'none'
     })
     document.getElementById('jag-abo-container').style.display = 'block'
        
