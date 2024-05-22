@@ -13,13 +13,13 @@ const REDIRECT = {
 }
 
 const ACTIVITY_PICT = {
-    footing : '',
-    crossfit : '',
-    bike : '',
-    promenade : '',
+    footing : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac295bff47ea0f59445_Group%20196451acti.png',
+    crossfit : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac2470b045e31f85937_6acti.png',
+    bike : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac215d605db1af32818_Group%20196442acti.png',
+    promenade : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/6613c05e432b743847c086b6_baladeitem.png',
     cani_rando : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac25eb3f6af15fc8579_acti6.png',
     rescue : '',
-    away : '',
+    away : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac2f93ad3ea98b44562_acti5.png',
     city_dogsitting : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac2470b045e31f8584a_Group%20196424acti.png',
 }
 
@@ -877,8 +877,10 @@ const initActivity = (type) => {
             if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
             }
-            // document.getElementById('jl-activity-card-img-' + activity._id)?.src = ''
-            // document.getElementById('jl-activity-card-img-' + activity._id)?.srcset = ''
+            if (document.getElementById('jl-activity-card-img-' + activity._id)) {
+                document.getElementById('jl-activity-card-img-' + activity._id).src = ACTIVITY_PICT[activity.activity_id]
+                document.getElementById('jl-activity-card-img-' + activity._id).srcset = ACTIVITY_PICT[activity.activity_id]
+            }
             if (type != 'moment')
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + (distance ?? '0m')
             if (type == 'activity') {
