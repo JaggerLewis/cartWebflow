@@ -80,7 +80,7 @@ const initClient = {
     'jl-collar-activation' : (node) => node.innerHTML = getDate(dog.collar.activationDate),
     'jl-collar-version' : (node) => node.innerHTML = dog.collar.firmwareVersion,
     'jl-collar-autonomy' : (node) => node.innerHTML = dog.battery.estimated != -1 ? 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie" : '',
-    'jl-collar-synchro-date' : (node) => node.innerHTML = dog.geolocation.LastConnect ? 'Dernière mise à jour: ' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')) : '',
+    'jl-collar-synchro-date' : (node) => node.innerHTML = dog.geolocation?.LastConnect ? 'Dernière mise à jour: ' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')) : '',
     'jl_Activation_serialNumber' : (node) => node.value = new URLSearchParams(window.location.search).get('sn'),
     'jl_Activation_phoneNumber' : (_) => checkActivationToken(),
     'jl-map' : (node) => initMap(node),
@@ -1195,7 +1195,7 @@ const getDog = async (id) => {
             method: 'GET',
             headers: header
         }).then(async (value) => await value.json());
-        dog.geolocation = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
+        dog.geolocation =  fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
