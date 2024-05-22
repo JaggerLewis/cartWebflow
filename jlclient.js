@@ -563,11 +563,13 @@ const initOption = async () => {
             case 'resilied':
                 document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-stop-' + subFormula.prices[0].id ).style.display = 'none'
                 break;
             case 'active':
                 document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
-            break;
+                document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = 'none'
+                break;
             case 'refused':
                 document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
                 document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
