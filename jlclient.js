@@ -10,6 +10,7 @@ const REDIRECT = {
     active : 'activation-1-3',
     active_2 : 'activation-produit-etape02-copy',
     active_3 : 'step3',
+    formula_life : 'lifetimeformula'
 }
 
 const ACTIVITY_PICT = {
@@ -586,14 +587,23 @@ const initOption = async () => {
                 break;
         }
         document.getElementById('jag-'+type+'-name-'+subFormula.prices[0].id).innerHTML = subFormula.name
-        return
-        if( dog.collar.formula_subscription.type == 'life') {
-            document.getElementById('jag-'+type+'-renew-'+subFormula.prices[0].id).style.display = 'none'
+        
+        switch (dog.collar.formula_subscription.type) {
+            case 'life':
+                document.getElementById('jl-abo-change').style.display = 'none'
+                break;
+            case 'yearly':
+                document.getElementById('jl-abo-change').innerHTML = 'Passer à vie'
+                document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.formula_life, '_self'))
+                break;
+            case 'monthly':
+                document.getElementById('jl-abo-change').innerHTML = 'Changer ma formule'
+                document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
+                
+                break;
+            default:
+                break;
         }
-        else {
-            document.getElementById('jag-'+type+'-renew-'+subFormula.prices[0].id).innerHTML = 'Au ' + getDate(dog.collar.formula_subscription.timeout)
-        }
-        document.getElementById('jag-'+type+'-start-'+subFormula.prices[0].id).innerHTML = 'Du '+ getDate(dog.collar.formula_subscription.subscription_date)
         if (subFormula.prices[0].metadata.pricing == 'life') {
             document.getElementById('jag-'+type+'-stop-'+subFormula.prices[0].id).addEventListener('click', () => showAddCart('Vous ne pouvez pas résilié'))
             document.getElementById('jag-'+type+'-stop-'+subFormula.prices[0].id).style.display = 'none'
