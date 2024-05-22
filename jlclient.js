@@ -13,7 +13,14 @@ const REDIRECT = {
 }
 
 const ACTIVITY_PICT = {
+    footing : '',
+    crossfit : '',
     bike : '',
+    promenade : '',
+    cani_rando : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac25eb3f6af15fc8579_acti6.png',
+    rescue : '',
+    away : '',
+    city_dogsitting : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac2470b045e31f8584a_Group%20196424acti.png',
 }
 
 
@@ -870,8 +877,8 @@ const initActivity = (type) => {
             if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
             }
-            document.getElementById('jl-activity-card-img-' + activity._id)?.src = ''
-            document.getElementById('jl-activity-card-img-' + activity._id)?.srcset = ''
+            // document.getElementById('jl-activity-card-img-' + activity._id)?.src = ''
+            // document.getElementById('jl-activity-card-img-' + activity._id)?.srcset = ''
             if (type != 'moment')
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + (distance ?? '0m')
             if (type == 'activity') {
