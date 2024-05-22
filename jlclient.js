@@ -1182,11 +1182,16 @@ const getCart = async () => {
         window.open(REDIRECT.active, '_self')
         return
     }
+    const checkoutOrder = await result.json();
     if (session_id == '725') {
         document.getElementById('jag-active-store').style.display = 'none'
     }
-    const checkoutOrder = await result.json();
-    session = checkoutOrder?.result;
+    else if (checkoutOrder.result?.hasAccount) {
+        document.getElementById('jag-active-store').style.display = 'none'
+    }
+    else {
+        document.getElementById('jag-active-dasboard').style.display = 'none'
+    }
 }
 
 const getOption = async () => {
