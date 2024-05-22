@@ -878,8 +878,8 @@ const initActivity = (type) => {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
             }
             if (document.getElementById('jl-activity-card-img-' + activity._id)) {
-                document.getElementById('jl-activity-card-img-' + activity._id).src = ACTIVITY_PICT[activity.activity_id]
-                document.getElementById('jl-activity-card-img-' + activity._id).srcset = ACTIVITY_PICT[activity.activity_id]
+                document.getElementById('jl-activity-card-img-' + activity._id).children[0].src = ACTIVITY_PICT[activity.activity_id]
+                document.getElementById('jl-activity-card-img-' + activity._id).children[0].srcset = ACTIVITY_PICT[activity.activity_id]
             }
             if (type != 'moment')
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + (distance ?? '0m')
