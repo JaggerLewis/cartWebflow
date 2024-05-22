@@ -568,7 +568,7 @@ const initOption = async () => {
         let card = document.getElementById('jag-'+type+'-card')
         
         let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
-        
+        let check
         switch (dog.collar.formula_subscription.status) {
             case 'resilied':
                 document.getElementById('jag-abo-stoped' ).style.display = 'none'
@@ -578,7 +578,7 @@ const initOption = async () => {
                 document.getElementById('jag-'+type+'-name').innerHTML = subFormula.name
                 // document.getElementById('jag-abo-stoped-action' )?.style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
                 // document.getElementById('jag-abo-stoped-action' )?.addEventListener('click', () => restartAbo())
-                let check = document.getElementById('jag-abo-check')
+                check = document.getElementById('jag-abo-check')
                 check.childNodes[0].remove()
                 check.innerHTML = 'X'
                 check.style.backgroundColor = 'red'
@@ -597,7 +597,7 @@ const initOption = async () => {
             case 'refused':
                 document.getElementById('jag-abo-resilli' ).style.display = 'none'
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
-                let check = document.getElementById('jag-abo-check')
+                check = document.getElementById('jag-abo-check')
                 check.childNodes[0].remove()
                 check.innerHTML = 'X'
                 check.style.backgroundColor = 'orange'
