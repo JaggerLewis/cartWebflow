@@ -569,28 +569,27 @@ const initOption = async () => {
         
         let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
         
-        changeChildsId(card, '-'+subFormula.prices[0].id, 'jag-')
         switch (dog.collar.formula_subscription.status) {
             case 'resilied':
-                document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-abo-stop-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-abo-resilli-text-'+ subFormula.prices[0].id).innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.timeout) :  'Votre abonnement est résilié.<br>Il se termine le ' + getDate(dog.collar.formula_subscription.timeout)
-                document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
-                document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).addEventListener('click', () => restartAbo())
+                document.getElementById('jag-abo-stoped' ).style.display = 'none'
+                document.getElementById('jag-abo-actif' ).style.display = 'none'
+                document.getElementById('jag-abo-stop' ).style.display = 'none'
+                document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.timeout) :  'Votre abonnement est résilié.<br>Il se termine le ' + getDate(dog.collar.formula_subscription.timeout)
+                document.getElementById('jag-abo-stoped-action' ).style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
+                document.getElementById('jag-abo-stoped-action' ).addEventListener('click', () => restartAbo())
                 break;
             case 'active':
-                document.getElementById('jag-abo-stoped-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'flex'
-                document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-abo-stop-' + subFormula.prices[0].id ).style.display = 'flex'
-                document.getElementById('jag-abo-stoped-action-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-'+type+'-actif-start-'+subFormula.prices[0].id).innerHTML = 'Abonnement actif depuis le '+ getDate(dog.collar.formula_subscription.subscription_date)
-                document.getElementById('jag-'+type+'-actif-end-'+subFormula.prices[0].id).innerHTML = "Jusqu'au " + getDate(dog.collar.formula_subscription.timeout)
+                document.getElementById('jag-abo-stoped' ).style.display = 'none'
+                document.getElementById('jag-abo-actif' ).style.display = 'flex'
+                document.getElementById('jag-abo-resilli' ).style.display = 'none'
+                document.getElementById('jag-abo-stop' ).style.display = 'flex'
+                document.getElementById('jag-abo-stoped-action' ).style.display = 'none'
+                document.getElementById('jag-'+type+'-actif-start').innerHTML = 'Abonnement actif depuis le '+ getDate(dog.collar.formula_subscription.subscription_date)
+                document.getElementById('jag-'+type+'-actif-end').innerHTML = "Jusqu'au " + getDate(dog.collar.formula_subscription.timeout)
                 break;
             case 'refused':
-                document.getElementById('jag-abo-resilli-' + subFormula.prices[0].id ).style.display = 'none'
-                document.getElementById('jag-abo-actif-' + subFormula.prices[0].id ).style.display = 'none'
+                document.getElementById('jag-abo-resilli' ).style.display = 'none'
+                document.getElementById('jag-abo-actif' ).style.display = 'none'
                 break;
             default:
                 document.getElementById('jag-abo-container').innerHTML = "Vous n'avez pas d'abonnement"
