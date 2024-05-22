@@ -12,6 +12,10 @@ const REDIRECT = {
     active_3 : 'step3',
 }
 
+const ACTIVITY_PICT = {
+    bike
+}
+
 
 let header = {
     'Content-Type': 'application/json'
@@ -866,6 +870,8 @@ const initActivity = (type) => {
             if (activity.distance) {
                 distance = activity.distance > 1000 ? activity.distance /1000 + 'Km' : activity.distance + 'm'
             }
+            document.getElementById('jl-activity-card-img-' + activity._id)?.src = ''
+            document.getElementById('jl-activity-card-img-' + activity._id)?.srcset = ''
             if (type != 'moment')
             document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + (distance ?? '0m')
             if (type == 'activity') {
