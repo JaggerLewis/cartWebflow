@@ -19,7 +19,7 @@ const ACTIVITY_PICT = {
     bike : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac215d605db1af32818_Group%20196442acti.png',
     promenade : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/6613c05e432b743847c086b6_baladeitem.png',
     cani_rando : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac25eb3f6af15fc8579_acti6.png',
-    rescue : '',
+    rescue : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/654b6a20bf057d68593d620a_logo.png',
     away : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac2f93ad3ea98b44562_acti5.png',
     city_dogsitting : 'https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c8ac2470b045e31f8584a_Group%20196424acti.png',
 }
