@@ -578,6 +578,11 @@ const initOption = async () => {
                 document.getElementById('jag-'+type+'-name').innerHTML = subFormula.name
                 // document.getElementById('jag-abo-stoped-action' )?.style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
                 // document.getElementById('jag-abo-stoped-action' )?.addEventListener('click', () => restartAbo())
+                let check = document.getElementById('jag-abo-check')
+                check.childNodes[0].remove()
+                check.innerHTML = 'X'
+                check.style.backgroundColor = 'red'
+                check.style.color = 'white'
                 break;
             case 'active':
                 document.getElementById('jag-abo-stoped' ).style.display = 'none'
@@ -592,6 +597,11 @@ const initOption = async () => {
             case 'refused':
                 document.getElementById('jag-abo-resilli' ).style.display = 'none'
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
+                let check = document.getElementById('jag-abo-check')
+                check.childNodes[0].remove()
+                check.innerHTML = 'X'
+                check.style.backgroundColor = 'orange'
+                check.style.color = 'white'
                 break;
             default:
                 document.getElementById('jag-abo-container').innerHTML = "Vous n'avez pas d'abonnement"
