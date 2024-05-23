@@ -67,7 +67,7 @@ const tracks = async (key) => {
             anchor: new google.maps.Point(0, 0)
         };
     }
-    if(!res) {
+    if(!res || !map) {
         stopRescue()
     }
     if (!(res.Tracks && res.Tracks.lenght != 0)) {
