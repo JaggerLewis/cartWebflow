@@ -63,9 +63,11 @@ const tracks = async (key) => {
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
         headers: header
-    }).then(async (value) => await value.json());
+    }).then(async (value) => await value?.json());
     clearMap()
-
+    if(!res) {
+        stopRescue()
+    }
     if (!(res.Tracks && res.Tracks.lenght != 0)) {
         circle.setMap(map)
         return;
