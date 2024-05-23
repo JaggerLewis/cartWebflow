@@ -174,12 +174,7 @@ const stopRescue = async (key) => {
 
 const initRescue = async (btn) => {
     updateLoading(1)
-    icon = {
-        url: "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid,
-        scaledSize: new google.maps.Size(50, 50), 
-        origin: new google.maps.Point(0,0),
-        anchor: new google.maps.Point(0, 0)
-    };
+  
     await getDog(dog._id)
     let acti = dog.personalActivities.find((elem) => !elem.end_timestamp)
     if (acti) {
