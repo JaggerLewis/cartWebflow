@@ -58,7 +58,7 @@ const startRescue = async (btn) => {
 }
 
 const tracks = async (key) => {
-    
+    updateLoading(3)
     let pos;
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
@@ -75,13 +75,13 @@ const tracks = async (key) => {
         pos =  {lat : marker.lat, lng : marker.lon}
         switch (marker.tracking_cmd) {
             case 0 : 
-                updateLoading(3)
+                updateLoading(4)
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
                 circle.setMap(map)
                 break
             case 1 : 
-                updateLoading(4)
+                updateLoading(5)
                 circle.setMap(null)
                 let tmp = new google.maps.Marker({
                     map: map,
