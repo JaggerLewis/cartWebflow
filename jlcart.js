@@ -1387,3 +1387,9 @@ if (document.getElementById('encart_jag_gps_s2')) {
 
 if (document.getElementById('JL_NavBar'))
     init()
+else {
+    let s = document.createElement('script')
+    s.type = 'text/javascript'
+    s.src = 'https://webcart.jagger-lewis.com/jlclient.js'
+    document.getElementsByTagName('head')[0].appendChild(s)
+}
