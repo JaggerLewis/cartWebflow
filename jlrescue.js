@@ -70,39 +70,43 @@ const tracks = async (key) => {
             anchor: new google.maps.Point(0, 0)
         };
     }
-   
-    if (!(res.Tracks && res.Tracks.lenght != 0)) {
-        circle.setMap(map)
-        return;
-    }
 
-    res.Tracks.reverse().forEach(marker => {
-        pos =  {lat : marker.lat, lng : marker.lon}
-        switch (marker.tracking_cmd) {
-            case 0 : 
-                step = 3
+    if(res.Tracks.find((elem) => elem.origin_mode == 'GNSS_TIMEOUT')) {
+        step = 6
+        circle.fillColor = 'red'
+        circle.strokeColor = 'red'
+        circle.setMap(map)
+        return
+    }
+    if(res.Tracks.find((elem) => elem.tracking_cmd == 1)) {
+        step = 4
+        res.Tracks.reverse().forEach(marker => {
+            if (marker.tracking_cmd == 0) {
+                return
+            }
+
+            pos =  {lat : marker.lat, lng : marker.lon}
+            step = 4
+            circle.setMap(null)
+            let tmp = new google.maps.Marker({
+                map: map,
+                position: pos,
+                title: "",
+                icon : icon ?? `https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c893a5d2b02d82784dbdc_imagedog.png`
+            });
+            markers.push(tmp)
+            })
+    }
+    else if(res.Tracks.find((elem) => elem.tracking_cmd == 0)) {
+        step = 3
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
                 circle.setMap(map)
                 break
-            case 1 : 
-                step = 4
-                circle.setMap(null)
-                let tmp = new google.maps.Marker({
-                    map: map,
-                    position: pos,
-                    title: "",
-                    icon : icon ?? `https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c893a5d2b02d82784dbdc_imagedog.png`
-                });
-                markers.push(tmp)
-                break
-            case 2 : 
-            default :
-            console.log('marker => ', marker)
-        }
-     
-     
-    });
+    }
+    else 
+        circle.setMap(map)
+
     updateLoading(step)
     map.setCenter(pos)
 }
@@ -134,6 +138,11 @@ const updateLoading = (step) => {
             clearPath(4)
             title.innerHTML = 'Arrête en cours'
             desc.innerHTML = "Nous contactons le boîtier afin d'arreter la localisation"
+            break;
+        case 6:
+            clearPath(-1)
+            title.innerHTML =  dog.name  + 'est introuvable...'
+            desc.innerHTML = `Nous continue de rechercher ${dog.name}, mais cela prends plus de temps que prévu`
             break;
     
         default:
