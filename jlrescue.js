@@ -59,6 +59,14 @@ const tracks = async (key) => {
         headers: header
     }).then(async (value) => await value?.json());
     clearMap()
+    if (!icon) {
+        icon = {
+            url: "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid,
+            scaledSize: new google.maps.Size(50, 50), 
+            origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(0, 0)
+        };
+    }
     if(!res) {
         stopRescue()
     }
