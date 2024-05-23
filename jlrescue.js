@@ -145,6 +145,8 @@ const initRescue = async (btn) => {
     }
 }
 
+initRescue()
+
 
 
 
