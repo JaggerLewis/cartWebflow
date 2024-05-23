@@ -849,11 +849,13 @@ const initMap = async (node) => {
 
     if (data.CellTower) {
         position = { lat: data.CellTower.lat, lng: data.CellTower.lon};
-        map = new Map(node, {
-            zoom: 14,
-            center: position,
-            mapId: "map",
-        });
+        if (!map) {
+            map = new Map(node, {
+                zoom: 14,
+                center: position,
+                mapId: "map",
+            });
+        }
         circle = new google.maps.Circle({
             strokeColor: 'grey',
             fillColor: 'grey',

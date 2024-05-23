@@ -179,6 +179,8 @@ const stopRescue = async (key) => {
     let newBtn = switchBtn('jl-rescue-action', () => initRescue(document.getElementById('jl-rescue-action')))
     newBtn.innerHTML = 'Lancer une localisation'
     updateLoading(0)
+    clearMap()
+    initMap(document.getElementById('jl-map'))
 }
 
 const initRescue = async (btn) => {
@@ -203,6 +205,5 @@ const initRescue = async (btn) => {
     else {
         btn.addEventListener('click', () => startRescue(btn))
     }
-    initMap(document.getElementById('jl-map'))
 }
 
