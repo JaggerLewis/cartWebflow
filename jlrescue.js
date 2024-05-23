@@ -189,6 +189,7 @@ const initRescue = async (btn) => {
     if (acti) {
         if (acti.type == 'rescue') {
             let btn = switchBtn('jl-rescue-action', () => stopRescue(acti.timestamp_key) )
+            updateLoading(2)
             btn.innerHTML = 'Arrêter la géolocalisation'
             timer = setInterval(() => {
                 tracks(acti.timestamp_key)
