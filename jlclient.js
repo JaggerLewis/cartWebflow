@@ -866,7 +866,7 @@ const initMap = async (node, stop) => {
             center: position,
             radius: data.CellTower?.accuracy ?? 500,
           });
-          if (stop) {
+          if (!stop) {
               initRescue(document.getElementById('jl-rescue-action'))
             }
     } 
