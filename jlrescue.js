@@ -144,3 +144,5 @@ const initRescue = async (btn) => {
         btn.addEventListener('click', () => startRescue(btn))
     }
 }
+
+initRescue()
