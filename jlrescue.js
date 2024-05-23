@@ -48,7 +48,7 @@ const startRescue = async (btn) => {
     document.getElementById('jag-detail-rescue').style.display = 'flex'
     timer = setInterval(() => {
         tracks(key)
-     }, 1000);
+     }, 5000);
 }
 
 const tracks = async (key) => {
@@ -59,6 +59,7 @@ const tracks = async (key) => {
         headers: header
     }).then(async (value) => await value?.json());
     clearMap()
+    
     if(!res || !map) {
         stopRescue()
     }
@@ -101,8 +102,8 @@ const tracks = async (key) => {
     else if(res.Tracks.find((elem) => elem.tracking_cmd == 0)) {
         circle.setMap(null)
         step = 3
-                circle.fillColor = '#4287f5'
-                circle.strokeColor = '#4287f5'
+                circle.fillColor = '#5363ff'
+                circle.strokeColor = '#5363ff'
                 circle.setMap(map)
     }
     else 
