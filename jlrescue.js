@@ -16,6 +16,7 @@ const switchBtn = (btnId, func) => {
 }
 
 const startRescue = async (btn) => {
+    updateLoading(2)
     icon = {
         url: "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid,
         scaledSize: new google.maps.Size(50, 50), 
@@ -57,6 +58,7 @@ const startRescue = async (btn) => {
 }
 
 const tracks = async (key) => {
+    
     let pos;
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
@@ -73,11 +75,13 @@ const tracks = async (key) => {
         pos =  {lat : marker.lat, lng : marker.lon}
         switch (marker.tracking_cmd) {
             case 0 : 
+                updateLoading(3)
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
                 circle.setMap(map)
                 break
             case 1 : 
+                updateLoading(4)
                 circle.setMap(null)
                 let tmp = new google.maps.Marker({
                     map: map,
@@ -95,6 +99,43 @@ const tracks = async (key) => {
      
     });
     map.setCenter(pos)
+}
+
+const updateLoading = (step) => {
+    const clearPath = (index) => 
+        Rescuepath.forEach((elem, pathIndex) =>  elem.style.backgroundColor = pathIndex == index ? '#5363ff' : 'rgba(0, 0, 0, .07)'  );
+
+    let Rescuepath = document.querySelectorAll("[id^='jag-rescue-info-path']")
+    let title = document.getElementById('jag-rescue-info-title')
+    let desc = document.getElementById('jag-rescue-info-description')
+    switch (step) {
+        case 2:
+            clearPath(1)
+            title.innerHTML = 'step 2'
+            desc.innerHTML = 'desc 2'
+            break;
+        case 3:
+            clearPath(2)
+            title.innerHTML = 'step 3'
+            desc.innerHTML = 'desc 3'
+            break;
+        case 4:
+            clearPath(3)
+            title.innerHTML = 'step 4'
+            desc.innerHTML = 'desc 4'
+            break;
+        case 5:
+            clearPath(4)
+            title.innerHTML = 'step 5'
+            desc.innerHTML = 'desc 5'
+            break;
+    
+        default:
+            clearPath(0)
+            title.innerHTML = 'step 1'
+            desc.innerHTML = 'desc 1'
+            break;
+    }
 }
 
 const clearMap = () => {
@@ -125,6 +166,7 @@ const stopRescue = async (key) => {
 }
 
 const initRescue = async (btn) => {
+    updateLoading(1)
     await getDog(dog._id)
     let acti = dog.personalActivities.find((elem) => !elem.end_timestamp)
     if (acti) {
