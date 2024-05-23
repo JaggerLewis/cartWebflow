@@ -52,7 +52,7 @@ const startRescue = async (btn) => {
 }
 
 const tracks = async (key) => {
-    let step = 3
+    let step = 2
     let pos;
     let res = await fetch(`https://app-api.mypet.fit/personal_activity/${dog.collar.simcardID}/${key}/rescue/tracks`, {
         method: 'GET',
@@ -130,7 +130,7 @@ const updateLoading = (step) => {
             break;
         case 4:
             clearPath(3)
-            title.innerHTML = dog.name  + ' est ici'
+            title.innerHTML = 'Boîtier localisé'
             desc.innerHTML = dog.name + ' est actuelement localisé à cette prosition'
             break;
         case 5:
