@@ -1369,7 +1369,7 @@ const initDashboard = async (node) => {
 const checkAuth = async () => {
     let url = new URL(window.location.href)
     let searchParams = new URLSearchParams(window.location.search);
-    if(document.querySelectorAll("[jl-auth='false']").length) {
+    if(document.querySelectorAll("[jl-auth='false']").length || !url.href.includes('my')) {
         return;
     }
 
