@@ -102,7 +102,6 @@ const tracks = async (key) => {
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
                 circle.setMap(map)
-                break
     }
     else 
         circle.setMap(map)
