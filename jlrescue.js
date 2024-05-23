@@ -59,6 +59,9 @@ const tracks = async (key) => {
         headers: header
     }).then(async (value) => await value?.json());
     clearMap()
+    if(!res || !map) {
+        stopRescue()
+    }
     if (!icon) {
         icon = {
             url: "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid,
@@ -67,9 +70,7 @@ const tracks = async (key) => {
             anchor: new google.maps.Point(0, 0)
         };
     }
-    if(!res || !map) {
-        stopRescue()
-    }
+   
     if (!(res.Tracks && res.Tracks.lenght != 0)) {
         circle.setMap(map)
         return;
