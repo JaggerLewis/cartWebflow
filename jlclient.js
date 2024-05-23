@@ -10,7 +10,8 @@ const REDIRECT = {
     active : 'activation-1-3',
     active_2 : 'activation-produit-etape02-copy',
     active_3 : 'step3',
-    formula_life : 'lifetimeformula'
+    formula_life : 'lifetimeformula',
+    email : 'emailsent'
 }
 
 const ACTIVITY_PICT = {
@@ -212,7 +213,7 @@ const deleteAccountEmail = async () => {
                 headers: header
             })
     if (res.status == 200) {
-        showAddCart('Email envoyé')
+        window.open(REDIRECT.home, '_self')
     }
     else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
@@ -531,7 +532,7 @@ const cancelSubScriptionEmail = async () => {
     .then(async (res) => await res.json())
 
     if (result.success) {
-        showAddCart('Un mail vous à été envoyé', true)
+        window.open(REDIRECT.home, '_self')
     }
     else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
