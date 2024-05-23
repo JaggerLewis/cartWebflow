@@ -64,7 +64,7 @@ const tracks = async (key) => {
     }
     if (!icon) {
         icon = {
-            url: "https://app-api.mypet.fit/img/" + dog.image.type +"/"+ dog.image.uuid,
+            url: "https://assets-global.website-files.com/6549f4ba8294cf140608d893/664e065a96ae535c2291cf88_dog%20pict.png",
             scaledSize: new google.maps.Size(50, 50), 
             origin: new google.maps.Point(0,0),
             anchor: new google.maps.Point(0, 0)
