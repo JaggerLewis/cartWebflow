@@ -865,10 +865,12 @@ const initMap = async (node) => {
             radius: data.CellTower?.accuracy ?? 500,
           });
  
+          initRescue(document.getElementById('jl-rescue-action'))
     } 
     else {
-        setTimeout(() => initMap(node), 20000)
+        setTimeout(() => initMap(node), 2000)
     }
+
     
 }
 
