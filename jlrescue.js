@@ -72,6 +72,7 @@ const tracks = async (key) => {
     }
 
     if(res.Tracks[res.Tracks.lenght - 1]?.origin_mode == 'GNSS_TIMEOUT') {
+        circle.setMap(null)
         step = 6
         circle.fillColor = 'red'
         circle.strokeColor = 'red'
@@ -98,6 +99,7 @@ const tracks = async (key) => {
             })
     }
     else if(res.Tracks.find((elem) => elem.tracking_cmd == 0)) {
+        circle.setMap(null)
         step = 3
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
