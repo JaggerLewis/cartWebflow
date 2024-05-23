@@ -145,11 +145,6 @@ const initRescue = async (btn) => {
     }
 }
 
-if(!document.getElementById('JL_NavBar')) {
-    checkAuth()
-    getAll()
-    
-}
 
 
 
