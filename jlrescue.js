@@ -203,5 +203,6 @@ const initRescue = async (btn) => {
     else {
         btn.addEventListener('click', () => startRescue(btn))
     }
+    initMap(document.getElementById('jl-map'))
 }
 
