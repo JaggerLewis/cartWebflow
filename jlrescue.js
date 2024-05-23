@@ -145,4 +145,4 @@ const initRescue = async (btn) => {
     }
 }
 
-initRescue()
+initRescue(document.getElementById('jl-rescue-action'))
