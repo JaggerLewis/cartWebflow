@@ -71,13 +71,13 @@ const tracks = async (key) => {
         pos =  {lat : marker.lat, lng : marker.lon}
         switch (marker.tracking_cmd) {
             case 0 : 
-                step = 4
+                step = 3
                 circle.fillColor = '#4287f5'
                 circle.strokeColor = '#4287f5'
                 circle.setMap(map)
                 break
             case 1 : 
-                step = 5
+                step = 4
                 circle.setMap(null)
                 let tmp = new google.maps.Marker({
                     map: map,
@@ -108,29 +108,29 @@ const updateLoading = (step) => {
     switch (step) {
         case 2:
             clearPath(1)
-            title.innerHTML = 'step 2'
-            desc.innerHTML = 'desc 2'
+            title.innerHTML = 'Demande de localisation envoyée'
+            desc.innerHTML = "Nous contactons votre collier, cela peut prendre du temps s'il se trouve dans une zone à faible couverture réseau..."
             break;
         case 3:
             clearPath(2)
-            title.innerHTML = 'step 3'
-            desc.innerHTML = 'desc 3'
+            title.innerHTML = 'Boîtier contacté, localisation en cours'
+            desc.innerHTML = 'Votre chien se trouve dans cette zone, nous recherchons actuellement un position plus précise.'
             break;
         case 4:
             clearPath(3)
-            title.innerHTML = 'step 4'
-            desc.innerHTML = 'desc 4'
+            title.innerHTML = dog.name  + ' est ici'
+            desc.innerHTML = dog.name + ' est actuelement localisé à cette prosition'
             break;
         case 5:
             clearPath(4)
-            title.innerHTML = 'step 5'
-            desc.innerHTML = 'desc 5'
+            title.innerHTML = 'Arrête en cours'
+            desc.innerHTML = "Nous contactons le boîtier afin d'arreter la localisation"
             break;
     
         default:
             clearPath(0)
-            title.innerHTML = 'step 1'
-            desc.innerHTML = 'desc 1'
+            title.innerHTML = "Recherche de l'antenne"
+            desc.innerHTML = "Avant de contacter votre boîtier, nous localison la zone grâce à l'antenne réseau la plus proche"
             break;
     }
 }
@@ -150,6 +150,7 @@ const clearMap = () => {
 }
 
 const stopRescue = async (key) => {
+    updateLoading(5)
     clearInterval(timer);
     let res = await fetch(`https://app-api.mypet.fit/collar/${dog.collar.simcardID}/rescue`,
         {
@@ -160,6 +161,7 @@ const stopRescue = async (key) => {
 
     let newBtn = switchBtn('jl-rescue-action', () => initRescue(document.getElementById('jl-rescue-action')))
     newBtn.innerHTML = 'Lancer une localisation'
+    updateLoading(0)
 }
 
 const initRescue = async (btn) => {
