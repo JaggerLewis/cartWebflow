@@ -839,7 +839,7 @@ const toLife = () => {
     })
 }
 
-const initMap = async (node) => {
+const initMap = async (node, stop) => {
     let position
     let data = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
         method: 'GET',
@@ -866,8 +866,9 @@ const initMap = async (node) => {
             center: position,
             radius: data.CellTower?.accuracy ?? 500,
           });
- 
-          initRescue(document.getElementById('jl-rescue-action'))
+          if (stop) {
+              initRescue(document.getElementById('jl-rescue-action'))
+            }
     } 
     else {
         setTimeout(() => initMap(node), 2000)
