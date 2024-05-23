@@ -871,7 +871,7 @@ const initMap = async (node, stop) => {
             }
     } 
     else {
-        setTimeout(() => initMap(node), 2000)
+        setTimeout(() => initMap(node), 20000)
     }
 
     
