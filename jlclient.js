@@ -120,14 +120,15 @@ const initClient = {
     'jl-collar-synchro-state' : (node) => node.innerHTML = dog.geolocation.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille',
     'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé',
     'jl-galery-list-0' : () => intiPict(),
-    'jl-rescue-action' : () =>  loadRescue(),
+    'jl-rescue-action' : (node) =>  loadRescue(node),
 }
 
-const loadRescue = () => {
+const loadRescue = (node) => {
     let s = document.createElement('script')
     s.type = 'text/javascript'
     s.src = 'https://webcart.jagger-lewis.com/jlrescue.js'
     document.getElementsByTagName('head')[0].appendChild(s)
+    initRescue(node)
 }
 
 const logout = () => {
@@ -1478,9 +1479,6 @@ const getAll = async () => {
         await getDog(dog._id)
     }
     loaderContainer.style.display = 'none'
-    if (document.getElementById('jl-rescue-action')) {
-        initRescue(document.getElementById('jl-rescue-action'))
-    }
 
 
   
