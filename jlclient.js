@@ -1008,6 +1008,10 @@ const setRescue = async (rescue) => {
     document.getElementById('jag-detail-activity').style.display = 'none'
     document.getElementById('jag-detail-rescue').style.display = 'none'
     let datas =  await fetch(baseurl + '/personal_activity/' + rescue._id, {headers : header}).then(async (res) => await res.json()).then((res) => res.data)
+    if (!datas.gps_data_affine) {
+        showAddCart('Oups, pas de données disponibles pour cette localisation', true)
+        return
+    }
     let line =  Object.values(JSON.parse(datas.gps_data_affine)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
     if (!map) {
         try {
