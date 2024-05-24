@@ -550,6 +550,7 @@ const cancelSubScriptionEmail = async () => {
 }
 
 const changeSubscription = async (type) => {
+    await loadAbonnement()
     let sub = findNewAbonnementSolo(type).prices[0].id
     let result = await fetch(
         baseurl + '/stripe/checkout_session/subscription/update', {
