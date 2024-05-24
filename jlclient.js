@@ -1141,7 +1141,6 @@ const checkActivation = async () => {
 
     let serial = document.getElementById('jl_Activation_serialNumber').value
     let phone = document.getElementById('jl_Activation_phoneNumber').value.replaceAll(' ', '')
-    phone = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9)
     if (!phone.match(regexPhone)) {
         showAddCart('Numéro de téléphone incorrect (+33612345678)', true)
         return
@@ -1150,6 +1149,7 @@ const checkActivation = async () => {
         showAddCart('Numéro de serie incorrect (JL1-1111A11A)', true)
         return
     }
+    phone = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9)
     const result = await fetch(baseurl + '/collar/serialNumber', {
         method: "POST",
         headers : header,
