@@ -1380,6 +1380,7 @@ const initDashboard = async (node) => {
                 newCard.addEventListener('click', async () => {
                      loaderContainer.style.display = 'flex'
                      await getDog(localDog._id)
+                     setAll()
                 
                      loaderContainer.style.display = 'none'
                     setidentity()
