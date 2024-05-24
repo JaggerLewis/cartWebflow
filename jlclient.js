@@ -846,6 +846,7 @@ const initMap = async (node, stop) => {
         document.getElementById('jl-rescue-action').innerHTML = 'Lancer une géolocalisation'
         document.getElementById('jl-rescue-action').parentElement.style.backgroundColor = 'grey'
         node.innerHTML = 'Votre abonnement est outdated'
+        return
     }
     let position
     let data = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
