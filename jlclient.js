@@ -996,9 +996,43 @@ const setBound = () => {
 }
 
 const setRescue = async (rescue) => {
+    if (!icon) {
+        icon = {
+            url: "https://assets-global.website-files.com/6549f4ba8294cf140608d893/664e065a96ae535c2291cf88_dog%20pict.png",
+            scaledSize: new google.maps.Size(30, 30), 
+            origin: new google.maps.Point(0,0),
+            anchor: new google.maps.Point(0, 0)
+        };
+    }
     document.getElementById('jag-detail-activity').style.display = 'none'
     document.getElementById('jag-detail-rescue').style.display = 'none'
-    let datas =  await fetch(baseurl + '/personal_activity/' + rescue._id, {headers : header}).then(async (res) => await res.json())
+    let datas =  await fetch(baseurl + '/personal_activity/' + rescue._id, {headers : header}).then(async (res) => await res.json()).then((res) => res.data)
+    let line =  Object.values(JSON.parse(datas.gps_data_affine)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
+    if (!map) {
+        try {
+            map = new Map(document.getElementById('jl-map'), {
+                zoom: 14,
+                center: line[0],
+                mapId: "DEMO_MAP_ID",
+            });
+        }
+        catch (e) {
+            showAddCart('Oups, une erreur est survenue, rechargez la page', true)
+        }
+    }
+    let pos
+    line.forEach((marker) => {
+        pos =  {lat : marker.lat, lng : marker.lng}
+        let tmp = new google.maps.Marker({
+            map: map,
+            position: pos,
+            title: "",
+            icon : icon ?? `https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c893a5d2b02d82784dbdc_imagedog.png`
+        });
+        markers.push(tmp)
+    })
+    map.setCenter(pos)
+
     console.log(datas);
 
 }
