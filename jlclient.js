@@ -628,10 +628,10 @@ const initOption = async () => {
             case 'monthly':
                 document.getElementById('jl-abo-change').innerHTML = 'Changer ma formule'
                 document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
-                
                 break;
             default:
                 document.getElementById('jl-abo-change').style.display = 'none'
+                document.getElementById('jag-'+type+'-actif-end').style.display = 'none'
                 break;
         }
     })
