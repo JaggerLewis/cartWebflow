@@ -599,7 +599,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-resilli' ).style.display = 'none'
                 document.getElementById('jag-abo-stop' ).style.display = 'flex'
                 document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? 'Formule à vie'
-                document.getElementById('jag-abo-stoped-action' )?.style.display = 'none'
+                document.getElementById('jag-abo-stoped-action' ).style.display = 'none'
                 document.getElementById('jag-'+type+'-actif-start').innerHTML = 'Abonnement actif depuis le '+ getDate(dog.collar.formula_subscription.subscription_date)
                 document.getElementById('jag-'+type+'-actif-end').innerHTML = "Jusqu'au " + getDate(dog.collar.formula_subscription.timeout)
                 break;
