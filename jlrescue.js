@@ -206,6 +206,7 @@ const initRescue = async (btn) => {
         }
     }
     else {
+        btn.innerHTML = 'Lancer une géolocalisation'
         btn.addEventListener('click', () => startRescue(btn))
     }
 }
