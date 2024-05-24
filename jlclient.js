@@ -1252,7 +1252,7 @@ const getAbonnement = async () => {
 const getDog = async (id) => {
     dog = JSON.parse(localStorage.getItem('dog'))
     if (dog && !id) {
-        if (JSON.parse(dog.collar.settings.simActivated).isActivated) {
+        if (!JSON.parse(dog.collar.settings.simActivated).isActivated) {
             window.open(REDIRECT.active)
         }
         return
