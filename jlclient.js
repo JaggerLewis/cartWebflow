@@ -963,6 +963,9 @@ const initActivity = (type) => {
                     newCard.addEventListener('click', () => setMap(activity));
                 }
             }
+            if (type == 'rescue') {
+                    newCard.addEventListener('click', () => setRescue(activity));
+            }
         }
     })
     card.style.display = 'none'
@@ -990,6 +993,14 @@ const setBound = () => {
     bounds.extend(new google.maps.LatLng(slat, slng));
     bounds.extend(new google.maps.LatLng(blat, blng));
     map.fitBounds(bounds)
+}
+
+const setRescue = async (rescue) => {
+    document.getElementById('jag-detail-activity').style.display = 'none'
+    document.getElementById('jag-detail-rescue').style.display = 'none'
+    let datas =  await fetch(baseurl + '/personal_activity/' + rescue._id, {headers : header}).then(async (res) => await res.json())
+    console.log(datas);
+
 }
 
 const setMap = async (activity) => {
