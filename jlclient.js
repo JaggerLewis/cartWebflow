@@ -622,7 +622,7 @@ const initOption = async () => {
         
         switch (dog.collar.formula_subscription.type) {
             case 'yearly':
-                document.getElementById('jl-abo-change').innerHTML = 'Passer à vie'
+                document.getElementById('jl-abo-change').innerHTML = 'Passer à la formule à vie'
                 document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.formula_life, '_self'))
                 break;
             case 'monthly':
