@@ -1010,6 +1010,8 @@ const setRescue = async (rescue) => {
     let line =  Object.values(JSON.parse(datas.gps_data_affine)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
     if (!map) {
         try {
+             const { Map } = await google.maps.importLibrary("maps");
+
             map = new Map(document.getElementById('jl-map'), {
                 zoom: 14,
                 center: line[0],
@@ -1058,6 +1060,8 @@ const setMap = async (activity) => {
     let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
     if (!map) {
         try {
+            const { Map } = await google.maps.importLibrary("maps");
+
             map = new Map(document.getElementById('jl-map'), {
                 zoom: 14,
                 center: line[0],
