@@ -993,16 +993,28 @@ const setBound = () => {
 }
 
 const setMap = async (activity) => {
+    
     document.getElementById('jag-detail-activity').style.display = 'flex'
     document.getElementById('jag-detail-rescue').style.display = 'none'
    
-    clearMap()
-
+    
     let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())
     if (!datas.data.gps_data) {
         showAddCart('Oups pas de données')
         return
     }
+    if (!map) {
+        const { Map } = await google.maps.importLibrary("maps");
+
+        console.log(datas.data.gps_data)
+        position = { lat: datas.data.gps_data[0].lat, lng: datas.data.gps_data[0].lon};
+            map = new Map(node, {
+                zoom: 14,
+                center: position,
+                mapId: "map",
+            });
+    }
+    clearMap()
     let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
     if (!map) {
         try {
