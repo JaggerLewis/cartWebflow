@@ -1140,7 +1140,7 @@ const checkActivation = async () => {
 
     let serial = document.getElementById('jl_Activation_serialNumber').value
     let phone = document.getElementById('jl_Activation_phoneNumber').value.replaceAll(' ', '')
-
+    phone = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9)
     if (!phone.match(regexPhone)) {
         showAddCart('Numéro de téléphone incorrect (+33612345678)', true)
         return
@@ -1154,7 +1154,7 @@ const checkActivation = async () => {
         headers : header,
         body: JSON.stringify({
             'serialNumber' : serial,
-            'phone' : res = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9),
+            'phone' :  phone,
         }), 
       }).then(async (res) => res.status) 
     
