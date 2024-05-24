@@ -1041,7 +1041,6 @@ const setRescue = async (rescue) => {
     })
     map.setCenter(pos)
 
-    console.log(datas);
 
 }
 
@@ -1155,7 +1154,6 @@ const validateAction = async () => {
             "phoneToken": value
         }), 
       }).then(async (res) => await res?.json())
-      console.log(result)
       if (result.result) {
         if (result.result.activated) {
             window.open(REDIRECT.active_3 + '?session_id=725', '_self')
@@ -1187,7 +1185,6 @@ const checkActivationToken = async () => {
             'serialNumber' : serial,
         }), 
     }).then(async (res) => await res?.json())
-    console.log(result)
     if (result.result) {
       if (result.result.activated) {
           window.open(REDIRECT.active_3 + '?session_id=725', '_self')
@@ -1264,7 +1261,6 @@ const getCart = async () => {
         method: "GET",
         headers : header,
     })
-    console.log(session_id);
     if (result.status != 200 && session_id != '725') {
         window.open(REDIRECT.active, '_self')
         return
