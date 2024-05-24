@@ -98,7 +98,7 @@ const initClient = {
     'jl_Abonnement_family_action' : (node) => node.addEventListener('click', () => aboAction('yearly')),
     'jl-galerie-link' : (node) => node.innerHTML = node.innerHTML.replace('{{nameDog}}', dog.name),
     'jl_Abonnement_Premium_action' : (node) => node.addEventListener('click', () => aboAction('life')),
-    'jl-abo-change' : (node) => node.addEventListener('click', () => window.open(REDIRECT.abo)),
+    'jl-abo-change' : (node) => node.addEventListener('click', () => window.open(REDIRECT.abo, '_self')),
     'jl-formula-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('abo')),
     'jl-option-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('option')),
     'jl-insurance-action' : (node) => node.addEventListener('click', () => formulaPageSwitch('insurance')),
@@ -1252,8 +1252,8 @@ const getAbonnement = async () => {
 const getDog = async (id) => {
     dog = JSON.parse(localStorage.getItem('dog'))
     if (dog && !id) {
-        if (!JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
-            window.open(REDIRECT.active)
+        if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
+            window.open(REDIRECT.active, '_self')
         }
         return
     }
@@ -1261,8 +1261,8 @@ const getDog = async (id) => {
         dog = await fetch(baseurl + '/dog/'+ (id ?? user.dogs[0]._id), {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
-        if (!JSON.parse(dog.collar.settings.simActivated ?? "{}").isActivated) {
-            window.open(REDIRECT.active)
+        if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
+            window.open(REDIRECT.active, '_self')
         }
         dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
             .then(async (res) => await res.json())
