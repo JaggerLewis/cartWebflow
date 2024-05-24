@@ -1261,7 +1261,7 @@ const getDog = async (id) => {
         dog = await fetch(baseurl + '/dog/'+ (id ?? user.dogs[0]._id), {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
-        if (JSON.parse(dog.collar.settings.simActivated ?? "{}").isActivated) {
+        if (!JSON.parse(dog.collar.settings.simActivated ?? "{}").isActivated) {
             window.open(REDIRECT.active)
         }
         dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
