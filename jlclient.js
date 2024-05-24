@@ -996,6 +996,7 @@ const setBound = () => {
 }
 
 const setRescue = async (rescue) => {
+    clearMap()
     if (!icon) {
         icon = {
             url: "https://assets-global.website-files.com/6549f4ba8294cf140608d893/664e065a96ae535c2291cf88_dog%20pict.png",
@@ -1024,17 +1025,12 @@ const setRescue = async (rescue) => {
     }
     let pos
     line.forEach((marker, index) => {
-        if (index == 0) {
-            icon.opacity = 1
-        }
-        else {
-            icon.opacity = 0.2
-        }
         pos =  {lat : marker.lat, lng : marker.lng}
         let tmp = new google.maps.Marker({
             map: map,
             position: pos,
             title: "",
+            opacity : index == 0 ? 1 : 0.2,
             icon : icon ?? `https://assets-global.website-files.com/6549f4ba8294cf140608d893/664c893a5d2b02d82784dbdc_imagedog.png`
         });
         markers.push(tmp)
