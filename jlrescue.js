@@ -191,6 +191,7 @@ const initRescue = async (btn) => {
   
     await getDog(dog._id)
     let acti = dog.personalActivities.find((elem) => !elem.end_timestamp)
+   
     if (acti) {
         if (acti.type == 'rescue') {
             let btn = switchBtn('jl-rescue-action', () => stopRescue(acti.timestamp_key) )

@@ -122,6 +122,7 @@ const initClient = {
     'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé',
     'jl-galery-list-0' : () => intiPict(),
     'jl-rescue-action' : () =>  loadRescue(),
+    'jl-change-formula-action' : () => localStorage.removeItem('dog')
 }
 
 const loadRescue = () => {
@@ -841,6 +842,11 @@ const toLife = () => {
 }
 
 const initMap = async (node, stop) => {
+    if (dog.collar.formula_subscription.timeout - Date.now() < 0) {
+        document.getElementById('jl-rescue-action').innerHTML = 'Lancer une géolocalisation'
+        document.getElementById('jl-rescue-action').parentElement.style.backgroundColor = 'grey'
+        node.innerHTML = 'Votre abonnement est outdated'
+    }
     let position
     let data = await fetch(baseurl + `/collar/${dog.collar.simcardID}/checkgeolocation`, {
         method: 'GET',
