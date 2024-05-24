@@ -7,7 +7,7 @@ const REDIRECT = {
     home : 'localisation-activite',
     abo : 'choix-abonnement-upgrade-b',
     stop : 'confirmation-de-resiliation',
-    active : 'activation-1-3',
+    active : 'step1',
     active_2 : 'activation-produit-etape02-copy',
     active_3 : 'step3',
     formula_life : 'lifetimeformula',
