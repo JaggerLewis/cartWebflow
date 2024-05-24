@@ -126,7 +126,8 @@ const initClient = {
     'jl-collar-activate' : (node) => setActivateBtn(node)
 }
 
-const setActivateBtn = (btn) => {
+const setActivateBtn = async (btn) => {
+    await getDog()
     if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
         
         btn.style.display ='flex'
