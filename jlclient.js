@@ -224,7 +224,7 @@ const deleteAccountEmail = async () => {
                 headers: header
             })
     if (res.status == 200) {
-        window.open(REDIRECT.home, '_self')
+        window.open(REDIRECT.email, '_self')
     }
     else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
@@ -543,7 +543,7 @@ const cancelSubScriptionEmail = async () => {
     .then(async (res) => await res.json())
 
     if (result.success) {
-        window.open(REDIRECT.home, '_self')
+        window.open(REDIRECT.email, '_self')
     }
     else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
