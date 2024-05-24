@@ -570,6 +570,7 @@ const initOption = async () => {
             headers : header,
           })
         await getDog(dog._id)
+        loaderContainer.style.display = 'none'
         getAll() 
     }
 
@@ -1457,11 +1458,14 @@ const disableButton = () => {
 }
 
 const getAll = async () => {
-    loaderContainer = document.createElement('div')
-    loaderContainer.classList.add('jl-loader-container')
-    loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
-    body.insertBefore(loaderContainer, document.body.firstChild);
+    if (!loaderContainer) {
+        loaderContainer = document.createElement('div')
+        loaderContainer.classList.add('jl-loader-container')
+        loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
+        body.insertBefore(loaderContainer, document.body.firstChild);
+    }
     loaderContainer.style.display = 'flex'
+
     if (document.getElementById('jag-step-3'))
         await getCart();
     else if (document.getElementById('jag-step-2')) {
