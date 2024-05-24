@@ -1003,18 +1003,6 @@ const setMap = async (activity) => {
         showAddCart('Oups pas de données')
         return
     }
-    if (!map) {
-        const { Map } = await google.maps.importLibrary("maps");
-
-        let data = Object.values(JSON.parse(datas.data.gps_data))[0]
-        console.log(data)
-        position = { lat: data.lat, lng: data.lng};
-        map = new Map(document.getElementById('jl-map'), {
-            zoom: 14,
-            center: position,
-            mapId: "map",
-        });
-    }
     clearMap()
     let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
     if (!map) {
