@@ -1007,12 +1007,12 @@ const setMap = async (activity) => {
         const { Map } = await google.maps.importLibrary("maps");
 
         console.log(datas.data.gps_data)
-        position = { lat: datas.data.gps_data[0].lat, lng: datas.data.gps_data[0].lon};
-            map = new Map(node, {
-                zoom: 14,
-                center: position,
-                mapId: "map",
-            });
+        position = { lat: datas.data.gps_data[0].lat, lng: datas.data.gps_data[0].lng};
+        map = new Map(document.getElementById('jl-map'), {
+            zoom: 14,
+            center: position,
+            mapId: "map",
+        });
     }
     clearMap()
     let line =  Object.values(JSON.parse(datas.data.gps_data)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
