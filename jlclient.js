@@ -1251,12 +1251,18 @@ const getAbonnement = async () => {
 const getDog = async (id) => {
     dog = JSON.parse(localStorage.getItem('dog'))
     if (dog && !id) {
+        if (JSON.parse(dog.collar.settings.simActivated).isActivated) {
+            window.open(REDIRECT.active)
+        }
         return
     }
     if (user.dogs.length != 0) {
         dog = await fetch(baseurl + '/dog/'+ (id ?? user.dogs[0]._id), {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
+        if (JSON.parse(dog.collar.settings.simActivated).isActivated) {
+            window.open(REDIRECT.active)
+        }
         dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.BatteryInfos)
