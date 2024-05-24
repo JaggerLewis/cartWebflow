@@ -354,9 +354,9 @@ const initOrder = async () => {
         newCard.style.display = 'flex'
         changeChildsId(newCard, '-'+order._id, 'jag-')
         node.appendChild(newCard)
-        document.getElementById('jag-order-ref-'+order._id).innerHTML = order.orderNumber
+        document.getElementById('jag-order-ref-'+order._id).innerHTML = order?.orderNumber
         document.getElementById('jag-order-date-'+order._id).innerHTML = getDate(order.createdAt)
-        document.getElementById('jag-order-price-'+order._id).innerHTML = order.total.total / 100 + '€'
+        document.getElementById('jag-order-price-'+order._id).innerHTML = ((order?.total?.total / 100) ?? 0 ) + '€'
         document.getElementById('jag-order-status-'+order._id).innerHTML = getorderStatus(order.status)
         document.getElementById('jag-order-action-'+order._id).addEventListener('click', async () => {
             loaderContainer.style.display = 'flex'
@@ -845,7 +845,7 @@ const initMap = async (node, stop) => {
     if (dog.collar.formula_subscription.timeout - Date.now() < 0) {
         document.getElementById('jl-rescue-action').innerHTML = 'Lancer une géolocalisation'
         document.getElementById('jl-rescue-action').parentElement.style.backgroundColor = 'grey'
-        node.innerHTML = 'Votre abonnement est outdated'
+        document.getElementById('jl-rescue-msg').innerHTML = 'Votre abonnement est outdated'
         return
     }
     let position
