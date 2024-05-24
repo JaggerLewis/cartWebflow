@@ -203,7 +203,7 @@ const initRescue = async (btn) => {
         }
         else if (acti.type == 'activity') {
             btn.parentElement.style.backgroundColor = 'grey'
-            btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en court !'))
+            btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en cours !'))
         }
     }
     else {
