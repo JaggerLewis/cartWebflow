@@ -852,6 +852,7 @@ const toLife = () => {
 }
 
 const initMap = async (node, stop) => {
+    const { Map } = await google.maps.importLibrary("maps");
     if (dog.collar.formula_subscription.timeout - Date.now() < 0) {
         document.getElementById('jl-rescue-action').innerHTML = 'Lancer une géolocalisation'
         document.getElementById('jl-rescue-action').parentElement.style.backgroundColor = 'grey'
@@ -863,7 +864,6 @@ const initMap = async (node, stop) => {
         method: 'GET',
         headers : header
     }).then(async (res) => res.json())
-    const { Map } = await google.maps.importLibrary("maps");
 
     if (data.CellTower) {
         position = { lat: data.CellTower.lat, lng: data.CellTower.lon};
