@@ -122,7 +122,16 @@ const initClient = {
     'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé',
     'jl-galery-list-0' : () => intiPict(),
     'jl-rescue-action' : () =>  loadRescue(),
-    'jl-change-formula-action' : () => localStorage.removeItem('dog')
+    'jl-change-formula-action' : () => localStorage.removeItem('dog'),
+    'jl-collar-activate' : (node) => setActivateBtn(node)
+}
+
+const setActivateBtn = (btn) => {
+    if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
+        
+        btn.style.display ='flex'
+        btn.addEventListener('click', window.open(REDIRECT.active + `?sn=${dog.collar.serialNumber}&HeyJag=${token}`, '_self'))
+    }
 }
 
 const loadRescue = () => {
@@ -1252,18 +1261,12 @@ const getAbonnement = async () => {
 const getDog = async (id) => {
     dog = JSON.parse(localStorage.getItem('dog'))
     if (dog && !id) {
-        if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
-            window.open(REDIRECT.active, '_self')
-        }
         return
     }
     if (user.dogs.length != 0) {
         dog = await fetch(baseurl + '/dog/'+ (id ?? user.dogs[0]._id), {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.dog)
-        if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
-            window.open(REDIRECT.active, '_self')
-        }
         dog.battery = await fetch(baseurl + '/collar/'+ dog.collar.simcardID+'/battery', {headers : header})
             .then(async (res) => await res.json())
             .then((res) => res.BatteryInfos)
