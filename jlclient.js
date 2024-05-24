@@ -1021,7 +1021,13 @@ const setRescue = async (rescue) => {
         }
     }
     let pos
-    line.forEach((marker) => {
+    line.forEach((marker, index) => {
+        if (index == 0) {
+            icon.opacity = 1
+        }
+        else {
+            icon.opacity = 0.2
+        }
         pos =  {lat : marker.lat, lng : marker.lng}
         let tmp = new google.maps.Marker({
             map: map,
