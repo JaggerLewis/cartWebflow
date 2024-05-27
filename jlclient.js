@@ -647,6 +647,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-none').style.display = 'flex'
                 document.getElementById('jag-abo-historic').style.display = 'none'
                 document.getElementById('jl-abo-change').style.display = 'none'
+                document.getElementById('jag-abo-none-action').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
                 card.style.display = 'none'
                 break;
         }
