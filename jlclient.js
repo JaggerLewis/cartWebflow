@@ -124,6 +124,17 @@ const initClient = {
     'jl-change-formula-action' : () => localStorage.removeItem('dog'),
     'jl-collar-activate' : (node) => setActivateBtn(node),
     'jl-mail-confirm-desc' : async (node) => setEmail(node),
+    'jl-life-formula' : (_) => setLifeFormula(),
+}
+
+const setLifeFormula = async () => {
+    abonnement = await loadAbonnement()
+    let formula = abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_'))
+    let lifePrice36 = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price / 36).toFixed(2) + '€'
+
+    document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
+    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')
+
 }
 
 const setEmail = async (node) => {
