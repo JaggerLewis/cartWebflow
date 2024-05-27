@@ -127,10 +127,14 @@ const initClient = {
 
 const setActivateBtn = async (btn) => {
     await getDog()
+
     if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
         
         btn.style.display ='flex'
         btn.addEventListener('click', () => window.open(REDIRECT.active + `?sn=${dog.collar.serialNumber}&HeyJag=${token}`, '_self'))
+    }
+    else {
+        btn.style.display ='none'
     }
 }
 
