@@ -134,7 +134,7 @@ const updateLoading = (step) => {
         case 4:
             clearPath(3)
             title.innerHTML = 'Boîtier localisé'
-            desc.innerHTML = dog.name + ' est actuelement localisé à cette prosition'
+            desc.innerHTML = dog.name + ' est actuellement localisé à cette position'
             break;
         case 5:
             clearPath(4)
