@@ -344,6 +344,18 @@ const initFamily = () => {
 
 
 const switchInfo = (type) => {
+    let color = ['var(--main)', 'var(--gristypofaible)']
+    
+    if (type == 'info') {
+        color = color.reverse()
+    }
+    
+    document.getElementById('jl-order-order').style.color = color[0]
+    document.getElementById('jl-order-order').style.borderColor = color[0]
+    document.getElementById('jl-order-info').style.color = color[1]
+    document.getElementById('jl-order-info').style.borderColor = color[1]
+
+
     document.getElementById('jag-order-list').style.display = type == 'info' ? 'none' : 'flex'
     document.getElementById('jag-info-container').style.display = type == 'info' ? 'flex' : 'none'
 }
