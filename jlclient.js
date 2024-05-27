@@ -129,14 +129,20 @@ const initClient = {
         // jag-historic-popup
 }
 
-const showAboHistoric = async (node) => {
-    if (node.style.display == 'flex') {
-        node.style.display = 'none'
-        return;
-    } 
-    else {
-        
-    }
+const showAboHistoric = async () => {
+    document.getElementById('jag-historic-popup').style.display = 'flex'
+    let card = document.getElementById('jag-abo-historic-card')
+    let orders = await fetch(baseurl + '/user/order', {headers : header})
+    .then(async (res) => await res.json())
+    .then((res) => res.orders)
+
+    orders.filter((elem) => elem.type != 'product').forEach((order) => {
+        let newCard = card.cloneNode(true)
+        changeChildsId(newCard, '-'+order._id, 'jag-')
+        card.parentElement.appendChild(newCard)
+    })
+
+    card.style.display = 'none'
 }
 
 const setLifeFormula = async () => {
