@@ -900,7 +900,7 @@ const initMap = async (node, stop) => {
     if (dog.collar.formula_subscription.timeout - Date.now() < 0) {
         document.getElementById('jl-rescue-action').innerHTML = 'Lancer une géolocalisation'
         document.getElementById('jl-rescue-action').parentElement.style.backgroundColor = 'grey'
-        document.getElementById('jl-rescue-msg').innerHTML = 'Votre abonnement est arrivé à expiration'
+        document.getElementById('jl-rescue-msg').innerHTML = "Votre abonnement est arrivé à expiration !<br>Vous n'avez plus accès à cette fonctionnalité."
         return
     }
     let position
