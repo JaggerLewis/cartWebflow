@@ -122,7 +122,13 @@ const initClient = {
     'jl-galery-list-0' : () => intiPict(),
     'jl-rescue-action' : () =>  loadRescue(),
     'jl-change-formula-action' : () => localStorage.removeItem('dog'),
-    'jl-collar-activate' : (node) => setActivateBtn(node)
+    'jl-collar-activate' : (node) => setActivateBtn(node),
+    'jl-mail-confirm-desc' : async (node) => setEmail(node),
+}
+
+const setEmail = async (node) => {
+    await getUser();
+    node.innerHTML = node.innerHTML.replace('{{email}}', user.email)
 }
 
 const setActivateBtn = async (btn) => {
