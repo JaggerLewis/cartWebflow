@@ -648,6 +648,7 @@ const initOption = async () => {
                 document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
                 break;
             default:
+                document.getElementById('jag-abo-stop').style.display = 'none'
                 document.getElementById('jl-abo-change').style.display = 'none'
                 document.getElementById('jag-'+type+'-actif-end').style.display = 'none'
                 break;
