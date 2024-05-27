@@ -125,6 +125,18 @@ const initClient = {
     'jl-collar-activate' : (node) => setActivateBtn(node),
     'jl-mail-confirm-desc' : async (node) => setEmail(node),
     'jl-life-formula' : (_) => setLifeFormula(),
+    'jl-abo-historic' : (node) => node.addEventListener('click', () => showAboHistoric()),
+        // jag-historic-popup
+}
+
+const showAboHistoric = async (node) => {
+    if (node.style.display == 'flex') {
+        node.style.display = 'none'
+        return;
+    } 
+    else {
+        
+    }
 }
 
 const setLifeFormula = async () => {
@@ -663,7 +675,7 @@ const initOption = async () => {
                 break;
             default:
                 document.getElementById('jag-abo-none').style.display = 'flex'
-                document.getElementById('jag-abo-historic').style.display = 'none'
+                document.getElementById('jl-abo-historic').style.display = 'none'
                 document.getElementById('jl-abo-change').style.display = 'none'
                 document.getElementById('jag-abo-none-action').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
                 card.style.display = 'none'
@@ -687,7 +699,7 @@ const initOption = async () => {
                 break;
             default :
                 document.getElementById('jag-abo-none').style.display = 'flex'
-                document.getElementById('jag-abo-historic').style.display = 'none'
+                document.getElementById('jl-abo-historic').style.display = 'none'
                 document.getElementById('jl-abo-change').style.display = 'none'
                 document.getElementById('jag-abo-none-action').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
                 card.style.display = 'none'
