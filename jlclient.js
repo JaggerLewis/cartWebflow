@@ -645,6 +645,8 @@ const initOption = async () => {
                 break;
             default:
                 document.getElementById('jag-abo-none').style.display = 'flex'
+                document.getElementById('jag-abo-historic').style.display = 'none'
+                document.getElementById('jl-abo-change').style.display = 'none'
                 card.style.display = 'none'
                 break;
         }
