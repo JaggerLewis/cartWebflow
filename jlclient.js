@@ -1421,6 +1421,9 @@ const initDashboard = async (node) => {
     loaderContainer.style.display = 'flex'
     let container = document.getElementById('jag-profil-dog-container');
     user.dogs.forEach((localDog) => {
+        if (document.getElementById('jag-profil-dog-container-' + localDog._id)) {
+            return
+        }
                 newCard = container.cloneNode(true)
                 newCard.style.display = 'flex'
                 changeChildsId(newCard, '-'+localDog._id, 'jag-')
