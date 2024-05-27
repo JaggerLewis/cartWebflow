@@ -632,7 +632,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-stoped' ).style.display = 'none'
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
                 document.getElementById('jag-abo-stop' ).style.display = 'none'
-                document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.timeout) :  'Votre abonnement est résilié.<br>Il se termine le ' + getDate(dog.collar.formula_subscription.timeout)
+                document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.timeout) :  'Votre abonnement est résilié.<br>Il prendra fin le ' + getDate(dog.collar.formula_subscription.timeout)
                 document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? 'Formule à vie'
                 document.getElementById('jag-abo-stoped-action').style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
                 document.getElementById('jag-abo-stoped-action').addEventListener('click', () => restartAbo())
