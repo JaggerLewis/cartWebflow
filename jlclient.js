@@ -1278,12 +1278,10 @@ const getCart = async () => {
 
 
     let session_id = searchParams.get('session_id')
-    if (session_id != 725) {
         result =  await fetch('https://app-api.mypet.fit/order/checkout/' + session_id , {
             method: "GET",
             headers : header,
         })
-    }
     if (result.status != 200 && session_id != '725') {
         window.open(REDIRECT.active, '_self')
         return
