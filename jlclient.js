@@ -297,7 +297,7 @@ let initGalery =  () => {
     let list =  document.getElementById('jag-profil-identity-gallery-container')
     let img = document.getElementById('jag-profil-identity-gallery-pict')
     for (let i = 0; i < 3; i++) {
-        if (document.getElementById('jag-profil-identity-gallery-pict-' + pict.image._id)) {
+        if (document.getElementById('jag-profil-identity-gallery-pict-' + user.galery[i].image._id)) {
             return
         }
         let newPict = img.cloneNode(true)
