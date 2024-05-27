@@ -644,7 +644,7 @@ const initOption = async () => {
                 check.style.color = 'white'
                 break;
             default:
-                document.getElementById('jag-abo-container').innerHTML = "Vous n'avez pas d'abonnement"
+                document.getElementById('jag-abo-none').style.display = 'flex'
                 card.style.display = 'none'
                 break;
         }
