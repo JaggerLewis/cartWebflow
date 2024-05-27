@@ -917,6 +917,7 @@ const initMap = async (node, stop) => {
             radius: data.CellTower?.accuracy ?? 500,
           });
           map.setCenter(position)
+          map.setZoom(14);
           if (!stop) {
               initRescue(document.getElementById('jl-rescue-action'))
             }
