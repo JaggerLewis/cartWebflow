@@ -1355,6 +1355,9 @@ const hideCart = () => {
 
 
 const showAddCart = (text, isError) => {
+    if (isError) {
+        text = getTrad('Oups, une erreur est survenue, rechargez la page', 'Oops, an error has occurred, reload the page')
+    }
     document.getElementById('JL_AddCart_Snack_Label').textContent = text
     document.getElementById('JL_AddCart_Snack').style.display = 'block';
 

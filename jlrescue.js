@@ -40,7 +40,7 @@ const startRescue = async (btn) => {
             body: JSON.stringify({ 'mode': 'standard_follow', 'key': key })
         }).then(async (value) => await value.json());
 
-    btn.innerHTML = 'Arrêter la géolocalisation'
+    btn.innerHTML = getTrad('Arrêter la géolocalisation', 'Stop geolocation')
     switchBtn('jl-rescue-action', () => stopRescue(key) )
     circle?.setMap(map)
     loaderContainer.style.display = 'none'
@@ -123,34 +123,34 @@ const updateLoading = (step) => {
     switch (step) {
         case 2:
             clearPath(1)
-            title.innerHTML = 'Demande de localisation envoyée'
-            desc.innerHTML = "Nous contactons votre collier, cela peut prendre du temps s'il se trouve dans une zone à faible couverture réseau..."
+            title.innerHTML = getTrad('Demande de localisation envoyée', 'Location request sent')
+            desc.innerHTML = getTrad("Nous contactons votre collier, cela peut prendre du temps s'il se trouve dans une zone à faible couverture réseau...", 'We will contact your collar, which may take some time if it is in an area with poor network coverage...')
             break;
         case 3:
             clearPath(2)
-            title.innerHTML = 'Boîtier contacté, localisation en cours'
-            desc.innerHTML = 'Votre chien se trouve dans cette zone, nous recherchons actuellement un position plus précise.'
+            title.innerHTML = getTrad('Boîtier contacté, localisation en cours', 'Collar contacted, location in progress')
+            desc.innerHTML = getTrad('Votre chien se trouve dans cette zone, nous recherchons actuellement un position plus précise.', 'Your dog is in this area. We are currently looking for a more precise location.')
             break;
         case 4:
             clearPath(3)
-            title.innerHTML = 'Boîtier localisé'
-            desc.innerHTML = dog.name + ' est actuellement localisé à cette position'
+            title.innerHTML = getTrad('Boîtier localisé', 'Localized collar')
+            desc.innerHTML = dog.name +  getTrad('est actuellement localisé à cette position', 'is currently located at this position.')
             break;
         case 5:
             clearPath(4)
-            title.innerHTML = 'Arrête en cours'
-            desc.innerHTML = "Nous contactons le boîtier afin d'arreter la localisation"
+            title.innerHTML = getTrad('Arrête en cours', 'Stop in progress')
+            desc.innerHTML = getTrad("Nous contactons le boîtier afin d'arrêter la localisation", 'We contact the collar to stop the location')
             break;
         case 6:
             clearPath(-1)
-            title.innerHTML =  dog.name  + 'est introuvable...'
-            desc.innerHTML = `Nous continue de rechercher ${dog.name}, mais cela prends plus de temps que prévu`
+            title.innerHTML =  dog.name  + getTrad('est introuvable...', 'connot be found...')
+            desc.innerHTML = getTrad(`Nous continuons de rechercher ${dog.name}, mais cela prends plus de temps que prévu`, `We're still searching for ${dog.name}, but it's taking longer than expected`)
             break;
     
         default:
             clearPath(0)
-            title.innerHTML = "Recherche de l'antenne"
-            desc.innerHTML = "Avant de contacter votre boîtier, nous localison la zone grâce à l'antenne réseau la plus proche"
+            title.innerHTML = getTrad("Recherche de l'antenne", 'Antenna search')
+            desc.innerHTML = getTrad("Avant de contacter votre boîtier, nous localison la zone grâce à l'antenne réseau la plus proche", 'Before contacting your collar, we locate the area using the nearest network antenna')
             break;
     }
 }
@@ -180,7 +180,7 @@ const stopRescue = async (key) => {
         }).then(async (value) => await value.json());
 
     let newBtn = switchBtn('jl-rescue-action', () => initRescue(document.getElementById('jl-rescue-action')))
-    newBtn.innerHTML = 'Lancer une localisation'
+    newBtn.innerHTML = getTrad('Lancer une localisation', 'Start a search')
     updateLoading(0)
     clearMap()
     initMap(document.getElementById('jl-map'), true)
@@ -196,18 +196,18 @@ const initRescue = async (btn) => {
         if (acti.type == 'rescue') {
             let btn = switchBtn('jl-rescue-action', () => stopRescue(acti.timestamp_key) )
             updateLoading(2)
-            btn.innerHTML = 'Arrêter la géolocalisation'
+            btn.innerHTML =  getTrad('Arrêter la géolocalisation', 'Stop geolocation')
             timer = setInterval(() => {
                 tracks(acti.timestamp_key)
              }, 1000);
         }
         else if (acti.type == 'activity') {
             btn.parentElement.style.backgroundColor = 'grey'
-            btn.addEventListener('click', () =>   showAddCart('Une activité est déjà en cours !'))
+            btn.addEventListener('click', () =>   showAddCart(getTrad('Une activité est déjà en cours !', 'One activity is already underway!')))
         }
     }
     else {
-        btn.innerHTML = 'Lancer une géolocalisation'
+        btn.innerHTML = getTrad('Lancer une localisation', 'Start a search')
         btn.addEventListener('click', () => startRescue(btn))
     }
 }

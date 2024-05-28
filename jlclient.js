@@ -81,8 +81,8 @@ const initClient = {
     'jl-collar-id' : (node) => node.innerHTML = dog.collar.name,
     'jl-collar-activation' : (node) => node.innerHTML = getDate(dog.collar.activationDate),
     'jl-collar-version' : (node) => node.innerHTML = dog.collar.firmwareVersion,
-    'jl-collar-autonomy' : (node) => node.innerHTML = dog.battery.estimated != -1 ? 'Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie" : '',
-    'jl-collar-synchro-date' : (node) => node.innerHTML = dog.geolocation?.LastConnect ? 'Dernière mise à jour: ' +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')) : '',
+    'jl-collar-autonomy' : (node) => node.innerHTML = dog.battery.estimated != -1 ? getTrad('Il reste environ ' + converTimestamp(dog.battery.estimated) + " d'autonomie", "There's about " + converTimestamp(dog.battery.estimated) + " of autonomy left") : '',
+    'jl-collar-synchro-date' : (node) => node.innerHTML = dog.geolocation?.LastConnect ? getTrad('Dernière mise à jour: ', 'Last update: ') +  getDate(parseInt(Math.round(dog.geolocation.LastConnect) + '000')) : '',
     'jl_Activation_serialNumber' : (node) => node.value = new URLSearchParams(window.location.search).get('sn'),
     'jl_Activation_phoneNumber' : (_) => checkActivationToken(),
     'jl-map' : (node) => initMap(node),
@@ -117,8 +117,8 @@ const initClient = {
     'jl_switch_life' : (node) =>  node.addEventListener('click', () => changeSubscription('life')),
     'jl-activation-resend-code' : (node) => node.addEventListener('click', () => resendActivationCode()),
     'jl-resend-code' : (node) => node.addEventListener('click', () => resendCode()),
-    'jl-collar-synchro-state' : (node) => node.innerHTML = dog.geolocation.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille',
-    'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : 'Pas encore synchronisé',
+    'jl-collar-synchro-state' : (node) => node.innerHTML = dog.geolocation.endpointStatus ? getTrad('Le boîtier est connecté', 'Your collar is connected') : getTrad('Le boîtier est en veille', 'Your collar is on StandBy'),
+    'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : getTrad('Pas encore synchronisé', 'Not yet synchronized'),
     'jl-galery-list-0' : () => intiPict(),
     'jl-rescue-action' : () =>  loadRescue(),
     'jl-change-formula-action' : () => localStorage.removeItem('dog'),
@@ -130,19 +130,6 @@ const initClient = {
 }
 
 const showAboHistoric = async () => {
-    
-    const getType = (type) => {
-        switch (type) {
-            case 'subscription':
-                return 'Abonnement'
-            case 'subscription.update' : 
-                return "Mise à jour de l'abonnement"
-            case 'subscription.renew' :
-                return "Renouvellement de l'abonnement"
-            default:
-                return `autre(${type})`;
-        }
-    }
     
     document.getElementById('jag-historic-popup').style.display = 'flex'
     let card = document.getElementById('jag-abo-historic-card')
@@ -244,13 +231,13 @@ const initSmartDock = (node) => {
         return
     }
 
-    document.getElementById('jl-smartdock-title').innerHTML = assigned ? 'Smartdock appairé' : 'Smartdock non-appairé'
+    document.getElementById('jl-smartdock-title').innerHTML = assigned ? getTrad('Smartdock appairé', 'Smartdock paired') : getTrad('Smartdock non-appairé', 'Smartdock not paired')
     if (!assigned) {
-        document.getElementById('jl-smartdock-desc').innerHTML = "Configurez-le sur l'application"
+        document.getElementById('jl-smartdock-desc').innerHTML = getTrad("Configurez-le sur l'application", 'Configure it on the application')
     }
     else {
         let connected = dog.dock?.data?.dock_status?.isConnected ?? false
-        document.getElementById('jl-smartdock-desc').innerHTML = connected ? 'Connecté' : 'Non-Connecté'
+        document.getElementById('jl-smartdock-desc').innerHTML = connected ? getTrad('Connecté', 'Connected') : getTrad('Non-Connecté', 'Not connected')
         if (!connected) {
             document.getElementById('jl-smartdock-pic-activate').parentElement.style.display = 'none'
             document.getElementById('jl-smartdock-pic-desactivate').parentElement.style.display = 'flex'
@@ -269,7 +256,7 @@ const initGeoFencingLabel = (node) => {
     if (data.label == "") {
         document.getElementById('jag-geofencing-card').style.display = 'none'
     }
-    node.innerHTML = `${data.active ? 'Activée' : 'Désactivée'} dans un rayon de ${data.radius}m autour de ${data.label.name}`
+    node.innerHTML = `${data.active ? getTrad('Activée', 'Activated') : getTrad('Désactivée', 'Unactivated')} ${getTrad(`dans un rayon de ${data.radius}m autour de ${data.label.name}`, `within a radius of ${data.radius}m around ${data.label.name}`)}`
 }
 
 const initGeoFencingSwitch = (node) => {
@@ -335,7 +322,7 @@ const deleteAccountSms = async () => {
     
         let value = input.value
         if(value.length != 7) {
-            showAddCart('Code incorrect', true)
+            showAddCart(getTrad('Code incorrect', 'Incorrect code'), false)
             return
         }
     
@@ -397,7 +384,7 @@ const initFamily = () => {
     document.getElementById('jag-family-pict-' + user._id).src = "https://app-api.mypet.fit/img/" + user.image.type +"/"+ user.image.uuid 
     document.getElementById('jag-family-pict-' + user._id).srcset = "https://app-api.mypet.fit/img/" + user.image.type +"/"+ user.image.uuid 
     document.getElementById('jag-family-name-' + user._id).innerHTML =user.name
-    document.getElementById('jag-family-type-' + user._id).innerHTML = "Propriétaire"
+    document.getElementById('jag-family-type-' + user._id).innerHTML = getTrad("Propriétaire", 'Owner')
     if (!dog.family) {
         return
     }
@@ -409,7 +396,7 @@ const initFamily = () => {
         document.getElementById('jag-family-pict-' + membre._id).src = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
          document.getElementById('jag-family-pict-' + membre._id).srcset = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
         document.getElementById('jag-family-name-' + membre._id).innerHTML =membre.name
-        document.getElementById('jag-family-type-' + membre._id).innerHTML = "Ma Famille"
+        document.getElementById('jag-family-type-' + membre._id).innerHTML = getTrad("Ma Famille", 'My Family')
     })
 }
 
@@ -436,7 +423,7 @@ const initOrder = async () => {
     const getorderStatus = (status) => {
         switch (status) {
             case 'new' : 
-                return 'En cours de traitement'
+                return getTrad('En cours de traitement', 'Currently being processed')
             default :
             return `(${status})`
         }
@@ -468,7 +455,7 @@ const initOrder = async () => {
             const url = window.URL.createObjectURL(new Blob([blob]));
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'jl-facture-'+ order._id+'.pdf'; 
+            a.download = `jl-${getTrad('facture', 'invoice')}-${order._id}.pdf`; 
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
@@ -487,7 +474,7 @@ const initInfos = async () => {
     let infos
 
     if (res.status == 404) {
-        showAddCart('Utilisateur introuvable...')
+        showAddCart(getTrad('Utilisateur introuvable...', 'User not found...'))
         setTimeout(() => {
             history.back()
           }, "1000");
@@ -500,13 +487,13 @@ const initInfos = async () => {
         document.getElementById('jag-info-name').innerHTML = infos.result.customer.name
         document.getElementById('jag-info-firstname').innerHTML = infos.result.customer.name
         document.getElementById('jag-info-email').innerHTML = infos.result.customer.email
-        document.getElementById('jag-info-livraison').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : 'Inconnue'
+        document.getElementById('jag-info-livraison').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : getTrad('Inconnue', 'Unknown')
         document.getElementById('jag-info-phone').innerHTML = infos.result.customer.phone.replace('0033', '0')
-        document.getElementById('jag-info-facture').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : 'Inconnue'
+        document.getElementById('jag-info-facture').innerHTML =  infos.result.customer?.address ? infos.result.customer?.address.line1+ ',' + infos.result.customer?.address?.city : getTrad('Inconnue', 'Unknown')
         loaderContainer.style.display = 'none'
     }
     else {
-        showAddCart('Utilisateur introuvable...')
+        showAddCart(getTrad('Utilisateur introuvable...', 'User not found...'))
         setTimeout(() => {
             history.back()
           }, "1000");
@@ -528,11 +515,11 @@ const loginEmail = async () => {
             document.getElementById('jag-code-popup').style.display = 'flex'
           }
           else {
-            showAddCart('Email inconnu')
+            showAddCart(getTrad('Email inconnu', 'Email unknown'))
           }
     }
     else {
-        showAddCart('Format email incorrect')
+        showAddCart(getTrad('Format email incorrect', 'Incorrect email format'))
     }
 }
 const loginCode = async () => {
@@ -562,11 +549,11 @@ const loginCode = async () => {
             }
           }
           else {
-            showAddCart('Code incorrect')
+        showAddCart(getTrad('Code incorrect', 'Incorrect code'))
           }
     }
     else {
-        showAddCart('Le code doit être au format 1234567')
+        showAddCart(getTrad('Le code doit être au format 1234567', 'The code must be in the format 123457'))
     }
 }
 
@@ -612,7 +599,7 @@ const cancelSubScription =  async () => {
           }
     }
     else {
-        showAddCart('Code Incorrect', true)
+        showAddCart(getTrad('Code incorrect', 'Incorrect code'))
       }
 
    
@@ -686,8 +673,8 @@ const initOption = async () => {
                 document.getElementById('jag-abo-stoped' ).style.display = 'none'
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
                 document.getElementById('jag-abo-stop' ).style.display = 'none'
-                document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? "Votre abonnement est terminé depuis le<br>"+ getDate(dog.collar.formula_subscription.timeout) :  'Votre abonnement est résilié.<br>Il prendra fin le ' + getDate(dog.collar.formula_subscription.timeout)
-                document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? 'Formule à vie'
+                document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? getTrad("Votre abonnement est terminé depuis le<br>", 'Your subscription ended on<br>.')+ getDate(dog.collar.formula_subscription.timeout) :  getTrad('Votre abonnement est résilié.<br>Il prendra fin le ', 'Your subscription is cancelled<br>.It will end on ') + getDate(dog.collar.formula_subscription.timeout)
+                document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? getTrad('Formule à vie', 'Life formula')
                 document.getElementById('jag-abo-stoped-action').style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
                 document.getElementById('jag-abo-stoped-action').addEventListener('click', () => restartAbo())
                 check = document.getElementById('jag-abo-check')
@@ -701,10 +688,10 @@ const initOption = async () => {
                 document.getElementById('jag-abo-actif' ).style.display = 'flex'
                 document.getElementById('jag-abo-resilli' ).style.display = 'none'
                 document.getElementById('jag-abo-stop' ).style.display = 'flex'
-                document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? 'Formule à vie'
+                document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? getTrad('Formule à vie', 'Life formula')
                 document.getElementById('jag-abo-stoped-action' ).style.display = 'none'
-                document.getElementById('jag-'+type+'-actif-start').innerHTML = 'Abonnement actif depuis le '+ getDate(dog.collar.formula_subscription.subscription_date)
-                document.getElementById('jag-'+type+'-actif-end').innerHTML = "Jusqu'au " + getDate(dog.collar.formula_subscription.timeout)
+                document.getElementById('jag-'+type+'-actif-start').innerHTML = getTrad('Abonnement actif depuis le ', 'Subscription active since ')+ getDate(dog.collar.formula_subscription.subscription_date)
+                document.getElementById('jag-'+type+'-actif-end').innerHTML = getTrad("Jusqu'au ", 'until ') + getDate(dog.collar.formula_subscription.timeout)
                 break;
             case 'refused':
                 document.getElementById('jag-abo-resilli' ).style.display = 'none'
@@ -727,11 +714,11 @@ const initOption = async () => {
         
         switch (dog.collar.formula_subscription.type) {
             case 'yearly':
-                document.getElementById('jl-abo-change').innerHTML = 'Passer à la formule à vie'
+                document.getElementById('jl-abo-change').innerHTML = getTrad('Passer à la formule à vie', 'Switching to a lifetime formula')
                 document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.formula_life, '_self'))
                 break;
             case 'monthly':
-                document.getElementById('jl-abo-change').innerHTML = 'Changer ma formule'
+                document.getElementById('jl-abo-change').innerHTML = getTrad('Changer ma formule', 'Change my formula')
                 document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
                 break;
             case 'life':
@@ -778,63 +765,63 @@ const getDate = (ts) => {
 const getSize = (size) => {
     switch(size) {
         case 'verySmall' :
-             return 'Très petite' 
+             return getTrad('Très petite', 'Very small') 
         case 'small' :
-             return 'Petite'  
+             return getTrad('Petite', 'Small')
         case 'tall' :
-             return 'Grande'  
+             return getTrad('Grande', 'Tall')
         case 'veryTall' :
-             return 'Très grande'
+             return getTrad('Très grande', 'Very Tall')
         default : 
-             return 'Moyenne'
+             return getTrad('Moyenne', 'Average')
     }
 }
 const getSilhouette = (silhouete) => {
     switch(silhouete) {
         case 'verySkinny' :
-             return 'Très maigre' 
+             return getTrad('Très maigre', 'Very Skinny') 
         case 'skinny' :
-             return 'Maigre'  
+             return getTrad('Maigre', 'skinny')  
         case 'Maigre' :
-             return 'Excès de poids'  
+             return getTrad('Excès de poids', 'Excess weight')  
         case 'obese' :
-             return 'En surpoids'
+             return getTrad('En surpoids', 'Overweight')
         default : 
-             return 'Idéale'
+             return getTrad('Idéale', 'Ideal')
     }
 }
 
 const getAboType = (type) => {
     switch(type) {
         case 'monthly' :
-             return 'Paiement mensuel' 
+             return getTrad('Paiement mensuel', 'Monthly payment') 
         case 'yearly' :
-             return 'Paiement annuel'  
+             return getTrad('Paiement annuel', 'Yearly payment')  
         default : 
-             return 'À vie'
+             return getTrad('À vie', 'For life')
     }
 }
 
 const getActivity = (name) => {
     switch(name) {
         case 'footing' :
-            return 'CaniCross' 
+            return getTrad('CaniCross' , 'CaniCross')
         case 'chasse' :
-            return 'Chasse'
+            return getTrad('Chasse', 'Hunting')
         case 'bike' :
-            return 'CaniVTT'
+            return getTrad('CaniVTT', 'CaniVTT')
         case 'crossfit' :
-            return 'Parcours libre'
+            return getTrad('Parcours libre', 'Crossfit')
         case 'promenade' :
-            return 'Balade'
+            return getTrad('Balade', 'Walk')
         case 'city_dogsitting' :
-            return 'DogSitting'  
+            return getTrad('DogSitting'  , 'DogSitting')
         case 'cani_rando' :
-            return 'CaniRando'  
+            return getTrad('CaniRando'  , 'CaniRando')
         case 'away' :
-            return 'Absence'  
+            return getTrad('Absence'  , 'Away')
         case 'rescue' : 
-            return 'Localisation'
+            return getTrad('Localisation', 'Location')
         default : 
              return `Autre (${name})`
     }
@@ -844,29 +831,29 @@ const getActivity = (name) => {
 
 const getMonth = (month) => {switch (month) {
     case 0:
-        return "janv";
+        return getTrad("janv", 'jan');
     case 1:
-        return "févr";
+        return getTrad("févr", 'feb');
     case 2:
-        return "mars";
+        return getTrad("mars", 'mar');
     case 3:
-        return "avri";
+        return getTrad("avri", 'apr');
     case 4:
-        return "mai";
+        return getTrad("mai", 'may');
     case 5:
-        return "juin"
+        return getTrad("juin", 'june')
     case 6:
-        return "juil";
+        return getTrad("juil", 'july');
     case 7:
-        return "août";
+        return getTrad("août", 'aug');
     case 8:
-        return "sept";
+        return getTrad("sept", 'sept');
     case 9:
-        return "octo";
+        return getTrad("octo", 'octo');
     case 10:
-        return "nove";
+        return getTrad("nove", 'nove');
     case 11:
-        return "déce";
+        return getTrad("déce", 'dece');
     default:
         return "";
 }}
@@ -887,7 +874,6 @@ const aboAction = async (type) => {
             method: "POST",
             headers : header,
             body: JSON.stringify({
-                     
                 'subscription' : subscription,
                 'phone' : window.localStorage.phone,
                 'serialNumber' : window.localStorage.serial,
@@ -908,7 +894,7 @@ const aboAction = async (type) => {
     }
 
     else if (!check || !check.checked) {
-        showAddCart("Vous devez accepter les frais d'activitation", true)
+        showAddCart(getTrad("Vous devez accepter les frais d'activitation", 'You must accept the activation fee'))
         return
     }
 }
@@ -957,9 +943,9 @@ const toLife = () => {
 const initMap = async (node, stop) => {
     const { Map } = await google.maps.importLibrary("maps");
     if (dog.collar.formula_subscription.timeout - Date.now() < 0) {
-        document.getElementById('jl-rescue-action').innerHTML = 'Lancer une géolocalisation'
+        document.getElementById('jl-rescue-action').innerHTML = getTrad('Lancer une géolocalisation', 'Launch a geolocation')
         document.getElementById('jl-rescue-action').parentElement.style.backgroundColor = 'grey'
-        document.getElementById('jl-rescue-msg').innerHTML = "Votre abonnement est arrivé à expiration !<br>Vous n'avez plus accès à cette fonctionnalité."
+        document.getElementById('jl-rescue-msg').innerHTML = getTrad("Votre abonnement est arrivé à expiration !<br>Vous n'avez plus accès à cette fonctionnalité.", 'Your subscription has expired!<br>You no longer have access to this feature.')
         return
     }
     let position
@@ -1058,7 +1044,7 @@ const initActivity = (type) => {
                 document.getElementById('jl-activity-card-img-' + activity._id).children[0].srcset = ACTIVITY_PICT[activity.activity_id]
             }
             if (type != 'moment')
-            document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = 'Distance parcourue de ' + (distance ?? '0m')
+            document.getElementById('jl-activity-card-distance-' + activity._id).innerHTML = getTrad('Distance parcourue de ', 'Distance covered of ') + (distance ?? '0m')
             if (type == 'activity') {
                 if (!activity.duration || !activity.distance) {
                     newCard.style.color = "#00000036"
@@ -1114,7 +1100,7 @@ const setRescue = async (rescue) => {
     document.getElementById('jag-detail-rescue').style.display = 'none'
     let datas =  await fetch(baseurl + '/personal_activity/' + rescue._id, {headers : header}).then(async (res) => await res.json()).then((res) => res.data)
     if (!datas.gps_data_affine) {
-        showAddCart('Oups, pas de données disponibles pour cette localisation', true)
+        showAddCart(getTrad('Oups, pas de données disponibles pour cette localisation', 'Oops, no data available for this location'))
         return
     }
     let line =  Object.values(JSON.parse(datas.gps_data_affine)).map((line) => { res = {}; res.lat = line.lat; res.lng = line.lng; return res;})
@@ -1157,7 +1143,7 @@ const setMap = async (activity) => {
     
     let datas =  await fetch(baseurl + '/personal_activity/' + activity._id, {headers : header}).then(async (res) => await res.json())
     if (!datas.data.gps_data) {
-        showAddCart('Oups pas de données')
+        showAddCart(getTrad('Oups pas de données'), 'Oops, no data')
         return
     }
     clearMap()
@@ -1208,7 +1194,7 @@ const resendActivationCode = async () => {
       }).then((res) => res.status) 
       
       if (result == 200) {
-        showAddCart('Le code a été renvoyé', true)
+        showAddCart(getTrad('Le code a été renvoyé', 'The code has been resended'))
       }
       else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
@@ -1233,7 +1219,7 @@ const resendCode = async () => {
       }).then((res) => res.status) 
       
       if (result == 200) {
-        showAddCart('Le code a été renvoyé', true)
+        showAddCart(getTrad('Le code a été renvoyé', 'The code has been resended'))
       }
       else {
         showAddCart('Oups, une erreur est survenue, rechargez la page', true)
@@ -1268,7 +1254,7 @@ const validateAction = async () => {
         }
       }
       else {
-        showAddCart('Code incorrect', true)
+        showAddCart(getTrad('Code incorrect', 'Incorrect code'))
       }
       return
 
@@ -1309,11 +1295,11 @@ const checkActivation = async () => {
     let serial = document.getElementById('jl_Activation_serialNumber').value
     let phone = document.getElementById('jl_Activation_phoneNumber').value.replaceAll(' ', '')
     if (!phone.match(regexPhone)) {
-        showAddCart('Numéro de téléphone incorrect (+33612345678)', true)
+        showAddCart(getTrad('Numéro de téléphone incorrect (+33612345678)', 'Incorrect telephone number (+33612345678)'))
         return
     }
     if (!serial.match(reglexSerial)) {
-        showAddCart('Numéro de serie incorrect (JL1-1111A11A)', true)
+        showAddCart(getTrad('Numéro de serie incorrect (JL1-1111A11A,)', 'Incorrect serial number (JL1-1111A11A,)'))
         return
     }
     phone = phone.slice(0, -9).replace('+', '0000000').slice(-4) + phone.slice(-9)
@@ -1338,16 +1324,16 @@ const checkActivation = async () => {
             }
             break
         case 400 :
-            showAddCart('Ce boîtier est déjà activé', true)
+            showAddCart(getTrad('Ce boîtier est déjà activé', 'This collar has already been activated'))
             setTimeout(() => {
                 window.open(REDIRECT.login, '_self')
               }, "1000");
             break 
         case 404 : 
-            showAddCart('Boîtier inconnu', true)
+            showAddCart(getTrad('Boîtier inconnu', 'Unknown collar'))
             break 
         case 403 :
-            showAddCart("Le numéro de téléphone ne correspond pas à l'acheteur du collier", true)
+            showAddCart(getTrad("Le numéro de téléphone ne correspond pas à l'acheteur du collier", 'The telephone number does not correspond to the purchaser of the necklace'))
             break  
       }
 }
@@ -1436,7 +1422,7 @@ const getDog = async (id) => {
             headers : header
         }).then(async (res) => res.json()).then((res) => {
             if (document.getElementById('jl-collar-synchro-state')) {
-                document.getElementById('jl-collar-synchro-state').innerHTML = res.endpointStatus ? 'Le boîtier est connecté' : 'Le boîtier est en veille'
+                document.getElementById('jl-collar-synchro-state').innerHTML = res.endpointStatus ? getTrad('Le boîtier est connecté', 'The collar is connected') : getTrad('Le boîtier est en veille', 'The collar is not connected')
             }
             return res;
         })
@@ -1490,8 +1476,8 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-name').innerHTML = dog.name 
     document.getElementById('jag-profil-identity-Iname').innerHTML = dog.name
     document.getElementById('jag-profil-identity-id').innerHTML =  dog.publicId[0] == '@' ? dog.publicId : `@${dog.publicId}`,
-    document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography?? 'Biographie'
-    document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender == 'male' ? 'Mâle' : 'Femelle'
+    document.getElementById('jag-profil-identity-bio').innerHTML = dog.biography?? getTrad('Biographie', 'Biography')
+    document.getElementById('jag-profil-identity-sexe').innerHTML = dog.gender == 'male' ? getTrad('Mâle', 'Male') : getTrad('Femelle', 'Female')
     document.getElementById('jag-profil-identity-birthdate').innerHTML = getDate(dog.birthDate)
     document.getElementById('jag-profil-identity-weight').innerHTML = dog.weight + 'Kg'
     document.getElementById('jag-profil-identity-size').innerHTML = getSize(dog.size)
@@ -1505,7 +1491,7 @@ const setidentity = () => {
     document.getElementById('jag-profil-food-night').innerHTML = (food.evening ?? '-') + ' g'
     document.getElementById('jag-profil-food-all').innerHTML = ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) == 0 ? '-' : ((food.morning ?? 0) + (food.noon ?? 0) + (food.evening ?? 0)) + 'g'
     if (food.foodType && food.foodType.type) {
-        document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : 'fait maison'
+        document.getElementById('jag-profil-food-type').innerHTML = food.foodType.type == 'indus' ? 'Croquette' : getTrad('Fait maison', 'Home made')
     }
     if (document.getElementById('jag-profil-welfare-calory')) {
         document.getElementById('jag-profil-welfare-calory').innerHTML = dog.welfareData?.global?.calory_global ?? '-'
