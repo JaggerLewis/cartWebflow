@@ -433,6 +433,11 @@ const initOrder = async () => {
     }
 
     loaderContainer.style.display = 'flex'
+    let color = ['var(--main)', 'var(--gristypofaible)']
+    document.getElementById('jl-order-order').style.color = color[0]
+    document.getElementById('jl-order-order').style.borderColor = color[0]
+    document.getElementById('jl-order-info').style.color = color[1]
+    document.getElementById('jl-order-info').style.borderColor = color[1]
     let orders = await fetch(baseurl + '/user/order', {headers : header})
                         .then(async (res) => await res.json())
                         .then((res) => res.orders)
