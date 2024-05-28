@@ -130,6 +130,18 @@ const initClient = {
 }
 
 const showAboHistoric = async () => {
+    
+    const getType = (type) => {
+        switch (type) {
+            case 'subscription':
+                return 'Abonnement'
+            case 'subscription.update' : 
+                return "mise à jour de l'abonnement"
+            default:
+                return `autre(${type})`;
+        }
+    }
+    
     document.getElementById('jag-historic-popup').style.display = 'flex'
     let card = document.getElementById('jag-abo-historic-card')
     let orders = await fetch(baseurl + '/user/order', {headers : header})
@@ -140,6 +152,28 @@ const showAboHistoric = async () => {
         let newCard = card.cloneNode(true)
         changeChildsId(newCard, '-'+order._id, 'jag-')
         card.parentElement.appendChild(newCard)
+        var date  = new Date(orders[0].createdAt)
+
+        document.getElementById('jag-abo-historic-date-' + order.id).innerHTML =  date.getDate() + '/' (date.getMonth() + 1) + '/' +  date.getFullYear();
+        document.getElementById('jag-abo-historic-type-' + order.id).innerHTML = getType(order.type)
+        document.getElementById('jag-abo-historic-pdf-'+order._id).addEventListener('click', async () => {
+            loaderContainer.style.display = 'flex'
+            fetch(baseurl + '/order/'+ order._id +'/pdf', {
+                method: 'GET',
+                headers: header
+            })
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'jl-facture-'+ order._id+'.pdf'; 
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+            loaderContainer.style.display = 'none'
+        })
     })
 
     card.style.display = 'none'
