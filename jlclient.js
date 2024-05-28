@@ -188,7 +188,7 @@ const setEmail = async (node) => {
 const setActivateBtn = async (btn) => {
     await getDog()
 
-    if (!dog.collar.settings?.isVirtual && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
+    if (!dog.collar.settings?.isVirtual && !dog.collar.settings?.isDumped && !JSON.parse(dog.collar.settings?.simActivated ?? "{}").isActivated) {
         
         btn.style.display ='flex'
         btn.addEventListener('click', () => window.open(REDIRECT.active + `?sn=${dog.collar.serialNumber}&HeyJag=${token}`, '_self'))
