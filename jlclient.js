@@ -157,7 +157,7 @@ const showAboHistoric = async () => {
         let date  = new Date(order.createdAt)
 
         document.getElementById('jag-abo-historic-date-' + order._id).innerHTML =  date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
-        document.getElementById('jag-abo-historic-type-' + order._id).innerHTML = order.total.total ?? 100 / 100  + '€'
+        document.getElementById('jag-abo-historic-type-' + order._id).innerHTML = (order.total.total ?? 100) / 100  + '€'
         document.getElementById('jag-abo-historic-pdf-'+order._id).addEventListener('click', async () => {
             loaderContainer.style.display = 'flex'
             fetch(baseurl + '/order/'+ order._id +'/pdf', {
