@@ -127,7 +127,10 @@ const initClient = {
     'jl-life-formula' : (_) => setLifeFormula(),
     'jl-abo-historic' : (node) => node.addEventListener('click', () => showAboHistoric()),
     'jl-popup-close' : (node) => node.addEventListener('click', () => document.getElementById('jag-historic-popup').style.display = 'none'),
-        // jag-historic-popup
+    'jl-active-action-close' : (node) => node.addEventListener('click', () => document.getElementById('jl-active-action-popup').style.display = 'none'),
+    'jl-active-action-ok' : (node) => node.addEventListener('click', () => restartAbo())
+        
+    // jag-historic-popup
 }
 
 const showAboHistoric = async () => {
@@ -661,18 +664,19 @@ const changeSubscription = async (type) => {
     }
 }
 
+const restartAbo = async () => {
+    loaderContainer.style.display = 'flex'
+    await fetch(baseurl  +`/formula_subscription/${dog.collar.formula_subscription._id}/uncancel`, {
+        method: "POST",
+        headers : header,
+      })
+    await getDog(dog._id)
+    loaderContainer.style.display = 'none'
+    getAll() 
+}
+
 const initOption = async () => {
 
-    const restartAbo = async () => {
-        loaderContainer.style.display = 'flex'
-        await fetch(baseurl  +`/formula_subscription/${dog.collar.formula_subscription._id}/uncancel`, {
-            method: "POST",
-            headers : header,
-          })
-        await getDog(dog._id)
-        loaderContainer.style.display = 'none'
-        getAll() 
-    }
 
     let types = ['abo']
     types.forEach((type) => {
@@ -688,7 +692,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? getTrad("Votre abonnement est terminé depuis le<br>", 'Your subscription ended on<br>')+ getDate(dog.collar.formula_subscription.timeout) :  getTrad('Votre abonnement est résilié.<br>Il prendra fin le ', 'Your subscription is cancelled<br>.It will end on ') + getDate(dog.collar.formula_subscription.timeout)
                 document.getElementById('jag-'+type+'-name').innerHTML =  subFormula ? getTrad(subFormula.metadata.title_fr, subFormula.metadata.title_en) : getTrad('Formule à vie', 'Life formula')
                 document.getElementById('jag-abo-stoped-action').style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
-                document.getElementById('jag-abo-stoped-action').addEventListener('click', () => restartAbo())
+                document.getElementById('jag-abo-stoped-action').addEventListener('click', () => document.getElementById('jl-active-action-popup').style.display = 'flex')
                 check = document.getElementById('jag-abo-check')
                 check.childNodes[0].remove()
                 check.innerHTML = 'X'
