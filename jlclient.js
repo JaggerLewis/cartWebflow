@@ -136,7 +136,9 @@ const showAboHistoric = async () => {
             case 'subscription':
                 return 'Abonnement'
             case 'subscription.update' : 
-                return "mise à jour de l'abonnement"
+                return "Mise à jour de l'abonnement"
+            case 'subscription.renew' :
+                return "Renouvellement de l'abonnement"
             default:
                 return `autre(${type})`;
         }
@@ -152,9 +154,9 @@ const showAboHistoric = async () => {
         let newCard = card.cloneNode(true)
         changeChildsId(newCard, '-'+order._id, 'jag-')
         card.parentElement.appendChild(newCard)
-        var date  = new Date(orders[0].createdAt)
+        let date  = new Date(order.createdAt)
 
-        document.getElementById('jag-abo-historic-date-' + order.id).innerHTML =  date.getDate() + '/' (date.getMonth() + 1) + '/' +  date.getFullYear();
+        document.getElementById('jag-abo-historic-date-' + order.id).innerHTML =  date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
         document.getElementById('jag-abo-historic-type-' + order.id).innerHTML = getType(order.type)
         document.getElementById('jag-abo-historic-pdf-'+order._id).addEventListener('click', async () => {
             loaderContainer.style.display = 'flex'
