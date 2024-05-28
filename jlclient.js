@@ -126,6 +126,7 @@ const initClient = {
     'jl-mail-confirm-desc' : async (node) => setEmail(node),
     'jl-life-formula' : (_) => setLifeFormula(),
     'jl-abo-historic' : (node) => node.addEventListener('click', () => showAboHistoric()),
+    'jl-popup-close' : (node) => node.addEventListener('click', () => document.getElementById('jag-historic-popup').style.display = 'none'),
         // jag-historic-popup
 }
 
