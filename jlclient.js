@@ -297,9 +297,9 @@ const deleteAccountEmail = async () => {
     }
 }
 
-const redirectAbo = () => {
+const redirectAbo = async () => {
     localStorage.removeItem('user')
-    localStorage.removeItem('dog')
+    getDog(dog._id)
     window.open(REDIRECT.home, '_self')
     checkAuth()
 }
@@ -672,6 +672,7 @@ const restartAbo = async () => {
       })
     await getDog(dog._id)
     loaderContainer.style.display = 'none'
+    document.getElementById('jl-active-action-popup').style.display = 'none'
     getAll() 
 }
 
