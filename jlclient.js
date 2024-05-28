@@ -674,7 +674,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
                 document.getElementById('jag-abo-stop' ).style.display = 'none'
                 document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? getTrad("Votre abonnement est terminé depuis le<br>", 'Your subscription ended on<br>.')+ getDate(dog.collar.formula_subscription.timeout) :  getTrad('Votre abonnement est résilié.<br>Il prendra fin le ', 'Your subscription is cancelled<br>.It will end on ') + getDate(dog.collar.formula_subscription.timeout)
-                document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? getTrad('Formule à vie', 'Life formula')
+                document.getElementById('jag-'+type+'-name').innerHTML =  subFormula ? getTrad(subFormula.metadata.title_fr, subFormula.metadata.title_en) : getTrad('Formule à vie', 'Life formula')
                 document.getElementById('jag-abo-stoped-action').style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
                 document.getElementById('jag-abo-stoped-action').addEventListener('click', () => restartAbo())
                 check = document.getElementById('jag-abo-check')
@@ -688,7 +688,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-actif' ).style.display = 'flex'
                 document.getElementById('jag-abo-resilli' ).style.display = 'none'
                 document.getElementById('jag-abo-stop' ).style.display = 'flex'
-                document.getElementById('jag-'+type+'-name').innerHTML = subFormula?.name ?? getTrad('Formule à vie', 'Life formula')
+                document.getElementById('jag-'+type+'-name').innerHTML = subFormula ? getTrad(subFormula.metadata.title_fr, subFormula.metadata.title_en) : getTrad('Formule à vie', 'Life formula')
                 document.getElementById('jag-abo-stoped-action' ).style.display = 'none'
                 document.getElementById('jag-'+type+'-actif-start').innerHTML = getTrad('Abonnement actif depuis le ', 'Subscription active since ')+ getDate(dog.collar.formula_subscription.subscription_date)
                 document.getElementById('jag-'+type+'-actif-end').innerHTML = getTrad("Jusqu'au ", 'until ') + getDate(dog.collar.formula_subscription.timeout)
