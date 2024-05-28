@@ -355,6 +355,9 @@ let initGalery =  () => {
     let list =  document.getElementById('jag-profil-identity-gallery-container')
     let img = document.getElementById('jag-profil-identity-gallery-pict')
     for (let i = 0; i < 3; i++) {
+        if (!user.galery[i]) {
+            return
+        }
         if (document.getElementById('jag-profil-identity-gallery-pict-' + user.galery[i].image._id)) {
             return
         }
@@ -673,7 +676,7 @@ const initOption = async () => {
                 document.getElementById('jag-abo-stoped' ).style.display = 'none'
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
                 document.getElementById('jag-abo-stop' ).style.display = 'none'
-                document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? getTrad("Votre abonnement est terminé depuis le<br>", 'Your subscription ended on<br>.')+ getDate(dog.collar.formula_subscription.timeout) :  getTrad('Votre abonnement est résilié.<br>Il prendra fin le ', 'Your subscription is cancelled<br>.It will end on ') + getDate(dog.collar.formula_subscription.timeout)
+                document.getElementById('jag-abo-resilli-text').innerHTML = dog.collar.formula_subscription.timeout - Date.now() < 0 ? getTrad("Votre abonnement est terminé depuis le<br>", 'Your subscription ended on<br>')+ getDate(dog.collar.formula_subscription.timeout) :  getTrad('Votre abonnement est résilié.<br>Il prendra fin le ', 'Your subscription is cancelled<br>.It will end on ') + getDate(dog.collar.formula_subscription.timeout)
                 document.getElementById('jag-'+type+'-name').innerHTML =  subFormula ? getTrad(subFormula.metadata.title_fr, subFormula.metadata.title_en) : getTrad('Formule à vie', 'Life formula')
                 document.getElementById('jag-abo-stoped-action').style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
                 document.getElementById('jag-abo-stoped-action').addEventListener('click', () => restartAbo())
