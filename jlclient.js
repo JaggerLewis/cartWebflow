@@ -301,12 +301,14 @@ const redirectAbo = () => {
     checkAuth()
 }
 
-const initDelete = (node) => {
+const initDelete = async (node)  => {
     let type = new URL(window.location.href).searchParams.get('type')
 
     if (type == 'subscription_cancel') {
+        await getDog()
         document.getElementById('jag-delete-text-stop').style.display = 'flex'
         document.getElementById('jag-delete-text-delete').style.display = 'none'
+        document.getElementById('jag-delete-text-stop').innerHTML = document.getElementById('jag-delete-text-stop').innerHTML.replace('{{date}}', getDate(dog.collar.formula_subscription.timeout))
         node.addEventListener('click', () => cancelSubScription())
         return
     }
