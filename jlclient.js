@@ -121,7 +121,7 @@ const initClient = {
     'jl-collar-synchro-last-date' : (node) => node.innerHTML = dog.flash.tmsLastInfo ? getDate(dog.flash.tmsLastInfo) : getTrad('Pas encore synchronisé', 'Not yet synchronized'),
     'jl-galery-list-0' : () => intiPict(),
     'jl-rescue-action' : () =>  loadRescue(),
-    'jl-change-formula-action' : () => localStorage.removeItem('dog'),
+    'jl-change-formula-action' : () => getDog(dog._id),
     'jl-collar-activate' : (node) => setActivateBtn(node),
     'jl-mail-confirm-desc' : async (node) => setEmail(node),
     'jl-life-formula' : (_) => setLifeFormula(),
@@ -686,6 +686,7 @@ const initOption = async () => {
         
         let subFormula = findNewAbonnementSolo(dog.collar.formula_subscription.type ?? 'life')
         let check
+        document.getElementById('jag-abo-container').style.display = 'block'
         switch (dog.collar.formula_subscription.status) {
             case 'resilied':
                 document.getElementById('jag-abo-stoped' ).style.display = 'none'
@@ -714,12 +715,14 @@ const initOption = async () => {
             case 'refused':
                 document.getElementById('jag-abo-resilli' ).style.display = 'none'
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
+                document.getElementById('jag-abo-stoped' ).style.display = 'flex'
                 check = document.getElementById('jag-abo-check')
                 check.childNodes[0].remove()
                 check.innerHTML = 'X'
                 check.style.backgroundColor = 'orange'
                 check.style.color = 'white'
-                break;
+                document.getElementById('jag-abo-stoped-action').style.display = 'none'
+                return;
             default:
                 document.getElementById('jag-abo-none').style.display = 'flex'
                 document.getElementById('jl-abo-historic').style.display = 'none'
