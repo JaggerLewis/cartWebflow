@@ -133,6 +133,23 @@ const initClient = {
     // jag-historic-popup
 }
 
+const setChecked = (node, type) => {
+    switch (type) {
+        case 'yes':
+                node.src = 'https://daks2k3a4ib2z.cloudfront.net/6549f4ba8294cf140608d893/661639b3c90093bedf11e0bc_okok-p-130x130q80.png'
+            break;
+        case 'no':
+                node.src = 'https://daks2k3a4ib2z.cloudfront.net/6549f4ba8294cf140608d893/664c61cb6fa65cf70148611b_croix-p-130x130q80.png'
+            break;
+        case 'warn':
+                node.src = 'https://daks2k3a4ib2z.cloudfront.net/6549f4ba8294cf140608d893/6644c9d79a46a0d3ef658985_i.png'
+            break;
+    
+        default:
+            break;
+    }
+}
+
 const showAboHistoric = async () => {
     
     document.getElementById('jag-historic-popup').style.display = 'flex'
@@ -725,12 +742,13 @@ const initOption = async () => {
                 check.style.backgroundColor = 'orange'
                 check.style.color = 'white'
                 document.getElementById('jag-abo-stoped-action').style.display = 'none'
+                document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
                 return;
             default:
                 document.getElementById('jag-abo-none').style.display = 'flex'
                 document.getElementById('jl-abo-historic').style.display = 'none'
                 document.getElementById('jl-abo-change').style.display = 'none'
-                document.getElementById('jag-abo-none-action').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
+                document.getElementById('jag-abo-none-action').style.display = 'none'
                 card.style.display = 'none'
                 break;
         }
