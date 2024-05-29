@@ -933,12 +933,15 @@ const initAboB = async () => {
     document.getElementById('jl-abo-year-price').innerHTML = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
     document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
 
-    document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation')
+    let active = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].activation == 'false'
+    document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation') + active ? getTrad("<br>Sans frait d'activation", '<br>Withour activation fee') : null
     //document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
     let annualPrice = formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price.toFixed(2) + '€'
-    document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit ' + annualPrice + ' par an', 'or ' + annualPrice + ' per year')
+    active = formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].activation == 'false'
+    document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit ' + annualPrice + ' par an', 'or ' + annualPrice + ' per year')+ active ? getTrad("<br>Sans frait d'activation", '<br>Withour activation fee') : null
+    active = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].activation == 'false'
     let lifePrice36 = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price / 36).toFixed(2) + '€'
-    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')
+    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')+ active ? getTrad("<br>Sans frait d'activation", '<br>Withour activation fee') : null
 }
 
 const initAccessWidget = async () => {
