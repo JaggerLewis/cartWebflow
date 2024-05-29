@@ -215,7 +215,7 @@ const logout = () => {
 
 let intiPict = () => {
     let container = document.getElementById('jag-pict-container')
-
+    let opened = []
     user.galery.forEach((elem) => {
         let url = "https://app-api.mypet.fit/img/" + elem.image.type +"/"+ elem.image.uuid 
         let pict = container.cloneNode(true)
@@ -224,7 +224,10 @@ let intiPict = () => {
         pict.style.display = 'flex'
         let list = document.getElementById('jl-galery-list-' +new Date(elem.timestamp).getMonth())
         list.appendChild(pict)
-        list.parentElement.parentElement.childNodes[0].click()
+        if (!opened.includes(new Date(elem.timestamp).getMonth())) {
+            opened.add(new Date(elem.timestamp).getMonth());
+            list.parentElement.parentElement.childNodes[0].click()
+        }
     })
 }
 
@@ -731,7 +734,6 @@ const initOption = async () => {
                 card.style.display = 'none'
                 break;
         }
-        
         
         switch (dog.collar.formula_subscription.type) {
             case 'yearly':
