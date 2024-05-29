@@ -933,7 +933,7 @@ const initAboB = async () => {
     document.getElementById('jl-abo-year-price').innerHTML = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
     document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
 
-    let active = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].activation == 'false'
+    let active = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].activation == 'true'
     document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation') + (active ? getTrad("<br>Sans frait d'activation", '<br>Withour activation fee') : '')
     //document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
     let annualPrice = formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price.toFixed(2) + '€'
