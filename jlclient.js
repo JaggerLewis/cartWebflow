@@ -222,8 +222,9 @@ let intiPict = () => {
         pict.src = url
         pict.srcset = url
         pict.style.display = 'flex'
-    
-        document.getElementById('jl-galery-list-' +new Date(elem.timestamp).getMonth()).appendChild(pict)
+        let list = document.getElementById('jl-galery-list-' +new Date(elem.timestamp).getMonth())
+        list.appendChild(pict)
+        list.parentElement.parentElement.childNodes[0].click()
     })
 }
 
