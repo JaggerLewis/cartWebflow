@@ -743,12 +743,12 @@ const initOption = async () => {
                 check.style.color = 'white'
                 document.getElementById('jag-abo-stoped-action').style.display = 'none'
                 document.getElementById('jl-abo-change').addEventListener('click', () => window.open(REDIRECT.abo, '_self'))
+                document.getElementById('jag-abo-none-action').style.display = 'none'
                 return;
             default:
                 document.getElementById('jag-abo-none').style.display = 'flex'
                 document.getElementById('jl-abo-historic').style.display = 'none'
                 document.getElementById('jl-abo-change').style.display = 'none'
-                document.getElementById('jag-abo-none-action').style.display = 'none'
                 card.style.display = 'none'
                 break;
         }
