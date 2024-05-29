@@ -225,7 +225,7 @@ let intiPict = () => {
         let list = document.getElementById('jl-galery-list-' +new Date(elem.timestamp).getMonth())
         list.appendChild(pict)
         if (!opened.includes(new Date(elem.timestamp).getMonth())) {
-            opened.add(new Date(elem.timestamp).getMonth());
+            opened.push(new Date(elem.timestamp).getMonth());
             list.parentElement.parentElement.childNodes[0].click()
         }
     })
