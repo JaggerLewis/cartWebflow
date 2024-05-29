@@ -908,14 +908,15 @@ const redirectStep2 = () => {
 const aboAction = async (type) => {
     const url = window.location.origin + window.location.pathname;
     let check = document.getElementById('jag_Abonnement_check')
-    if (check && check.checked) {
-        let subscription = findNewAbonnementSolo(type).prices[0].id
+    let subscription = findNewAbonnementSolo(type).prices[0]
+
+    if ((subscription.metadata.activation === "false") || (check && check.checked)) {
         loaderContainer.style.display = 'flex'
         const result = await fetch('https://app-api.mypet.fit/stripe/checkout_session/subscription', {
             method: "POST",
             headers : header,
             body: JSON.stringify({
-                'subscription' : subscription,
+                'subscription' : subscription.id,
                 'phone' : window.localStorage.phone,
                 'serialNumber' : window.localStorage.serial,
                 'referer': url,
