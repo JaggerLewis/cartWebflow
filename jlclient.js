@@ -1319,6 +1319,8 @@ const checkActivationToken = async () => {
         }), 
     }).then(async (res) => await res?.json())
     if (result.result) {
+        window.localStorage.serial = serial
+        window.localStorage.phone = result.result.phone
       if (result.result.activated) {
           window.open(REDIRECT.active_3 + '?session_id=725', '_self')
       }
