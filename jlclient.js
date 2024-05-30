@@ -1450,6 +1450,7 @@ const getDog = async (id) => {
     }
     if (user.dogs.length == 0) {
         showAddCart(getTrad("Vous n'avez pas de chien lié à un collier", 'No dog found'))
+        localStorage.removeItem('token')
            setTimeout(() => {
                window.open(REDIRECT.login, '_self')
              }, "1000");
@@ -1559,6 +1560,7 @@ const initDashboard = async (node) => {
     loaderContainer.style.display = 'flex'
     let container = document.getElementById('jag-profil-dog-container');
     if (user.dogs.length == 0) {
+        localStorage.removeItem('token')
          showAddCart(getTrad("Vous n'avez pas de chien lié à un collier", 'No dog found'))
             setTimeout(() => {
                 window.open(REDIRECT.login, '_self')
