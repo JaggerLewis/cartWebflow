@@ -478,7 +478,7 @@ const initOrder = async () => {
         node.appendChild(newCard)
         document.getElementById('jag-order-ref-'+order._id).innerHTML = order?.orderNumber
         document.getElementById('jag-order-date-'+order._id).innerHTML = getDate(order.createdAt)
-        document.getElementById('jag-order-price-'+order._id).innerHTML = (order?.total?.total ?? 100 / 100 ) + '€'
+        document.getElementById('jag-order-price-'+order._id).innerHTML = ((order?.total?.total ?? 100) / 100 ) + '€'
         document.getElementById('jag-order-status-'+order._id).innerHTML = getorderStatus(order.status)
         document.getElementById('jag-order-action-'+order._id).addEventListener('click', async () => {
             loaderContainer.style.display = 'flex'
