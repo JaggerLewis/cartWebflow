@@ -1405,6 +1405,7 @@ const getCart = async () => {
         document.getElementById('jag-active-store').style.display = 'none'
     }
     else if (checkoutOrder.result?.hasAccount) {
+        localStorage.removeItem('dog')
         document.getElementById('jag-active-store').style.display = 'none'
     }
     else {
