@@ -1448,6 +1448,12 @@ const getDog = async (id) => {
     if (dog && !id) {
         return
     }
+    if (user.dogs.length == 0) {
+        showAddCart(getTrad("Vous n'avez pas de chien lié à un collier", 'No dog found'))
+           setTimeout(() => {
+               window.open(REDIRECT.login, '_self')
+             }, "1000");
+   }
     if (user.dogs.length != 0) {
         dog = await fetch(baseurl + '/dog/'+ (id ?? user.dogs[0]._id), {headers : header})
             .then(async (res) => await res.json())
@@ -1552,6 +1558,12 @@ const initDashboard = async (node) => {
     initGalery()
     loaderContainer.style.display = 'flex'
     let container = document.getElementById('jag-profil-dog-container');
+    if (user.dogs.length == 0) {
+         showAddCart(getTrad("Vous n'avez pas de chien lié à un collier", 'No dog found'))
+            setTimeout(() => {
+                window.open(REDIRECT.login, '_self')
+              }, "1000");
+    }
     user.dogs.forEach((localDog) => {
         if (document.getElementById('jag-profil-dog-container-' + localDog._id)) {
             return
