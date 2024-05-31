@@ -717,10 +717,10 @@ const initOption = async () => {
                 document.getElementById('jag-abo-stoped-action').style.display = dog.collar.formula_subscription.timeout - Date.now() < 0 ? 'none' : 'flex'
                 document.getElementById('jag-abo-stoped-action').addEventListener('click', () => document.getElementById('jl-active-action-popup').style.display = 'flex')
                 check = document.getElementById('jag-abo-check')
-                check.childNodes[0].remove()
-                check.innerHTML = 'X'
-                check.style.backgroundColor = 'red'
-                check.style.color = 'white'
+                setChecked(check.childNodes[0].childNodes[0], 'no')
+                check.childNodes[0].style.backgroundColor = 'red'
+                check.childNodes[0].childNodes[0].style.height = '12px'
+
                 break;
             case 'active':
                 document.getElementById('jag-abo-stoped' ).style.display = 'none'
@@ -737,10 +737,9 @@ const initOption = async () => {
                 document.getElementById('jag-abo-actif' ).style.display = 'none'
                 document.getElementById('jag-abo-stoped' ).style.display = 'flex'
                 check = document.getElementById('jag-abo-check')
-                check.childNodes[0].remove()
-                check.innerHTML = 'X'
-                check.style.backgroundColor = 'orange'
-                check.style.color = 'white'
+                setChecked(check.childNodes[0].childNodes[0], 'warn')
+                check.childNodes[0].style.backgroundColor = 'orange'
+                check.childNodes[0].childNodes[0].style.height = '12px'
                 document.getElementById('jag-abo-stoped-action').style.display = 'none'
                 document.getElementById('jl-abo-change').style.display = 'none'
                 return;
@@ -1536,7 +1535,15 @@ const setidentity = () => {
     document.getElementById('jag-profil-identity-silouhette').innerHTML = getSilhouette(dog.silhouette)
     document.getElementById('jag-profil-identity-breed').innerHTML =race.name
     document.getElementById('jag-profil-identity-lof').firstChild.style['background-color'] = dog.isLOF ? '' : 'grey'
+    if (!dog.isLOF) {
+        setChecked(document.getElementById('jag-profil-identity-lof').firstChild.firstChild, 'no')
+    }
+    document.getElementById('jag-profil-identity-lof').firstChild.firstChild.style.height = '12px'
     document.getElementById('jag-profil-identity-steril').firstChild.style['background-color'] = dog.sterilized ? '' : 'grey'
+    if (!dog.sterilized) {
+        setChecked(document.getElementById('jag-profil-identity-steril').firstChild.firstChild, 'no')
+    }
+    document.getElementById('jag-profil-identity-steril').firstChild.firstChild.style.height = '12px'
     // TODO(dev): add disable state on food
     document.getElementById('jag-profil-food-moring').innerHTML = (food.morning ?? '-') + ' g'
     document.getElementById('jag-profil-food-noon').innerHTML = (food.noon ?? '-') + ' g'
