@@ -33,7 +33,7 @@ const startRescue = async (btn) => {
         }).then(async (value) => await value.json());
 
     let key = res.timestamp_key
-    await fetch(`https://app-api.mypet.fit/collar/${dog.collar.simcardID}/rescue`,
+    res = await fetch(`https://app-api.mypet.fit/collar/${dog.collar.simcardID}/rescue`,
         {
             method: 'POST',
             headers: header,

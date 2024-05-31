@@ -792,7 +792,7 @@ const initJagAccessory = () => {
             document.activeElement.blur();
         });
 
-        document.getElementById('jl-Accessory-item-' + nbAccess).style.display = 'block';
+        document.getElementById('jl-Accessory-item-' + nbAccess).style.display = 'flex';
 
         nbAccess++;
     })
