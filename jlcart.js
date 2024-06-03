@@ -1390,12 +1390,17 @@ if (document.getElementById('encart_jag_gps_s2')) {
     }
 }
 
-
-if (document.getElementById('JL_NavBar'))
-    init()
-else {
+const appendPage = (url) => {
     let s = document.createElement('script')
     s.type = 'text/javascript'
-    s.src = 'https://webcart.jagger-lewis.com/jlclient.js'
+    s.src = url
     document.getElementsByTagName('head')[0].appendChild(s)
+}
+
+
+if (document.getElementById('JL_NavBar'))
+
+    init()
+else {
+   appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
