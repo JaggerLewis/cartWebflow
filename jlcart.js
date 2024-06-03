@@ -1317,7 +1317,7 @@ const showNewCart = (event) => {
         });
 
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
-
+        
         cart_items.push({
             'item_id': prod.id.metadata.productId,
             'item_name': prod.id.metadata.title_fr,
@@ -1400,9 +1400,6 @@ const appendPage = (url) => {
 
 if (document.getElementById('JL_NavBar')) {
     init()
-    if (document.getElementById('JL_NavBar').getAttribute('product-page')) {
-        appendPage('https://webcart.jagger-lewis.com/jlproduct.js')
-    }
 }
 else {
    appendPage('https://webcart.jagger-lewis.com/jlclient.js')
