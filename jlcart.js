@@ -116,6 +116,7 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
+        console.log(id)
         let maxProductinCart = 4
         if (this.countItems() >= maxProductinCart) {
             let labeltocart = getTrad('Vous ne pouvez pas ajouter plus de ' + maxProductinCart + ' articles au panier', "You can't add more than " + maxProductinCart + " products in your cart");
