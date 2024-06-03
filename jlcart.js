@@ -1398,9 +1398,12 @@ const appendPage = (url) => {
 }
 
 
-if (document.getElementById('JL_NavBar'))
-
+if (document.getElementById('JL_NavBar')) {
     init()
+    if (document.getElementById('JL_NavBar').getAttribute('product-page')) {
+        appendPage('https://webcart.jagger-lewis.com/jlproduct.js')
+    }
+}
 else {
    appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
