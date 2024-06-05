@@ -964,7 +964,6 @@ const initAccessWidget = async () => {
 
 
 const refreshOrderInfo = async () => {
-    shoppingCart.clear()
     if (document.getElementById('JL_ORDER'))
         document.getElementById('JL_ORDER').style.display = 'none';
 
@@ -988,14 +987,19 @@ const refreshOrderInfo = async () => {
     let items = datas.aside_data.cart;
 
     for (i = 0; i < items.length; i++) {
-        item = datas.aside_data.cart[i];
+        let item = datas.aside_data.cart[i];
         //console.log(item);
 
         let itemColor = '';
-        if (item.description.toLowerCase().indexOf('weimar') > -1) { itemColor = 'Weimar'; }
-        if (item.description.toLowerCase().indexOf('fauve') > -1) { itemColor = 'Fauve'; }
-        if (item.description.toLowerCase().indexOf('charbon') > -1) { itemColor = 'Charbon'; }
-
+        if (item.description) {
+            if (item.description.toLowerCase().indexOf('weimar') > -1) { itemColor = 'Weimar'; }
+            if (item.description.toLowerCase().indexOf('fauve') > -1) { itemColor = 'Fauve'; }
+            if (item.description.toLowerCase().indexOf('charbon') > -1) { itemColor = 'Charbon'; }
+        }
+        else {
+            itemColor = 'Fauve'
+        }
+            
         newItem = {
             item_id: item.price.product,
             item_name: item.description,
@@ -1025,6 +1029,7 @@ const refreshOrderInfo = async () => {
         items: order_items
     });
     console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
+    shoppingCart.clearItem()
 
 }
 
@@ -1150,6 +1155,7 @@ const init = async () => {
 
     if (document.getElementById('jl-checkout-redirect')) {
         refreshOrderInfo();
+
     }
     if (document.getElementById('jag-solo')) {
         initAccessWidget();
@@ -1157,6 +1163,7 @@ const init = async () => {
     if (document.getElementById('jag-abo-B-page')) {
         initAboB();
     }
+
 
     setCartNumber();
     page = window.location.href.split('/')[3].split('?')[0];
