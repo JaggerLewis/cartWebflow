@@ -991,7 +991,7 @@ const refreshOrderInfo = async () => {
 
         let item = datas.aside_data.cart[i];
         //console.log(item);
-        shoppingCart.clearItem(item.id)
+        shoppingCart.clearItem(item)
 
         let itemColor = '';
         if (item.description) {
