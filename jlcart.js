@@ -1000,7 +1000,7 @@ const refreshOrderInfo = async () => {
             if (item.description.toLowerCase().indexOf('charbon') > -1) { itemColor = 'Charbon'; }
         }
         else {
-            itemColor = 'Fauve'
+            itemColor = null
         }
             
         newItem = {
