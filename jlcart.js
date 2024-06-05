@@ -1157,7 +1157,6 @@ const init = async () => {
 
     if (document.getElementById('jl-checkout-redirect')) {
         refreshOrderInfo();
-        shoppingCart.clearItem()
 
     }
     if (document.getElementById('jag-solo')) {
