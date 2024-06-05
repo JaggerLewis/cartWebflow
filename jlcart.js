@@ -199,7 +199,6 @@ class ShoppingCart {
 
     clear() {
         this.cart = []
-        document.getElementById('jl-cart-number').textContent = 0
         
         //this.saveCart({ event: { type: "clearCart", id: id, count: count } });
     }
@@ -989,8 +988,10 @@ const refreshOrderInfo = async () => {
     let items = datas.aside_data.cart;
 
     for (i = 0; i < items.length; i++) {
+
         let item = datas.aside_data.cart[i];
         //console.log(item);
+        shoppingCart.clearItem(item.id)
 
         let itemColor = '';
         if (item.description) {
@@ -1031,7 +1032,6 @@ const refreshOrderInfo = async () => {
         items: order_items
     });
     console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
-    shoppingCart.clear()
 
 }
 
