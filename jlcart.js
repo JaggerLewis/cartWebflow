@@ -199,6 +199,8 @@ class ShoppingCart {
 
     clear() {
         this.cart = []
+        document.getElementById('jl-cart-number').textContent = 0
+        
         //this.saveCart({ event: { type: "clearCart", id: id, count: count } });
     }
 
@@ -1029,7 +1031,7 @@ const refreshOrderInfo = async () => {
         items: order_items
     });
     console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
-    shoppingCart.clearItem()
+    shoppingCart.clear()
 
 }
 
@@ -1155,6 +1157,7 @@ const init = async () => {
 
     if (document.getElementById('jl-checkout-redirect')) {
         refreshOrderInfo();
+        shoppingCart.clearItem()
 
     }
     if (document.getElementById('jag-solo')) {
