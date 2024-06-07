@@ -103,7 +103,10 @@ class ShoppingCart {
         const productIndex = this.findProductIndexById(id)
         console.log('productIndex =>', productIndex)
         if (productIndex < 0) {
+            console.log('id ===> ',id)
             const cardProduct = new ProductCart(id, count)
+            console.log('cardProduct ===> ',cardProduct)
+
             this.cart.push(cardProduct)
         } else {
             this.cart[productIndex].quantity++
