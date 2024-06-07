@@ -84,7 +84,7 @@ class ShoppingCart {
 
     findProductIndexById(id) {
 
-        print('find ==> ', id)
+        console.log('find ==> ', id)
         return this.cart.findIndex(product =>
             product.id.price.id === id.price.id
         )
@@ -101,7 +101,7 @@ class ShoppingCart {
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
         const productIndex = this.findProductIndexById(id)
-        print('productIndex =>', productIndex)
+        console.log('productIndex =>', productIndex)
         if (productIndex < 0) {
             const cardProduct = new ProductCart(id, count)
             this.cart.push(cardProduct)
