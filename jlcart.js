@@ -60,7 +60,9 @@ class Product {
 }
 
 class ProductCart {
+    
     constructor(id, quantity) {
+        console.log('inside ==> ', id);
         this.id = id;
         this.quantity = quantity;
     }
