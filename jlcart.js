@@ -988,8 +988,10 @@ const redirectToStripe = async (event) => {
 const getTrad = (labelFr, labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelUs : labelFr
 
 const showNewCart = (event) => {
-
-    event.preventDefault();
+    try {
+        
+        event.preventDefault();
+    } catch (_) {}
 
     document.getElementById('JL_Basket_Valide_Commande').addEventListener('click', (event) => {
         event.preventDefault()
