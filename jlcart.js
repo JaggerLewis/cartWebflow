@@ -84,7 +84,7 @@ class ShoppingCart {
 
     findProductIndexById(id) {
 
-
+        print('find ==> ', id)
         return this.cart.findIndex(product =>
             product.id.price.id === id.price.id
         )
@@ -95,12 +95,13 @@ class ShoppingCart {
         let maxProductinCart = 4
         if (this.countItems() >= maxProductinCart) {
             let labeltocart = getTrad('Vous ne pouvez pas ajouter plus de ' + maxProductinCart + ' articles au panier', "You can't add more than " + maxProductinCart + " products in your cart");
-            showAddCart(labeltocart, true)
+            showAddCart(labeltocart)
             return
         }
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
         const productIndex = this.findProductIndexById(id)
+        print('productIndex =>', productIndex)
         if (productIndex < 0) {
             const cardProduct = new ProductCart(id, count)
             this.cart.push(cardProduct)
