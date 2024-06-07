@@ -97,16 +97,12 @@ class ShoppingCart {
    
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
-        const productIndex = this.findProductIndexById(id)
-        console.log('productIndex =>', productIndex)
         if (productIndex < 0) {
             console.log('id ===> ',id)
             const cardProduct = new ProductCart(id, count)
             console.log('cardProduct ===> ',cardProduct)
 
             this.cart.push(cardProduct)
-        } else {
-            this.cart[productIndex].quantity++
         }
         console.log('cart ==> ', this.cart)
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
