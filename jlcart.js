@@ -108,6 +108,7 @@ class ShoppingCart {
         } else {
             this.cart[productIndex].quantity++
         }
+        console.log('cart ==> ', this.cart)
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
     }
 
