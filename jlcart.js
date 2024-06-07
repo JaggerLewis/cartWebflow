@@ -36,27 +36,7 @@ function displayPrice(price) {
             : '' + price
 }
 
-const getRightAbo = (value) => {
-    switch (value) {
-        case 'premium':
-            return 'premium-family';
-        case 'family':
-            return 'starter-family';
-        default:
-            return value
-    }
-}
 
-const getRightLenght = (value) => {
-    switch (value) {
-        case 'mois':
-            return 'monthly';
-        case 'annee':
-            return 'yearly';
-        default:
-            return value
-    }
-}
 
 const setCartNumber = () => {
     if (JL_NavBar) {
@@ -85,11 +65,6 @@ class ProductCart {
         this.quantity = quantity;
     }
 
-    getProductFromList(products) {
-        return products.find((product) => {
-            return product.price.id === this.id
-        })
-    }
 }
 
 class ShoppingCart {
@@ -145,22 +120,6 @@ class ShoppingCart {
             this.clearItem(id);
         }
         this.saveCart({ event: { type: "removeItem", id: id, count: count } })
-    }
-
-    setItemCount(id, count) {
-        const productIndex = this.findProductIndexById(id)
-        if (productIndex < -1) {
-            throw new Error();
-        }
-        if (count < 0) {
-            throw new Error();
-        }
-        if (count === 0) {
-            this.removeItem(id)
-        } else {
-            this.cart[productIndex].quantity = count
-        }
-        this.saveCart({ event: { type: "setItem", id: id, count: count } })
     }
 
     clearItem(id) {
@@ -537,147 +496,6 @@ const switchProduct = (targetProduct) => {
 
 }
 
-const initHome = async () => {
-
-    let collar = document.querySelector('#jl-collar')
-    let dock = document.querySelector('#jl-dock')
-    document.querySelector('#price-jag').innerHTML = document.querySelector('#price-jag').innerHTML.replace('{price}', findProduct('jag', 'fauve').price.price)
-    document.querySelector('#jl-price-month').textContent =  findAbonnementSolo('monthly').price.toFixed(2)
-
-    document.querySelector('#jag-jag').addEventListener('click', (event) => {
-        event.preventDefault()
-        let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
-        shoppingCart.addItem(product, 1)
-        document.activeElement.blur();
-    })
-
-    document.querySelector('#jag-jag-dock').addEventListener('click', (event) => {
-        event.preventDefault()
-        let product = products.find(elem => elem.price.id == dock.getAttribute('data-selected'))
-        shoppingCart.addItem(product, 1)
-        document.activeElement.blur();
-    })
-
-    //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
-    document.querySelectorAll('#btn_boitier_color_fauve').forEach(element => element.addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id)
-        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
-    }))
-    //document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
-    document.querySelectorAll('#btn_boitier_color_weimar').forEach(element => element.addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id)
-        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
-    }))
-    //document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
-    document.querySelectorAll('#btn_boitier_color_charbon').forEach(element => element.addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id)
-        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
-    }))
-
-    collar.setAttribute('data-selected', findProduct('jag', 'fauve').price.id)
-    collar.srcset = findProduct('jag', 'fauve').image
-    dock.setAttribute('data-selected', findProduct('jag-smartdock', 'fauve').price.id)
-    dock.srcset = findProduct('jag-smartdock', 'fauve').image
-    colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
-    colorButtonSelect('#btn-dock-color-fauve', 'color-dock-selected', 'jl-color-selected', true)
-
-}
-
-const initCollar = async () => {
-    let collar = document.querySelector('#page-jag-collar')
-    document.querySelector('#abo-dock-price').innerHTML = document.querySelector('#abo-dock-price').innerHTML.replace('{price}', findProduct('jag-smartdock', 'fauve').price.price)
-    document.querySelector('#abo-jag-price').innerHTML = document.querySelector('#abo-jag-price').innerHTML.replace('{price}', findProduct('jag', 'fauve').price.price)
-    document.querySelector('#abo-cable-price').innerHTML = document.querySelector('#abo-cable-price').innerHTML.replace('{price}', findProduct('jag-chargingcable').price.price)
-    document.querySelector('#abo-coque-price').innerHTML = document.querySelector('#abo-coque-price').innerHTML.replace('{price}', findProduct('jag-sock', 'fauve').price.price)
-    document.querySelector('#je-commande-mon-jag').addEventListener('click', (event) => {
-        event.preventDefault()
-        let color = products.find(elem => elem.price.id == collar.getAttribute('data-selected')).metadata.colorId
-        let option = document.querySelector('[hover-selected=true]')
-        let productId
-        switch (option.id) {
-            case 'jag-en-solo':
-                productId = 'jag'
-                break;
-            case 'jag-avec-smartdock':
-                productId = 'jag-smartdock'
-                break;
-            default:
-        }
-        let finalProduct = products.find(elem => elem.metadata.pId == productId && elem.metadata.colorId == color)
-
-        if (finalProduct != null)
-            shoppingCart.addItem(finalProduct, 1)
-        else
-            showSnackBar("Votre produit n'a pas été trouvé...", true)
-
-    })
-    document.querySelector('#btn-color-fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id)
-        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
-
-    })
-    document.querySelector('#btn-color-weimar').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id)
-        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#btn-color-charbon').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id)
-        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#txt-color-fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'fauve').image, findProduct('jag', 'fauve').price.id)
-        colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
-
-    })
-    document.querySelector('#txt-color-weimar').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'weimar').image, findProduct('jag', 'weimar').price.id)
-        colorButtonSelect('#btn-color-weimar', 'color-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#txt-color-charbon').addEventListener('click', (event) => {
-        event.preventDefault()
-        colorButtonAction(collar, findProduct('jag', 'charbon').image, findProduct('jag', 'charbon').price.id)
-        colorButtonSelect('#btn-color-charbon', 'color-selected', 'jl-color-selected', true)
-    })
-    document.querySelector('#jag-en-solo').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-button-selected')
-    })
-    document.querySelector('#jag-avec-smartdock').addEventListener('click', (event) => {
-        colorButtonSelect('#jag-avec-smartdock', 'hover-selected', 'jag-button-selected')
-    })
-
-    document.querySelector('#jl-jag-coque-fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-sock', 'fauve'), 1)
-    })
-    document.querySelector('#jl-jag-cable').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-chargingcable'), 1)
-    })
-    collar.setAttribute('data-selected', findProduct('jag', 'fauve').price.id)
-    collar.srcset = findProduct('jag', 'fauve').image
-    colorButtonSelect('#btn-color-fauve', 'color-selected', 'jl-color-selected', true)
-    colorButtonSelect('#jag-en-solo', 'hover-selected', 'jag-button-selected')
-
-}
-
-const initBox = async () => {
-    document.querySelector('#jl-dock-antenne').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-smartdock-antenna-md'), 1)
-    })
-    document.querySelector('#jl-dock-cable').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-chargingcable'), 1)
-    })
-}
 
 const initNewsLettre = () => {
     let btn = document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
@@ -690,49 +508,7 @@ const initNewsLettre = () => {
     })
 }
 
-const initAccessory = () => {
 
-    document.querySelector('#acc-coque-fauve-price').innerHTML = document.querySelector('#acc-coque-fauve-price').innerHTML.replace('{price}', findProduct('jag-sock', 'fauve').price.price)
-    document.querySelector('#acc-coque-carbon-price').innerHTML = document.querySelector('#acc-coque-carbon-price').innerHTML.replace('{price}', findProduct('jag-sock', 'charbon').price.price)
-    document.querySelector('#acc-coque-weimar-price').innerHTML = document.querySelector('#acc-coque-weimar-price').innerHTML.replace('{price}', findProduct('jag-sock', 'weimar').price.price)
-    document.querySelector('#acc-cable-sm-price').innerHTML = document.querySelector('#acc-cable-sm-price').innerHTML.replace('{price}', findProduct('jag-chargingcable').price.price)
-    document.querySelector('#acc-cable-price').innerHTML = document.querySelector('#acc-cable-price').innerHTML.replace('{price}', findProduct('jag-chargingcable').price.price)
-    document.querySelector('#acc-dock-price').innerHTML = document.querySelector('#acc-dock-price').innerHTML.replace('{price}', findProduct('smartdock').price.price)
-    document.querySelector('#acc-big-antena-price').innerHTML = document.querySelector('#acc-big-antena-price').innerHTML.replace('{price}', findProduct('jag-smartdock-antenna-lg').price.price)
-    document.querySelector('#acc-sml-antena-price').innerHTML = document.querySelector('#acc-sml-antena-price').innerHTML.replace('{price}', findProduct('jag-smartdock-antenna-md').price.price)
-    document.querySelector('#jl-coque-fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-sock', 'fauve'), 1)
-    })
-    document.querySelector('#jl-coque-charbon').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-sock', 'charbon'), 1)
-    })
-    document.querySelector('#jl-coque-weimar').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-sock', 'weimar'), 1)
-    })
-    document.querySelector('#jl-antenne').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-smartdock-antenna-md'), 1)
-    })
-    document.querySelector('#jl-cable-cta').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-chargingcable'), 1)
-    })
-    document.querySelector('#jl-cable-cta-dock').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-smartdock-chargingcable'), 1)
-    })
-    document.querySelector('#jl-grande-antenne').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('jag-smartdock-antenna-lg'), 1)
-    })
-    document.querySelector('#jl-smartdock-accessoire').addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(findProduct('smartdock'), 1)
-    })
-}
 
 const initJagAccessory = () => {
 
@@ -1199,18 +975,6 @@ const redirectToStripe = async (event) => {
         },
     });
 
-}
-
-const redirectToStripeBis = async () => {
-    const url = window.location.origin + window.location.pathname;
-    let abo = findAboType(findAbonnement('premium-first'), 'life').id;
-    const answer = await fetch(`${interfaceUrl}/stripe/checkout_session`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart: [{ id: abo, quantity: 1 }], mode: 'payment', referer: url })
-    })
-    const apiResJson = await answer.json()
-    window.location.href = apiResJson.url
 }
 
 
