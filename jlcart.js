@@ -202,20 +202,20 @@ class ShoppingCart {
     }
 }
 
-const getProductsFromStripe = async () => {
-    try {
-        const answer = await fetch(`${interfaceUrl}/stripe/products`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        })
-        return answer
-    }
-    catch (e) {
-        return await setTimeout(async () => {
-            return await getProductsFromStripe()
-        }, "1000");
-    }
-}
+// const getProductsFromStripe = async () => {
+//     try {
+//         const answer = await fetch(`${interfaceUrl}/stripe/products`, {
+//             method: "GET",
+//             headers: { "Content-Type": "application/json" },
+//         })
+//         return answer
+//     }
+//     catch (e) {
+//         return await setTimeout(async () => {
+//             return await getProductsFromStripe()
+//         }, "1000");
+//     }
+// }
 
 const getAbonnementFromStripe = async () => {
     const answer = await fetch(`${interfaceUrl}/stripe/products/category/subscription`, {
@@ -699,20 +699,20 @@ const initAboJag = async () => {
 }
 
 const initAboB = async () => {
-    let formula = abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_'))
-    document.getElementById('jl-abo-month-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].price.toFixed(2) + '€' + getTrad('/mois', '/month')
-    document.getElementById('jl-abo-year-price').innerHTML = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
-    document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
+    // let formula = abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_'))
+    // // document.getElementById('jl-abo-month-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].price.toFixed(2) + '€' + getTrad('/mois', '/month')
+    // // document.getElementById('jl-abo-year-price').innerHTML = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
+    // // document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
 
-    let active = (formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
-    document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation') + (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
-    //document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
-    let annualPrice = formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price.toFixed(2) + '€'
-    active = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
-    document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit ' + annualPrice + ' par an', 'or ' + annualPrice + ' per year')+ (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
-    active = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
-    let lifePrice36 = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price / 36).toFixed(2) + '€'
-    document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')+ (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
+    // let active = (formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
+    // document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation') + (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
+    // //document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
+    // let annualPrice = formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price.toFixed(2) + '€'
+    // active = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
+    // document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit ' + annualPrice + ' par an', 'or ' + annualPrice + ' per year')+ (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
+    // active = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
+    // let lifePrice36 = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price / 36).toFixed(2) + '€'
+    // document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')+ (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
 }
 
 const initAccessWidget = async () => {
@@ -832,15 +832,15 @@ function preload(url) {
     return image;
 }
 
-const loadData = async () => {
-    let date = Date.now()
-    let result
+// const loadData = async () => {
+//     let date = Date.now()
+//     let result
 
-    result = await (await getProductsFromStripe()).json()
-    localStorage.setItem('ts', date)
-    localStorage.setItem('data', JSON.stringify(result))
-    return result
-}
+//     result = await (await getProductsFromStripe()).json()
+//     localStorage.setItem('ts', date)
+//     localStorage.setItem('data', JSON.stringify(result))
+//     return result
+// }
 
 const init = async () => {
 
@@ -860,7 +860,7 @@ const init = async () => {
     console.log(date, lastDate, (date - lastDate));
 
     if ((date - lastDate) > delayDate) {
-        await loadData()
+        // await loadData()
         await loadAbonnement()
     }
 
