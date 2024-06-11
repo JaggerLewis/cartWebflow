@@ -578,7 +578,7 @@ const loadAbonnement = async () => {
     let date = Date.now()
     let abonnement
     //loaderContainer.style.display = 'none'
-    abonnement = await (await getAbonnementFromStripe()).json()
+    // abonnement = await (await getAbonnementFromStripe()).json()
     localStorage.setItem('ts-abonnement', date)
     localStorage.setItem('abonnement', JSON.stringify(abonnement))
     return abonnement
@@ -906,11 +906,11 @@ const init = async () => {
 
         initAccessWidget();
     }
-    if (document.getElementById('jag-abo-B-page')) {
-        console.log('loader => jag-abo-B-page')
+    // if (document.getElementById('jag-abo-B-page')) {
+    //     console.log('loader => jag-abo-B-page')
 
-        initAboB();
-    }
+    //     initAboB();
+    // }
 
 
     setCartNumber();
@@ -974,7 +974,7 @@ const showNewCart = (event) => {
         document.getElementById('JL_Basket_Empty').style.display = 'flex';
         document.getElementById('JL_Basket_Content').style.display = 'none';
         document.getElementById('JL_Basket_Delivery_Amount').style.display = 'none';
-        document.getElementById('JL_Basket_Info_Abo').style.display = 'none';
+        // document.getElementById('JL_Basket_Info_Abo').style.display = 'none';
         document.getElementById('JL_Basket_Boutons').style.display = 'none';
         document.getElementById('JL_Basket').style.display = 'flex';
         document.getElementById('JL_Basket_Total').style.display = 'none';
@@ -1090,7 +1090,7 @@ const showNewCart = (event) => {
     document.getElementById('JL_Basket_Boutons').style.display = 'flex';
     document.getElementById('JL_Basket_Item').style.display = 'none'; // Ligne vide de modèle
     document.getElementById('JL_Basket_Empty').style.display = 'none';
-    document.getElementById('JL_Basket_Info_Abo').style.display = 'flex';
+    // document.getElementById('JL_Basket_Info_Abo').style.display = 'flex';
     document.getElementById('JL_Basket').style.display = 'flex';
     document.getElementById('JL_Basket_Content').style.display = 'block';
 
