@@ -881,13 +881,13 @@ const init = async () => {
         initJagGPS();
     }
 
-    if (document.getElementById('jl-price-month')) {
-        console.log('loader => jl-price-month')
+    // if (document.getElementById('jl-price-month')) {
+    //     console.log('loader => jl-price-month')
         
-        let abo = abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'life')
-        console.log(abonnement, abo)
-        document.querySelector('#jl-price-month').textContent = (abo.price / 36).toFixed(2)
-    }
+    //     let abo = abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'life')
+    //     console.log(abonnement, abo)
+    //     document.querySelector('#jl-price-month').textContent = (abo.price / 36).toFixed(2)
+    // }
 
     if (document.getElementById('jl-Accessory')) {
         console.log('loader => jl-Accessory')
