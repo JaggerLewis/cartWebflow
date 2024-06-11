@@ -24,11 +24,9 @@ modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div cl
 body.appendChild(modalDiv)
 
 
-const capitalise = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-const getLocalName = (products) => window.location.href.split('/').find((elem) => elem == 'en') ? products.metadata.title_en : products.metadata.title_fr
 
-function displayPrice(price) {
+function displayPrice(price) { //USED
     return price % 1 == 0
         ? price + '.00'
         : (price % 0.1).toFixed(5) == 0
@@ -38,7 +36,7 @@ function displayPrice(price) {
 
 
 
-const setCartNumber = () => {
+const setCartNumber = () => { //USED
     if (JL_NavBar) {
         let count = 0
         if (localStorage.getItem("shoppingCart")) {
@@ -49,6 +47,8 @@ const setCartNumber = () => {
 
 }
 
+
+// TODO(dev): update with new methode
 class Product {
     constructor(name, description, metadata, image, price) {
         this.name = name;
@@ -59,6 +59,7 @@ class Product {
     }
 }
 
+// TODO(dev): update with new methode
 class ProductCart {
     
     constructor(id, quantity) {
@@ -121,14 +122,6 @@ class ShoppingCart {
         this.saveCart({ event: { type: "clearItem", id: id } })
     }
 
-    countItems() {
-        let total = 0
-        this.cart.forEach(product => {
-            total += product.quantity
-        })
-        return total
-    }
-
     getTotalPrice() {
         let totalPrice = 0;
         this.cart.forEach((productCart) => {
@@ -143,13 +136,6 @@ class ShoppingCart {
         const totalSpan = document.getElementById('JL_Basket_Total_Amount');
         totalSpan.innerHTML = price.toFixed(2) + " &euro;"
         return price.toFixed(2);
-    }
-
-
-    clear() {
-        this.cart = []
-        
-        //this.saveCart({ event: { type: "clearCart", id: id, count: count } });
     }
 
     saveCart({ callApi = true, event } = {}) {
@@ -202,21 +188,9 @@ class ShoppingCart {
     }
 }
 
-// const getProductsFromStripe = async () => {
-//     try {
-//         const answer = await fetch(`${interfaceUrl}/stripe/products`, {
-//             method: "GET",
-//             headers: { "Content-Type": "application/json" },
-//         })
-//         return answer
-//     }
-//     catch (e) {
-//         return await setTimeout(async () => {
-//             return await getProductsFromStripe()
-//         }, "1000");
-//     }
-// }
 
+
+// TODO(dev): update methode to use JL API
 const getAbonnementFromStripe = async () => {
     const answer = await fetch(`${interfaceUrl}/stripe/products/category/subscription`, {
         method: "GET",
@@ -227,41 +201,6 @@ const getAbonnementFromStripe = async () => {
 
 const shoppingCart = new ShoppingCart();
 
-const colorButtonAction = (elem, image, id) => {
-    //elem.srcset = image
-    elem.setAttribute('data-selected', id)
-    elem.src = image
-}
-
-const colorButtonSelect = (newBtn, attribut, Newclass, is_text) => {
-
-    newBtn = newBtn.replace('#', '');
-
-    let btn = document.getElementById(newBtn);
-
-    if (btn == null) {
-        return false;
-    }
-
-    let oldBtn = document.querySelectorAll('[' + attribut + '=true]')
-    if (oldBtn != null) {
-        oldBtn.forEach((element) => {
-            element.removeAttribute(attribut)
-            element.classList.remove(Newclass)
-            element.classList.remove('text-selected')
-        })
-    }
-
-    if (is_text) {
-        let txtlabel = document.getElementById(newBtn.replace('btn', 'txt'));
-        txtlabel.classList.add(Newclass);
-        txtlabel.setAttribute(attribut, 'true');
-    }
-
-    btn.setAttribute(attribut, 'true');
-    return true;
-
-}
 
 let products = []
 let abonnement = []
@@ -341,157 +280,24 @@ const setBtnColor = (color) => {
 }
 
 const initJagGPS = async () => {
-    
-    let collar = document.getElementById('jl-collar')
+    let colors = ['fauve', 'weimar', 'charbon']
 
-    //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
-    document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
-        event.preventDefault()
-        setBtnColor('fauve')
-        // colorButtonAction(collar, findProduct(targetProduct, 'fauve').image, findProduct(targetProduct, 'fauve').price.id)
-        // colorButtonSelect('btn-color-fauve', 'color-selected', 'txt-color-selected', true)
-        SlideToColor('fauve');
-        document.activeElement.blur();
-    })
-    //document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
-    document.getElementById('btn_boitier_color_weimar').addEventListener('click', (event) => {
-        event.preventDefault()
-        setBtnColor('weimar')
-        // colorButtonAction(collar, findProduct(targetProduct, 'weimar').image, findProduct(targetProduct, 'weimar').price.id)
-        // colorButtonSelect('btn-color-weimar', 'color-selected', 'txt-color-selected', true)
-        SlideToColor('weimar');
-        document.activeElement.blur();
-    })
-    //document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
-    document.getElementById('btn_boitier_color_charbon').addEventListener('click', (event) => {
-        event.preventDefault()
-        setBtnColor('charbon')
-        // colorButtonAction(collar, findProduct(targetProduct, 'charbon').image, findProduct(targetProduct, 'charbon').price.id)
-        // colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
-        SlideToColor('charbon');
-        document.activeElement.blur();
+    colors.forEach((color) => {
+        document.getElementById('btn_boitier_color_'+ color).addEventListener('click', (event) => {
+            event.preventDefault()
+            setBtnColor(color)
+            SlideToColor(color);
+            document.activeElement.blur();
+        })
     })
 
-    // document.getElementById('jag-jag').addEventListener('click', (event) => {
-    //     event.preventDefault()
-    //     let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
-    //     shoppingCart.addItem(product, 1)
-    //     document.activeElement.blur();
-    //     gtag("event", "add_to_cart",
-    //         {
-    //             currency: "EUR",
-    //             value: product.price.price,
-    //             items: [
-    //                 {
-    //                     item_id: product.metadata.productId,
-    //                     item_name: product.metadata.title_fr,
-    //                     item_brand: "Jagger & Lewis",
-    //                     item_variant: product.colorId,
-    //                     price: product.price.price,
-    //                     quantity: 3
-    //                 }
-    //             ]
-    //         });
-    // })
-
-    /*
-    document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
-    document.getElementById('btn_add_smartdock').addEventListener('click', (event) => {
-        event.preventDefault()
-        switchProduct();
-        document.activeElement.blur();
-    })
-    */
-
-    // console.log('ici');
-
-    // document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
-    //     event.preventDefault()
-    //     switchProduct('jag');
-    //     document.activeElement.blur();
-    // })
-    // document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
-    //     event.preventDefault()
-    //     switchProduct('jag-smartdock');
-    //     document.activeElement.blur();
-    // })
-
-    // document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
-    // document.getElementById('price-jag-smartdock').innerHTML = findProduct('jag-smartdock', initialColor).price.price;
-    
-    //collar.srcset = findProduct('jag', initialColor).image
-    
-    colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
-    // switchProduct(initialDevice);
+    setBtnColor(initialColor)
 
     return true;
 }
 
-// const initSmartDockAlone = async () => {
-//     let smartdock = document.getElementById('jag-smartdock-alone')
-
-//     let priceLabel = document.getElementById('price-jag')
-//     let btnAddBasket = document.getElementById('btn-buy-smartdock-alone')
-
-//     if (!priceLabel) { return false; }
-//     if (!btnAddBasket) { return false; }
-
-//     smartdockProduct = findProduct('smartdock');
-//     //console.log(smartdockProduct);
-
-//     priceLabel.innerHTML = smartdockProduct.price.price;
-//     btnAddBasket.addEventListener('click', (event) => {
-//         event.preventDefault()
-//         shoppingCart.addItem(smartdockProduct, 1)
-//         document.activeElement.blur();
-//     })
-// }
-
-// const switchProduct = (targetProduct) => {
-
-//     if (targetProduct == 'jag-smartdock') {
-//         // On bascule avec le smartdock
-//         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
-//         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
-//         document.getElementById('jag-without-smartdock').className = 'jl-jag-encart';
-//         document.getElementById('jag-with-smartdock').className = 'jl-jag-encart selected';
-//     }
-    
-//     if (targetProduct == 'jag') {
-//         // On bascule sur le produit seul
-//         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
-//         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
-//         document.getElementById('jag-without-smartdock').className = 'jl-jag-encart selected';
-//         document.getElementById('jag-with-smartdock').className = 'jl-jag-encart';
-//     }
-
-//     let collar = document.getElementById('jl-collar')
-//     colorChanged = false;
-
-//     colors.forEach((color) => {
-//         theBtnColor = document.getElementById('btn-color-' + color);
-//         if (theBtnColor.getAttribute('color-selected') == 'true') {
-//             colorChanged = true;
-//             colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
-//             colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-//             document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
-//         }
-//     })
-
-//     if (colorChanged == false) {
-//         color = initialColor;
-//         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
-//         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-//         document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
-//     }
-    
-//     collar.setAttribute('data-selected', findProduct(targetProduct, initialColor).price.id)
-
-// }
-
-
 const initNewsLettre = () => {
-    let btn = document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
+    document.querySelector('#btn-restons-en-contact').addEventListener('click', () => {
         let emailValue = document.querySelector('#input-restons-en-contact').value
         fetch(`${interfaceUrl}/newsletter/subscribe`, {
             method: "POST",
@@ -501,76 +307,6 @@ const initNewsLettre = () => {
     })
 }
 
-
-
-const initJagAccessory = () => {
-
-    //console.log(accessory);
-
-    document.getElementById('jl-Accessory-model').style.display = 'none';
-
-    function createAccessoryItem(itemLine) {
-        let element = document.getElementById('jl-Accessory-model');
-
-        let newAccess = element.cloneNode(true);
-        newAccess.setAttribute('id', 'jl-Accessory-item');
-        changeChildsId(newAccess, '-' + itemLine, 'jl-Accessory-item')
-        // for (const child of newAccess.childNodes) {
-        //     if (child.hasChildNodes()) {
-        //         child.childNodes.forEach((e, i) => {
-        //             if (e.id.startsWith('jl-Accessory-item')) {
-        //                 e.setAttribute('id', e.id + '-' + itemLine);
-        //             }
-        //         });
-        //     }
-        //     else {
-        //         if (child.id.startsWith('jl-Accessory-item')) {
-        //             child.setAttribute('id', child.id + '-' + itemLine);
-        //         }
-        //     }
-        // }
-        //console.log(newItem);
-        document.getElementById('jl-Accessory-List').appendChild(newAccess);
-    }
-
-    nbAccess = 1;
-
-    if (accessory.length == 0) {
-        return true;
-    }
-
-    accessory.forEach((access) => {
-        if (access.metadata.pId.endsWith('unlimited')) {
-            return;
-        }
-
-        //let id = prod.price.id
-        //addHtml(prod, id)
-        //addFunction(prod.id, id)
-
-        //console.log(access);
-        createAccessoryItem(nbAccess);
-        document.getElementById('jl-Accessory-item-label-' + nbAccess).innerHTML = capitalise(getLocalName(access));
-        document.getElementById('jl-Accessory-item-desc-' + nbAccess).innerHTML = access.description
-        document.getElementById('jl-Accessory-item-ref-' + nbAccess).innerHTML = access.metadata.pId;
-        document.getElementById('jl-Accessory-item-Img-' + nbAccess).src = access.image;
-        document.getElementById('jl-Accessory-item-Img-' + nbAccess).removeAttribute('srcset');
-        document.getElementById('jl-Accessory-item-price-' + nbAccess).innerHTML = (access.price.price).toFixed(2) + ' &euro;';
-
-        document.getElementById('jl-Accessory-item-btn-' + nbAccess).addEventListener('click', (event) => {
-            event.preventDefault();
-            shoppingCart.addItem(access, 1)
-            document.activeElement.blur();
-        });
-
-        document.getElementById('jl-Accessory-item-' + nbAccess).style.display = 'flex';
-
-        nbAccess++;
-    })
-
-
-
-}
 
 const loadAbonnement = async () => {
     //loaderContainer.style = null
@@ -698,53 +434,17 @@ const initAboJag = async () => {
 
 }
 
-const initAboB = async () => {
-    // let formula = abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_'))
-    // // document.getElementById('jl-abo-month-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].price.toFixed(2) + '€' + getTrad('/mois', '/month')
-    // // document.getElementById('jl-abo-year-price').innerHTML = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price / 12).toFixed(2) + '€' + getTrad('/mois', '/month')
-    // // document.getElementById('jl-abo-life-price').innerHTML = formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price.toFixed(2) + '€'
+const initAboB = async () => {}
 
-    // let active = (formula.find((elem) => elem.metadata.pricing == 'monthly').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
-    // document.getElementById('jl-abo-month-price-info').innerHTML = getTrad('Sans engagement', 'Without obligation') + (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
-    // //document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit 3 mois gratuits', '3 months free')
-    // let annualPrice = formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].price.toFixed(2) + '€'
-    // active = (formula.find((elem) => elem.metadata.pricing == 'yearly').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
-    // document.getElementById('jl-abo-year-price-info').innerHTML = getTrad('Soit ' + annualPrice + ' par an', 'or ' + annualPrice + ' per year')+ (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
-    // active = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].metadata.activation == 'false' && document.getElementById('jag_Abonnement_check') != null)
-    // let lifePrice36 = (formula.find((elem) => elem.metadata.pricing == 'life').prices[0].price / 36).toFixed(2) + '€'
-    // document.getElementById('jl-abo-life-price-info').innerHTML = getTrad('Soit ' + lifePrice36 + '/mois sur 3 ans', 'Or ' + lifePrice36 + '/month over 3 years')+ (active ? getTrad("<br>Sans frais d'activation", '<br>Withour activation fee') : '')
-}
 
-const initAccessWidget = async () => {
-    let datas = products.filter((elem) => elem.metadata.category == 'product' && !['jag-unlimited', 'jag-smartdock', 'jag-smartdock-unlimited'].includes(elem.metadata.pId))
-    let card = document.getElementById('jag-solo-container')
-    let container = document.getElementById('jag-solo')
-    datas.forEach((prod) => {
-        let newCard = card.cloneNode(true)
-
-        changeChildsId(newCard, '-' + prod.metadata.productId, 'jag-')
-        container.insertBefore(newCard, container.firstChild)
-        document.getElementById('jag-solo-pict-' + prod.metadata.productId).src = prod.image
-        document.getElementById('jag-solo-title-' + prod.metadata.productId).innerHTML = prod.name
-        document.getElementById('jag-solo-price-' + prod.metadata.productId).innerHTML = prod.price.price + '€'
-        document.getElementById('jag-solo-action-' + prod.metadata.productId).addEventListener('click', () => shoppingCart.addItem(prod, 1))
-        newCard.style.display = 'flex'
-    })
-}
 
 
 const refreshOrderInfo = async () => {
     if (document.getElementById('JL_ORDER'))
         document.getElementById('JL_ORDER').style.display = 'none';
 
-    let id = new URLSearchParams(window.location.search).get('session_id')
-    //console.log(id)
-    if (id == null) {
-        id = "cs_live_a1Rd0HTjHn8zIFgoXlj3wnk0jxW0Krpv5f3W4wjamNnAzytLTq9Px9WYfV";
-    }
-
+    let id = new URLSearchParams(window.location.search).get('session_id') ?? "cs_live_a1Rd0HTjHn8zIFgoXlj3wnk0jxW0Krpv5f3W4wjamNnAzytLTq9Px9WYfV"
     let datas = await loadCart(id)
-    //console.log(datas);
 
     localStorage.setItem('session_id', id)
     if (document.getElementById('JL_ORDER')) {
@@ -759,7 +459,6 @@ const refreshOrderInfo = async () => {
     for (i = 0; i < items.length; i++) {
 
         let item = datas.aside_data.cart[i];
-        //console.log(item);
         shoppingCart.clearItem(item)
 
         let itemColor = '';
@@ -783,14 +482,12 @@ const refreshOrderInfo = async () => {
         }
 
         order_total_amount += item.amount_total;
-        //console.log(newItem);
         order_items.push(newItem)
     }
 
     shipping_cost = 599;
     order_total_amount = order_total_amount + shipping_cost;
     order_total_tax = parseInt(order_total_amount / 1.2);
-    //console.log(order_total_amount,order_total_tax,order_items )
 
     gtag("event", "purchase", {
         transaction_id: datas.orderNumber,
@@ -860,83 +557,30 @@ const init = async () => {
         document.getElementById('JL_Btn_Close_Basket').addEventListener('click', (event) => hideCart(event))
     }
 
-    if (document.getElementById('JL_Abonnement_Full_Grille')) {
-        console.log('loader => JL_Abonnement_Full_Grille')
-        initAboJag()
-    }
-
-    if (document.getElementById('JL_Abo_Newsletter')) {
-        console.log('loader => JL_Abo_Newsletter')
-
+    if (document.getElementById('JL_Abo_Newsletter')) { //USED
         initNewsLettre()
     }
 
-    // if (document.getElementById('jag-smartdock-alone')) {
-    //     initSmartDockAlone()
-    // }
-
-    if (document.getElementById('jl-collar')) {
-        console.log('loader => jl-collar')
-
+    if (document.getElementById('jl-collar')) { //USED
         initJagGPS();
     }
 
-    // if (document.getElementById('jl-price-month')) {
-    //     console.log('loader => jl-price-month')
-        
-    //     let abo = abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'life')
-    //     console.log(abonnement, abo)
-    //     document.querySelector('#jl-price-month').textContent = (abo.price / 36).toFixed(2)
-    // }
-
-    if (document.getElementById('jl-Accessory')) {
-        console.log('loader => jl-Accessory')
-
-        initJagAccessory();
-    }
-
-    if (document.getElementById('jl-checkout-redirect')) {
-        console.log('loader => jl-checkout-redirect')
-
+    if (document.getElementById('jl-checkout-redirect')) { //USED
         refreshOrderInfo();
 
     }
-    if (document.getElementById('jag-solo')) {
-        console.log('loader => jag-solo')
-
-        initAccessWidget();
-    }
-    // if (document.getElementById('jag-abo-B-page')) {
-    //     console.log('loader => jag-abo-B-page')
-
-    //     initAboB();
-    // }
-
-
     setCartNumber();
     page = window.location.href.split('/')[3].split('?')[0];
-
-    //console.log(page);
 }
 
 const redirectToStripe = async (event) => {
     try {
         event.preventDefault();
     }
-    catch (e) {
-        //console.log(e);
-    }
+    catch (e) {}
 
-    /*
-    if (shoppingCart.countItems() == 0) {
-        showSnackBar("Vous n'avez pas d'article", true)
-            return
-        }
-    */
     const apiRes = await shoppingCart.getCartStripeUrl()
-    //console.log(apiRes);
     const apiResJson = await apiRes.json()
-    //console.log(apiResJson);
 
     //Appel du Tag Manager pour le checkout puis redirection vers stripe
     gtag("event", "begin_checkout", {
@@ -1023,7 +667,7 @@ const showNewCart = (event) => {
 
         createLine(nbItem);
 
-        document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML = getLocalName(prod.id);
+        document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML =  getTrad(products.metadata.title_fr, products.metadata.title_en);
         let labelQty = getTrad('qté : ', 'qty : ');
         document.getElementById('JL_Basket_Item_Ref_' + nbItem).innerHTML = prod.id.metadata.pId + " (" + labelQty + prod.quantity + ")";
         document.getElementById('JL_Basket_Item_Img_' + nbItem).src = prod.id.image;
