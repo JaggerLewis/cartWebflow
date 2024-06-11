@@ -844,51 +844,13 @@ function preload(url) {
 
 const init = async () => {
 
-    let date = Date.now()
 
     let loaderContainer
     loaderContainer = document.createElement('div')
     loaderContainer.classList.add('jl-loader-container')
     loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
     body.insertBefore(loaderContainer, document.body.firstChild);
-
-
-    let lastDate = JSON.parse(localStorage.getItem('ts')) || Date.now();
-    let delayDate = 24 * 60 * 60 * 1000;
-
-
-    console.log(date, lastDate, (date - lastDate));
-
-    if ((date - lastDate) > delayDate) {
-        // await loadData()
-        await loadAbonnement()
-    }
-
-    let result = JSON.parse(localStorage.getItem('data')) || await loadData()
-    abonnement = JSON.parse(localStorage.getItem('abonnement')) || await loadAbonnement()
-
     loaderContainer.style.display = 'none'
-
-    for (const product of result) {
-        products.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
-        if (product.metadata.category == "accessory" || product.metadata.category == "product") {
-            accessory.push(new Product(product.name, product.description, product.metadata, product.image, product.prices[0]))
-        }
-    }
-
-    /*
-    try {
-        preload(findProduct('jag', 'fauve').image)
-        preload(findProduct('jag', 'weimar').image)
-        preload(findProduct('jag', 'charbon').image)
-        preload(findProduct('jag-smartdock', 'fauve').image)
-        preload(findProduct('jag-smartdock', 'weimar').image)
-        preload(findProduct('jag-smartdock', 'charbon').image)
-    }
-    catch (e) {
-        console.log(e)
-    }
-    */
 
     if (JL_NavBar) {
         document.getElementById('JL_Basket_Item').style.display = 'none';
@@ -899,10 +861,13 @@ const init = async () => {
     }
 
     if (document.getElementById('JL_Abonnement_Full_Grille')) {
+        console.log('loader => JL_Abonnement_Full_Grille')
         initAboJag()
     }
 
     if (document.getElementById('JL_Abo_Newsletter')) {
+        console.log('loader => JL_Abo_Newsletter')
+
         initNewsLettre()
     }
 
@@ -911,27 +876,39 @@ const init = async () => {
     // }
 
     if (document.getElementById('jl-collar')) {
+        console.log('loader => jl-collar')
+
         initJagGPS();
     }
 
     if (document.getElementById('jl-price-month')) {
+        console.log('loader => jl-price-month')
+        
         let abo = abonnement.find((elem) => elem.metadata.pId == 'formula_unique').prices.find((elem) => elem.metadata.pricing == 'life')
         console.log(abonnement, abo)
         document.querySelector('#jl-price-month').textContent = (abo.price / 36).toFixed(2)
     }
 
     if (document.getElementById('jl-Accessory')) {
+        console.log('loader => jl-Accessory')
+
         initJagAccessory();
     }
 
     if (document.getElementById('jl-checkout-redirect')) {
+        console.log('loader => jl-checkout-redirect')
+
         refreshOrderInfo();
 
     }
     if (document.getElementById('jag-solo')) {
+        console.log('loader => jag-solo')
+
         initAccessWidget();
     }
     if (document.getElementById('jag-abo-B-page')) {
+        console.log('loader => jag-abo-B-page')
+
         initAboB();
     }
 
