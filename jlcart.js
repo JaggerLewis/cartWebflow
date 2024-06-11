@@ -335,6 +335,11 @@ const SlideToColor = (ColorProduct) => {
 
 }
 
+const setBtnColor = (color) => {
+    document.querySelectorAll('[id^=txt-color-]').forEach((elem) => elem.classList.remove('txt-color-selected'))
+    document.getElementById('txt-color-' + color).classList.add('txt-color-selected')
+}
+
 const initJagGPS = async () => {
     
     let collar = document.getElementById('jl-collar')
@@ -342,7 +347,7 @@ const initJagGPS = async () => {
     //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        let targetProduct = getTargetProduct();
+        setBtnColor
         // colorButtonAction(collar, findProduct(targetProduct, 'fauve').image, findProduct(targetProduct, 'fauve').price.id)
         // colorButtonSelect('btn-color-fauve', 'color-selected', 'txt-color-selected', true)
         SlideToColor('fauve');
@@ -351,7 +356,7 @@ const initJagGPS = async () => {
     //document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        let targetProduct = getTargetProduct();
+        setBtnColor
         // colorButtonAction(collar, findProduct(targetProduct, 'weimar').image, findProduct(targetProduct, 'weimar').price.id)
         // colorButtonSelect('btn-color-weimar', 'color-selected', 'txt-color-selected', true)
         SlideToColor('weimar');
@@ -360,7 +365,7 @@ const initJagGPS = async () => {
     //document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        let targetProduct = getTargetProduct();
+        setBtnColor
         // colorButtonAction(collar, findProduct(targetProduct, 'charbon').image, findProduct(targetProduct, 'charbon').price.id)
         // colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
         SlideToColor('charbon');
