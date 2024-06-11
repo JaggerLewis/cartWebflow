@@ -347,7 +347,7 @@ const initJagGPS = async () => {
     //document.querySelectorAll('#btn-color-fauve').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
         event.preventDefault()
-        setBtnColor
+        setBtnColor('fauve')
         // colorButtonAction(collar, findProduct(targetProduct, 'fauve').image, findProduct(targetProduct, 'fauve').price.id)
         // colorButtonSelect('btn-color-fauve', 'color-selected', 'txt-color-selected', true)
         SlideToColor('fauve');
@@ -356,7 +356,7 @@ const initJagGPS = async () => {
     //document.querySelectorAll('#btn-color-weimar').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_weimar').addEventListener('click', (event) => {
         event.preventDefault()
-        setBtnColor
+        setBtnColor('weimar')
         // colorButtonAction(collar, findProduct(targetProduct, 'weimar').image, findProduct(targetProduct, 'weimar').price.id)
         // colorButtonSelect('btn-color-weimar', 'color-selected', 'txt-color-selected', true)
         SlideToColor('weimar');
@@ -365,7 +365,7 @@ const initJagGPS = async () => {
     //document.querySelectorAll('#btn-color-charbon').forEach(element => element.addEventListener('click', (event) => {
     document.getElementById('btn_boitier_color_charbon').addEventListener('click', (event) => {
         event.preventDefault()
-        setBtnColor
+        setBtnColor('charbon')
         // colorButtonAction(collar, findProduct(targetProduct, 'charbon').image, findProduct(targetProduct, 'charbon').price.id)
         // colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
         SlideToColor('charbon');
