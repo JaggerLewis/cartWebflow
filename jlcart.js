@@ -25,6 +25,7 @@ body.appendChild(modalDiv)
 
 
 
+const getTrad = (labelFr, labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelUs : labelFr
 
 function displayPrice(price) { //USED
     return price % 1 == 0
@@ -33,8 +34,6 @@ function displayPrice(price) { //USED
             ? price + '0'
             : '' + price
 }
-
-
 
 const setCartNumber = () => { //USED
     if (JL_NavBar) {
@@ -46,7 +45,6 @@ const setCartNumber = () => { //USED
     }
 
 }
-
 
 // TODO(dev): update with new methode
 class Product {
@@ -132,7 +130,6 @@ class ShoppingCart {
 
     setTotalPrice() {
         let price = this.getTotalPrice() + 5.99
-        //const totalSpan = document.querySelector('#jl-total')
         const totalSpan = document.getElementById('JL_Basket_Total_Amount');
         totalSpan.innerHTML = price.toFixed(2) + " &euro;"
         return price.toFixed(2);
@@ -203,8 +200,6 @@ const shoppingCart = new ShoppingCart();
 
 
 let products = []
-let abonnement = []
-let accessory = []
 
 const findProduct = (product, color) => {
     const filtered = products.find(elem =>
@@ -225,32 +220,16 @@ const findAboType = (abo, type) => {
     return filtered
 }
 
-// const getTargetProduct = () => {
 
-//     targetProduct = 'jag-smartdock';
-
-//     if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
-//         targetProduct = 'jag';
-//     }
-
-//     if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
-//         targetProduct = 'jag-smartdock';
-//     }
-
-//     return targetProduct;
-// }
-
+// Permet de faire bouger le slider
 const SlideToColor = (ColorProduct) => {
 
-    // Permet de faire bouger le slider
     slides = document.getElementById('jl-slide-mask-product');
     withSlide = slides.offsetWidth;
 
     if (ColorProduct == 'fauve') {nbSlide = 0};
     if (ColorProduct == 'weimar') {nbSlide = 1};
     if (ColorProduct == 'charbon') {nbSlide = 2};
-
-    console.log('nbSlide',nbSlide)
 
     for (const child of slides.children) {
         child.style.transform = 'translateX(-' + (nbSlide * withSlide).toString() + 'px)';
@@ -280,8 +259,6 @@ const setBtnColor = (color) => {
 }
 
 const initJagGPS = async () => {
-    let colors = ['fauve', 'weimar', 'charbon']
-
     colors.forEach((color) => {
         document.getElementById('btn_boitier_color_'+ color).addEventListener('click', (event) => {
             event.preventDefault()
@@ -309,134 +286,15 @@ const initNewsLettre = () => {
 
 
 const loadAbonnement = async () => {
-    //loaderContainer.style = null
 
     let date = Date.now()
     let abonnement
-    //loaderContainer.style.display = 'none'
-    // abonnement = await (await getAbonnementFromStripe()).json()
     localStorage.setItem('ts-abonnement', date)
     localStorage.setItem('abonnement', JSON.stringify(abonnement))
     return abonnement
 }
 
-const updateTime = (search) => {
-    var div = document.getElementsByTagName("div");
-    var searchText = search ? '1 an' : '1 mois';
-
-    for (var i = 0; i < div.length; i++) {
-        if (div[i].textContent == searchText) {
-            div[i].textContent = search ? '1 mois' : '1 an';
-        }
-    }
-}
-
-const initAboJag = async () => {
-    const switchDisplay = () => {
-        if (document.getElementById('jl_abo-facture-mois').className == 'abo_btn_on') {
-            toMonth();
-        }
-        if (document.getElementById('jl_abo-facture-annee').className == 'abo_btn_on') {
-            toYear();
-        }
-        if (document.getElementById('jl_abo-facture-life').className == 'abo_btn_on') {
-            toLife();
-        }
-    }
-
-    const toMonth = () => {
-        document.getElementById('jl_abo-facture-mois').className = 'abo_btn_on';
-        document.getElementById('jl_abo-facture-annee').className = 'abo_btn_off';
-        document.getElementById('jl_abo-facture-life').className = 'abo_btn_off';
-
-        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "monthly").price) + getTrad('€/mois', '€/month')
-        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "monthly").price) + getTrad('€/mois', '€/month')
-        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "monthly").price) + getTrad('€/mois', '€/month')
-
-        document.getElementById('abo-annee-mois-starter').textContent = getTrad('Sans engagement', 'No obligation')
-        document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('Sans engagement', 'No obligation')
-        document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('Sans engagement', 'No obligation')
-
-        document.querySelector('#total-family-premium').innerHTML = ""; //"Ou " + findAboType(findAbonnement("premium-family"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + "€</b>/mois"
-        document.querySelector('#total-starter-family').innerHTML = ""; // "Ou " + findAboType(findAbonnement("starter-family"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + "€</b>/mois"
-        document.querySelector('#total-starter').innerHTML = ""; // "Ou " + findAboType(findAbonnement("starter"), "yearly").price + "&euro; / an <br> soit <b>" +  (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2)  + "€</b>/mois"
-
-        updateTime(false)
-    }
-
-    const toYear = () => {
-        document.getElementById('jl_abo-facture-mois').className = 'abo_btn_off';
-        document.getElementById('jl_abo-facture-annee').className = 'abo_btn_on';
-        document.getElementById('jl_abo-facture-life').className = 'abo_btn_off';
-
-        /*
-        document.getElementById('abo-prix-family-premium').textContent = displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + getTrad('€/an', '€/year')
-        document.getElementById('abo-prix-starter-family').textContent = displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) + getTrad('€/an', '€/year')
-        document.getElementById('abo-prix-starter').textContent = displayPrice(findAboType(findAbonnement("starter"), "yearly").price) + getTrad('€/an', '€/year')
-        document.getElementById('total-family-premium').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        document.getElementById('total-starter-family').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        document.getElementById('total-starter').innerHTML = getTrad('Soit', 'Or') + " <b>" + (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        */
-
-        document.getElementById('total-family-premium').textContent = getTrad('Paiement de ', '') + displayPrice(findAboType(findAbonnement("premium-family"), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
-        document.getElementById('total-starter-family').textContent = getTrad('Paiement de ', '') + displayPrice(findAboType(findAbonnement("starter-family"), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
-        document.getElementById('total-starter').textContent = getTrad('Paiement de ', '') + displayPrice(findAboType(findAbonnement("starter"), "yearly").price) + getTrad('€ tous les ans', '€ billed annualy')
-        document.getElementById('abo-prix-family-premium').innerHTML = (findAboType(findAbonnement("premium-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        document.getElementById('abo-prix-starter-family').innerHTML = (findAboType(findAbonnement("starter-family"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-        document.getElementById('abo-prix-starter').innerHTML = (findAboType(findAbonnement("starter"), "yearly").price / 12).toFixed(2) + getTrad('€/mois', '€/month')
-
-        document.getElementById('abo-annee-mois-starter').textContent = getTrad('2 mois offerts', '2 months free')
-        document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('2 mois offerts', '2 months free')
-        document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('2 mois offerts', '2 months free')
-
-        updateTime(false)
-    }
-
-    const toLife = () => {
-        document.getElementById('jl_abo-facture-mois').className = 'abo_btn_off';
-        document.getElementById('jl_abo-facture-annee').className = 'abo_btn_off';
-        document.getElementById('jl_abo-facture-life').className = 'abo_btn_on';
-
-        document.getElementById('abo-prix-family-premium').textContent = findAboType(findAbonnement("premium-family"), "life").price + '€'
-        document.getElementById('abo-prix-starter-family').textContent = findAboType(findAbonnement("starter-family"), "life").price + '€'
-        document.getElementById('abo-prix-starter').textContent = findAboType(findAbonnement("starter"), "life").price + '€'
-
-        document.getElementById('abo-annee-mois-starter').textContent = getTrad('Formule sans abonnement', 'no-subscription formula')
-        document.getElementById('abo-annee-mois-starter-family').textContent = getTrad('Formule sans abonnement', 'no-subscription formula')
-        document.getElementById('abo-annee-mois-family-premium').textContent = getTrad('Formule sans abonnement', 'no-subscription formula')
-
-        document.getElementById('total-family-premium').innerHTML = getTrad('1 paiement unique', '1 single payment')
-        document.getElementById('total-starter-family').innerHTML = getTrad('1 paiement unique', '1 single payment')
-        document.getElementById('total-starter').innerHTML = getTrad('1 paiement unique', '1 single payment')
-        updateTime(true)
-
-    }
-
-    document.getElementById('jl_abo-facture-annee').addEventListener('click', (event) => {
-        event.preventDefault();
-        toYear();
-        document.activeElement.blur();
-    });
-    document.getElementById('jl_abo-facture-life').addEventListener('click', (event) => {
-        event.preventDefault();
-        toLife();
-        document.activeElement.blur();
-    });
-    document.getElementById('jl_abo-facture-mois').addEventListener('click', (event) => {
-        event.preventDefault();
-        toMonth();
-        document.activeElement.blur();
-    })
-
-    switchDisplay();
-
-    toYear();
-
-}
-
 const initAboB = async () => {}
-
-
 
 
 const refreshOrderInfo = async () => {
@@ -522,26 +380,9 @@ const loadCart = async (id) => {
     catch (e) { }
     return await fetch(`${interfaceUrl}/stripe/checkout_session/` + id + '/cart').then(res => res.json())
 }
-
-function preload(url) {
-    let image = new Image();
-    image.src = url;
-    return image;
-}
-
-// const loadData = async () => {
-//     let date = Date.now()
-//     let result
-
-//     result = await (await getProductsFromStripe()).json()
-//     localStorage.setItem('ts', date)
-//     localStorage.setItem('data', JSON.stringify(result))
-//     return result
-// }
-
 const init = async () => {
 
-
+    // TODO(dev): put loader on client
     let loaderContainer
     loaderContainer = document.createElement('div')
     loaderContainer.classList.add('jl-loader-container')
@@ -554,7 +395,7 @@ const init = async () => {
         document.getElementById('JL_Basket_Empty').style.display = 'block';
         document.getElementById('jl-cart-number').addEventListener('click', (event) => showNewCart(event))
         document.getElementById('jag-cart').addEventListener('click', (event) => showNewCart(event))
-        document.getElementById('JL_Btn_Close_Basket').addEventListener('click', (event) => hideCart(event))
+        document.getElementById('JL_Btn_Close_Basket').addEventListener('click', () =>  document.getElementById('JL_Basket').style.display = 'none')
     }
 
     if (document.getElementById('JL_Abo_Newsletter')) { //USED
@@ -590,9 +431,6 @@ const redirectToStripe = async (event) => {
     });
 
 }
-
-
-const getTrad = (labelFr, labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelUs : labelFr
 
 const showNewCart = (event) => {
     try {
@@ -735,13 +573,6 @@ const showNewCart = (event) => {
 
 }
 
-const hideCart = () => {
-    document.getElementById('JL_Basket').style.display = 'none';
-}
-//document.querySelector('#jag-cart').addEventListener('click',(event) => showCart(event))
-
-
-
 const showAddCart = (text, isError) => {
     if (isError) {
         text = getTrad('Oups, une erreur est survenue, rechargez la page', 'Oops, an error has occurred, reload the page')
@@ -752,10 +583,9 @@ const showAddCart = (text, isError) => {
     setTimeout(function () { document.getElementById('JL_AddCart_Snack').style.display = 'none' }, 3000);
 }
 
-const goToStripe = document.getElementById("validate-cart");
-goToStripe.onclick = (event) => {
+document.getElementById("validate-cart").onclick = (event) => {
     redirectToStripe(event)
-}
+};
 
 var colors = ['fauve', 'weimar', 'charbon'];
 var devices = ['jag', 'jag-smartdock'];

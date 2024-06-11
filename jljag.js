@@ -11,10 +11,6 @@ const Jag_initBox = async ()  => {
     })
 }
 
-function preload(url) {
-    let tmp = new Image();
-    tmp.src = url;
-    }
 
 function Jag_GetContext() {
     let jagToken = new URLSearchParams(window.location.search).get('jwt')
