@@ -417,7 +417,7 @@ const initJagGPS = async () => {
     //collar.srcset = findProduct('jag', initialColor).image
     
     colorButtonSelect('#btn-color-' + initialColor, 'color-selected', 'txt-color-selected', true)
-    switchProduct(initialDevice);
+    // switchProduct(initialDevice);
 
     return true;
 }
@@ -442,47 +442,47 @@ const initSmartDockAlone = async () => {
     })
 }
 
-const switchProduct = (targetProduct) => {
+// const switchProduct = (targetProduct) => {
 
-    if (targetProduct == 'jag-smartdock') {
-        // On bascule avec le smartdock
-        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
-        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
-        document.getElementById('jag-without-smartdock').className = 'jl-jag-encart';
-        document.getElementById('jag-with-smartdock').className = 'jl-jag-encart selected';
-    }
+//     if (targetProduct == 'jag-smartdock') {
+//         // On bascule avec le smartdock
+//         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'no');
+//         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'yes');
+//         document.getElementById('jag-without-smartdock').className = 'jl-jag-encart';
+//         document.getElementById('jag-with-smartdock').className = 'jl-jag-encart selected';
+//     }
     
-    if (targetProduct == 'jag') {
-        // On bascule sur le produit seul
-        document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
-        document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
-        document.getElementById('jag-without-smartdock').className = 'jl-jag-encart selected';
-        document.getElementById('jag-with-smartdock').className = 'jl-jag-encart';
-    }
+//     if (targetProduct == 'jag') {
+//         // On bascule sur le produit seul
+//         document.getElementById('jag-without-smartdock').setAttribute('isChecked', 'yes');
+//         document.getElementById('jag-with-smartdock').setAttribute('isChecked', 'no');
+//         document.getElementById('jag-without-smartdock').className = 'jl-jag-encart selected';
+//         document.getElementById('jag-with-smartdock').className = 'jl-jag-encart';
+//     }
 
-    let collar = document.getElementById('jl-collar')
-    colorChanged = false;
+//     let collar = document.getElementById('jl-collar')
+//     colorChanged = false;
 
-    colors.forEach((color) => {
-        theBtnColor = document.getElementById('btn-color-' + color);
-        if (theBtnColor.getAttribute('color-selected') == 'true') {
-            colorChanged = true;
-            colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
-            colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-            document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
-        }
-    })
+//     colors.forEach((color) => {
+//         theBtnColor = document.getElementById('btn-color-' + color);
+//         if (theBtnColor.getAttribute('color-selected') == 'true') {
+//             colorChanged = true;
+//             colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
+//             colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
+//             document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
+//         }
+//     })
 
-    if (colorChanged == false) {
-        color = initialColor;
-        colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
-        colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
-        document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
-    }
+//     if (colorChanged == false) {
+//         color = initialColor;
+//         colorButtonAction(collar, findProduct(targetProduct, color).image, findProduct(targetProduct, color).price.id);
+//         colorButtonSelect('btn-color-' + color, 'color-selected', 'txt-color-selected', true);
+//         document.getElementById('price-' + targetProduct).innerHTML = findProduct(targetProduct, color).price.price;
+//     }
     
-    collar.setAttribute('data-selected', findProduct(targetProduct, initialColor).price.id)
+//     collar.setAttribute('data-selected', findProduct(targetProduct, initialColor).price.id)
 
-}
+// }
 
 
 const initNewsLettre = () => {
