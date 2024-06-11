@@ -660,14 +660,9 @@ const showNewCart = (event) => {
     let cart_items = [];
 
     shoppingCart.cart.forEach((prod) => {
-
-        let id = prod.id.price.id
-        //addHtml(prod, id)
-        //addFunction(prod.id, id)
-
         createLine(nbItem);
 
-        document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML =  getTrad(products.metadata.title_fr, products.metadata.title_en);
+        document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML =  getTrad(prod.metadata.title_fr, prod.metadata.title_en);
         let labelQty = getTrad('qté : ', 'qty : ');
         document.getElementById('JL_Basket_Item_Ref_' + nbItem).innerHTML = prod.id.metadata.pId + " (" + labelQty + prod.quantity + ")";
         document.getElementById('JL_Basket_Item_Img_' + nbItem).src = prod.id.image;
