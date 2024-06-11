@@ -62,7 +62,6 @@ class Product {
 class ProductCart {
     
     constructor(id, quantity) {
-        console.log('inside ==> ', id);
         this.id = id;
         this.quantity = quantity;
     }
@@ -86,23 +85,18 @@ class ShoppingCart {
 
     findProductIndexById(id) {
 
-        console.log('find ==> ', id)
         return this.cart.findIndex(product =>
             product.id.price.id === id.price.id
         )
     }
 
     addItem(id, count = 1) {
-        console.log(id)
    
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
-        console.log('id ===> ',id)
         const cardProduct = new ProductCart(id, count)
-        console.log('cardProduct ===> ',cardProduct)
 
         this.cart.push(cardProduct)
-        console.log('cart ==> ', this.cart)
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
     }
 
@@ -342,8 +336,6 @@ const SlideToColor = (ColorProduct) => {
 }
 
 const initJagGPS = async () => {
-
-    console.log('start');
     
     let collar = document.getElementById('jl-collar')
 
@@ -406,21 +398,21 @@ const initJagGPS = async () => {
     })
     */
 
-    console.log('ici');
+    // console.log('ici');
 
-    document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
-        event.preventDefault()
-        switchProduct('jag');
-        document.activeElement.blur();
-    })
-    document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
-        event.preventDefault()
-        switchProduct('jag-smartdock');
-        document.activeElement.blur();
-    })
+    // document.getElementById('jag-without-smartdock').addEventListener('click', (event) => {
+    //     event.preventDefault()
+    //     switchProduct('jag');
+    //     document.activeElement.blur();
+    // })
+    // document.getElementById('jag-with-smartdock').addEventListener('click', (event) => {
+    //     event.preventDefault()
+    //     switchProduct('jag-smartdock');
+    //     document.activeElement.blur();
+    // })
 
-    document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
-    document.getElementById('price-jag-smartdock').innerHTML = findProduct('jag-smartdock', initialColor).price.price;
+    // document.getElementById('price-jag').innerHTML = findProduct('jag', initialColor).price.price;
+    // document.getElementById('price-jag-smartdock').innerHTML = findProduct('jag-smartdock', initialColor).price.price;
     
     //collar.srcset = findProduct('jag', initialColor).image
     
