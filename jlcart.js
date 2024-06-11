@@ -427,25 +427,25 @@ const initJagGPS = async () => {
     return true;
 }
 
-const initSmartDockAlone = async () => {
-    let smartdock = document.getElementById('jag-smartdock-alone')
+// const initSmartDockAlone = async () => {
+//     let smartdock = document.getElementById('jag-smartdock-alone')
 
-    let priceLabel = document.getElementById('price-jag')
-    let btnAddBasket = document.getElementById('btn-buy-smartdock-alone')
+//     let priceLabel = document.getElementById('price-jag')
+//     let btnAddBasket = document.getElementById('btn-buy-smartdock-alone')
 
-    if (!priceLabel) { return false; }
-    if (!btnAddBasket) { return false; }
+//     if (!priceLabel) { return false; }
+//     if (!btnAddBasket) { return false; }
 
-    smartdockProduct = findProduct('smartdock');
-    //console.log(smartdockProduct);
+//     smartdockProduct = findProduct('smartdock');
+//     //console.log(smartdockProduct);
 
-    priceLabel.innerHTML = smartdockProduct.price.price;
-    btnAddBasket.addEventListener('click', (event) => {
-        event.preventDefault()
-        shoppingCart.addItem(smartdockProduct, 1)
-        document.activeElement.blur();
-    })
-}
+//     priceLabel.innerHTML = smartdockProduct.price.price;
+//     btnAddBasket.addEventListener('click', (event) => {
+//         event.preventDefault()
+//         shoppingCart.addItem(smartdockProduct, 1)
+//         document.activeElement.blur();
+//     })
+// }
 
 // const switchProduct = (targetProduct) => {
 
@@ -906,9 +906,9 @@ const init = async () => {
         initNewsLettre()
     }
 
-    if (document.getElementById('jag-smartdock-alone')) {
-        initSmartDockAlone()
-    }
+    // if (document.getElementById('jag-smartdock-alone')) {
+    //     initSmartDockAlone()
+    // }
 
     if (document.getElementById('jl-collar')) {
         initJagGPS();
