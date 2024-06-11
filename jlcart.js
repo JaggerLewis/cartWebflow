@@ -292,20 +292,20 @@ const findAboType = (abo, type) => {
     return filtered
 }
 
-const getTargetProduct = () => {
+// const getTargetProduct = () => {
 
-    targetProduct = 'jag-smartdock';
+//     targetProduct = 'jag-smartdock';
 
-    if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
-        targetProduct = 'jag';
-    }
+//     if (document.getElementById('jag-without-smartdock').getAttribute('isChecked') == 'yes') {
+//         targetProduct = 'jag';
+//     }
 
-    if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
-        targetProduct = 'jag-smartdock';
-    }
+//     if (document.getElementById('jag-with-smartdock').getAttribute('isChecked') == 'yes') {
+//         targetProduct = 'jag-smartdock';
+//     }
 
-    return targetProduct;
-}
+//     return targetProduct;
+// }
 
 const SlideToColor = (ColorProduct) => {
 
@@ -351,8 +351,8 @@ const initJagGPS = async () => {
     document.getElementById('btn_boitier_color_fauve').addEventListener('click', (event) => {
         event.preventDefault()
         let targetProduct = getTargetProduct();
-        colorButtonAction(collar, findProduct(targetProduct, 'fauve').image, findProduct(targetProduct, 'fauve').price.id)
-        colorButtonSelect('btn-color-fauve', 'color-selected', 'txt-color-selected', true)
+        // colorButtonAction(collar, findProduct(targetProduct, 'fauve').image, findProduct(targetProduct, 'fauve').price.id)
+        // colorButtonSelect('btn-color-fauve', 'color-selected', 'txt-color-selected', true)
         SlideToColor('fauve');
         document.activeElement.blur();
     })
@@ -360,8 +360,8 @@ const initJagGPS = async () => {
     document.getElementById('btn_boitier_color_weimar').addEventListener('click', (event) => {
         event.preventDefault()
         let targetProduct = getTargetProduct();
-        colorButtonAction(collar, findProduct(targetProduct, 'weimar').image, findProduct(targetProduct, 'weimar').price.id)
-        colorButtonSelect('btn-color-weimar', 'color-selected', 'txt-color-selected', true)
+        // colorButtonAction(collar, findProduct(targetProduct, 'weimar').image, findProduct(targetProduct, 'weimar').price.id)
+        // colorButtonSelect('btn-color-weimar', 'color-selected', 'txt-color-selected', true)
         SlideToColor('weimar');
         document.activeElement.blur();
     })
@@ -369,33 +369,33 @@ const initJagGPS = async () => {
     document.getElementById('btn_boitier_color_charbon').addEventListener('click', (event) => {
         event.preventDefault()
         let targetProduct = getTargetProduct();
-        colorButtonAction(collar, findProduct(targetProduct, 'charbon').image, findProduct(targetProduct, 'charbon').price.id)
-        colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
+        // colorButtonAction(collar, findProduct(targetProduct, 'charbon').image, findProduct(targetProduct, 'charbon').price.id)
+        // colorButtonSelect('btn-color-charbon', 'color-selected', 'txt-color-selected', true)
         SlideToColor('charbon');
         document.activeElement.blur();
     })
 
-    document.getElementById('jag-jag').addEventListener('click', (event) => {
-        event.preventDefault()
-        let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
-        shoppingCart.addItem(product, 1)
-        document.activeElement.blur();
-        gtag("event", "add_to_cart",
-            {
-                currency: "EUR",
-                value: product.price.price,
-                items: [
-                    {
-                        item_id: product.metadata.productId,
-                        item_name: product.metadata.title_fr,
-                        item_brand: "Jagger & Lewis",
-                        item_variant: product.colorId,
-                        price: product.price.price,
-                        quantity: 3
-                    }
-                ]
-            });
-    })
+    // document.getElementById('jag-jag').addEventListener('click', (event) => {
+    //     event.preventDefault()
+    //     let product = products.find(elem => elem.price.id == collar.getAttribute('data-selected'))
+    //     shoppingCart.addItem(product, 1)
+    //     document.activeElement.blur();
+    //     gtag("event", "add_to_cart",
+    //         {
+    //             currency: "EUR",
+    //             value: product.price.price,
+    //             items: [
+    //                 {
+    //                     item_id: product.metadata.productId,
+    //                     item_name: product.metadata.title_fr,
+    //                     item_brand: "Jagger & Lewis",
+    //                     item_variant: product.colorId,
+    //                     price: product.price.price,
+    //                     quantity: 3
+    //                 }
+    //             ]
+    //         });
+    // })
 
     /*
     document.getElementById('btn_add_smartdock').setAttribute('isChecked', 'no');
