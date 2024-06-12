@@ -129,7 +129,7 @@ class ShoppingCart {
     }
 
     setTotalPrice() {
-        let price = this.getTotalPrice() + 5.99
+        let price = this.getTotalPrice()// + 5.99
         const totalSpan = document.getElementById('JL_Basket_Total_Amount');
         totalSpan.innerHTML = price.toFixed(2) + " &euro;"
         return price.toFixed(2);
