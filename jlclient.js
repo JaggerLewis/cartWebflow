@@ -4,7 +4,7 @@ const baseurl = 'https://app-api.mypet.fit'
 const REDIRECT = {
     login : 'seconnecter',
     dashboard : 'profil-chien',
-    home : 'localisation-activite',
+    home : 'home',
     abo : 'choix-abonnement-upgrade-b',
     stop : 'confirmation-de-resiliation',
     active : 'step1',
