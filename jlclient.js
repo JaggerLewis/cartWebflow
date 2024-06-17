@@ -2,7 +2,7 @@
 
 const baseurl = 'https://app-api.mypet.fit'
 const REDIRECT = {
-    login : 'seconnecter',
+    login : 'login',
     dashboard : 'profil-chien',
     home : 'home',
     abo : 'choix-abonnement-upgrade-b',
@@ -148,6 +148,16 @@ const setChecked = (node, type) => {
         default:
             break;
     }
+}
+
+const loadAbonnement = async () => {
+    let date = Date.now()
+    let abonnement = await fetch(`${interfaceUrl}/stripe/products/category/subscription`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+    }).then(async (res) => res.json())
+    localStorage.setItem('ts-abonnement', date)
+    localStorage.setItem('abonnement', JSON.stringify(abonnement))
 }
 
 const showAboHistoric = async () => {

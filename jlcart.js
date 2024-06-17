@@ -185,17 +185,6 @@ class ShoppingCart {
     }
 }
 
-
-
-// TODO(dev): update methode to use JL API
-const getAbonnementFromStripe = async () => {
-    const answer = await fetch(`${interfaceUrl}/stripe/products/category/subscription`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-    })
-    return answer
-}
-
 const shoppingCart = new ShoppingCart();
 
 
@@ -282,16 +271,6 @@ const initNewsLettre = () => {
             body: JSON.stringify({ email: emailValue })
         })
     })
-}
-
-
-const loadAbonnement = async () => {
-
-    let date = Date.now()
-    let abonnement
-    localStorage.setItem('ts-abonnement', date)
-    localStorage.setItem('abonnement', JSON.stringify(abonnement))
-    return abonnement
 }
 
 const initAboB = async () => {}
