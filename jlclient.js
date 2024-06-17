@@ -231,7 +231,7 @@ const setActivateBtn = async (btn) => {
 const loadRescue = () => {
     let s = document.createElement('script')
     s.type = 'text/javascript'
-    s.src = 'https://webcart.jagger-lewis.com/jlrescue.js'
+    s.src = 'https://webcart.jagger-lewis.com/jlrescue.min.js'
     document.getElementsByTagName('head')[0].appendChild(s)
 }
 
