@@ -10,21 +10,6 @@ if (document.querySelector('#jl-aqua-modal')) {
     document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
 }
 
-
-
-const modalDiv = document.createElement("div");
-modalDiv.setAttribute("id", "cart")
-modalDiv.setAttribute("tabindex", "-1")
-modalDiv.setAttribute("role", "dialog")
-modalDiv.setAttribute("aria-labelledby", "exampleModalLabel")
-modalDiv.setAttribute("aria-hidden", "true")
-modalDiv.classList.add("modal")
-modalDiv.setAttribute("class", "modal fade")
-modalDiv.innerHTML = '<div class="modal-dialog modal-lg" role="document"><div class="jl-modal"><div class="jl-header"><p class="title jl-p">Panier</p><img class="close-button hover" data-dismiss="modal" src="https://webcart.jagger-lewis.com/asset/icon_close.png"></img></div><div class="jl-border-container"><div id="jl-no-display" class="jl-no-display">Aucun élément sélectionné</div></div><div class="jl-bottom-container"><p class="jl-p jl-bottom-text">Frais de livraison (Standard)</p><p class=" jl-p jl-bottom-text">5.99€</p></div><div class="jl-container-total"><p class=" jl-p jl-total-title">Total</p><p class="jl-p jl-total-title" id="jl-total">0&euro;</p></div><button id="validate-cart" class="jl-button">Finaliser la commande</button></div></div>'
-body.appendChild(modalDiv)
-
-
-
 const getTrad = (labelFr, labelUs) => window.location.href.split('/').find((elem) => elem == 'en') ? labelUs : labelFr
 
 function displayPrice(price) { //USED
