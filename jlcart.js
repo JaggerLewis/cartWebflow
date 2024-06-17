@@ -374,21 +374,9 @@ const changeChildsId = (node, suffix, filter) => {
 }
 
 const loadCart = async (id) => {
-    try {
-        loaderContainer.display = ''
-    }
-    catch (e) { }
     return await fetch(`${interfaceUrl}/stripe/checkout_session/` + id + '/cart').then(res => res.json())
 }
 const init = async () => {
-
-    // TODO(dev): put loader on client
-    let loaderContainer
-    loaderContainer = document.createElement('div')
-    loaderContainer.classList.add('jl-loader-container')
-    loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
-    body.insertBefore(loaderContainer, document.body.firstChild);
-    loaderContainer.style.display = 'none'
 
     if (JL_NavBar) {
         document.getElementById('JL_Basket_Item').style.display = 'none';
