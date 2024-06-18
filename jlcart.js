@@ -535,9 +535,12 @@ const showAddCart = (text, isError) => {
     setTimeout(function () { document.getElementById('JL_AddCart_Snack').style.display = 'none' }, 3000);
 }
 
-document.getElementById("validate-cart").onclick = (event) => {
-    redirectToStripe(event)
-};
+if (document.getElementById("validate-cart"))
+{   
+    document.getElementById("validate-cart").onclick = (event) => {
+        redirectToStripe(event)
+    };
+}
 
 var colors = ['fauve', 'weimar', 'charbon'];
 var devices = ['jag', 'jag-smartdock'];
