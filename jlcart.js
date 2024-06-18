@@ -537,6 +537,7 @@ const showAddCart = (text, isError) => {
 
 if (document.getElementById("validate-cart"))
 {   
+    // Adx
     document.getElementById("validate-cart").onclick = (event) => {
         redirectToStripe(event)
     };
