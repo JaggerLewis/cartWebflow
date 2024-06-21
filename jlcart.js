@@ -120,7 +120,7 @@ class ShoppingCart {
         return price.toFixed(2);
     }
 
-    saveCart({ callApi = true, event } = {}) {
+    saveCart({ callApi = false, event } = {}) {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNumber();
         if (callApi) {
