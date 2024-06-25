@@ -512,6 +512,11 @@ const showNewCart = (event) => {
         value: cart_totalPrice,
         items: cart_items,
     });
+    console.log("event", "view_cart", {
+        currency: "EUR",
+        value: cart_totalPrice,
+        items: cart_items,
+    })
 
     document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
 
