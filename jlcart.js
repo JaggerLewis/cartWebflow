@@ -518,7 +518,7 @@ const showNewCart = (event) => {
         items: cart_items,
     })
 
-    document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
+    //document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
 
     document.getElementById('JL_Basket_Total').style.display = 'flex';
     document.getElementById('JL_Basket_Boutons').style.display = 'flex';
