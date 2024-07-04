@@ -579,5 +579,5 @@ if (document.getElementById('JL_NavBar')) {
 }
 else {
     appendPage('https://cdnjs.cloudflare.com/ajax/libs/lottie-player/2.0.4/lottie-player.js')
-   appendPage('https://webcart.jagger-lewis.com/jlclient.min.js')
+   appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
