@@ -1686,7 +1686,7 @@ const disableButton = () => {
 const getAll = async () => {
     if (!loaderContainer) {
         loaderContainer = document.createElement('div')
-        loaderContainer.classList.add('jl-loader-container')
+        loaderContainer.style = "width: 100Vw;height: 100VH;position: absolute;justify-content: center;align-items: center;background-color: #8080806e;"
         loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
         body.insertBefore(loaderContainer, document.body.firstChild);
     }
