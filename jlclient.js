@@ -8,7 +8,7 @@ const REDIRECT = {
     abo : 'upgrade',
     stop : 'confirmation-de-resiliation',
     active : 'step1',
-    active_2 : 'activation-produit-etape02-copy',
+    active_2 : 'step2',
     active_3 : 'step3',
     formula_life : 'lifetimeformula',
     email : 'emailsent'
