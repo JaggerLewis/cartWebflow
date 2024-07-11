@@ -1673,7 +1673,7 @@ const disableButton = () => {
     for (elem of document.querySelectorAll('[id=jl-product-abo-container]')) {
         elem.onclick = () => showAddCart('Vous ne pouvez pas séléctionner cette formule...', false);
         elem.classList.add('selected')
-        if (elem.getAttribute('jl_productid') == currentAbo)
+        if (elem.getAttribute('jl_productid') == abo)
         return
     }
 }
