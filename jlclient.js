@@ -1660,7 +1660,9 @@ const getWelfareData = async () => {
 
 const disableButton = () => {
     let currentAbo = JSON.parse(localStorage.getItem('dog')).collar.formula_subscription.type;
-    let abo = abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_') && elem.metadata.pricing == currentAbo)[0].metadata.productId
+    let abo = '667d22143715ce5387932844'
+    
+    // abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_') && elem.metadata.pricing == currentAbo)[0].metadata.productId
     let collarId = JSON.parse(localStorage.getItem('dog')).collar._id
         
         if (collarId == 0) {
