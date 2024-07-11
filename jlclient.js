@@ -1661,12 +1661,6 @@ const getWelfareData = async () => {
 const disableButton = () => {
     let currentAbo = JSON.parse(localStorage.getItem('dog')).collar.formula_subscription.type;
     let abo = '6644bc10947f9d11efacd4ad'
-
-        
-        if (collarId == 0) {
-        return
-        }
-    
     
     for (elem of document.querySelectorAll('[id=jl-product-abo-container]')) {
         elem.onclick = () => showAddCart('Vous ne pouvez pas séléctionner cette formule...', false);
