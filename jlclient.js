@@ -1658,30 +1658,23 @@ const getWelfareData = async () => {
     dog.welfareData = result
 }
 
-// const disableButton = () => {
-//     let newBtn = document.getElementById('jag-my-formula')
-//     newBtn.style.display = 'none'
-//     let id
-//     switch(getNewAbo()?.metadata?.pricing) {
-//         case 'monthly' :
-//             id =  'month'
-//             break
-//         case 'yearly' :
-//             id =   'year'
-//             break
-//         case 'life' :
-//             id =   'life'
-//             break
-//     }
-//     if (id) {
-//         let btn = document.getElementById('jl_switch_' + id)
-//         btn.style.display = 'none'
-//         newBtn.style.display = 'block'
-//         btn.parentElement.appendChild(newBtn)
-//         btn.remove()
-//     }
-
-// }
+const disableButton = () => {
+    let currentAbo = JSON.parse(localStorage.getItem('dog')).collar.formula_subscription.type;
+    let abo = abonnement.filter((elem) => elem.metadata.pId.includes('formula_unique_') && elem.metadata.pricing == currentAbo)[0].metadata.productId
+    let collarId = JSON.parse(localStorage.getItem('dog')).collar._id
+        
+        if (collarId == 0) {
+        return
+        }
+    
+    
+    for (elem of document.querySelectorAll('[id=jl-product-abo-container]')) {
+        elem.onclick = () => false;
+        elem.classlist.add('selected')
+        if (elem.getAttribute('jl_productid') == currentAbo)
+        return
+    }
+}
 
 const getAll = async () => {
     if (!loaderContainer) {
@@ -1713,7 +1706,7 @@ const getAll = async () => {
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
         initAboB()
-        // disableButton()
+        disableButton()
     }
     else if (document.getElementById('jag-abo-stop')) {
         await loadAbonnement()
