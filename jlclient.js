@@ -1658,30 +1658,30 @@ const getWelfareData = async () => {
     dog.welfareData = result
 }
 
-const disableButton = () => {
-    let newBtn = document.getElementById('jag-my-formula')
-    newBtn.style.display = 'none'
-    let id
-    switch(getNewAbo()?.metadata?.pricing) {
-        case 'monthly' :
-            id =  'month'
-            break
-        case 'yearly' :
-            id =   'year'
-            break
-        case 'life' :
-            id =   'life'
-            break
-    }
-    if (id) {
-        let btn = document.getElementById('jl_switch_' + id)
-        btn.style.display = 'none'
-        newBtn.style.display = 'block'
-        btn.parentElement.appendChild(newBtn)
-        btn.remove()
-    }
+// const disableButton = () => {
+//     let newBtn = document.getElementById('jag-my-formula')
+//     newBtn.style.display = 'none'
+//     let id
+//     switch(getNewAbo()?.metadata?.pricing) {
+//         case 'monthly' :
+//             id =  'month'
+//             break
+//         case 'yearly' :
+//             id =   'year'
+//             break
+//         case 'life' :
+//             id =   'life'
+//             break
+//     }
+//     if (id) {
+//         let btn = document.getElementById('jl_switch_' + id)
+//         btn.style.display = 'none'
+//         newBtn.style.display = 'block'
+//         btn.parentElement.appendChild(newBtn)
+//         btn.remove()
+//     }
 
-}
+// }
 
 const getAll = async () => {
     if (!loaderContainer) {
@@ -1713,7 +1713,7 @@ const getAll = async () => {
         abonnement = JSON.parse(localStorage.getItem('abonnement'))
         await getUser()
         initAboB()
-        disableButton()
+        // disableButton()
     }
     else if (document.getElementById('jag-abo-stop')) {
         await loadAbonnement()
