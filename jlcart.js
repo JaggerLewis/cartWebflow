@@ -265,9 +265,13 @@ const refreshOrderInfo = async () => {
     if (document.getElementById('JL_ORDER'))
         document.getElementById('JL_ORDER').style.display = 'none';
 
-    let id = new URLSearchParams(window.location.search).get('session_id') ?? "cs_live_a1Rd0HTjHn8zIFgoXlj3wnk0jxW0Krpv5f3W4wjamNnAzytLTq9Px9WYfV"
-    let datas = await loadCart(id)
+    let id = new URLSearchParams(window.location.search).get('session_id')
+    if (!id) {
+        window.open('/404', '_self')
+    }
 
+    let datas = await loadCart(id)
+    
     localStorage.setItem('session_id', id)
     if (document.getElementById('JL_ORDER')) {
         document.getElementById('JL_ORDER_ID').textContent = datas.orderNumber
