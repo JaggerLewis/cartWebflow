@@ -410,7 +410,7 @@ const showNewCart = (event) => {
     }
     function noItems() {
         document.getElementById('JL_Basket_Empty').style.display = 'flex';
-        document.getElementById('JL_Basket_Content').style.display = 'none';
+        //document.getElementById('JL_Basket_Content').style.display = 'none';
         document.getElementById('JL_Basket_Delivery_Amount').style.display = 'none';
         // document.getElementById('JL_Basket_Info_Abo').style.display = 'none';
         document.getElementById('JL_Basket_Boutons').style.display = 'none';
