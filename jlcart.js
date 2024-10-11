@@ -419,27 +419,30 @@ const init = async () => {
 }
 
 const hideSubscription = () => {
-        // Find subscription in cart
-        let productId = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
-        let sub_list = [...abo_list ?? []].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
+    if (!abo_list) {
+        return
+    }
+    // Find subscription in cart
+    let productId = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+    let sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
+    sub_list.forEach((elem) => {
+        // able subscription   
+        elem.style.backgroundColor = null
+        elem.style.color = null
+        elem.style.pointerEvents = "auto";
+    })
+    if (productId) {
+        // Get subscription node in page
+        
         sub_list.forEach((elem) => {
-            // able subscription   
-            elem.style.backgroundColor = null
-            elem.style.color = null
-            elem.style.pointerEvents = "auto";
+            // Find subscription defferent that in cart
+            if (elem.getAttribute('jl_productId') != productId ) {
+            // Disable subscription   
+            elem.style.backgroundColor = '#f5f5f5'
+            elem.style.color = "#00000052"
+            elem.style.pointerEvents = "none";
+            }
         })
-        if (productId) {
-          // Get subscription node in page
-            
-            sub_list.forEach((elem) => {
-                // Find subscription defferent that in cart
-                if (elem.getAttribute('jl_productId') != productId ) {
-                // Disable subscription   
-                elem.style.backgroundColor = '#f5f5f5'
-                elem.style.color = "#00000052"
-                elem.style.pointerEvents = "none";
-                }
-            })
         }
 }
 
