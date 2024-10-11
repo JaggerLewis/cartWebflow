@@ -92,7 +92,6 @@ class ShoppingCart {
 
     addItem(id, count = 1) {
         // Get first subscription in cart
-        // let p = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
         let p = id?.metadata?.productId
         if (p && id.metadata.subscription) {
             // Get subscription node in page
@@ -101,7 +100,7 @@ class ShoppingCart {
             // Find subscription defferent that in cart
             if (elem.getAttribute('jl_productId') != p) {
             // Disable subscription   
-            elem.style.backgroundColor = '#d7d7d7'
+            elem.style.backgroundColor = '#f5f5f5'
             elem.style.color = "#00000052"
             
             elem.style.pointerEvents = "none";
