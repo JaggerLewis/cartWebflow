@@ -419,7 +419,7 @@ const init = async () => {
 }
 
 const hideSubscription = () => {
-    if (!abo_list) {
+    if (typeof abo_list == 'undefined') {
         return
     }
     // Find subscription in cart
