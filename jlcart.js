@@ -421,6 +421,12 @@ const init = async () => {
 const hideSubscription = () => {
         // Find subscription in cart
         let productId = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+        sub_list.forEach((elem) => {
+            // able subscription   
+            elem.style.backgroundColor = null
+            elem.style.color = null
+            elem.style.pointerEvents = "auto";
+        })
         if (productId) {
           // Get subscription node in page
             let sub_list = [...abo_list ?? []].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
@@ -433,7 +439,7 @@ const hideSubscription = () => {
                 elem.style.pointerEvents = "none";
                 }
             })
-    }
+        }
 }
 
 const redirectToStripe = async (event) => {
