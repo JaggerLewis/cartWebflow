@@ -616,6 +616,7 @@ var devices = ['jag', 'jag-smartdock'];
 var initialColor = 'fauve';
 var initialDevice = 'jag-smartdock';
 
+/*
 if (document.getElementById('encart_jag_gps_s2')) {
     let queryParams = new URLSearchParams(document.location.search);
     var jagColor = queryParams.get("c")
@@ -628,6 +629,7 @@ if (document.getElementById('encart_jag_gps_s2')) {
         initialDevice = jagDevice;
     }
 }
+    */
 
 const appendPage = (url) => {
     let s = document.createElement('script')
@@ -636,12 +638,16 @@ const appendPage = (url) => {
     document.getElementsByTagName('head')[0].appendChild(s)
 }
 
-
 if (document.getElementById('JL_NavBar')) {
     init();
     if ( document.getElementById('jl-product-selector-global') ) {
         console.log('launch webflow embed script viewItem');
         viewItem_EmbedWebflow();
+    }
+    let queryParams = new URLSearchParams(document.location.search);
+    var stripe_cancel = queryParams.get("stripe_cancel")
+    if (stripe_cancel != null) {
+        console.log("event", "stripe_cancel")
     }
 }
 else {
