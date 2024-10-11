@@ -640,7 +640,7 @@ const appendPage = (url) => {
 if (document.getElementById('JL_NavBar')) {
     init();
     if ( document.getElementById('jl-product-selector-global') ) {
-        console.log('launch webflow embed script viewitem');
+        console.log('launch webflow embed script viewItem');
         viewItem_EmbedWebflow();
     }
 }
