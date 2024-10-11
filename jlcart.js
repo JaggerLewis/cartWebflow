@@ -74,12 +74,42 @@ class ShoppingCart {
         )
     }
 
+    viewItem(id) {
+        console.log("event", "view_item", id);
+        gtag("event", "view_item", {
+            currency: "EUR",
+            value: id.price.price,
+            items: [
+                {
+                  item_id: id.sku,
+                  item_name: id.name,
+                  price: id.price.price,
+                  quantity: 1
+                }
+              ]
+        });
+    }
+
     addItem(id, count = 1) {
    
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
         const cardProduct = new ProductCart(id, count)
 
+        console.log("event", "add_to_cart", id);
+        gtag("event", "add_to_cart", {
+            currency: "EUR",
+            value: id.price.price,
+            items: [
+                {
+                  item_id: id.sku,
+                  item_name: id.name,
+                  price: id.price.price,
+                  quantity: 1
+                }
+              ]
+        });
+        
         this.cart.push(cardProduct)
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
     }
@@ -93,6 +123,19 @@ class ShoppingCart {
         if (this.cart[productIndex].quantity <= 0) {
             this.clearItem(id);
         }
+        console.log("event", "remove_from_cart", id);
+        gtag("event", "remove_from_cart", {
+            currency: "EUR",
+            value: id.price.price,
+            items: [
+                {
+                  item_id: id.sku,
+                  item_name: id.name,
+                  price: id.price.price,
+                  quantity: 1
+                }
+              ]
+        });
         this.saveCart({ event: { type: "removeItem", id: id, count: count } })
     }
 
@@ -391,7 +434,12 @@ const redirectToStripe = async (event) => {
         showAddCart('', true)
     }
     //Appel du Tag Manager pour le checkout puis redirection vers stripe
-   
+    gtag("event", "begin_checkout", {
+        event_callback: function () {
+            console.log('event','begin_checkout');
+            window.location.href = apiResJson.url;
+        },
+    });
 
 }
 
@@ -481,6 +529,7 @@ const showNewCart = (event) => {
             shoppingCart.setTotalPrice();
 
             // Add event for google
+            console.log('event','remove_from_cart');
             gtag("event", "remove_from_cart",
                 {
                     'currency': "EUR",
@@ -496,7 +545,7 @@ const showNewCart = (event) => {
                         }
                     ]
                 });
-
+            
             if (shoppingCart.cart.length == 0) {
                 noItems();
             }
@@ -524,6 +573,7 @@ const showNewCart = (event) => {
         value: cart_totalPrice,
         items: cart_items,
     });
+
     console.log("event", "view_cart", {
         currency: "EUR",
         value: cart_totalPrice,
