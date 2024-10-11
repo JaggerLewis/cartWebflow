@@ -638,9 +638,13 @@ const appendPage = (url) => {
 
 
 if (document.getElementById('JL_NavBar')) {
-    init()
+    init();
+    if ( document.getElementById('jl-product-selector-global') ) {
+        console.log('launch webflow embed script viewitem');
+        viewItem_EmbedWebflow();
+    }
 }
 else {
     appendPage('https://cdnjs.cloudflare.com/ajax/libs/lottie-player/2.0.4/lottie-player.js')
-   appendPage('https://webcart.jagger-lewis.com/jlclient.js')
+    appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
