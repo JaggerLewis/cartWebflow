@@ -439,7 +439,7 @@ const hideSubscriptionBtn = () => {
           // Find subscription defferent that in cart
           if (elem.getAttribute('jl_productId') != p) {
           // Disable subscription   
-          elem.style.backgroundColor = '#d7d7d7'
+          elem.style.backgroundColor = '#f5f5f5'
           elem.style.color = "#00000052"
           
           elem.style.pointerEvents = "none";
