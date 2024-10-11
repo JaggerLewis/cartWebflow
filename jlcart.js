@@ -91,7 +91,23 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
-   
+        // Get first subscription in cart
+        p = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+        if (p) {
+            // Get subscription node in page
+            sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
+            sub_list.forEach((elem) => {
+            // Find subscription defferent that in cart
+            if (elem.getAttribute('jl_productId') != p) {
+            // Disable subscription   
+            elem.style.backgroundColor = '#d7d7d7'
+            let action =  getEventListeners(elem).click
+                if (action) {
+            elem.removeEventListener('click', getEventListeners(elem).click[0].listener)
+                }
+            }
+        })
+        }
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
         const cardProduct = new ProductCart(id, count)
@@ -434,8 +450,6 @@ const redirectToStripe = async (event) => {
     else {
         showAddCart('', true)
     }
-
-
 }
 
 const showNewCart = (event) => {
