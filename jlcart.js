@@ -92,7 +92,8 @@ class ShoppingCart {
 
     addItem(id, count = 1) {
         // Get first subscription in cart
-        let p = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+        // let p = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+        let p = id?.metadata?.productId
         if (p) {
             // Get subscription node in page
             sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
@@ -101,10 +102,8 @@ class ShoppingCart {
             if (elem.getAttribute('jl_productId') != p) {
             // Disable subscription   
             elem.style.backgroundColor = '#d7d7d7'
-            let action =  getEventListeners(elem).click
-                if (action) {
-            elem.removeEventListener('click', getEventListeners(elem).click[0].listener)
-                }
+            actionBtn.style.pointerEvents = "none";
+
             }
         })
         }
