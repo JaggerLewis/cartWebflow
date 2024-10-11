@@ -430,6 +430,25 @@ const init = async () => {
     page = window.location.href.split('/')[3].split('?')[0];
 }
 
+const hideSubscriptionBtn = () => {
+      let p = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+      if (p) {
+          // Get subscription node in page
+          let sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
+          sub_list.forEach((elem) => {
+          // Find subscription defferent that in cart
+          if (elem.getAttribute('jl_productId') != p) {
+          // Disable subscription   
+          elem.style.backgroundColor = '#d7d7d7'
+          elem.style.color = "#00000052"
+          
+          elem.style.pointerEvents = "none";
+
+          }
+      })
+      }
+}
+
 const redirectToStripe = async (event) => {
     try {
         event.preventDefault();
@@ -653,6 +672,7 @@ if (document.getElementById('JL_NavBar')) {
     if ( document.getElementById('jl-product-selector-global') ) {
         console.log('launch webflow embed script viewItem');
         viewItem_EmbedWebflow();
+        hideSubscriptionBtn();
     }
     let queryParams = new URLSearchParams(document.location.search);
     var stripe_cancel = queryParams.get("stripe_cancel")
