@@ -96,7 +96,7 @@ class ShoppingCart {
         let p = id?.metadata?.productId
         if (p) {
             // Get subscription node in page
-            sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
+            let sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
             sub_list.forEach((elem) => {
             // Find subscription defferent that in cart
             if (elem.getAttribute('jl_productId') != p) {
