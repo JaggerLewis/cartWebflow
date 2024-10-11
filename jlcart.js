@@ -102,7 +102,9 @@ class ShoppingCart {
             if (elem.getAttribute('jl_productId') != p) {
             // Disable subscription   
             elem.style.backgroundColor = '#d7d7d7'
-            actionBtn.style.pointerEvents = "none";
+            elem.style.color = "#00000052"
+            
+            elem.style.pointerEvents = "none";
 
             }
         })
