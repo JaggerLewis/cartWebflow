@@ -94,7 +94,7 @@ class ShoppingCart {
         // Get first subscription in cart
         // let p = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
         let p = id?.metadata?.productId
-        if (p) {
+        if (p && id.metadata.subscription) {
             // Get subscription node in page
             let sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
             sub_list.forEach((elem) => {
