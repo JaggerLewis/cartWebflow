@@ -421,6 +421,7 @@ const init = async () => {
 const hideSubscription = () => {
         // Find subscription in cart
         let productId = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+        let sub_list = [...abo_list ?? []].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
         sub_list.forEach((elem) => {
             // able subscription   
             elem.style.backgroundColor = null
@@ -429,7 +430,7 @@ const hideSubscription = () => {
         })
         if (productId) {
           // Get subscription node in page
-            let sub_list = [...abo_list ?? []].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
+            
             sub_list.forEach((elem) => {
                 // Find subscription defferent that in cart
                 if (elem.getAttribute('jl_productId') != productId ) {
