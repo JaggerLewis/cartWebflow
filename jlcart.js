@@ -91,23 +91,7 @@ class ShoppingCart {
     }
 
     addItem(id, count = 1) {
-        // Get first subscription in cart
-        let p = id?.metadata?.productId
-        if (p && id.metadata.subscription) {
-            // Get subscription node in page
-            let sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
-            sub_list.forEach((elem) => {
-            // Find subscription defferent that in cart
-            if (elem.getAttribute('jl_productId') != p) {
-            // Disable subscription   
-            elem.style.backgroundColor = '#f5f5f5'
-            elem.style.color = "#00000052"
-            
-            elem.style.pointerEvents = "none";
-
-            }
-        })
-        }
+      
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
         showAddCart(labeltocart, false)
         const cardProduct = new ProductCart(id, count)
@@ -128,6 +112,8 @@ class ShoppingCart {
         
         this.cart.push(cardProduct)
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
+        hideSubscription()
+
     }
 
     removeItem(id, count = 1) {
@@ -410,7 +396,10 @@ const init = async () => {
         document.getElementById('JL_Basket_Empty').style.display = 'block';
         document.getElementById('jl-cart-number').addEventListener('click', (event) => showNewCart(event))
         document.getElementById('jag-cart').addEventListener('click', (event) => showNewCart(event))
-        document.getElementById('JL_Btn_Close_Basket').addEventListener('click', () =>  document.getElementById('JL_Basket').style.display = 'none')
+        document.getElementById('JL_Btn_Close_Basket').addEventListener('click', () => {
+            hideSubscription()   
+            document.getElementById('JL_Basket').style.display = 'none'
+        })
     }
 
     if (document.getElementById('JL_Abo_Newsletter')) { //USED
@@ -429,23 +418,22 @@ const init = async () => {
     page = window.location.href.split('/')[3].split('?')[0];
 }
 
-const hideSubscriptionBtn = () => {
-      let p = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
-      if (p) {
+const hideSubscription = () => {
+        // Find subscription in cart
+        let productId = shoppingCart.cart.filter((elem) => elem.id.metadata.subscription==true)[0]?.id?.metadata?.productId
+        if (productId) {
           // Get subscription node in page
-          let sub_list = [...abo_list].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
-          sub_list.forEach((elem) => {
-          // Find subscription defferent that in cart
-          if (elem.getAttribute('jl_productId') != p) {
-          // Disable subscription   
-          elem.style.backgroundColor = '#f5f5f5'
-          elem.style.color = "#00000052"
-          
-          elem.style.pointerEvents = "none";
-
-          }
-      })
-      }
+            let sub_list = [...abo_list ?? []].filter((elem) => elem.getAttribute('jl_category') == 'subscription')
+            sub_list.forEach((elem) => {
+                // Find subscription defferent that in cart
+                if (elem.getAttribute('jl_productId') != productId ) {
+                // Disable subscription   
+                elem.style.backgroundColor = '#f5f5f5'
+                elem.style.color = "#00000052"
+                elem.style.pointerEvents = "none";
+                }
+            })
+    }
 }
 
 const redirectToStripe = async (event) => {
@@ -671,7 +659,8 @@ if (document.getElementById('JL_NavBar')) {
     if ( document.getElementById('jl-product-selector-global') ) {
         console.log('launch webflow embed script viewItem');
         viewItem_EmbedWebflow();
-        hideSubscriptionBtn();
+        hideSubscription();
+
     }
     let queryParams = new URLSearchParams(document.location.search);
     var stripe_cancel = queryParams.get("stripe_cancel")
