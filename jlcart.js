@@ -433,17 +433,16 @@ const hideSubscription = () => {
     })
     if (productId) {
         // Get subscription node in page
-        
         sub_list.forEach((elem) => {
             // Find subscription defferent that in cart
             if (elem.getAttribute('jl_productId') != productId ) {
-            // Disable subscription   
-            elem.style.backgroundColor = '#f5f5f5'
-            elem.style.color = "#00000052"
-            elem.style.pointerEvents = "none";
+                // Disable subscription   
+                elem.style.backgroundColor = '#f5f5f5'
+                elem.style.color = "#00000052"
+                elem.style.pointerEvents = "none";
             }
         })
-        }
+    }
 }
 
 const redirectToStripe = async (event) => {
@@ -579,7 +578,14 @@ const showNewCart = (event) => {
         });
 
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
-        
+
+        if (prod.id.metadata.productId == 'price_1Q5pKjADzHYMiB1YAxkcjLSv') {
+            prod.id.metadata.productId = 'price_1P9Nh8ADzHYMiB1Y0XMZ9v4y'
+        }
+        if (prod.id.metadata.productId == 'price_1QIBgoADzHYMiB1Y6CQ1JsIu') {
+            prod.id.metadata.productId = 'price_1P9NihADzHYMiB1YCTWgreKk'
+        }
+
         cart_items.push({
             'item_id': prod.id.metadata.productId,
             'item_name': prod.id.metadata.title_fr,
