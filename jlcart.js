@@ -450,6 +450,15 @@ const redirectToStripe = async (event) => {
         event.preventDefault();
     }
     catch (e) {}
+    shoppingCart.cart.forEach((elem) => {
+        if (elem.id.price.id == 'price_1Q5pKjADzHYMiB1YAxkcjLSv') {
+            elem.id.price.id = 'price_1P9Nh8ADzHYMiB1Y0XMZ9v4y'
+        }
+        if (elem.id.price.id == 'price_1QIBgoADzHYMiB1Y6CQ1JsIu') {
+            elem.id.price.id = 'price_1P9NihADzHYMiB1YCTWgreKk'
+        }
+    
+    })
 
     const apiRes = await shoppingCart.getCartStripeUrl()
     
@@ -579,12 +588,7 @@ const showNewCart = (event) => {
 
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
 
-        if (prod.id.metadata.productId == 'price_1Q5pKjADzHYMiB1YAxkcjLSv') {
-            prod.id.metadata.productId = 'price_1P9Nh8ADzHYMiB1Y0XMZ9v4y'
-        }
-        if (prod.id.metadata.productId == 'price_1QIBgoADzHYMiB1Y6CQ1JsIu') {
-            prod.id.metadata.productId = 'price_1P9NihADzHYMiB1YCTWgreKk'
-        }
+    
 
         cart_items.push({
             'item_id': prod.id.metadata.productId,
