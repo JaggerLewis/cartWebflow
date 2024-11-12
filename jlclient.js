@@ -435,8 +435,11 @@ const initFamily = () => {
         familyCard.style.display = 'flex'
         changeChildsId(familyCard, '-'+membre._id, 'jag-')
         list.appendChild(familyCard)
-        document.getElementById('jag-family-pict-' + membre._id).src = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
-         document.getElementById('jag-family-pict-' + membre._id).srcset = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
+        if (membre.image)
+        {
+            document.getElementById('jag-family-pict-' + membre._id).src = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
+            document.getElementById('jag-family-pict-' + membre._id).srcset = "https://app-api.mypet.fit/img/" + membre.image.type +"/"+ membre.image.uuid 
+        }
         document.getElementById('jag-family-name-' + membre._id).innerHTML =membre.name
         document.getElementById('jag-family-type-' + membre._id).innerHTML = getTrad("Ma Famille", 'My Family')
     })
