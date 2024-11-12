@@ -427,6 +427,7 @@ const initFamily = () => {
     document.getElementById('jag-family-name-' + user._id).innerHTML =user.name
     document.getElementById('jag-family-type-' + user._id).innerHTML = getTrad("Propriétaire", 'Owner')
     if (!dog.family) {
+        card.style.display = 'none';
         return
     }
     dog.family.forEach((membre) => {
@@ -439,6 +440,8 @@ const initFamily = () => {
         document.getElementById('jag-family-name-' + membre._id).innerHTML =membre.name
         document.getElementById('jag-family-type-' + membre._id).innerHTML = getTrad("Ma Famille", 'My Family')
     })
+    card.style.display = 'none';
+    
 }
 
 
