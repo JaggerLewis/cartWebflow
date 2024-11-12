@@ -1495,11 +1495,13 @@ const getDog = async (id) => {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
-        if (dog.dock.result.assigned && dog.dock.result.dock?.serial_number) {
+        
+        if (dog.dock?.result?.assigned && dog.dock.result.dock?.serial_number) {
             dog.dock.data = await fetch('https://app-api.mypet.fit/dock/getStatus', 
                 {headers : header, method : 'POST',  body: JSON.stringify({'serial_number': dog.dock.result.dock?.serial_number, 'dog_id': dog._id}),}
             ).then(async (res) => await res.json())
         }
+
         if (!dog.welfareData) {
             await getWelfareData()
         }
