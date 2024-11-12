@@ -1495,7 +1495,7 @@ const getDog = async (id) => {
             method: 'GET',
             headers : header
         }).then(async (res) => res.json())
-        
+
         if (dog.dock?.result?.assigned && dog.dock.result.dock?.serial_number) {
             dog.dock.data = await fetch('https://app-api.mypet.fit/dock/getStatus', 
                 {headers : header, method : 'POST',  body: JSON.stringify({'serial_number': dog.dock.result.dock?.serial_number, 'dog_id': dog._id}),}
@@ -1679,7 +1679,7 @@ const disableButton = () => {
 const getAll = async () => {
     if (!loaderContainer) {
         loaderContainer = document.createElement('div')
-        loaderContainer.style = "width: 100Vw;height: 100VH;position: absolute;justify-content: center;align-items: center;background-color: #8080806e;"
+        loaderContainer.style = "width: 100Vw;height: 100VH;position: absolute;justify-content: center;align-items: center;backdrop-filter: blur(15px);"
         loaderContainer.innerHTML = '<lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player>'
         body.insertBefore(loaderContainer, document.body.firstChild);
     }
