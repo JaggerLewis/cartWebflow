@@ -1685,8 +1685,8 @@ const disableButton = () => {
 const getAll = async () => {
     if (!loaderContainer) {
         loaderContainer = document.createElement('div')
-        loaderContainer.style = "width: 100Vw;height: 100VH;position: absolute;justify-content: center;align-items: center;"
-        loaderContainer.innerHTML = '<div style="display:flex;width:100%;height:100%;justify-content: center;align-items: center;backdrop-filter: blur(5px)"><lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 300px; height: 300px;"  autoplay></lottie-player></div>'
+        loaderContainer.style = "width: 100Vw;height: 100VH;position: absolute;justify-content: center;align-items: center;backdrop-filter: blur(5px);"
+        loaderContainer.innerHTML = '<div style="display:flex;width:100%;height:100%;justify-content: center;align-items: center;backdrop-filter: blur(5px)"><lottie-player src="https://webcart.jagger-lewis.com/loader%20site.json" background="transparent" speed="1"style="width: 15%; height: 10%;"  autoplay></lottie-player></div>'
         body.insertBefore(loaderContainer, document.body.firstChild);
     }
     loaderContainer.style.display = 'flex'
