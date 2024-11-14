@@ -1405,7 +1405,6 @@ const getCart = async () => {
         return
     }
 
-
     let session_id = searchParams.get('session_id')
 
     if (session_id == '725') {  
@@ -1413,10 +1412,12 @@ const getCart = async () => {
         return
     }
 
-        result =  await fetch('https://app-api.mypet.fit/order/checkout/' + session_id , {
+    result =  await fetch('https://app-api.mypet.fit/order/checkout/' + session_id , {
             method: "GET",
             headers : header,
-        })
+    })
+
+    
     if (result.status != 200 && session_id != '725') {
         window.open(REDIRECT.active, '_self')
         return
@@ -1424,10 +1425,15 @@ const getCart = async () => {
     const checkoutOrder = await result.json();
 
     if (checkoutOrder.result?.hasAccount) {
+        document.getElementById('jag-has-account').style.display = 'flex'
+        document.getElementById('jag-has-noaccount').style.display = 'none'
         localStorage.removeItem('dog')
-        document.getElementById('jag-active-store').style.display = 'none'
+        //document.getElementById('jag-active-store').style.display = 'none'
     }
     else {
+        document.getElementById('jag-has-account').style.display = 'none'
+        document.getElementById('jag-has-noaccount').style.display = 'flex'
+        document.getElementById('jag-active-store').style.display = 'flex'
         document.getElementById('jag-active-dasboard').style.display = 'none'
     }
 }
