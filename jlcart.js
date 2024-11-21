@@ -93,7 +93,7 @@ class ShoppingCart {
     addItem(id, count = 1) {
       
         let labeltocart = getTrad(id.name + ' ajouté au panier', id.name + ' add to cart');
-        showAddCart(labeltocart, false)
+        //showAddCart(labeltocart, false)
         const cardProduct = new ProductCart(id, count)
 
         console.log("event", "add_to_cart", id);
