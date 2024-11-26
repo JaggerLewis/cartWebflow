@@ -316,6 +316,7 @@ const initGeoFencingSwitch = (node) => {
     })
  }
 const deleteAccountEmail = async () => {
+    Print.postMessage('Hello World being called from Javascript code');
     let res = await fetch(baseurl + '/user/delete/email', {
                 method: 'POST',
                 headers: header
