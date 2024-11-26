@@ -108,12 +108,7 @@ const initClient = {
     'jl-order-container' : () => initOrder(),
     'jl-order-order' : (node) => node.addEventListener('click', () => switchInfo('order')),
     'jl-order-info' : (node) => node.addEventListener('click', () => switchInfo('info')),
-    'jl-delete-email' : (node) => {
-        console.log('log')
-        Print.postMessage('Hello World being called from Javascript code');
-        console.log('log2')
-        node.addEventListener('click', () => deleteAccountEmail());
-    } ,
+    'jl-delete-email' : (node) => node.addEventListener('click', () => deleteAccountEmail()),
     'jl-delete-sms-action' : (node) => initDelete(node),
     'jl-formula-close-action' : (node) =>  node.addEventListener('click', () => cancelSubScriptionEmail()),
     'jl-formula-good-action' : (node) =>  node.addEventListener('click', () => redirectAbo()),
