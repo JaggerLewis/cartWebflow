@@ -1307,7 +1307,7 @@ const validateAction = async () => {
             if (result.reason == 'collarIsActivated') {
                 window.open(REDIRECT.active_3 + '?session_id=725', '_self')
             } else {
-                showAddCart(getTrad(result.result.reasonFr, result.result.reasonUk))
+                showAddCart(getTrad(result.reasonFr, result.reasonUk))
             }
         }
         else {
