@@ -1303,8 +1303,8 @@ const validateAction = async () => {
             "phoneToken": value
         }), 
       }).then(async (res) => await res?.json())
-        if (!result.result.success) {
-            if (result.result.reason == 'collarIsActivated') {
+        if (!result.success) {
+            if (result.reason == 'collarIsActivated') {
                 window.open(REDIRECT.active_3 + '?session_id=725', '_self')
             } else {
                 showAddCart(getTrad(result.result.reasonFr, result.result.reasonUk))
