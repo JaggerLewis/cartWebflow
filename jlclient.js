@@ -1303,17 +1303,16 @@ const validateAction = async () => {
             "phoneToken": value
         }), 
       }).then(async (res) => await res?.json())
-      if (result.result) {
-        if (result.result.activated) {
-            window.open(REDIRECT.active_3 + '?session_id=725', '_self')
+        if (!result.result.success) {
+            if (result.result.reason == 'collarIsActivated') {
+                window.open(REDIRECT.active_3 + '?session_id=725', '_self')
+            } else {
+                showAddCart(getTrad(result.result.reasonFr, result.result.reasonUk))
+            }
         }
         else {
             window.open(REDIRECT.active_2, '_self')
         }
-      }
-      else {
-        showAddCart(getTrad('Code incorrect', 'Incorrect code'))
-      }
       return
 
 }
