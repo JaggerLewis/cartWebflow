@@ -1311,6 +1311,7 @@ const validateAction = async () => {
             }
         }
         else {
+            window.localStorage.setItem('isAmazon', result.collar.settings.isAmazon ?? false)
             window.open(REDIRECT.active_2, '_self')
         }
       return
