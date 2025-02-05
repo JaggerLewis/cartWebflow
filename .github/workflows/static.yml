@@ -24,14 +24,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Updated to latest stable version
+        uses: actions/checkout@v4  # Latest version
 
       - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4  # Updated to latest stable version
+        uses: actions/configure-pages@v4  # Latest version
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # Latest stable version
+        uses: actions/upload-artifact@v4  # Fixed: Updated to v4
+        with:
+          name: github-pages-artifact  # Name the artifact explicitly
+          path: './'  # Adjust if necessary (e.g., `./build`)
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2  # Latest stable version
+        uses: actions/deploy-pages@v2  # Latest version
