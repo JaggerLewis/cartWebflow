@@ -6,7 +6,6 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   pages: write
   id-token: write
@@ -26,15 +25,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4  # Latest version
 
+      - name: List files in workspace (Debugging)
+        run: ls -R  # Lists all files to verify the correct path
+
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4  # Latest version
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4  # Fixed: Updated to v4
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
-          name: github-pages-artifact  # Name the artifact explicitly
-          path: './'  # Adjust if necessary (e.g., `./build`)
+          name: github-pages-artifact
+          path: './'  # Make sure this is correct for your project
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2  # Latest version
+        uses: actions/deploy-pages@v2
