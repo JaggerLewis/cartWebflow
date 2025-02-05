@@ -468,14 +468,16 @@ const redirectToStripe = async (event) => {
     if (apiResJson.url) {
         try {
             gtag("event", "begin_checkout", {
-                event_callback: function () {
-                    window.location.href = apiResJson.url
-                },
+                // event_callback: function () {
+                //     window.location.href = apiResJson.url
+                // },
             });
 
         } catch (e) {
-            window.location.href = apiResJson.url
+            console.log('error with tag manager : ', e)
         }
+        window.location.href = apiResJson.url
+
     }
     else {
         showAddCart('', true)
