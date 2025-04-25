@@ -172,6 +172,7 @@ class ShoppingCart {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
         setCartNbItems();
         if (callApi) {
+            console.log('🐾 save cart', this.orderId)
             this.updateCartInDb({ event }).then(answer => {
                 answer.json().then(answerJson => {
                     if (answerJson.success) {
