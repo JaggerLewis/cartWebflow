@@ -20,7 +20,7 @@ function displayPrice(price) { //USED
             : '' + price
 }
 
-const setCartNumber = () => { //USED
+const setCartNbItems = () => { //USED
     if (JL_NavBar) {
         let count = 0
         if (localStorage.getItem("shoppingCart")) {
@@ -60,11 +60,12 @@ class ShoppingCart {
             for (const product of cart) {
                 this.cart.push(new ProductCart(product.id, product.quantity))
             }
-            this.orderId = localStorage.getItem("orderId") ?? undefined;
+            this.orderId = localStorage.getItem("jagOrderId") ?? undefined;
         } else {
             this.cart = []
             this.orderId = undefined;
         }
+        console.log('🐾 ' + this.orderId.toString())
     }
 
     findProductIndexById(id) {
@@ -165,15 +166,15 @@ class ShoppingCart {
         return price.toFixed(2);
     }
 
-    saveCart({ callApi = false, event } = {}) {
+    saveCart({ callApi = true, event } = {}) {
         localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
-        setCartNumber();
+        setCartNbItems();
         if (callApi) {
             this.updateCartInDb({ event }).then(answer => {
                 answer.json().then(answerJson => {
                     if (answerJson.success) {
                         this.orderId = answerJson.orderId
-                        localStorage.setItem('orderId', this.orderId)
+                        localStorage.setItem('jagOrderId', this.orderId)
                     }
                 }).catch(e => {
                     console.error("error parsing", e);
@@ -183,6 +184,7 @@ class ShoppingCart {
             })
         }
     }
+
 
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
@@ -412,7 +414,7 @@ const init = async () => {
         refreshOrderInfo();
 
     }
-    setCartNumber();
+    setCartNbItems();
     page = window.location.href.split('/')[3].split('?')[0];
 }
 
@@ -694,4 +696,4 @@ else {
     appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
 
-console.log('🐾 Jag is on the way')
+console.log('🐾 Jag is on the way');
