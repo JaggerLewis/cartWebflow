@@ -178,6 +178,7 @@ class ShoppingCart {
                     if (answerJson.success) {
                         this.orderId = answerJson.orderId
                         localStorage.setItem('jagOrderId', this.orderId)
+                        console.log('🐾 cart saved', this.orderId)
                     }
                 }).catch(e => {
                     console.error("error parsing", e);
