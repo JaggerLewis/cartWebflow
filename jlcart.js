@@ -78,12 +78,12 @@ class ShoppingCart {
         console.log("event", "view_item", id);
         gtag("event", "view_item", {
             currency: "EUR",
-            value: id.price.price,
+            value: id.price.price / 100,
             items: [
                 {
                   item_id: id.sku,
                   item_name: id.name,
-                  price: id.price.price,
+                  price: id.price.price / 100,
                   quantity: 1
                 }
               ]
@@ -99,12 +99,12 @@ class ShoppingCart {
         console.log("event", "add_to_cart", id);
         gtag("event", "add_to_cart", {
             currency: "EUR",
-            value: id.price.price,
+            value: id.price.price / 100,
             items: [
                 {
                   item_id: id.sku,
                   item_name: id.name,
-                  price: id.price.price,
+                  price: id.price.price / 100,
                   quantity: 1
                 }
               ]
@@ -128,12 +128,12 @@ class ShoppingCart {
         console.log("event", "remove_from_cart", id);
         gtag("event", "remove_from_cart", {
             currency: "EUR",
-            value: id.price.price,
+            value: id.price.price / 100,
             items: [
                 {
                   item_id: id.sku,
                   item_name: id.name,
-                  price: id.price.price,
+                  price: id.price.price / 100,
                   quantity: 1
                 }
               ]
@@ -217,7 +217,6 @@ class ShoppingCart {
 
 const shoppingCart = new ShoppingCart();
 
-
 let products = []
 
 const findProduct = (product, color) => {
@@ -238,7 +237,6 @@ const findAboType = (abo, type) => {
 
     return filtered
 }
-
 
 // Permet de faire bouger le slider
 const SlideToColor = (ColorProduct) => {
@@ -304,7 +302,6 @@ const initNewsLettre = () => {
 }
 
 const initAboB = async () => {}
-
 
 const refreshOrderInfo = async () => {
     if (document.getElementById('JL_ORDER'))
@@ -389,6 +386,7 @@ const changeChildsId = (node, suffix, filter) => {
 const loadCart = async (id) => {
     return await fetch(`${interfaceUrl}/stripe/checkout_session/` + id + '/cart').then(res => res.json())
 }
+
 const init = async () => {
 
     if (JL_NavBar) {
@@ -446,6 +444,7 @@ const hideSubscription = () => {
 }
 
 const redirectToStripe = async (event) => {
+    console.log('Start Checkout')
     try {
         event.preventDefault();
     }
@@ -463,20 +462,21 @@ const redirectToStripe = async (event) => {
     const apiRes = await shoppingCart.getCartStripeUrl()
     
     const apiResJson = await apiRes.json()
-    
+
+    console.log("apiResJson", apiResJson);
+
     //Appel du Tag Manager pour le checkout puis redirection vers stripe
     if (apiResJson.url) {
         try {
             gtag("event", "begin_checkout", {
-                // event_callback: function () {
-                //     window.location.href = apiResJson.url
-                // },
+                event_callback: function () {
+                    window.location.href = apiResJson.url
+                },
             });
-
         } catch (e) {
             console.log('error with tag manager : ', e)
         }
-        window.location.href = apiResJson.url
+        //window.location.href = apiResJson.url
 
     }
     else {
@@ -574,14 +574,14 @@ const showNewCart = (event) => {
             gtag("event", "remove_from_cart",
                 {
                     'currency': "EUR",
-                    'value': prod.id.price.price,
+                    'value': prod.id.price.price / 100,
                     'items': [
                         {
                             'item_id': prod.id.metadata.productId,
                             'item_name': prod.id.metadata.title_fr,
-                            'item_brand': "Jagger & Lewis",
+                            'item_brand': "Jagger Lewis",
                             'item_variant': prod.id.metadata.colorId,
-                            'price': prod.id.price.price,
+                            'price': prod.id.price.price / 100,
                             'quantity': prod.quantity
                         }
                     ]
@@ -613,15 +613,9 @@ const showNewCart = (event) => {
 
     gtag("event", "view_cart", {
         currency: "EUR",
-        value: cart_totalPrice,
+        value: cart_totalPrice / 100,
         items: cart_items,
     });
-
-    console.log("event", "view_cart", {
-        currency: "EUR",
-        value: cart_totalPrice,
-        items: cart_items,
-    })
 
     //document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
 
@@ -699,3 +693,5 @@ else {
     appendPage('https://cdnjs.cloudflare.com/ajax/libs/lottie-player/2.0.4/lottie-player.js')
     appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
+
+console.log('🐾 Jag is on the way')
