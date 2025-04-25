@@ -65,7 +65,9 @@ class ShoppingCart {
             this.cart = []
             this.orderId = undefined;
         }
-        console.log('🐾 ' + this.orderId.toString())
+        if (this.orderId != undefined) {
+            console.log('🐾 ' + this.orderId.toString());
+        }        
     }
 
     findProductIndexById(id) {
