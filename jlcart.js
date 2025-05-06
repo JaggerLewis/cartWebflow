@@ -112,6 +112,12 @@ class ShoppingCart {
                 }
               ]
         });
+
+        //Gtag conversion (ajout)
+        gtag('event', 'conversion', {
+            'send_to': 'AW-726660854/6--KCJCjh7cZEPbtv9oC'
+        });
+        console.log("event", "conversion pushed");
         
         this.cart.push(cardProduct)
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
@@ -314,9 +320,9 @@ const refreshOrderInfo = async () => {
         document.getElementById('JL_ORDER').style.display = 'none';
 
     let id = new URLSearchParams(window.location.search).get('session_id')
-    if (!id) {
-        window.open('/404', '_self')
-    }
+    //if (!id) {
+    //    window.open('/404', '_self')
+    //}
 
     let datas = await loadCart(id)
     
@@ -359,20 +365,32 @@ const refreshOrderInfo = async () => {
         order_items.push(newItem)
     }
 
-    shipping_cost = 599;
+    //shipping_cost = 599;
+    shipping_cost = 0;
     order_total_amount = order_total_amount + shipping_cost;
     order_total_tax = parseInt(order_total_amount / 1.2);
 
     gtag("event", "purchase", {
-        transaction_id: datas.orderNumber,
-        value: order_total_amount / 100,
-        tax: order_total_tax / 100,
-        shipping: shipping_cost / 100,
-        currency: "EUR",
-        items: order_items
+        'transaction_id': datas.orderNumber,
+        'value': order_total_amount / 100,
+        'tax': order_total_tax / 100,
+        'shipping': shipping_cost / 100,
+        'currency': "EUR",
+        'items': order_items
     });
     console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
 
+    orderId = this.orderId = localStorage.getItem("jagOrderId") ?? undefined;
+
+    conversionValue = {
+        'send_to': 'AW-726660854/rlPfCLWfg7cZEPbtv9oC',
+        'value': order_total_amount / 100,
+        'currency': 'EUR',
+        'transaction_id': datas.orderNumber
+    }
+
+    gtag('event', 'conversion', conversionValue);
+    console.log('gtag conversion ok', conversionValue);
 }
 
 const changeChildsId = (node, suffix, filter) => {
