@@ -412,14 +412,14 @@ const refreshOrderInfo = async () => {
         'items': orderItems
     });
 
-    console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
+    console.log('gtag purchase ok', orderDatas.orderNumber, orderShippingCost, orderTotalAmount, orderTotalTax);
     console.log('🐾 JAG gtag Purchase Sent')
 
     conversionValue = {
         'send_to': 'AW-726660854/rlPfCLWfg7cZEPbtv9oC',
-        'value': this.orderTotalAmount / 100,
+        'value': orderTotalAmount / 100,
         'currency': 'EUR',
-        'transaction_id': this.orderNumber
+        'transaction_id': orderNumber
     }
     gtag('event', 'conversion', conversionValue);
     console.log('🐾 JAG gtag Conversion Sent')
