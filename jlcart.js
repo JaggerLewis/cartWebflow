@@ -720,7 +720,7 @@ const appendPage = (url) => {
     document.getElementsByTagName('head')[0].appendChild(s)
 }
 
-if (document.getElementById('JL_NavBar')) {
+if ( document.getElementById('JL_NavBar') || JL_pageId == 'confirm_checkout' ) {
     init();
     if ( document.getElementById('jl-product-selector-global') ) {
         console.log('launch webflow embed script viewItem');
