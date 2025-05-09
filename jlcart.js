@@ -60,8 +60,7 @@ class ShoppingCart {
             localStorage.removeItem("shoppingCart")
         }
        
-        if (!localStorage.getItem("JagSession")) {
-            JagSession = {
+        let JagSession = {
                 cart : [],
                 orderId : undefined,
                 orderNumber : undefined,
@@ -71,10 +70,12 @@ class ShoppingCart {
                 session_id : undefined,
                 session_creation_time : Date.now()
             }
+
+        if (!localStorage.getItem("JagSession")) {
             localStorage.setItem("JagSession", JSON.stringify(JagSession));
+            JagSession = JSON.parse(localStorage.getItem("JagSession"));
         }
 
-        JagSession = JSON.parse(localStorage.getItem("JagSession"))
         this.cart = []
         for (const product of JagSession.cart) {
             this.cart.push(new ProductCart(product.id, product.quantity))
