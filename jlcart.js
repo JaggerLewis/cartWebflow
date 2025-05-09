@@ -94,11 +94,7 @@ class ShoppingCart {
         this.session_id = JagSession.session_id
         this.session_creation_time = JagSession.session_creation_time
         
-        console.log('🐾 Nb Cart Items ' + this.cart.length);
-
-        if (this.orderId != undefined) {
-            console.log('🐾 ' + this.orderId.toString());
-        }   
+        console.log('🐾 Jag Order Session ' + this.orderId.toString());
     }
 
     findProductIndexById(id) {
@@ -222,11 +218,9 @@ class ShoppingCart {
     }
 
     saveCart({ callApi = true, event } = {}) {
-        console.log(this.cart);
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.cart = this.cart
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
-        console.log('🐾 JAG cart Saved ', this.orderId)
         setCartNbItems();
 
         if (callApi) {
@@ -235,7 +229,6 @@ class ShoppingCart {
                     if (answerJson.success) {
                         this.orderId = answerJson.orderId
                         this.saveOrderId(answerJson.orderId);
-                        console.log('🐾 JAG cart Saved ', this.orderId);
                     }
                 })
             })
