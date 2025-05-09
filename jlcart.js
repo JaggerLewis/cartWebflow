@@ -373,9 +373,11 @@ const refreshOrderInfo = async () => {
     let orderShippingCost = 0;
     let orderNumber = orderDatas.orderNumber
 
-    for (i = 0; i < items.length; i++) {
+    let cartItems = orderDatas.aside_data.cart ;
 
-        let item = orderDatas.aside_data.cart[i];
+    for (i = 0; i < cartItems.length; i++) {
+
+        let item = cartItems[i];
 
         let itemColor = '';
         if (item.description) {
