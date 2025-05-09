@@ -726,7 +726,7 @@ const appendPage = (url) => {
     document.getElementsByTagName('head')[0].appendChild(s)
 }
 
-if (JL_pageId == undefined) 
+if (JL_pageId !== undefined) 
 {
     JL_pageId = '';
 }
