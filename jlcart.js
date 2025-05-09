@@ -72,7 +72,12 @@ class ShoppingCart {
             }
 
         if (!localStorage.getItem("JagSession")) {
+            console.log('🐾 New Jag Session');
             localStorage.setItem("JagSession", JSON.stringify(JagSession));
+            JagSession = JSON.parse(localStorage.getItem("JagSession"));
+        }
+        else
+        {
             JagSession = JSON.parse(localStorage.getItem("JagSession"));
         }
 
@@ -89,7 +94,7 @@ class ShoppingCart {
         this.session_id = JagSession.session_id
         this.session_creation_time = JagSession.session_creation_time
         
-        console.log('🐾 ' + this.cart);
+        console.log('🐾 Nb Cart Items ' + this.cart.length);
 
         if (this.orderId != undefined) {
             console.log('🐾 ' + this.orderId.toString());
@@ -144,9 +149,7 @@ class ShoppingCart {
         });
         console.log("event", "conversion pushed");
         
-        console.log("Before Saved", this.cart);
         this.cart.push(cardProduct)
-        console.log("After Saved", this.cart);
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
         hideSubscription()
 
