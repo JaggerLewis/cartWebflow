@@ -439,6 +439,8 @@ const changeChildsId = (node, suffix, filter) => {
 
 const init = async () => {
 
+    console.log('🐾 JAG IS HERE' + JL_pageId)
+
     if (JL_NavBar) {
         document.getElementById('JL_Basket_Item').style.display = 'none';
         document.getElementById('JL_Basket_Empty').style.display = 'block';
