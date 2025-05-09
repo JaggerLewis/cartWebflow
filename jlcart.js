@@ -84,6 +84,8 @@ class ShoppingCart {
             this.session_creation_time = JagSession.session_creation_time
         }
 
+        console.log('🐾 ' + this.cart);
+        
         if (this.orderId != undefined) {
             console.log('🐾 ' + this.orderId.toString());
         }   
