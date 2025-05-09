@@ -229,7 +229,7 @@ class ShoppingCart {
                 answer.json().then(answerJson => {
                     if (answerJson.success) {
                         this.orderId = answerJson.orderId
-                        saveOrderId(answerJson.orderId)
+                        this.saveOrderId(answerJson.orderId)
                     }
                 })
             })
