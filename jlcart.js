@@ -365,8 +365,8 @@ const refreshOrderInfo = async () => {
         document.getElementById('JL_ORDER').style.display = 'flex';
     }
 
-    document.getElementById('JL_CHECKOUT_INFOS').style.display = 'none';
-    document.getElementById('JL_CHECKOUT_LOADER').style.display = 'flex';
+    document.getElementById('JL_CHECKOUT_INFOS').style.display = 'flex';
+    document.getElementById('JL_CHECKOUT_LOADER').style.display = 'none';
 
     let orderItems = [];
     let orderTotalAmount = 0;
@@ -441,7 +441,7 @@ const changeChildsId = (node, suffix, filter) => {
 
 const init = async () => {
 
-    console.log('🐾 JAG IS HERE' + JL_pageId)
+    console.log('🐾 JAG IS HERE ' + JL_pageId)
 
     if (JL_NavBar) {
         document.getElementById('JL_Basket_Item').style.display = 'none';
