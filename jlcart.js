@@ -365,6 +365,9 @@ const refreshOrderInfo = async () => {
         document.getElementById('JL_ORDER').style.display = 'flex';
     }
 
+    document.getElementById('JL_CHECKOUT_INFOS').style.display = 'none';
+    document.getElementById('JL_CHECKOUT_LOADER').style.display = 'flex';
+
     let orderItems = [];
     let orderTotalAmount = 0;
     let orderShippingCost = 0;
@@ -461,8 +464,11 @@ const init = async () => {
     }
 
     if (JL_pageId == 'confirm_checkout') {
+        document.getElementById('JL_CHECKOUT_LOADER').style.display = 'block';
+        document.getElementById('JL_CHECKOUT_INFOS').style.display = 'none';
         console.log('🐾 JAG CHECKOUT IS HERE')
         refreshOrderInfo();
+        
     }
     
     setCartNbItems();
