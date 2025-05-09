@@ -6,6 +6,8 @@ const interfaceUrl = "https://heyjag.mypet.fit";
 const body = document.querySelector("body");
 const JL_NavBar = document.getElementById('JL_NavBar')
 
+console.log('🐾 Jag is on the way');
+
 if (document.querySelector('#jl-aqua-modal')) {
     document.addEventListener('scroll', (event) => document.querySelector('#jl-aqua-modal').style.display = 'none')
 }
@@ -347,6 +349,9 @@ const initAboB = async () => {}
 
 const refreshOrderInfo = async () => {
 
+    document.getElementById('JL_CHECKOUT_LOADER').style.display = 'block';
+    document.getElementById('JL_CHECKOUT_INFOS').style.display = 'none';
+
     // Désormais la fonction est traitée sur WFL
     if (!document.getElementById('JL_ORDER')) {
         console.log('🐾 JAG WRONG CONTENT')
@@ -423,8 +428,8 @@ const refreshOrderInfo = async () => {
         'transaction_id': orderNumber
     }
     gtag('event', 'conversion', conversionValue);
-    
-    console.log('🐾 JAG gtag Conversion Sent')
+
+    console.log('🐾 JAG gtag Conversion Sent', conversionValue)
 }
 
 const changeChildsId = (node, suffix, filter) => {
@@ -470,9 +475,6 @@ const init = async () => {
     }
 
     if (JL_pageId == 'confirm_checkout') {
-        document.getElementById('JL_CHECKOUT_LOADER').style.display = 'block';
-        document.getElementById('JL_CHECKOUT_INFOS').style.display = 'none';
-        console.log('🐾 JAG CHECKOUT IS HERE')
         refreshOrderInfo();
         
     }
@@ -743,4 +745,3 @@ else {
     appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
 
-console.log('🐾 Jag is on the way');
