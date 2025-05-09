@@ -222,7 +222,7 @@ class ShoppingCart {
                         saveOrderId(answerJson.orderId)
                     }
                 })
-            }
+            })
         }
     }
 
