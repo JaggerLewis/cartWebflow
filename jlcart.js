@@ -401,7 +401,7 @@ const refreshOrderInfo = async () => {
     }
     
     orderTotalAmount = orderTotalAmount + orderShippingCost;
-    let order_total_tax = parseInt(orderTotalAmount / 1.2);
+    orderTotalTax = parseInt(orderTotalAmount / 1.2);
 
     gtag("event", "purchase", {
         'transaction_id': orderNumber,
