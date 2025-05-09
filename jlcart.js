@@ -59,33 +59,37 @@ class ShoppingCart {
         if (localStorage.getItem("shoppingCart")) {
             localStorage.removeItem("shoppingCart")
         }
-
-        this.cart = []
-        this.orderId = undefined
-        this.orderNumber = undefined
-        this.orderTotalAmount = 0
-        this.orderShippingCost = 0
-        this.orderItems = []
-        this.session_id = undefined
-        this.session_creation_time = Date.now()
-        
-        if (localStorage.getItem("JagSession")) {
-            let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-            this.cart = []
-            for (const product of JagSession.cart) {
-                this.cart.push(new ProductCart(product.id, product.quantity))
+       
+        if (!localStorage.getItem("JagSession")) {
+            JagSession = {
+                cart : [],
+                orderId : undefined,
+                orderNumber : undefined,
+                orderTotalAmount : 0,
+                orderShippingCost : 0,
+                orderItems : [],
+                session_id : undefined,
+                session_creation_time : Date.now()
             }
-            this.orderId = JagSession.orderId
-            this.orderNumber = JagSession.orderNumber
-            this.orderTotalAmount = JagSession.orderTotalAmount
-            this.orderShippingCost = JagSession.orderShippingCost
-            this.orderItems = JagSession.orderItems
-            this.session_id = JagSession.session_id
-            this.session_creation_time = JagSession.session_creation_time
+            localStorage.setItem("JagSession", JSON.stringify(JagSession));
         }
 
-        console.log('🐾 ' + this.cart);
+        JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        this.cart = []
+        for (const product of JagSession.cart) {
+            this.cart.push(new ProductCart(product.id, product.quantity))
+        }
+
+        this.orderId = JagSession.orderId
+        this.orderNumber = JagSession.orderNumber
+        this.orderTotalAmount = JagSession.orderTotalAmount
+        this.orderShippingCost = JagSession.orderShippingCost
+        this.orderItems = JagSession.orderItems
+        this.session_id = JagSession.session_id
+        this.session_creation_time = JagSession.session_creation_time
         
+        console.log('🐾 ' + this.cart);
+
         if (this.orderId != undefined) {
             console.log('🐾 ' + this.orderId.toString());
         }   
