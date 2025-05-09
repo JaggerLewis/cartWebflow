@@ -356,7 +356,7 @@ const refreshOrderInfo = async () => {
     document.getElementById('JL_ORDER').style.display = 'none';
 
     let session_id = new URLSearchParams(window.location.search).get('session_id')
-    let orderDatas await fetch(`${interfaceUrl}/stripe/checkout_session/` + session_id + '/cart').then(res => res.json())
+    let orderDatas = await fetch(`${interfaceUrl}/stripe/checkout_session/` + session_id + '/cart').then(res => res.json())
 
     console.log('🐾 JAG CS DATAS', orderDatas)
 
