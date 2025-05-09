@@ -23,12 +23,11 @@ function displayPrice(price) { //USED
 const setCartNbItems = () => { //USED
     if (JL_NavBar) {
         let count = 0
-        if (localStorage.getItem("shoppingCart")) {
-            JSON.parse(localStorage.getItem('shoppingCart')).forEach(elem => count += elem.quantity)
+        if (localStorage.getItem("JagSession")) {
+            JSON.parse(localStorage.getItem('JagSession')).cart.forEach(elem => count += elem.quantity);
         }
         document.getElementById('jl-cart-number').textContent = count;
     }
-
 }
 
 // TODO(dev): update with new methode
@@ -54,24 +53,41 @@ class ProductCart {
 
 class ShoppingCart {
     constructor() {
+        // On supprime l'ancienne référence
         if (localStorage.getItem("shoppingCart")) {
-            let cart = JSON.parse(localStorage.getItem("shoppingCart"))
+            localStorage.removeItem("shoppingCart")
+        }
+
+        this.cart = []
+        this.orderId = undefined
+        this.orderNumber = undefined
+        this.orderTotalAmount = 0
+        this.orderShippingCost = 0
+        this.orderItems = []
+        this.session_id = undefined
+        this.session_creation_time = Date.now()
+        
+        if (localStorage.getItem("JagSession")) {
+            let JagSession = JSON.parse(localStorage.getItem("JagSession"))
             this.cart = []
-            for (const product of cart) {
+            for (const product of JagSession.cart) {
                 this.cart.push(new ProductCart(product.id, product.quantity))
             }
-            this.orderId = localStorage.getItem("jagOrderId") ?? undefined;
-        } else {
-            this.cart = []
-            this.orderId = undefined;
+            this.orderId = JagSession.orderId
+            this.orderNumber = JagSession.orderNumber
+            this.orderTotalAmount = JagSession.orderTotalAmount
+            this.orderShippingCost = JagSession.orderShippingCost
+            this.orderItems = JagSession.orderItems
+            this.session_id = JagSession.session_id
+            this.session_creation_time = JagSession.session_creation_time
         }
+
         if (this.orderId != undefined) {
             console.log('🐾 ' + this.orderId.toString());
-        }        
+        }   
     }
 
     findProductIndexById(id) {
-
         return this.cart.findIndex(product =>
             product.id.price.id === id.price.id
         )
@@ -157,6 +173,16 @@ class ShoppingCart {
         }
         this.cart.splice(productIndex, 1)
         this.saveCart({ event: { type: "clearItem", id: id } })
+        console.log('--' + id.toString())
+    }
+
+    RemoveSession() {
+        // On vide la session, le panier car l'achat a bien été fait
+        console.log('RemoveSession')
+    }
+
+    RemoveCartItems() {
+        console.log('RemoveCartItems')
     }
 
     getTotalPrice() {
@@ -174,27 +200,31 @@ class ShoppingCart {
         return price.toFixed(2);
     }
 
+    saveOrderId(orderId) {
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        JagSession.orderId = orderId
+        localStorage.setItem("JagSession", JSON.stringify(JagSession))
+        console.log('🐾 JAG orderId Saved ', this.orderId)
+    }
+
     saveCart({ callApi = true, event } = {}) {
-        localStorage.setItem('shoppingCart', JSON.stringify(this.cart));
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        JagSession.cart = this.cart
+        localStorage.setItem("JagSession", JSON.stringify(JagSession))
+        console.log('🐾 JAG cart Saved ', this.orderId)
         setCartNbItems();
+
         if (callApi) {
-            console.log('🐾 save cart', this.orderId)
             this.updateCartInDb({ event }).then(answer => {
                 answer.json().then(answerJson => {
                     if (answerJson.success) {
                         this.orderId = answerJson.orderId
-                        localStorage.setItem('jagOrderId', this.orderId)
-                        console.log('🐾 cart saved', this.orderId)
+                        saveOrderId(answerJson.orderId)
                     }
-                }).catch(e => {
-                    console.error("error parsing", e);
                 })
-            }).catch(e => {
-                console.error("error fetching", e)
-            })
+            }
         }
     }
-
 
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
@@ -221,8 +251,8 @@ class ShoppingCart {
             return answer
         }
         catch (e) {
-            console.log(e)
-            return true
+            console.error("Error Saving CartDB", e)
+            return {success:false}
         }
     }
 }
@@ -316,30 +346,33 @@ const initNewsLettre = () => {
 const initAboB = async () => {}
 
 const refreshOrderInfo = async () => {
-    if (document.getElementById('JL_ORDER'))
-        document.getElementById('JL_ORDER').style.display = 'none';
 
-    let id = new URLSearchParams(window.location.search).get('session_id')
-    //if (!id) {
-    //    window.open('/404', '_self')
-    //}
+    // Désormais la fonction est traitée sur WFL
+    if (!document.getElementById('JL_ORDER')) {
+        console.log('🐾 JAG WRONG CONTENT')
+        return false
+    }
 
-    let datas = await loadCart(id)
-    
-    localStorage.setItem('session_id', id)
+    document.getElementById('JL_ORDER').style.display = 'none';
+
+    let session_id = new URLSearchParams(window.location.search).get('session_id')
+    let orderDatas await fetch(`${interfaceUrl}/stripe/checkout_session/` + session_id + '/cart').then(res => res.json())
+
+    console.log('🐾 JAG CS DATAS', orderDatas)
+
     if (document.getElementById('JL_ORDER')) {
-        document.getElementById('JL_ORDER_ID').textContent = datas.orderNumber
+        document.getElementById('JL_ORDER_ID').textContent = orderDatas.orderNumber
         document.getElementById('JL_ORDER').style.display = 'flex';
     }
 
-    let order_total_amount = 0;
-    let order_items = [];
-    let items = datas.aside_data.cart;
+    let orderItems = [];
+    let orderTotalAmount = 0;
+    let orderShippingCost = 0;
+    let orderNumber = orderDatas.orderNumber
 
     for (i = 0; i < items.length; i++) {
 
-        let item = datas.aside_data.cart[i];
-        shoppingCart.clearItem(item)
+        let item = orderDatas.aside_data.cart[i];
 
         let itemColor = '';
         if (item.description) {
@@ -347,10 +380,7 @@ const refreshOrderInfo = async () => {
             if (item.description.toLowerCase().indexOf('fauve') > -1) { itemColor = 'Fauve'; }
             if (item.description.toLowerCase().indexOf('charbon') > -1) { itemColor = 'Charbon'; }
         }
-        else {
-            itemColor = null
-        }
-            
+
         newItem = {
             item_id: item.price.product,
             item_name: item.description,
@@ -361,36 +391,33 @@ const refreshOrderInfo = async () => {
             quantity: item.quantity
         }
 
-        order_total_amount += item.amount_total;
-        order_items.push(newItem)
+        orderTotalAmount += item.amount_total
+        orderItems.push(newItem)
     }
-
-    //shipping_cost = 599;
-    shipping_cost = 0;
-    order_total_amount = order_total_amount + shipping_cost;
-    order_total_tax = parseInt(order_total_amount / 1.2);
+    
+    orderTotalAmount = orderTotalAmount + orderShippingCost;
+    let order_total_tax = parseInt(orderTotalAmount / 1.2);
 
     gtag("event", "purchase", {
-        'transaction_id': datas.orderNumber,
-        'value': order_total_amount / 100,
-        'tax': order_total_tax / 100,
-        'shipping': shipping_cost / 100,
+        'transaction_id': orderNumber,
+        'value': orderTotalAmount / 100,
+        'tax': orderTotalTax / 100,
+        'shipping': orderShippingCost / 100,
         'currency': "EUR",
-        'items': order_items
+        'items': orderItems
     });
-    console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
 
-    orderId = this.orderId = localStorage.getItem("jagOrderId") ?? undefined;
+    console.log('gtag purchase ok', datas.orderNumber, shipping_cost, order_total_amount, order_total_tax);
+    console.log('🐾 JAG gtag Purchase Sent')
 
     conversionValue = {
         'send_to': 'AW-726660854/rlPfCLWfg7cZEPbtv9oC',
-        'value': order_total_amount / 100,
+        'value': this.orderTotalAmount / 100,
         'currency': 'EUR',
-        'transaction_id': datas.orderNumber
+        'transaction_id': this.orderNumber
     }
-
     gtag('event', 'conversion', conversionValue);
-    console.log('gtag conversion ok', conversionValue);
+    console.log('🐾 JAG gtag Conversion Sent')
 }
 
 const changeChildsId = (node, suffix, filter) => {
@@ -405,10 +432,6 @@ const changeChildsId = (node, suffix, filter) => {
             changeChildsId(childs[index], suffix, filter)
         }
     }
-}
-
-const loadCart = async (id) => {
-    return await fetch(`${interfaceUrl}/stripe/checkout_session/` + id + '/cart').then(res => res.json())
 }
 
 const init = async () => {
@@ -432,10 +455,16 @@ const init = async () => {
         initJagGPS();
     }
 
-    if (document.getElementById('jl-checkout-redirect')) { //USED
-        refreshOrderInfo();
-
+    
+    if (document.getElementById('jl-checkout-redirect')) { //NOT USED - WFL
+        //refreshOrderInfo();
     }
+
+    if (JL_pageId == 'confirm_checkout') {
+        console.log('🐾 JAG CHECKOUT IS HERE')
+        refreshOrderInfo();
+    }
+    
     setCartNbItems();
     page = window.location.href.split('/')[3].split('?')[0];
 }
@@ -520,7 +549,7 @@ const showNewCart = (event) => {
         document.activeElement.blur();
     })
 
-    function clearCart() {
+    function clearCartPopup() {
         const myElement = document.getElementById("JL_Basket_Items");
         for (const child of myElement.children) {
             if (child.id != 'JL_Basket_Item') {
@@ -528,6 +557,7 @@ const showNewCart = (event) => {
             }
         }
     }
+
     function noItems() {
         document.getElementById('JL_Basket_Empty').style.display = 'flex';
         //document.getElementById('JL_Basket_Content').style.display = 'none';
@@ -570,7 +600,7 @@ const showNewCart = (event) => {
 
     nbItem = 1;
 
-    clearCart();
+    clearCartPopup();
 
     let cart_items = [];
 
@@ -618,8 +648,6 @@ const showNewCart = (event) => {
         });
 
         document.getElementById('JL_Basket_Item_' + nbItem).style.display = 'flex';
-
-    
 
         cart_items.push({
             'item_id': prod.id.metadata.productId,
@@ -676,21 +704,6 @@ var colors = ['fauve', 'weimar', 'charbon'];
 var devices = ['jag', 'jag-smartdock'];
 var initialColor = 'fauve';
 var initialDevice = 'jag-smartdock';
-
-/*
-if (document.getElementById('encart_jag_gps_s2')) {
-    let queryParams = new URLSearchParams(document.location.search);
-    var jagColor = queryParams.get("c")
-    if ((jagColor != null) && (colors.includes(jagColor))) {
-        initialColor = jagColor;
-    }
-
-    var jagDevice = queryParams.get("d")
-    if ((jagDevice != null) && (devices.includes(jagDevice))) {
-        initialDevice = jagDevice;
-    }
-}
-    */
 
 const appendPage = (url) => {
     let s = document.createElement('script')
