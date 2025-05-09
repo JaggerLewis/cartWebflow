@@ -94,7 +94,9 @@ class ShoppingCart {
         this.session_id = JagSession.session_id
         this.session_creation_time = JagSession.session_creation_time
         
-        console.log('🐾 Jag Order Session ' + this.orderId.toString());
+        if (this.orderId != undefined) {
+            console.log('🐾 ' + this.orderId.toString());
+        }   
     }
 
     findProductIndexById(id) {
