@@ -726,6 +726,10 @@ const appendPage = (url) => {
     document.getElementsByTagName('head')[0].appendChild(s)
 }
 
+if (!JL_pageId) 
+{
+    JL_pageId = '';
+}
 if ( document.getElementById('JL_NavBar') || JL_pageId == 'confirm_checkout' ) {
     init();
     if ( document.getElementById('jl-product-selector-global') ) {
