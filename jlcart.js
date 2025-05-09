@@ -726,9 +726,9 @@ const appendPage = (url) => {
     document.getElementsByTagName('head')[0].appendChild(s)
 }
 
-if (JL_pageId !== undefined) 
-{
-    JL_pageId = '';
+if (typeof JL_pageId === 'undefined') {
+  // Your variable is undefined
+  JL_pageId = '';
 }
 
 if ( document.getElementById('JL_NavBar') || JL_pageId == 'confirm_checkout' ) {
