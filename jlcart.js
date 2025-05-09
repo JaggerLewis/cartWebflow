@@ -144,7 +144,9 @@ class ShoppingCart {
         });
         console.log("event", "conversion pushed");
         
+        console.log("Before Saved", this.cart);
         this.cart.push(cardProduct)
+        console.log("After Saved", this.cart);
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
         hideSubscription()
 
@@ -217,7 +219,7 @@ class ShoppingCart {
     }
 
     saveCart({ callApi = true, event } = {}) {
-        console.log(event);
+        console.log(this.cart);
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.cart = this.cart
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
@@ -229,7 +231,8 @@ class ShoppingCart {
                 answer.json().then(answerJson => {
                     if (answerJson.success) {
                         this.orderId = answerJson.orderId
-                        this.saveOrderId(answerJson.orderId)
+                        this.saveOrderId(answerJson.orderId);
+                        console.log('🐾 JAG cart Saved ', this.orderId);
                     }
                 })
             })
