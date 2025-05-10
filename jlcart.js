@@ -686,11 +686,13 @@ const showNewCart = (event) => {
 
     let cart_totalPrice = shoppingCart.setTotalPrice();
 
-    gtag("event", "view_cart", {
+    view_cart_event = {
         currency: "EUR",
         value: cart_totalPrice / 100,
         items: cart_items,
-    });
+    }
+    console.log("event", "view_cart", view_cart_event);
+    gtag("event", "view_cart", view_cart_event);
 
     //document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
 
