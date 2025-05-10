@@ -685,10 +685,9 @@ const showNewCart = (event) => {
     })
 
     let cart_totalPrice = shoppingCart.setTotalPrice();
-
     view_cart_event = {
         currency: "EUR",
-        value: cart_totalPrice / 100,
+        value: cart_totalPrice,
         items: cart_items,
     }
     console.log("event", "view_cart", view_cart_event);
