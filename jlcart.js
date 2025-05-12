@@ -379,6 +379,15 @@ const refreshOrderInfo = async () => {
         document.getElementById('JL_ORDER').style.display = 'flex';
     }
 
+    if (document.getElementById('JL_USER_EMAIL')) {
+        try {
+            document.getElementById('JL_USER_EMAIL').textContent = orderDatas.aside_data.customerDetails.email ;
+        }
+        catch (e)  {
+            console.log('🐾 JAG CS DATAS NO EMAIL');
+        }
+    }
+
     document.getElementById('JL_CHECKOUT_INFOS').style.display = 'flex';
     document.getElementById('JL_CHECKOUT_LOADER').style.display = 'none';
 
