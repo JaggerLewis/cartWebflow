@@ -229,7 +229,7 @@ class ShoppingCart {
             this.updateCartInDb({ event }).then(answer => {
                 answer.json().then(answerJson => {
                     if (answerJson.success) {
-                        this.orderId = answerJson.orderId
+                        this.orderId = answerJson.orderId;
                         this.saveOrderId(answerJson.orderId);
                     }
                 })
@@ -239,17 +239,36 @@ class ShoppingCart {
 
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
-        let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } })
+        let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
+
+        let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"));
+        if (JagSessionInfos.customerEmail)
+        {
+            customerEmail = JagSessionInfos.customerEmail;
+        }
+        else {
+            customerEmail = undefined;
+        }
+
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment', referer: url })
+            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment', referer: url, customerEmail : customerEmail })
         })
         return answer
     }
 
     updateCartInDb({ event } = {}) {
         try {
+            let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"))
+            if (JagSessionInfos.customerEmail)
+            {
+                customerEmail = JagSessionInfos.customerEmail;
+            }
+            else {
+                customerEmail = undefined;
+            }
+
             const answer = fetch(`${interfaceUrl}/stripe/cart`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -257,6 +276,7 @@ class ShoppingCart {
                     cart: this.cart,
                     orderId: this.orderId,
                     event: event,
+                    customerEmail : customerEmail,
                 })
             })
             return answer
