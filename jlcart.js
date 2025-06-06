@@ -242,16 +242,16 @@ class ShoppingCart {
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
 
         let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"));
-        let customerEmail = undefined;
+        /*let customerEmail = undefined;
         if (JagSessionInfos.customerEmail)
         {
             customerEmail = JagSessionInfos.customerEmail;
-        }
-        
+        }*/
+
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment', referer: url, customerEmail : customerEmail })
+            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment', referer: url })
         })
         return answer
     }
@@ -259,11 +259,11 @@ class ShoppingCart {
     updateCartInDb({ event } = {}) {
         try {
             let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"))
-            let customerEmail = undefined;
+            /*let customerEmail = undefined;
             if (JagSessionInfos.customerEmail)
             {
                 customerEmail = JagSessionInfos.customerEmail;
-            }
+            }*/
 
             const answer = fetch(`${interfaceUrl}/stripe/cart`, {
                 method: "POST",
@@ -272,7 +272,7 @@ class ShoppingCart {
                     cart: this.cart,
                     orderId: this.orderId,
                     event: event,
-                    customerEmail : customerEmail,
+                    //customerEmail : customerEmail,
                 })
             })
             return answer
