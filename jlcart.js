@@ -242,12 +242,10 @@ class ShoppingCart {
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
 
         let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"));
+        customerEmail = '';
         if (JagSessionInfos.customerEmail)
         {
             customerEmail = JagSessionInfos.customerEmail;
-        }
-        else {
-            customerEmail = undefined;
         }
 
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
@@ -261,12 +259,10 @@ class ShoppingCart {
     updateCartInDb({ event } = {}) {
         try {
             let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"))
+            customerEmail = '';
             if (JagSessionInfos.customerEmail)
             {
                 customerEmail = JagSessionInfos.customerEmail;
-            }
-            else {
-                customerEmail = undefined;
             }
 
             const answer = fetch(`${interfaceUrl}/stripe/cart`, {
