@@ -264,7 +264,7 @@ class ShoppingCart {
         
         if ( JagSession.tsEncartIsHide )
         {
-            if (JagSession.tsEncartEmail < ( Date.now() - 86400 )) ) {
+            if (JagSession.tsEncartEmail < ( Date.now() - 86400 )) {
                 console.log('🐾 JAG CUSTO [RE]-ASK');
                 return true;
             }
