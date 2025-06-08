@@ -331,7 +331,7 @@ class ShoppingCart {
                     cart: this.cart,
                     orderId: this.orderId,
                     event: event,
-                    customerEmail : this.customerEmail,
+                    //customerEmail : this.customerEmail,
                 })
             })
             return answer
