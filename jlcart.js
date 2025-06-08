@@ -305,11 +305,12 @@ class ShoppingCart {
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
+        let infosCart = {cart: value,orderId: this.orderId, mode: 'payment', referer: url };
 
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({cart: value,orderId: this.orderId, mode: 'payment', referer: url })
+            body: JSON.stringify(infosCart)
         })
         return answer
     }
@@ -323,7 +324,7 @@ class ShoppingCart {
                     cart: this.cart,
                     orderId: this.orderId,
                     event: event,
-                    //customerEmail : this.customerEmail,
+                    customerEmail : this.customerEmail,
                 })
             })
             return answer
