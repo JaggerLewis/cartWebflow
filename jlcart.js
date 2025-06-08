@@ -70,8 +70,8 @@ class ShoppingCart {
                 session_id : undefined,
                 session_creation_time : Date.now(),
                 customerEmail : undefined,
-                tsEncartEmail = Date.now();
-                tsEncartIsHide = false;
+                tsEncartEmail = Date.now(),
+                tsEncartIsHide = false
             }
 
         if (!localStorage.getItem("JagSession")) {
