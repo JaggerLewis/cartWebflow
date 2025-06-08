@@ -85,9 +85,12 @@ class ShoppingCart {
         }
 
         if ( !JagSession.customerEmail ) {
+            console.log('🐾 JAG SET CUSTO');
             JagSession.customerEmail = undefined;
-            JagSession.tsEncartEmail = Date.now();
-            JagSession.tsEncartIsHide = false;
+            if ( !JagSession.tsEncartIsHide ) {
+                JagSession.tsEncartEmail = Date.now();
+                JagSession.tsEncartIsHide = false;
+            }
             localStorage.setItem("JagSession", JSON.stringify(JagSession));
         }
 
