@@ -260,7 +260,7 @@ class ShoppingCart {
 
     askCustomerEmail() {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        console.log ( JagSession.customerEmail , JagSession.tsEncartEmail, JagSession.tsEncartIsHide )
+        //console.log ( JagSession.customerEmail , JagSession.tsEncartEmail, JagSession.tsEncartIsHide )
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
         {
             console.log('🐾 JAG CUSTO IS FINE');
@@ -613,10 +613,10 @@ const redirectToStripe = async (event) => {
     })
 
     const apiRes = await shoppingCart.getCartStripeUrl()
-    console.log("apiRes", apiRes);
+    //console.log("apiRes", apiRes);
 
     const apiResJson = await apiRes.json()
-    console.log("apiResJson", apiResJson);
+    //console.log("apiResJson", apiResJson);
 
     //Appel du Tag Manager pour le checkout puis redirection vers stripe
     if (apiResJson.url) {
