@@ -235,7 +235,7 @@ class ShoppingCart {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.customerEmail = customerEmail
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
-        console.log('🐾 JAG CUSTO IS OK');
+        console.log('🐾 JAG CUSTO IS ON FIRE');
     }
 
     hideCustomerEmail() {
@@ -252,6 +252,31 @@ class ShoppingCart {
         JagSession.tsEncartIsHide = false;
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
         console.log('🐾 JAG BYE COCODE');
+    }
+
+    askCustomerEmail() {
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
+        {
+            console.log('🐾 JAG CUSTO IS FINE');
+            return false;
+        }
+        
+        if ( JagSession.tsEncartIsHide )
+        {
+            if (JagSession.tsEncartEmail < ( Date.now() - 86400 )) ) {
+                console.log('🐾 JAG CUSTO [RE]-ASK');
+                return true;
+            }
+            else 
+            {
+                console.log('🐾 JAG CUSTO WAIT');
+                return false;
+            }
+        } 
+
+        console.log('🐾 JAG CUSTO ASK');
+        return false;
     }
 
     saveCart({ callApi = true, event } = {}) {
