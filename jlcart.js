@@ -305,19 +305,11 @@ class ShoppingCart {
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
-        let infosCart = { 
-            cart: value, 
-            orderId: this.orderId, 
-            //customerEmail : this.customerEmail,
-            mode: 'payment', 
-            referer: url };
-
-        console.log(infosCart);
 
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(infosCart)
+            body: JSON.stringify({cart: value,orderId: this.orderId, mode: 'payment', referer: url })
         })
         return answer
     }
