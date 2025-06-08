@@ -251,7 +251,7 @@ class ShoppingCart {
 
     undoCustomerEmail() {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        JagSession.tsEncartEmail = Date.now() - 90000;
+        JagSession.tsEncartEmail = Date.now() - 90000000;
         JagSession.tsEncartIsHide = false;
         JagSession.customerEmail = undefined;
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
@@ -269,7 +269,7 @@ class ShoppingCart {
         
         if ( JagSession.tsEncartIsHide )
         {
-            if (JagSession.tsEncartEmail < ( Date.now() - 86400 )) {
+            if (JagSession.tsEncartEmail < ( Date.now() - 86400000 )) {
                 console.log('🐾 JAG CUSTO [RE]-ASK');
                 return true;
             }
