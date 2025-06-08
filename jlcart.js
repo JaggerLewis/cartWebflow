@@ -68,7 +68,10 @@ class ShoppingCart {
                 orderShippingCost : 0,
                 orderItems : [],
                 session_id : undefined,
-                session_creation_time : Date.now()
+                session_creation_time : Date.now(),
+                customerEmail : undefined,
+                tsEncartEmail = Date.now();
+                tsEncartIsHide = false;
             }
 
         if (!localStorage.getItem("JagSession")) {
@@ -79,6 +82,13 @@ class ShoppingCart {
         else
         {
             JagSession = JSON.parse(localStorage.getItem("JagSession"));
+        }
+
+        if ( !JagSession.customerEmail ) {
+            JagSession.customerEmail = undefined;
+            JagSession.tsEncartEmail = Date.now();
+            JagSession.tsEncartIsHide = false;
+            localStorage.setItem("JagSession", JSON.stringify(JagSession));
         }
 
         this.cart = []
@@ -93,6 +103,9 @@ class ShoppingCart {
         this.orderItems = JagSession.orderItems
         this.session_id = JagSession.session_id
         this.session_creation_time = JagSession.session_creation_time
+        this.customerEmail = JagSession.customerEmail
+        this.tsEncartEmail = Date.now();
+        this.tsEncartIsHide = false;
         
         if (this.orderId != undefined) {
             console.log('🐾 ' + this.orderId.toString());
@@ -150,7 +163,6 @@ class ShoppingCart {
         this.cart.push(cardProduct)
         this.saveCart({ event: { type: "addItem", id: id, count: count } })
         hideSubscription()
-
     }
 
     removeItem(id, count = 1) {
@@ -219,6 +231,29 @@ class ShoppingCart {
         console.log('🐾 JAG orderId Saved ', this.orderId)
     }
 
+    saveCustomerEmail(customerEmail) {
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        JagSession.customerEmail = customerEmail
+        localStorage.setItem("JagSession", JSON.stringify(JagSession))
+        console.log('🐾 JAG CUSTO IS OK');
+    }
+
+    hideCustomerEmail() {
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        JagSession.tsEncartEmail = Date.now();
+        JagSession.tsEncartIsHide = true;
+        localStorage.setItem("JagSession", JSON.stringify(JagSession))
+        console.log('🐾 JAG BYE COCODE');
+    }
+
+    undoCustomerEmail() {
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        JagSession.tsEncartEmail = Date.now();
+        JagSession.tsEncartIsHide = false;
+        localStorage.setItem("JagSession", JSON.stringify(JagSession))
+        console.log('🐾 JAG BYE COCODE');
+    }
+
     saveCart({ callApi = true, event } = {}) {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.cart = this.cart
@@ -240,31 +275,23 @@ class ShoppingCart {
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
-
-        let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"));
-        /*let customerEmail = undefined;
-        if (JagSessionInfos.customerEmail)
-        {
-            customerEmail = JagSessionInfos.customerEmail;
-        }*/
+        let infosCart = { 
+            cart: value, 
+            orderId: this.orderId, 
+            customerEmail : this.customerEmail,
+            mode: 'payment', 
+            referer: url };
 
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cart: value, orderId: this.orderId, mode: 'payment', referer: url })
+            body: JSON.stringify(infosCart)
         })
         return answer
     }
 
     updateCartInDb({ event } = {}) {
         try {
-            let JagSessionInfos = JSON.parse(localStorage.getItem("JagSession"))
-            /*let customerEmail = undefined;
-            if (JagSessionInfos.customerEmail)
-            {
-                customerEmail = JagSessionInfos.customerEmail;
-            }*/
-
             const answer = fetch(`${interfaceUrl}/stripe/cart`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -272,7 +299,7 @@ class ShoppingCart {
                     cart: this.cart,
                     orderId: this.orderId,
                     event: event,
-                    //customerEmail : customerEmail,
+                    customerEmail : this.customerEmail,
                 })
             })
             return answer
