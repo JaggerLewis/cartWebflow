@@ -308,7 +308,7 @@ class ShoppingCart {
         let infosCart = { 
             cart: value, 
             orderId: this.orderId, 
-            customerEmail : this.customerEmail,
+            //customerEmail : this.customerEmail,
             mode: 'payment', 
             referer: url };
 
