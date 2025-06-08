@@ -248,14 +248,16 @@ class ShoppingCart {
 
     undoCustomerEmail() {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        JagSession.tsEncartEmail = Date.now();
+        JagSession.tsEncartEmail = Date.now() - 90000;
         JagSession.tsEncartIsHide = false;
+        JagSession.customerEmail = undefined;
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
         console.log('🐾 JAG BYE COCODE');
     }
 
     askCustomerEmail() {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        console.log ( JagSession.customerEmail , JagSession.tsEncartEmail, JagSession.tsEncartIsHide )
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
         {
             console.log('🐾 JAG CUSTO IS FINE');
@@ -276,7 +278,7 @@ class ShoppingCart {
         } 
 
         console.log('🐾 JAG CUSTO ASK');
-        return false;
+        return true;
     }
 
     saveCart({ callApi = true, event } = {}) {
