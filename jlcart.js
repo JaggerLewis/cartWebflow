@@ -312,6 +312,8 @@ class ShoppingCart {
             mode: 'payment', 
             referer: url };
 
+        console.log(infosCart);
+        
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
