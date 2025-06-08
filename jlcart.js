@@ -313,7 +313,7 @@ class ShoppingCart {
             referer: url };
 
         console.log(infosCart);
-        
+
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -620,9 +620,9 @@ const redirectToStripe = async (event) => {
     })
 
     const apiRes = await shoppingCart.getCartStripeUrl()
-    
-    const apiResJson = await apiRes.json()
+    console.log("apiRes", apiRes);
 
+    const apiResJson = await apiRes.json()
     console.log("apiResJson", apiResJson);
 
     //Appel du Tag Manager pour le checkout puis redirection vers stripe
