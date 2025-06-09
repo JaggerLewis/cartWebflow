@@ -316,15 +316,16 @@ class ShoppingCart {
     }
 
     updateCartInDb({ event } = {}) {
+        const JagSession = JSON.parse(localStorage.getItem("JagSession"))
         try {
             const answer = fetch(`${interfaceUrl}/stripe/cart`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    cart: this.cart,
-                    orderId: this.orderId,
+                    cart: JagSession.cart,
+                    orderId: JagSession.orderId,
                     event: event,
-                    customerEmail : this.customerEmail,
+                    customerEmail : JagSession.customerEmail,
                 })
             })
             return answer
