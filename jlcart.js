@@ -234,8 +234,8 @@ class ShoppingCart {
             const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
             
             if (reductionAmount > 0) {
-                document.getElementById('JL_Basket_Discount_Div').style.display = 'block';
-                reductionAmountSpan.innerHTML = reductionAmount.toFixed(2) + " &euro;"
+                document.getElementById('JL_Basket_Discount_Div').style.display = 'flex';
+                reductionAmountSpan.innerHTML = "- " + reductionAmount.toFixed(2) + " &euro;"
             }
             
         }
