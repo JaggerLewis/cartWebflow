@@ -221,22 +221,29 @@ class ShoppingCart {
     }
 
     getReductionAmount() {
+
+        const reductionAmountDiv = document.getElementById('JL_Basket_Discount_Div');
+        const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
+        const reductionLabelSpan = document.getElementById('JL_Basket_Discount_Code');
+
+        reductionAmountDiv.style.display = 'none'
+
         let reductionAmount = 0;
         
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
         {
             reductionAmount = 20;
+            reductionLabel = "LOVEJAG";
         }
         
         if ( document.getElementById('JL_Basket_Discount_Amount') )
         {
-            const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
-            const reductionLabelSpan = document.getElementById('JL_Basket_Discount_Code');
-
+            
+            reductionAmountDiv.style.display = 'flex';
             if (reductionAmount > 0) {
-                document.getElementById('JL_Basket_Discount_Div').style.display = 'flex';
                 reductionAmountSpan.innerHTML = "- " + reductionAmount.toFixed(2) + " &euro;"
+                reductionLabelSpan.innerHTML = reductionLabel;
             }
             
         }
@@ -600,16 +607,13 @@ const init = async () => {
     console.log('🐾 JAG IS HERE ' + JL_pageId)
 
     if (JL_NavBar) {
-        document.getElementById('JL_Basket').style.display = 'none'
-        document.getElementById('JL_Basket_Discount_Div').style.display = 'none'
         document.getElementById('JL_Basket_Item').style.display = 'none';
         document.getElementById('JL_Basket_Empty').style.display = 'block';
         document.getElementById('jl-cart-number').addEventListener('click', (event) => showNewCart(event))
         document.getElementById('jag-cart').addEventListener('click', (event) => showNewCart(event))
         document.getElementById('JL_Btn_Close_Basket').addEventListener('click', () => {
             hideSubscription()   
-            document.getElementById('JL_Basket').style.display = 'none'
-            document.getElementById('JL_Basket_Discount_Div').style.display = 'none'
+            document.getElementById('JL_Basket_Container').style.display = 'none'
         })
     }
 
@@ -731,7 +735,7 @@ const showNewCart = (event) => {
         // document.getElementById('JL_Basket_Delivery_Amount').style.display = 'none';
         // document.getElementById('JL_Basket_Info_Abo').style.display = 'none';
         document.getElementById('JL_Basket_Boutons').style.display = 'none';
-        document.getElementById('JL_Basket').style.display = 'flex';
+        document.getElementById('JL_Basket_Container').style.display = 'flex';
         document.getElementById('JL_Basket_Total').style.display = 'none';
     }
 
@@ -851,7 +855,7 @@ const showNewCart = (event) => {
     document.getElementById('JL_Basket_Item').style.display = 'none'; // Ligne vide de modèle
     document.getElementById('JL_Basket_Empty').style.display = 'none';
     // document.getElementById('JL_Basket_Info_Abo').style.display = 'flex';
-    document.getElementById('JL_Basket').style.display = 'flex';
+    document.getElementById('JL_Basket_Container').style.display = 'flex';
     document.getElementById('JL_Basket_Content').style.display = 'block';
     document.getElementById('JL_Basket_Items').style.display = 'flex';
 
