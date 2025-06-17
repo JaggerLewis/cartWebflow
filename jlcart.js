@@ -732,7 +732,7 @@ const showNewCart = (event) => {
                     if (e.hasChildNodes()) {
                         e.childNodes.forEach((eChild, i) => {
                             if (eChild.id.startsWith('JL_Basket_Item')) {
-                                eChild.setAttribute('id', eChild.id + '_' + itemLine);
+                                //eChild.setAttribute('id', eChild.id + '_' + itemLine);
                                 console.log( eChild.id + '_' + itemLine );
                             }
                         });
