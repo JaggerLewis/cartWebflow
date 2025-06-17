@@ -238,6 +238,9 @@ class ShoppingCart {
             reductionLabel = "LOVEJAG";
         }
         
+        reductionAmount = 20;
+        reductionLabel = "LOVEJAG";
+
         if ( document.getElementById('JL_Basket_Discount_Amount') )
         {
             
