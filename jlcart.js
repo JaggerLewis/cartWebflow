@@ -263,7 +263,7 @@ class ShoppingCart {
         }
         else
         {
-            deliveryAmountSpan.innerHTML = "Offerts"
+            deliveryAmountSpan.innerHTML = "Offerte"
         }
         console.log(deliveryPrice);
         return deliveryPrice;
