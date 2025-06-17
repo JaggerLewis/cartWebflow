@@ -600,6 +600,8 @@ const init = async () => {
     console.log('🐾 JAG IS HERE ' + JL_pageId)
 
     if (JL_NavBar) {
+        document.getElementById('JL_Basket').style.display = 'none'
+        document.getElementById('JL_Basket_Discount_Div').style.display = 'none'
         document.getElementById('JL_Basket_Item').style.display = 'none';
         document.getElementById('JL_Basket_Empty').style.display = 'block';
         document.getElementById('jl-cart-number').addEventListener('click', (event) => showNewCart(event))
