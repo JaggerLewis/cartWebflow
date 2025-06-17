@@ -232,7 +232,8 @@ class ShoppingCart {
         if ( document.getElementById('JL_Basket_Discount_Amount') )
         {
             const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
-            
+            const reductionLabelSpan = document.getElementById('JL_Basket_Discount_Code');
+
             if (reductionAmount > 0) {
                 document.getElementById('JL_Basket_Discount_Div').style.display = 'flex';
                 reductionAmountSpan.innerHTML = "- " + reductionAmount.toFixed(2) + " &euro;"
@@ -269,7 +270,7 @@ class ShoppingCart {
         let deliveryPrice = this.getDeliveryPrice();
 
         let reductionAmount = this.getReductionAmount(); 
-        
+
         console.log(cartAmountTotal, deliveryPrice, reductionAmount);
 
         let totalPrice = cartAmountTotal + deliveryPrice - reductionAmount;
@@ -331,7 +332,6 @@ class ShoppingCart {
                 return false;
             }
         } 
-
         console.log('🐾 JAG CUSTO ASK');
         return true;
     }
@@ -357,7 +357,17 @@ class ShoppingCart {
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
+
         let infosCart = {cart: value,orderId: this.orderId, mode: 'payment', referer: url };
+
+        let reductionAmount = this.getReductionAmount()
+        if (reductionAmount == 20) {
+            infosCart['promoCodeId'] = '611vwK8n'
+        }
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) ) {
+            infosCart['customerEmail'] = JagSession.customerEmail
+        }
 
         const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
