@@ -256,6 +256,7 @@ class ShoppingCart {
         {
             deliveryAmountSpan.innerHTML = "Offerts"
         }
+        console.log(deliveryPrice);
         return deliveryPrice.toFixed(2);
     }
 
