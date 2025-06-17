@@ -262,7 +262,8 @@ class ShoppingCart {
 
     setTotalPrice() {
         let cartAmountTotal = this.getTotalPrice(); 
-
+        console.log(cartAmountTotal)
+        
         const cartAmountSpan = document.getElementById('JL_Basket_Cart_Amount');
         cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
         
@@ -270,7 +271,7 @@ class ShoppingCart {
 
         let reductionAmount = this.getReductionAmount(); 
         
-        let totalPrice = cartAmountTotal + deliveryPrice - reductionAmount;
+        let totalPrice = (cartAmountTotal / 100) + deliveryPrice - reductionAmount;
         const totalAmountSpan = document.getElementById('JL_Basket_Total_Amount');
         totalAmountSpan.innerHTML = totalPrice.toFixed(2) + " &euro;"
 
@@ -834,8 +835,6 @@ const showNewCart = (event) => {
     }
     console.log("event", "view_cart", view_cart_event);
     gtag("event", "view_cart", view_cart_event);
-
-    //document.getElementById('JL_Basket_Delivery_Amount').innerHTML = "<b>" + document.getElementById('JL_Basket_Delivery_Amount').innerHTML.replace('{price.delivery.std}', '5.99') + "</b>";
 
     document.getElementById('JL_Basket_Total').style.display = 'flex';
     document.getElementById('JL_Basket_Boutons').style.display = 'flex';
