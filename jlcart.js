@@ -257,12 +257,11 @@ class ShoppingCart {
             deliveryAmountSpan.innerHTML = "Offerts"
         }
         console.log(deliveryPrice);
-        return deliveryPrice.toFixed(2);
+        return deliveryPrice;
     }
 
     setTotalPrice() {
         let cartAmountTotal = this.getTotalPrice(); 
-        console.log(cartAmountTotal)
         
         const cartAmountSpan = document.getElementById('JL_Basket_Cart_Amount');
         cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
@@ -271,7 +270,9 @@ class ShoppingCart {
 
         let reductionAmount = this.getReductionAmount(); 
         
-        let totalPrice = (cartAmountTotal / 100) + deliveryPrice - reductionAmount;
+        console.log(cartAmountTotal, deliveryPrice, reductionAmount);
+
+        let totalPrice = cartAmountTotal + deliveryPrice - reductionAmount;
         const totalAmountSpan = document.getElementById('JL_Basket_Total_Amount');
         totalAmountSpan.innerHTML = totalPrice.toFixed(2) + " &euro;"
 
