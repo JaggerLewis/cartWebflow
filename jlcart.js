@@ -735,7 +735,7 @@ const showNewCart = (event) => {
                                 eChild.setAttribute('id', eChild.id + '_' + itemLine);
                                 console.log( eChild.id + '_' + itemLine );
                             }
-                        }
+                        });
                     }
                     else {
                         if (e.id.startsWith('JL_Basket_Item')) {
