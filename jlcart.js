@@ -241,8 +241,8 @@ class ShoppingCart {
         if ( document.getElementById('JL_Basket_Discount_Amount') )
         {
             
-            reductionAmountDiv.style.display = 'flex';
             if (reductionAmount > 0) {
+                reductionAmountDiv.style.display = 'flex';
                 reductionAmountSpan.innerHTML = "- " + reductionAmount.toFixed(2) + " &euro;"
                 reductionLabelSpan.innerHTML = reductionLabel;
             }
