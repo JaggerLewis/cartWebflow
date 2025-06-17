@@ -220,11 +220,60 @@ class ShoppingCart {
         return totalPrice
     }
 
+    getCodePromoAmount() {
+        let reductionAmount = 0;
+        
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
+        {
+            reductionAmount = 20;
+        }
+        
+        if ( document.getElementById('JL_Basket_Discount_Amount') )
+        {
+            const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
+            
+            if (reductionAmount > 0) {
+                document.getElementById('JL_Basket_Discount_Div').style.display = 'block';
+                reductionAmountSpan.innerHTML = reductionAmount.toFixed(2) + " &euro;"
+            }
+            
+        }
+        else {
+            reductionAmount = 0;
+        }
+
+        return reductionAmount
+    }
+
+    getDeliveryPrice() {
+        let deliveryPrice = 0; // + 5.99
+        const deliveryAmountSpan = document.getElementById('JL_Basket_Delivery_Amount');
+        if (deliveryPrice > 0) {
+            deliveryAmountSpan.innerHTML = price.toFixed(2) + " &euro;"
+        }
+        else
+        {
+            deliveryAmountSpan.innerHTML = "Offerts"
+        }
+        return deliveryPrice.toFixed(2);
+    }
+
     setTotalPrice() {
-        let price = this.getTotalPrice()// + 5.99
-        const totalSpan = document.getElementById('JL_Basket_Total_Amount');
-        totalSpan.innerHTML = price.toFixed(2) + " &euro;"
-        return price.toFixed(2);
+        let cartAmountTotal = this.getTotalPrice(); 
+
+        const cartAmountSpan = document.getElementById('JL_Basket_Cart_Amount');
+        cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
+        
+        let deliveryPrice = this.getDeliveryPrice();
+
+        let codePromoAmount = this.getCodePromoAmount(); 
+        
+        let totalPrice = cartAmountTotal + deliveryPrice - codePromoAmount;
+        const totalAmountSpan = document.getElementById('JL_Basket_Total_Amount');
+        totalAmountSpan.innerHTML = totalAmountSpan.toFixed(2) + " &euro;"
+
+        return totalPrice.toFixed(2);
     }
 
     saveOrderId(orderId) {
@@ -545,6 +594,7 @@ const init = async () => {
         document.getElementById('JL_Btn_Close_Basket').addEventListener('click', () => {
             hideSubscription()   
             document.getElementById('JL_Basket').style.display = 'none'
+            document.getElementById('JL_Basket_Discount_Div').style.display = 'none'
         })
     }
 
@@ -679,14 +729,26 @@ const showNewCart = (event) => {
         for (const child of newItem.childNodes) {
             if (child.hasChildNodes()) {
                 child.childNodes.forEach((e, i) => {
-                    if (e.id.startsWith('JL_Basket_Item')) {
-                        e.setAttribute('id', e.id + '_' + itemLine);
+                    if (e.hasChildNodes()) {
+                        e.childNodes.forEach((eChild, i) => {
+                            if (eChild.id.startsWith('JL_Basket_Item')) {
+                                eChild.setAttribute('id', eChild.id + '_' + itemLine);
+                                console.log( eChild.id + '_' + itemLine );
+                            }
+                        }
+                    }
+                    else {
+                        if (e.id.startsWith('JL_Basket_Item')) {
+                            e.setAttribute('id', e.id + '_' + itemLine);
+                            console.log( e.id + '_' + itemLine );
+                        }
                     }
                 });
             }
             else {
                 if (child.id.startsWith('JL_Basket_Item')) {
                     child.setAttribute('id', child.id + '_' + itemLine);
+                    console.log( child.id + '_' + itemLine );
                 }
             }
         }
@@ -709,6 +771,7 @@ const showNewCart = (event) => {
         createLine(nbItem);
         
         document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML =  getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
+        document.getElementById('JL_Basket_Item_Color' + nbItem).innerHTML =  prod.id.metadata.colorId;
         let labelQty = getTrad('qté : ', 'qty : ');
         document.getElementById('JL_Basket_Item_Ref_' + nbItem).innerHTML = prod.id.metadata.pId + " (" + labelQty + prod.quantity + ")";
         document.getElementById('JL_Basket_Item_Img_' + nbItem).src = prod.id.image;
