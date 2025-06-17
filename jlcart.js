@@ -771,7 +771,7 @@ const showNewCart = (event) => {
         createLine(nbItem);
         
         document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML =  getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
-        document.getElementById('JL_Basket_Item_Color' + nbItem).innerHTML =  prod.id.metadata.colorId;
+        document.getElementById('JL_Basket_Item_Color_' + nbItem).innerHTML =  prod.id.metadata.colorId;
         let labelQty = getTrad('qté : ', 'qty : ');
         document.getElementById('JL_Basket_Item_Ref_' + nbItem).innerHTML = prod.id.metadata.pId + " (" + labelQty + prod.quantity + ")";
         document.getElementById('JL_Basket_Item_Img_' + nbItem).src = prod.id.image;
