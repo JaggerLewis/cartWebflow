@@ -229,7 +229,8 @@ class ShoppingCart {
         reductionAmountDiv.style.display = 'none'
 
         let reductionAmount = 0;
-        
+        let reductionLabel = "";
+
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
         {
