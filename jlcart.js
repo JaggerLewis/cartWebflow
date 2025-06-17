@@ -228,8 +228,8 @@ class ShoppingCart {
 
         reductionAmountDiv.style.display = 'none'
 
-        let reductionAmount = 0;
-        let reductionLabel = "";
+        let reductionAmount = 20 ; // 0
+        let reductionLabel = "LOVEJAG"; // ""
 
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
@@ -238,9 +238,6 @@ class ShoppingCart {
             reductionLabel = "LOVEJAG";
         }
         
-        reductionAmount = 20;
-        reductionLabel = "LOVEJAG";
-
         if ( document.getElementById('JL_Basket_Discount_Amount') )
         {
             
