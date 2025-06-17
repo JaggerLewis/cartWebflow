@@ -220,7 +220,7 @@ class ShoppingCart {
         return totalPrice
     }
 
-    getCodePromoAmount() {
+    getReductionAmount() {
         let reductionAmount = 0;
         
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
@@ -267,11 +267,11 @@ class ShoppingCart {
         
         let deliveryPrice = this.getDeliveryPrice();
 
-        let codePromoAmount = this.getCodePromoAmount(); 
+        let reductionAmount = this.getReductionAmount(); 
         
-        let totalPrice = cartAmountTotal + deliveryPrice - codePromoAmount;
+        let totalPrice = cartAmountTotal + deliveryPrice - reductionAmount;
         const totalAmountSpan = document.getElementById('JL_Basket_Total_Amount');
-        totalAmountSpan.innerHTML = totalAmountSpan.toFixed(2) + " &euro;"
+        totalAmountSpan.innerHTML = totalPrice.toFixed(2) + " &euro;"
 
         return totalPrice.toFixed(2);
     }
