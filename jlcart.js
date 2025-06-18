@@ -228,8 +228,8 @@ class ShoppingCart {
 
         reductionAmountDiv.style.display = 'none'
 
-        let reductionAmount = 20 ; // 0
-        let reductionLabel = "LOVEJAG"; // ""
+        let reductionAmount = 0;
+        let reductionLabel = "";
 
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
@@ -258,12 +258,17 @@ class ShoppingCart {
     getDeliveryPrice() {
         let deliveryPrice = 0; // + 5.99
         const deliveryAmountSpan = document.getElementById('JL_Basket_Delivery_Amount');
+        const deliveryAmountLabel = document.getElementById('JL_Basket_Delivery_Label');
+
         if (deliveryPrice > 0) {
+            deliveryAmountLabel.style.display = 'block';
+            deliveryAmountLabel.innerHTML = getTrad('Livraison', 'Delivery');
             deliveryAmountSpan.innerHTML = price.toFixed(2) + " &euro;"
         }
         else
         {
-            deliveryAmountSpan.innerHTML = "Offerte"
+            deliveryAmountLabel.style.display = 'none';
+            deliveryAmountSpan.innerHTML = getTrad("Livraison Offerte", "Free Delivery"); 
         }
         console.log(deliveryPrice);
         return deliveryPrice;
@@ -271,11 +276,15 @@ class ShoppingCart {
 
     setTotalPrice() {
         let cartAmountTotal = this.getTotalPrice(); 
-        
-        const cartAmountSpan = document.getElementById('JL_Basket_Cart_Amount');
-        cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
-        
         let deliveryPrice = this.getDeliveryPrice();
+
+        if (deliveryPrice > 0) {
+            const cartAmountDiv = document.getElementById('JL_Basket_Cart_Div');
+            cartAmountDiv.style.display = 'flex';
+            
+            const cartAmountSpan = document.getElementById('JL_Basket_Cart_Amount');
+            cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
+        }       
 
         let reductionAmount = this.getReductionAmount(); 
 
@@ -615,6 +624,8 @@ const init = async () => {
         document.getElementById('JL_Btn_Close_Basket').addEventListener('click', () => {
             hideSubscription()   
             document.getElementById('JL_Basket_Container').style.display = 'none'
+            document.getElementById('JL_Basket_Cart_Div').style.display = 'none'
+            document.getElementById('JL_Basket_Discount_Div').style.display = 'none'
         })
     }
 
