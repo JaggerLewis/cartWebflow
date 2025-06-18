@@ -623,9 +623,10 @@ const init = async () => {
         document.getElementById('jag-cart').addEventListener('click', (event) => showNewCart(event))
         document.getElementById('JL_Btn_Close_Basket').addEventListener('click', () => {
             hideSubscription()   
-            document.getElementById('JL_Basket_Container').style.display = 'none'
-            document.getElementById('JL_Basket_Cart_Div').style.display = 'none'
-            document.getElementById('JL_Basket_Discount_Div').style.display = 'none'
+            document.getElementById('JL_Basket_Container').style.display = 'none';
+            document.getElementById('JL_Btn_Close_Basket').style.display = 'none';
+            document.getElementById('JL_Basket_Cart_Div').style.display = 'none';
+            document.getElementById('JL_Basket_Discount_Div').style.display = 'none';
         })
     }
 
@@ -741,6 +742,7 @@ const showNewCart = (event) => {
     }
 
     function noItems() {
+        document.getElementById('JL_Btn_Close_Basket').style.display = 'block';
         document.getElementById('JL_Basket_Empty').style.display = 'flex';
         // document.getElementById('JL_Basket_Content').style.display = 'none';
         document.getElementById('JL_Basket_Items').style.display = 'none';
