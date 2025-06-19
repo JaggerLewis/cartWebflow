@@ -929,3 +929,9 @@ else {
     appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
 
+try {
+    console.log("JLCart", JLCart);
+} catch (e) {
+    console.error("error getting JLCart", e);
+}
+
