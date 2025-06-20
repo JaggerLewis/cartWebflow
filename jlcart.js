@@ -255,16 +255,19 @@ class ShoppingCart {
                 headers: { "Content-Type": "application/json" },
             }).then(res => res.json())
             
-            console.log('codePromoInfos', codePromoInfos)
-            shoppingCart.savePromoCode({
-                'id' : codePromoInfos.promoCode.id,
-                'amount' : codePromoInfos.promoCode.amount / 100,
-                'name' : codePromoInfos.promoCode.name
-            });
-
-            reductionAmount = codePromoInfos.promoCode.amount;
-            reductionLabel = codePromoInfos.promoCode.name;
-
+            //console.log('codePromoInfos', codePromoInfos)
+            if ( codePromoInfos.success == true ) {
+                shoppingCart.savePromoCode({
+                    'id' : codePromoInfos.promoCode.id,
+                    'amount' : codePromoInfos.promoCode.amount / 100,
+                    'name' : codePromoInfos.promoCode.name
+                });
+                reductionAmount = codePromoInfos.promoCode.amount;
+                reductionLabel = codePromoInfos.promoCode.name;
+            }
+            else {
+                console.log('code promo not valid')
+            }
         }
         else {
             let JagSession = JSON.parse(localStorage.getItem("JagSession"))
@@ -288,7 +291,6 @@ class ShoppingCart {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.promoCode = promoCode
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
-        console.log('🐾 JAG promoCode Saved ', this.promoCode)
     }
 
     getReductionAmount() {
