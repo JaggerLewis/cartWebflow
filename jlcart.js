@@ -238,7 +238,7 @@ class ShoppingCart {
             return null;
         }
     }
-    
+
     getPromoCode() {
         let reductionAmount = 0;
         let reductionLabel = "";
@@ -247,7 +247,7 @@ class ShoppingCart {
         const promoCodeId = queryParams.get('promoCodeId');
     
         if (promoCodeId) {
-            getPromoCodeDatas(promoCodeId).then((res) => {
+            this.getPromoCodeDatas(promoCodeId).then((res) => {
                 console.log("promoCodeInfos", res);
                 const promoCodeDatas = res.promoCode;
                 shoppingCart.savePromoCode(promoCodeDatas);
@@ -279,7 +279,7 @@ class ShoppingCart {
 
     getReductionAmount() {
 
-        let {reductionAmount, reductionLabel} = getPromoCode()
+        let {reductionAmount, reductionLabel} = this.getPromoCode()
         
         const reductionAmountDiv = document.getElementById('JL_Basket_Discount_Div');
         const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
