@@ -415,6 +415,22 @@ class ShoppingCart {
             return {success:false}
         }
     }
+
+    recreateCart(cart) {
+    this.cart.length = 0;
+    for (const product of cart) {
+        const cardProduct = new ProductCart(id, count)
+        this.cart.push(cardProduct)
+    }
+
+    view_cart_event = {
+        currency: "EUR",
+        value: cart_totalPrice,
+        items: cart_items,
+    }
+    console.log("event", "view_cart", view_cart_event);
+    gtag("event", "view_cart", view_cart_event);
+}
 }
 
 const shoppingCart = new ShoppingCart();
@@ -956,22 +972,6 @@ const getPromoCodeDatas = async (promoCodeId) => {
     }
 }
 
-const recreateCart = (cart) => {
-    this.cart.length = 0;
-    for (const product of cart) {
-        const cardProduct = new ProductCart(id, count)
-        this.cart.push(cardProduct)
-    }
-
-    view_cart_event = {
-        currency: "EUR",
-        value: cart_totalPrice,
-        items: cart_items,
-    }
-    console.log("event", "view_cart", view_cart_event);
-    gtag("event", "view_cart", view_cart_event);
-}
-
 try {
     if (JLCart) {
         const queryParams = new URLSearchParams(document.location.search);
@@ -979,10 +979,10 @@ try {
         const eventId = queryParams.get("eventId");
         getEventDatas(eventId).then((res) => {
             const eventDatas = res.result.event.datas;
-            saveOrderId(datas.order._id);
-            saveCustomerEmail(datas.customer.email);
-            recreateCart(datas.order.aside_data.cart);
-            this.saveCart({ event: { type: "recreate Cart", cart: this.cart } });
+            shoppingCart.saveOrderId(datas.order._id);
+            shoppingCart.saveCustomerEmail(datas.customer.email);
+            shoppingCart.recreateCart(datas.order.aside_data.cart);
+            shoppingCart.saveCart({ event: { type: "recreate Cart", cart: shoppingCart.cart } });
         })
         getPromoCodeDatas(promoCodeId).then((res) => {
             const eventDatas = res;
