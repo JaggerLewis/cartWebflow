@@ -226,6 +226,19 @@ class ShoppingCart {
         return totalPrice
     }
 
+    getPromoCodeDatas = async (promoCodeId) => {
+        try {
+            const answer = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            })
+            const answerJson = await answer.json();
+            return answerJson;
+        } catch (_) {
+            return null;
+        }
+    }
+    
     getPromoCode() {
         let reductionAmount = 0;
         let reductionLabel = "";
@@ -715,7 +728,7 @@ const init = async () => {
     page = window.location.href.split('/')[3].split('?')[0];
 
     shoppingCart.getPromoCode();
-    
+
 }
 
 const hideSubscription = () => {
@@ -1008,20 +1021,6 @@ const getEventDatas = async (eventId) => {
         return null;
     }
 }
-
-const getPromoCodeDatas = async (promoCodeId) => {
-    try {
-        const answer = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-        })
-        const answerJson = await answer.json();
-        return answerJson;
-    } catch (_) {
-        return null;
-    }
-}
-
 
 try {
     if (JLCart) {
