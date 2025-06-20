@@ -240,7 +240,7 @@ class ShoppingCart {
        return null
     }
 
-    getPromoCode = async () => {
+    getPromoCode() {
         let reductionAmount = 0;
         let reductionLabel = "";
 
@@ -255,6 +255,7 @@ class ShoppingCart {
                 headers: { "Content-Type": "application/json" },
             }).then(res => res.json())
             
+            console.log('codePromoInfos', codePromoInfos)
             shoppingCart.savePromoCode({
                 'id' : codePromoInfos.promoCode.id,
                 'amount' : codePromoInfos.promoCode.amount,
@@ -287,13 +288,19 @@ class ShoppingCart {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.promoCode = promoCode
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
-
-        // console.log('🐾 JAG promoCode Saved ', this.promoCode)
+        console.log('🐾 JAG promoCode Saved ', this.promoCode)
     }
 
     getReductionAmount() {
+        let reductionAmount = 0
+        let reductionLabel = ''
 
-        let {reductionAmount, reductionLabel} = this.getPromoCode()
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        if ( JagSession.promoCode )
+        {
+            reductionAmount = JagSession.promoCode.amount
+            reductionLabel = JagSession.promoCode.name
+        }
         
         const reductionAmountDiv = document.getElementById('JL_Basket_Discount_Div');
         const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
@@ -309,8 +316,7 @@ class ShoppingCart {
                 reductionLabelSpan.innerHTML = reductionLabel;
             }
         }
-        console.log('reductionAmount', reductionAmount)
-        
+
         return reductionAmount
     }
 
@@ -343,7 +349,7 @@ class ShoppingCart {
         return deliveryPrice;
     }
 
-    setTotalPrice = async () => {
+    setTotalPrice() {
         let cartAmountTotal = this.getTotalPrice(); 
         let deliveryPrice = this.getDeliveryPrice();
 
@@ -355,7 +361,7 @@ class ShoppingCart {
             cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
         }       
 
-        let reductionAmount = await this.getReductionAmount(); 
+        let reductionAmount = this.getReductionAmount(); 
 
         console.log(cartAmountTotal, deliveryPrice, reductionAmount);
 
@@ -508,7 +514,6 @@ class ShoppingCart {
         }
             
         let cart_totalPrice = shoppingCart.setTotalPrice();
-
         let view_cart_event = {
             currency: "EUR",
             value: cart_totalPrice,
