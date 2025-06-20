@@ -419,7 +419,7 @@ class ShoppingCart {
     recreateCart(cart) {
     this.cart.length = 0;
     for (const product of cart) {
-        const cardProduct = new ProductCart(id, count)
+        const cardProduct = new ProductCart(product.id, product.count)
         this.cart.push(cardProduct)
     }
 
