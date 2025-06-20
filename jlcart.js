@@ -240,7 +240,7 @@ class ShoppingCart {
        return null
     }
 
-    getPromoCode() {
+    getPromoCode = async () => {
         let reductionAmount = 0;
         let reductionLabel = "";
 
@@ -256,7 +256,7 @@ class ShoppingCart {
             }).then(res => res.json())
             
             console.log('codePromoInfos', codePromoInfos);
-            
+
             shoppingCart.savePromoCode({
                 'id' : codePromoInfos.promoCode.id,
                 'amount' : codePromoInfos.promoCode.amount,
