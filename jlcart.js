@@ -313,7 +313,7 @@ class ShoppingCart {
             if (reductionAmount > 0) {
                 reductionAmountDiv.style.display = 'flex';
                 reductionAmountSpan.innerHTML = "- " + reductionAmount.toFixed(2) + " &euro;"
-                reductionLabelSpan.innerHTML = reductionLabel;
+                reductionLabelSpan.innerHTML = "Code " + reductionLabel + ":";
             }
         }
 
@@ -344,6 +344,7 @@ class ShoppingCart {
         {
             deliveryAmountLabel.style.display = 'none';
             deliveryAmountSpan.innerHTML = getTrad("Livraison Offerte", "Free Delivery"); 
+            deliveryAmountSpan.style.width = '100%'
         }
         console.log(deliveryPrice);
         return deliveryPrice;
