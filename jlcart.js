@@ -306,7 +306,7 @@ class ShoppingCart {
         return reductionAmount
     }
 
-    getReductionCode() {
+    getPromoCodeId() {
         let promoCodeId = '';
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if (JagSession.promoCode) {
@@ -441,7 +441,7 @@ class ShoppingCart {
 
         let reductionAmount = this.getReductionAmount()
         if (reductionAmount > 0) {
-            promoCodeId = getReductionCode();
+            promoCodeId = getPromoCodeId();
             if (promoCodeId != '')
             {
                 infosCart['promoCodeId'] = '611vwK8n'
