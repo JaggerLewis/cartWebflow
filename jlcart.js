@@ -698,7 +698,7 @@ const init = async () => {
     if (promoCodeId) {
         try {
             getPromoCodeDatas(promoCodeId).then((res) => {
-                const eventDatas = res.promo;
+                const eventDatas = res.promoCode;
                 console.log("promo", eventDatas);
             })
         } catch (_) {}
@@ -1027,8 +1027,7 @@ try {
             init();
         })
         getPromoCodeDatas(promoCodeId).then((res) => {
-            console.log("res", res)
-            const promoCodeDatas = res.promo;
+            const promoCodeDatas = res.promoCode;
             shoppingCart.savePromoCode(promoCodeDatas);
             console.log("shoppingCart", shoppingCart)
         })
