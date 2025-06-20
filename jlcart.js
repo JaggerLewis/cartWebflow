@@ -444,7 +444,7 @@ class ShoppingCart {
             promoCodeId = getPromoCodeId();
             if (promoCodeId != '')
             {
-                infosCart['promoCodeId'] = '611vwK8n'
+                infosCart['promoCodeId'] = promoCodeId
             }
         }
 
