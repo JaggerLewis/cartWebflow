@@ -239,28 +239,31 @@ class ShoppingCart {
         }
     }
 
-    getPromoCode() {
+    getPromoCode {
         let reductionAmount = 0;
         let reductionLabel = "";
 
         const queryParams = new URLSearchParams(document.location.search);
         const promoCodeId = queryParams.get('promoCodeId');
-        
-        console.log('promoCodeId', promoCodeId);
-        
+                
         if (promoCodeId) {
-            this.getPromoCodeDatas(promoCodeId).then((res) => {
-                const promoCodeDatas = res.promoCode;
+            console.log('start check promo');
 
+            fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }).then( function(response) {
+                return data = response.json()} ).then( function(res) {
+            
+                const promoCodeDatas = res.promoCode;
                 shoppingCart.savePromoCode({
                     'id' : res.promoCode.id,
                     'amount' : res.promoCode.amount,
                     'name' : res.promoCode.name
                 });
-                
                 reductionAmount = res.promoCode.amount;
                 reductionLabel = res.promoCode.name;
-            })
+            });
         }
         else {
             let JagSession = JSON.parse(localStorage.getItem("JagSession"))
