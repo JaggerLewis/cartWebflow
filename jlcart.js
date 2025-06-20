@@ -417,20 +417,30 @@ class ShoppingCart {
     }
 
     recreateCart(cart) {
-    this.cart.length = 0;
-    for (const product of cart) {
-        const cardProduct = new ProductCart(product.id, product.count)
-        this.cart.push(cardProduct)
+        this.cart.length = 0;
+        const cart_items = [];
+        for (const product of cart) {
+            const cardProduct = new ProductCart(product.id, product.count)
+            this.cart.push(cardProduct)
+            cart_items.push({
+                'item_id': product.id.metadata.productId,
+                'item_name': product.id.metadata.title_fr,
+                'item_brand': "Jagger & Lewis",
+                'item_variant': product.id.metadata.colorId,
+                'price': product.id.price.price,
+                'quantity': product.quantity
+            });
+        }
+            
+        let cart_totalPrice = shoppingCart.setTotalPrice();
+        view_cart_event = {
+            currency: "EUR",
+            value: cart_totalPrice,
+            items: cart_items,
+        }
+        console.log("event", "view_cart", view_cart_event);
+        gtag("event", "view_cart", view_cart_event);
     }
-
-    view_cart_event = {
-        currency: "EUR",
-        value: cart_totalPrice,
-        items: cart_items,
-    }
-    console.log("event", "view_cart", view_cart_event);
-    gtag("event", "view_cart", view_cart_event);
-}
 }
 
 const shoppingCart = new ShoppingCart();
