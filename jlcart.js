@@ -235,6 +235,7 @@ class ShoppingCart {
     
         if (promoCodeId) {
             getPromoCodeDatas(promoCodeId).then((res) => {
+                console.log("promoCodeInfos", res);
                 const promoCodeDatas = res.promoCode;
                 shoppingCart.savePromoCode(promoCodeDatas);
                 console.log("shoppingCart", shoppingCart)
