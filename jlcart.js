@@ -164,7 +164,11 @@ class ShoppingCart {
         console.log("event", "conversion pushed");
         
         this.cart.push(cardProduct)
-        this.saveCart({ event: { type: "addItem", id: id, count: count } })
+        this.saveCart({ event: { 
+            type: "addItem", 
+            id: id, 
+            count: count
+         } })
         hideSubscription()
     }
 
@@ -371,6 +375,8 @@ class ShoppingCart {
             })
         }
     }
+
+
 
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
@@ -769,7 +775,6 @@ const showNewCart = (event) => {
     }
 
     function noItems() {
-        document.getElementById('JL_Btn_Close_Basket').style.display = 'block';
         document.getElementById('JL_Basket_Empty').style.display = 'flex';
         // document.getElementById('JL_Basket_Content').style.display = 'none';
         document.getElementById('JL_Basket_Items').style.display = 'none';
@@ -891,6 +896,7 @@ const showNewCart = (event) => {
     console.log("event", "view_cart", view_cart_event);
     gtag("event", "view_cart", view_cart_event);
 
+    document.getElementById('JL_Btn_Close_Basket').style.display = 'block';
     document.getElementById('JL_Basket_Total').style.display = 'flex';
     document.getElementById('JL_Basket_Boutons').style.display = 'flex';
     document.getElementById('JL_Basket_Item').style.display = 'none'; // Ligne vide de modèle
