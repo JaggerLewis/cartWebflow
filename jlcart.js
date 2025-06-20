@@ -455,7 +455,7 @@ class ShoppingCart {
 
         let reductionAmount = this.getReductionAmount()
         if (reductionAmount > 0) {
-            promoCodeId = this.getPromoCodeId();
+            let promoCodeId = this.getPromoCodeId();
             if (promoCodeId != '')
             {
                 infosCart['promoCodeId'] = promoCodeId
