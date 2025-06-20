@@ -775,6 +775,7 @@ const showNewCart = (event) => {
     }
 
     function noItems() {
+        document.getElementById('JL_Btn_Close_Basket').style.display = 'block';
         document.getElementById('JL_Basket_Empty').style.display = 'flex';
         // document.getElementById('JL_Basket_Content').style.display = 'none';
         document.getElementById('JL_Basket_Items').style.display = 'none';
