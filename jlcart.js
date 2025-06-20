@@ -226,23 +226,52 @@ class ShoppingCart {
         return totalPrice
     }
 
+    getPromoCode() {
+        let reductionAmount = 0;
+        let reductionLabel = "";
+
+        const queryParams = new URLSearchParams(document.location.search);
+        const promoCodeId = queryParams.get('promoCodeId');
+    
+        if (promoCodeId) {
+            getPromoCodeDatas(promoCodeId).then((res) => {
+                const promoCodeDatas = res.promoCode;
+                shoppingCart.savePromoCode(promoCodeDatas);
+                console.log("shoppingCart", shoppingCart)
+            })
+        }
+        else {
+            let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+            if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
+            {
+                reductionAmount = 20;
+                reductionLabel = "LOVEJAG";
+            }
+        }
+
+        return {
+            reductionAmount: reductionAmount,
+            reductionLabel: reductionLabel,
+        }
+    }
+
+    savePromoCode(promoCode) {
+        this.promoCode = promoCode
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        JagSession.promoCode = promoCode
+        localStorage.setItem("JagSession", JSON.stringify(JagSession))
+        console.log('🐾 JAG promoCode Saved ', this.promoCode)
+    }
+
     getReductionAmount() {
 
+        let {reductionAmount, reductionLabel} = getPromoCode()
+        
         const reductionAmountDiv = document.getElementById('JL_Basket_Discount_Div');
         const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
         const reductionLabelSpan = document.getElementById('JL_Basket_Discount_Code');
 
         reductionAmountDiv.style.display = 'none'
-
-        let reductionAmount = 0;
-        let reductionLabel = "";
-
-        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
-        {
-            reductionAmount = 20;
-            reductionLabel = "LOVEJAG";
-        }
         
         if ( document.getElementById('JL_Basket_Discount_Amount') )
         {
@@ -377,16 +406,6 @@ class ShoppingCart {
             })
         }
     }
-
-    savePromoCode(promoCode) {
-        this.promoCode = promoCode
-        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        JagSession.promoCode = promoCode
-        localStorage.setItem("JagSession", JSON.stringify(JagSession))
-        console.log('🐾 JAG promoCode Saved ', this.promoCode)
-    }
-
-
 
     getCartStripeUrl() {
         const url = window.location.origin + window.location.pathname;
@@ -689,22 +708,8 @@ const init = async () => {
 
     if (JL_pageId == 'confirm_checkout') {
         refreshOrderInfo();
-        
     }
 
-    const queryParams = new URLSearchParams(document.location.search);
-    const promoCodeId = queryParams.get('promoCodeId');
-    /*
-    if (promoCodeId) {
-        try {
-            getPromoCodeDatas(promoCodeId).then((res) => {
-                const eventDatas = res.promoCode;
-                console.log("promo", eventDatas);
-            })
-        } catch (_) {}
-    }
-    */
-    
     setCartNbItems();
     page = window.location.href.split('/')[3].split('?')[0];
 }
@@ -1012,6 +1017,7 @@ const getPromoCodeDatas = async (promoCodeId) => {
         return null;
     }
 }
+
 
 try {
     if (JLCart) {
