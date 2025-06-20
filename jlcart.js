@@ -240,7 +240,7 @@ class ShoppingCart {
        return null
     }
 
-    getPromoCode() {
+    getPromoCode = async () => {
         let reductionAmount = 0;
         let reductionLabel = "";
 
