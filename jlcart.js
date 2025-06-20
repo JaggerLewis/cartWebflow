@@ -258,7 +258,7 @@ class ShoppingCart {
             console.log('codePromoInfos', codePromoInfos)
             shoppingCart.savePromoCode({
                 'id' : codePromoInfos.promoCode.id,
-                'amount' : codePromoInfos.promoCode.amount,
+                'amount' : codePromoInfos.promoCode.amount / 100,
                 'name' : codePromoInfos.promoCode.name
             });
 
