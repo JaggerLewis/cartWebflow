@@ -125,12 +125,12 @@ class ShoppingCart {
         console.log("event", "view_item", id);
         gtag("event", "view_item", {
             currency: "EUR",
-            value: id.price.price / 100,
+            value: Number(id.price.price) / 100,
             items: [
                 {
                   item_id: id.sku,
                   item_name: id.name,
-                  price: id.price.price / 100,
+                  price: Number(id.price.price) / 100,
                   quantity: 1
                 }
               ]
@@ -146,12 +146,12 @@ class ShoppingCart {
         console.log("event", "add_to_cart", id);
         gtag("event", "add_to_cart", {
             currency: "EUR",
-            value: id.price.price / 100,
+            value: Number(id.price.price) / 100,
             items: [
                 {
                   item_id: id.sku,
                   item_name: id.name,
-                  price: id.price.price / 100,
+                  price: Number(id.price.price) / 100,
                   quantity: 1
                 }
               ]
@@ -184,12 +184,12 @@ class ShoppingCart {
         console.log("event", "remove_from_cart", id);
         gtag("event", "remove_from_cart", {
             currency: "EUR",
-            value: id.price.price / 100,
+            value: Number(id.price.price) / 100,
             items: [
                 {
                   item_id: id.sku,
                   item_name: id.name,
-                  price: id.price.price / 100,
+                  price: Number(id.price.price) / 100,
                   quantity: 1
                 }
               ]
@@ -219,6 +219,7 @@ class ShoppingCart {
     getTotalPrice() {
         let totalPrice = 0;
         this.cart.forEach((productCart) => {
+            console.log("productCart", productCart);
             totalPrice += Number(productCart.id.price.price) * productCart.quantity
         })
         return totalPrice
