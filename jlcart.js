@@ -433,7 +433,7 @@ class ShoppingCart {
         }
             
         let cart_totalPrice = shoppingCart.setTotalPrice();
-        view_cart_event = {
+        let view_cart_event = {
             currency: "EUR",
             value: cart_totalPrice,
             items: cart_items,
@@ -883,7 +883,7 @@ const showNewCart = (event) => {
     })
 
     let cart_totalPrice = shoppingCart.setTotalPrice();
-    view_cart_event = {
+    let view_cart_event = {
         currency: "EUR",
         value: cart_totalPrice,
         items: cart_items,
