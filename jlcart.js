@@ -219,7 +219,7 @@ class ShoppingCart {
     getTotalPrice() {
         let totalPrice = 0;
         this.cart.forEach((productCart) => {
-            totalPrice += productCart.id.price.price * productCart.quantity
+            totalPrice += Number(productCart.id.price.price) * productCart.quantity
         })
         return totalPrice
     }
