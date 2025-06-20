@@ -427,7 +427,7 @@ class ShoppingCart {
         this.cart.length = 0;
         const cart_items = [];
         for (const product of cart) {
-            addItem(product.id, product.quantity);
+            this.addItem(product.id, product.quantity);
             //const cardProduct = new ProductCart(product.id, product.quantity)
             //this.cart.push(cardProduct)
             cart_items.push({
