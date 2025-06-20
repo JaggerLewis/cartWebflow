@@ -245,7 +245,9 @@ class ShoppingCart {
 
         const queryParams = new URLSearchParams(document.location.search);
         const promoCodeId = queryParams.get('promoCodeId');
-    
+        
+        console.log('promoCodeId', promoCodeId);
+        
         if (promoCodeId) {
             this.getPromoCodeDatas(promoCodeId).then((res) => {
                 const promoCodeDatas = res.promoCode;
@@ -270,7 +272,7 @@ class ShoppingCart {
         }
 
         console.log('reductionAmount',reductionAmount,'reductionLabel',reductionLabel )
-        
+
         return {
             reductionAmount: reductionAmount,
             reductionLabel: reductionLabel,
