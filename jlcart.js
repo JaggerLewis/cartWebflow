@@ -356,6 +356,7 @@ class ShoppingCart {
     saveCart({ callApi = true, event } = {}) {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.cart = this.cart
+        console.log("JagSession", JagSession);
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
         setCartNbItems();
 
@@ -984,8 +985,8 @@ try {
             this.saveCart({ event: { type: "recreate Cart", cart: this.cart } });
         })
         getPromoCodeDatas(promoCodeId).then((res) => {
-            const eventDatas = res.promoCode;
-            console.log(eventDatas);
+            const eventDatas = res;
+            console.log("promo", eventDatas);
         })
     }
 } catch (_) {}
