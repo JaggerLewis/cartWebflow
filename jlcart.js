@@ -1001,6 +1001,7 @@ try {
             shoppingCart.saveCustomerEmail(eventDatas.customer.email);
             shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
             shoppingCart.saveCart({ event: { type: "recreate Cart", cart: eventDatas.order.aside_data.cart } });
+            init();
         })
         getPromoCodeDatas(promoCodeId).then((res) => {
             const eventDatas = res;
