@@ -929,9 +929,43 @@ else {
     appendPage('https://webcart.jagger-lewis.com/jlclient.js')
 }
 
-try {
-    console.log("JLCart", JLCart);
-} catch (e) {
-    console.error("error getting JLCart", e);
+const getEventDatas = async (eventId) => {
+    try {
+        const answer = await fetch(`${interfaceUrl}/event/${eventId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
+        const answerJson = await answer.json();
+        return answerJson;
+    } catch (_) {
+        return null;
+    }
 }
+
+const getPromoCodeDatas = async (promoCodeId) => {
+    try {
+        const answer = await fetch(`${interfaceUrl}/stripe/promo/${promoCodeId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        })
+        const answerJson = await answer.json();
+        return answerJson;
+    } catch (_) {
+        return null;
+    }
+}
+
+try {
+    if (JLCart) {
+        const queryParams = new URLSearchParams(document.location.search);
+        const promoCodeId = queryParams.get("promoCodeId");
+        const eventId = queryParams.get("eventId");
+        getEventDatas(eventId).then((res) => {
+            console.log(res);
+        })
+        getPromoCodeDatas().then((res) => {
+            console.log(res);
+        })
+    }
+} catch (_) {}
 
