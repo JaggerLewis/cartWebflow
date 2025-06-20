@@ -269,6 +269,8 @@ class ShoppingCart {
             }
         }
 
+        console.log('reductionAmount',reductionAmount,'reductionLabel',reductionLabel )
+        
         return {
             reductionAmount: reductionAmount,
             reductionLabel: reductionLabel,
