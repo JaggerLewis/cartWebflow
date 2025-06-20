@@ -713,6 +713,9 @@ const init = async () => {
 
     setCartNbItems();
     page = window.location.href.split('/')[3].split('?')[0];
+
+    shoppingCart.getPromoCode();
+    
 }
 
 const hideSubscription = () => {
