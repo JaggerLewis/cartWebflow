@@ -313,7 +313,7 @@ class ShoppingCart {
             if (reductionAmount > 0) {
                 reductionAmountDiv.style.display = 'flex';
                 reductionAmountSpan.innerHTML = "- " + reductionAmount.toFixed(2) + " &euro;"
-                reductionLabelSpan.innerHTML = "Code " + reductionLabel + ":";
+                reductionLabelSpan.innerHTML = "Code " + reductionLabel + " :";
             }
         }
 
