@@ -291,7 +291,7 @@ class ShoppingCart {
         // console.log('🐾 JAG promoCode Saved ', this.promoCode)
     }
 
-    getReductionAmount() {
+    getReductionAmount = async () => {
 
         let {reductionAmount, reductionLabel} = this.getPromoCode()
         
@@ -310,7 +310,7 @@ class ShoppingCart {
             }
         }
         console.log('reductionAmount', reductionAmount)
-        
+
         return reductionAmount
     }
 
@@ -355,7 +355,7 @@ class ShoppingCart {
             cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
         }       
 
-        let reductionAmount = this.getReductionAmount(); 
+        let reductionAmount = await this.getReductionAmount(); 
 
         console.log(cartAmountTotal, deliveryPrice, reductionAmount);
 
