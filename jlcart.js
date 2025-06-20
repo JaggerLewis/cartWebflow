@@ -109,6 +109,7 @@ class ShoppingCart {
         this.customerEmail = JagSession.customerEmail
         this.tsEncartEmail = Date.now();
         this.tsEncartIsHide = false;
+        this.promoCode = JagSession.promoCode
         
         if (this.orderId != undefined) {
             console.log('🐾 ' + this.orderId.toString());
@@ -375,6 +376,14 @@ class ShoppingCart {
                 })
             })
         }
+    }
+
+    savePromoCode(promoCode) {
+        this.promoCode = promoCode
+        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+        JagSession.promoCode = promoCode
+        localStorage.setItem("JagSession", JSON.stringify(JagSession))
+        console.log('🐾 JAG promoCode Saved ', this.promoCode)
     }
 
 
@@ -682,6 +691,19 @@ const init = async () => {
         refreshOrderInfo();
         
     }
+
+    const queryParams = new URLSearchParams(document.location.search);
+    const promoCodeId = queryParams.get('promoCodeId');
+    /*
+    if (promoCodeId) {
+        try {
+            getPromoCodeDatas(promoCodeId).then((res) => {
+                const eventDatas = res;
+                console.log("promo", eventDatas);
+            })
+        } catch (_) {}
+    }
+    */
     
     setCartNbItems();
     page = window.location.href.split('/')[3].split('?')[0];
@@ -994,8 +1016,8 @@ const getPromoCodeDatas = async (promoCodeId) => {
 try {
     if (JLCart) {
         const queryParams = new URLSearchParams(document.location.search);
-        const promoCodeId = queryParams.get("promoCodeId");
         const eventId = queryParams.get("eventId");
+        const promoCodeId = queryParams.get("promoCodeId");
         getEventDatas(eventId).then((res) => {
             const eventDatas = res.result.event.datas;
             shoppingCart.saveOrderId(eventDatas.order._id);
@@ -1005,8 +1027,9 @@ try {
             init();
         })
         getPromoCodeDatas(promoCodeId).then((res) => {
-            const eventDatas = res;
-            console.log("promo", eventDatas);
+            const promoCodeDatas = res;
+            shoppingCart.savePromoCode(promoCodeDatas);
+            console.log(res, shoppingCart)
         })
     }
 } catch (_) {}
