@@ -961,7 +961,7 @@ const getEventDatas = async (eventId) => {
 
 const getPromoCodeDatas = async (promoCodeId) => {
     try {
-        const answer = await fetch(`${interfaceUrl}/stripe/promo/${promoCodeId}`, {
+        const answer = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         })
@@ -979,10 +979,10 @@ try {
         const eventId = queryParams.get("eventId");
         getEventDatas(eventId).then((res) => {
             const eventDatas = res.result.event.datas;
-            shoppingCart.saveOrderId(datas.order._id);
-            shoppingCart.saveCustomerEmail(datas.customer.email);
-            shoppingCart.recreateCart(datas.order.aside_data.cart);
-            shoppingCart.saveCart({ event: { type: "recreate Cart", cart: shoppingCart.cart } });
+            shoppingCart.saveOrderId(eventDatas.order._id);
+            shoppingCart.saveCustomerEmail(eventDatas.customer.email);
+            shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
+            shoppingCart.saveCart({ event: { type: "recreate Cart", cart: eventDatas.order.aside_data.cart } });
         })
         getPromoCodeDatas(promoCodeId).then((res) => {
             const eventDatas = res;
