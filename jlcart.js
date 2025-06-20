@@ -250,13 +250,11 @@ class ShoppingCart {
             this.getPromoCodeDatas(promoCodeId).then((res) => {
                 const promoCodeDatas = res.promoCode;
 
-                promoCode = {
+                shoppingCart.savePromoCode({
                     'id' : res.promoCode.id,
                     'amount' : res.promoCode.amount,
                     'name' : res.promoCode.name
-                }
-
-                shoppingCart.savePromoCode(promoCode);
+                });
                 
                 reductionAmount = res.promoCode.amount;
                 reductionLabel = res.promoCode.name;
