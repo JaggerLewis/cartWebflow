@@ -1027,9 +1027,10 @@ try {
             init();
         })
         getPromoCodeDatas(promoCodeId).then((res) => {
+            console.log("res", res)
             const promoCodeDatas = res.promo;
             shoppingCart.savePromoCode(promoCodeDatas);
-            console.log(res, shoppingCart)
+            console.log("shoppingCart", shoppingCart)
         })
     }
 } catch (_) {}
