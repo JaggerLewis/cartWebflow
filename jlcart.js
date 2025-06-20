@@ -254,7 +254,7 @@ class ShoppingCart {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             }).then( function(response) {
-                return data = response.json()} ).then( function(res) {
+                return const data = response.json()} ).then( function(res) {
             
                 const promoCodeDatas = res.promoCode;
                 shoppingCart.savePromoCode({
