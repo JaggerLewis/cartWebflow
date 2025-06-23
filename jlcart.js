@@ -246,6 +246,8 @@ class ShoppingCart {
 
         const queryParams = new URLSearchParams(document.location.search);
         const promoCodeId = queryParams.get('promoCodeId');
+
+        console.log("promo code : ", promoCodeId);
                 
         if (promoCodeId) {
             console.log('start check promo');
@@ -759,6 +761,8 @@ const init = async () => {
     setCartNbItems();
     page = window.location.href.split('/')[3].split('?')[0];
 
+    console.log("prepare promo code")
+    
     shoppingCart.getPromoCode();
 
 }
