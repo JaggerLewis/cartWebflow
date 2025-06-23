@@ -208,6 +208,10 @@ class ShoppingCart {
         console.log('--' + id.toString())
     }
 
+    hasDock() {
+        return this.cart.some((e) => { return e.id.metadata.sku.startsWith("JAG-GPS-S2-PLUS") });
+    }
+
     RemoveSession() {
         // On vide la session, le panier car l'achat a bien été fait
         console.log('RemoveSession')
