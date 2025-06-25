@@ -920,7 +920,13 @@ const showNewCart = (event) => {
         createLine(nbItem);
         
         document.getElementById('JL_Basket_Item_Label_' + nbItem).innerHTML =  getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
-        document.getElementById('JL_Basket_Item_Color_' + nbItem).innerHTML =  prod.id.metadata.colorId;
+        if (prod.id.metadata.colorId != 'undefined')
+            {
+                document.getElementById('JL_Basket_Item_Color_' + nbItem).innerHTML =  prod.id.metadata.colorId;
+            }
+        else {
+            document.getElementById('JL_Basket_Item_Color_' + nbItem).innerHTML =  '';
+        }
         let labelQty = getTrad('qté : ', 'qty : ');
         document.getElementById('JL_Basket_Item_Ref_' + nbItem).innerHTML = prod.id.metadata.pId + " (" + labelQty + prod.quantity + ")";
         document.getElementById('JL_Basket_Item_Img_' + nbItem).src = prod.id.image;
