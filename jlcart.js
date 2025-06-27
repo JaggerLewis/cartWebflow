@@ -331,7 +331,7 @@ class ShoppingCart {
     }
 
     savePromoCode(promoCodeInfos) {
-        this.promoCodeId = promoCodeInfos.id
+        this.promoCodeInfos = promoCodeInfos
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.promoCodeInfos = promoCodeInfos
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
