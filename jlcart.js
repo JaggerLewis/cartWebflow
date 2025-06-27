@@ -328,8 +328,6 @@ class ShoppingCart {
         console.log(this.promoCodeInfos)
         
         this.applyCodeHelper()
-        
-        return promoCodeInfos
     }
 
     savePromoCode(promoCodeInfos) {
