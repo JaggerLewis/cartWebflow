@@ -245,49 +245,67 @@ class ShoppingCart {
     }
 
     getPromoCode = async () => {
-        let reductionAmount = 0;
-        let reductionLabel = "";
-
         const queryParams = new URLSearchParams(document.location.search);
-        const promoCodeId = queryParams.get('promoCodeId');
+        let promoCodeId = queryParams.get('promoCodeId');
 
         console.log("promo code : ", promoCodeId);
-                
-        if (promoCodeId) {
-            console.log('start check promo');
-
-            let codePromoInfos = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            }).then(res => res.json())
-            
-            console.log('codePromoInfos', codePromoInfos)
-            if ( codePromoInfos.success == true ) {
-                shoppingCart.savePromoCode({
-                    'id' : codePromoInfos.promoCode.id,
-                    'amount' : codePromoInfos.promoCode.amount / 100,
-                    'name' : codePromoInfos.promoCode.name
-                });
-                reductionAmount = codePromoInfos.promoCode.amount;
-                reductionLabel = codePromoInfos.promoCode.name;
-            }
-            else {
-                console.log('code promo not valid')
-            }
+    
+        let promoCodeInfos = {
+            'id' : '',
+            'amount' : 0,
+            'name' : '',
+            'minimumAmount' : 0,
+            'productsEAN' : [],
+            'expires_at' : 0,
         }
-        else {
+
+        if (!promoCodeId) {
             let JagSession = JSON.parse(localStorage.getItem("JagSession"))
             if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
             {
-                reductionAmount = 20;
-                reductionLabel = "LOVEJAG";
+                promoCodeId = '611vwK8n' ; // LOVEJAG
+            }
+            else {
+                return promoCodeInfos;
             }
         }
 
-        return {
-            reductionAmount: reductionAmount,
-            reductionLabel: reductionLabel,
+        console.log('start check promo', promoCodeId);
+
+        let codePromoInfos = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        }).then(res => res.json())
+        
+        console.log('codePromoInfos', codePromoInfos)
+
+        if ( (codePromoInfos.success == true) && (codePromoInfos.promoCode.valid == true) ) {
+            let productsEAN = [];
+            if (codePromoInfos.promoCode.metadata.products) {
+                productsEAN = codePromoInfos.promoCode.metadata.products;
+            }
+
+            let minimumAmount = 0;
+            if (codePromoInfos.promoCode.restrictions.minimum_amount) {
+                minimumAmount = codePromoInfos.promoCode.restrictions.minimum_amount;
+            }
+            promoCodeInfos = {
+                'id' : codePromoInfos.promoCode.id,
+                'amount' : codePromoInfos.promoCode.amount / 100,
+                'name' : codePromoInfos.promoCode.name,
+                'minimumAmount' : minimumAmount,
+                'productsEAN' : productsEAN,
+                'expires_at' : codePromoInfos.promoCode.expires_at,
+            }
         }
+        else {
+            console.log('code promo not valid')
+        }
+
+        shoppingCart.savePromoCode(promoCodeInfos);
+        console.log(promoCodeInfos)
+        
+        return promoCodeInfos
     }
 
     savePromoCode(promoCode) {
