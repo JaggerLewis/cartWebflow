@@ -478,7 +478,7 @@ class ShoppingCart {
 
 	    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	    if ( emailPattern.test(customerEmail) ) {
-            saveCustomerEmail(customerEmail)
+            this.saveCustomerEmail(customerEmail)
         }
     }
 
