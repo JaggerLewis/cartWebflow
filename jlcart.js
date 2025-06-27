@@ -472,6 +472,16 @@ class ShoppingCart {
         console.log('🐾 JAG orderId Saved ', this.orderId)
     }
 
+    getQueryCustomerEmail = async () => {
+        const queryParams = new URLSearchParams(document.location.search);
+        let customerEmail = queryParams.get('cml');
+
+	    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	    if ( emailPattern.test(customerEmail) ) {
+            saveCustomerEmail(customerEmail)
+        }
+    }
+
     saveCustomerEmail(customerEmail) {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         JagSession.customerEmail = customerEmail
@@ -846,6 +856,7 @@ const init = async () => {
     console.log("prepare promo code")
     
     shoppingCart.getPromoCode();
+    shoppingCart.getQueryCustomerEmail()
 
 }
 
