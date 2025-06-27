@@ -258,7 +258,8 @@ class ShoppingCart {
     getPromoCode = async () => {
         const queryParams = new URLSearchParams(document.location.search);
         let promoCodeId = queryParams.get('promoCodeId');
-
+        let codeHelper = ''
+        
         console.log("promo code : ", promoCodeId);
 
         if (!promoCodeId) {
