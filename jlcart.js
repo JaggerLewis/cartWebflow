@@ -101,7 +101,7 @@ class ShoppingCart {
 
         if (JagSession.promoCodeInfos)
         {
-            this.codePromoInfos = JagSession.promoCodeInfos
+            this.promoCodeInfos = JagSession.promoCodeInfos
         }
         else
         {
