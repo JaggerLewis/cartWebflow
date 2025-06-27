@@ -269,7 +269,9 @@ class ShoppingCart {
                 promoCodeId = '611vwK8n' ; // LOVEJAG
             }
             else {
-                return promoCodeInfos;
+                console.log(this.promoCodeInfos)
+                this.applyCodeHelper()
+                return;
             }
         }
         
@@ -326,7 +328,6 @@ class ShoppingCart {
         }
 
         console.log(this.promoCodeInfos)
-        
         this.applyCodeHelper()
     }
 
