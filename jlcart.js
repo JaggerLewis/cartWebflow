@@ -327,7 +327,7 @@ class ShoppingCart {
 
         console.log(this.promoCodeInfos)
         
-        applyCodeHelper()
+        this.applyCodeHelper()
         
         return promoCodeInfos
     }
