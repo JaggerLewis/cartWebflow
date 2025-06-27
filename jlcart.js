@@ -326,6 +326,8 @@ class ShoppingCart {
         shoppingCart.savePromoCode(promoCodeInfos);
         console.log(promoCodeInfos)
         
+        applyCodeHelper()
+        
         return promoCodeInfos
     }
 
@@ -447,8 +449,6 @@ class ShoppingCart {
 
         //let reductionAmount = this.applyCodePromo(); 
         let reductionAmount = 0;
-        
-        applyCodeHelper()
 
         console.log(cartAmountTotal, deliveryPrice, reductionAmount);
 
