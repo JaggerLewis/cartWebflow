@@ -294,7 +294,7 @@ class ShoppingCart {
 
             console.log(codePromoInfos.promoCode.expires_at, Date.now());
 
-            if ( codePromoInfos.promoCode.expires_at > Date.now() ) {
+            if ( (codePromoInfos.promoCode.expires_at * 1000) > Date.now() ) {
 
                 if ( codePromoInfos.promoCode.id == '96poDEs6')
                 {
