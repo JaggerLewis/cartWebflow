@@ -261,7 +261,7 @@ class ShoppingCart {
                 headers: { "Content-Type": "application/json" },
             }).then(res => res.json())
             
-            //console.log('codePromoInfos', codePromoInfos)
+            console.log('codePromoInfos', codePromoInfos)
             if ( codePromoInfos.success == true ) {
                 shoppingCart.savePromoCode({
                     'id' : codePromoInfos.promoCode.id,
