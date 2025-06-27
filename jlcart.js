@@ -99,6 +99,17 @@ class ShoppingCart {
             this.cart.push(new ProductCart(product.id, product.quantity))
         }
 
+        this.promoCodeInfos = {
+            'id' : undefined,
+            'amount' : 0,
+            'name' : '',
+            'minimumAmount' : 0,
+            'productsEAN' : [],
+            'expires_at' : 0,
+            'helper' : '',
+        }
+        this.codeHelper = '';
+
         this.orderId = JagSession.orderId
         this.orderNumber = JagSession.orderNumber
         this.orderTotalAmount = JagSession.orderTotalAmount
@@ -109,7 +120,7 @@ class ShoppingCart {
         this.customerEmail = JagSession.customerEmail
         this.tsEncartEmail = Date.now();
         this.tsEncartIsHide = false;
-        this.promoCode = JagSession.promoCode
+        //this.promoCode = JagSession.promoCode
         
         if (this.orderId != undefined) {
             console.log('🐾 ' + this.orderId.toString());
@@ -246,18 +257,9 @@ class ShoppingCart {
 
     getPromoCode = async () => {
         const queryParams = new URLSearchParams(document.location.search);
-        let promoCodeId = queryParams.get('promoCodeId');
+        let codeHelper =  = queryParams.get('promoCodeId');
 
         console.log("promo code : ", promoCodeId);
-    
-        let promoCodeInfos = {
-            'id' : '',
-            'amount' : 0,
-            'name' : '',
-            'minimumAmount' : 0,
-            'productsEAN' : [],
-            'expires_at' : 0,
-        }
 
         if (!promoCodeId) {
             let JagSession = JSON.parse(localStorage.getItem("JagSession"))
@@ -269,7 +271,7 @@ class ShoppingCart {
                 return promoCodeInfos;
             }
         }
-
+        
         console.log('start check promo', promoCodeId);
 
         let codePromoInfos = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
@@ -289,14 +291,33 @@ class ShoppingCart {
             if (codePromoInfos.promoCode.restrictions.minimum_amount) {
                 minimumAmount = codePromoInfos.promoCode.restrictions.minimum_amount;
             }
-            promoCodeInfos = {
-                'id' : codePromoInfos.promoCode.id,
-                'amount' : codePromoInfos.promoCode.amount / 100,
-                'name' : codePromoInfos.promoCode.name,
-                'minimumAmount' : minimumAmount,
-                'productsEAN' : productsEAN,
-                'expires_at' : codePromoInfos.promoCode.expires_at,
+
+            console.log(codePromoInfos.promoCode.expires_at, Date.now());
+
+            if ( codePromoInfos.promoCode.expires_at > Date.now() ) {
+
+                if ( codePromoInfos.promoCode.id == '96poDEs6')
+                {
+                    codeHelper = '30€ de réduction avec le code JUNE30 sur les JAG GPS avec Smartdock et 20€ avec le code JUNE20 sur les JAG GPS.'
+                }
+                if ( codePromoInfos.promoCode.id == '611vwK8n')
+                {
+                    codeHelper = 'Profitez de 20€ de réduction avec le code LOVEJAG.'
+                }
+                promoCodeInfos = {
+                    'id' : codePromoInfos.promoCode.id,
+                    'amount' : codePromoInfos.promoCode.amount / 100,
+                    'name' : codePromoInfos.promoCode.name,
+                    'minimumAmount' : minimumAmount,
+                    'productsEAN' : productsEAN,
+                    'expires_at' : codePromoInfos.promoCode.expires_at,
+                    'helper' : codeHelper,
+                }
             }
+            else {
+                console.log('code promo expired')
+            }
+            
         }
         else {
             console.log('code promo not valid')
@@ -308,29 +329,55 @@ class ShoppingCart {
         return promoCodeInfos
     }
 
-    savePromoCode(promoCode) {
-        this.promoCode = promoCode
+    savePromoCode(promoCodeInfos) {
+        this.promoCodeId = promoCodeInfos.id
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        JagSession.promoCode = promoCode
+        JagSession.promoCodeInfos = promoCodeInfos
         localStorage.setItem("JagSession", JSON.stringify(JagSession))
     }
 
-    getReductionAmount() {
+    applyCodePromo() {
+
         let reductionAmount = 0
         let reductionLabel = ''
+        let isApplied = false
 
-        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        if ( JagSession.promoCode )
-        {
-            reductionAmount = JagSession.promoCode.amount
-            reductionLabel = JagSession.promoCode.name
-        }
-        
         const reductionAmountDiv = document.getElementById('JL_Basket_Discount_Div');
         const reductionAmountSpan = document.getElementById('JL_Basket_Discount_Amount');
         const reductionLabelSpan = document.getElementById('JL_Basket_Discount_Code');
 
         reductionAmountDiv.style.display = 'none'
+
+        if ( this.promoCodeInfos.id == undefined )
+        {
+            return reductionAmount;
+        }
+
+        if ( this.promoCodeInfos.minimumAmount > this.getTotalPrice() )
+        {
+            return reductionAmount;
+        }
+
+        if ( this.promoCodeInfos.productsEAN == [] )
+        {
+            reductionAmount = this.promoCodeInfos.amount;
+            reductionLabel = this.promoCodeInfos.name;
+        }
+        
+        this.cart.forEach((productCart) => {
+            if ( this.promoCodeInfos.productsEAN.includes(productCart.id.metadata.productId ) )
+            {
+                isApplied = true
+            }
+        })
+        
+        if (isApplied == false)
+        {
+            return reductionAmount;
+        }
+
+        reductionAmount = JagSession.promoCode.amount
+        reductionLabel = JagSession.promoCode.name
         
         if ( document.getElementById('JL_Basket_Discount_Amount') )
         {
@@ -340,20 +387,32 @@ class ShoppingCart {
                 reductionLabelSpan.innerHTML = "Code " + reductionLabel + " :";
             }
         }
-
         return reductionAmount
+
     }
 
-    getPromoCodeId() {
-        let promoCodeId = '';
-        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
-        if (JagSession.promoCode) {
-            promoCodeId = JagSession.promoCode.id
-        }
-        console.log('promoCodeId', promoCodeId)
-        return promoCodeId;
-    }
+    applyCodeHelper() {
+        if (document.getElementById('JL_Basket_Discount_Helper_Div'))
+        {
+            const reductionAmountHelperDiv = document.getElementById('JL_Basket_Discount_Helper_Div');
+            const reductionAmountHelperSpan = document.getElementById('JL_Basket_Discount_Helper_Span');
 
+            reductionAmountHelperSpan.innerHTML = ''
+            reductionAmountHelperDiv.style.display = 'none'
+            
+            if ( this.promoCodeInfos.id == undefined )
+            {
+                return true
+            }
+
+            if ( this.promoCodeInfos.helper != '') {
+                reductionAmountHelperSpan.innerHTML = this.promoCodeInfos.helper
+                reductionAmountHelperDiv.style.display = 'flex'
+            }
+        }        
+        return true
+    }
+    
     getDeliveryPrice() {
         let deliveryPrice = 0; // + 5.99
         const deliveryAmountSpan = document.getElementById('JL_Basket_Delivery_Amount');
@@ -386,7 +445,10 @@ class ShoppingCart {
             cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;"
         }       
 
-        let reductionAmount = this.getReductionAmount(); 
+        //let reductionAmount = this.applyCodePromo(); 
+        let reductionAmount = 0;
+        
+        applyCodeHelper()
 
         console.log(cartAmountTotal, deliveryPrice, reductionAmount);
 
@@ -476,16 +538,7 @@ class ShoppingCart {
         const url = window.location.origin + window.location.pathname;
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
 
-        let infosCart = {cart: value,orderId: this.orderId, mode: 'payment', referer: url };
-
-        let reductionAmount = this.getReductionAmount()
-        if (reductionAmount > 0) {
-            let promoCodeId = this.getPromoCodeId();
-            if (promoCodeId != '')
-            {
-                infosCart['promoCodeId'] = promoCodeId
-            }
-        }
+        let infosCart = {cart: value,orderId: this.orderId, mode: 'payment', referer: url, 'promoCodeId' : this.promoCodeId };
 
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) ) {
