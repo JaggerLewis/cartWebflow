@@ -259,7 +259,7 @@ class ShoppingCart {
         const queryParams = new URLSearchParams(document.location.search);
         let promoCodeId = queryParams.get('promoCodeId');
         let codeHelper = ''
-        
+
         console.log("promo code : ", promoCodeId);
 
         if (!promoCodeId) {
@@ -305,7 +305,7 @@ class ShoppingCart {
                 {
                     codeHelper = 'Profitez de 20€ de réduction avec le code LOVEJAG.'
                 }
-                promoCodeInfos = {
+                let promoCodeInfos = {
                     'id' : codePromoInfos.promoCode.id,
                     'amount' : codePromoInfos.promoCode.amount / 100,
                     'name' : codePromoInfos.promoCode.name,
