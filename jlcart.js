@@ -313,6 +313,7 @@ class ShoppingCart {
                     'expires_at' : codePromoInfos.promoCode.expires_at,
                     'helper' : codeHelper,
                 }
+                shoppingCart.savePromoCode(promoCodeInfos);
             }
             else {
                 console.log('code promo expired')
@@ -323,8 +324,7 @@ class ShoppingCart {
             console.log('code promo not valid')
         }
 
-        shoppingCart.savePromoCode(promoCodeInfos);
-        console.log(promoCodeInfos)
+        console.log(this.promoCodeInfos)
         
         applyCodeHelper()
         
