@@ -538,7 +538,8 @@ class ShoppingCart {
         const url = window.location.origin + window.location.pathname;
         let value = this.cart.map((e) => { return { id: e.id.price.id, quantity: e.quantity } });
 
-        let infosCart = {cart: value,orderId: this.orderId, mode: 'payment', referer: url, 'promoCodeId' : this.promoCodeId };
+        //let infosCart = {cart: value,orderId: this.orderId, mode: 'payment', referer: url, 'promoCodeId' : this.promoCodeId };
+        let infosCart = {cart: value,orderId: this.orderId, mode: 'payment', referer: url };
 
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) ) {
