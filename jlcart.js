@@ -99,17 +99,23 @@ class ShoppingCart {
             this.cart.push(new ProductCart(product.id, product.quantity))
         }
 
-        this.promoCodeInfos = {
-            'id' : undefined,
-            'amount' : 0,
-            'name' : '',
-            'minimumAmount' : 0,
-            'productsEAN' : [],
-            'expires_at' : 0,
-            'helper' : '',
+        if (JagSession.promoCodeInfos)
+        {
+            this.codePromoInfos = JagSession.promoCodeInfos
         }
-        this.codeHelper = '';
-
+        else
+        {
+            this.promoCodeInfos = {
+                'id' : undefined,
+                'amount' : 0,
+                'name' : '',
+                'minimumAmount' : 0,
+                'productsEAN' : [],
+                'expires_at' : 0,
+                'helper' : '',
+            }
+        }
+        
         this.orderId = JagSession.orderId
         this.orderNumber = JagSession.orderNumber
         this.orderTotalAmount = JagSession.orderTotalAmount
