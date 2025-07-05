@@ -313,7 +313,7 @@ class ShoppingCart {
 
                 if ( codePromoInfos.promoCode.id == 'hXbVDcY2')
                 {
-                    codeHelper = 'Pour les 10ANS de Jagger, 30€ de réduction avec le code 10ANS sur les JAG GPS avec Smartdock.'
+                    codeHelper = 'Pour les 10ANS de Jagger, 30€ de réduction avec le code 10ANS sur les JAG GPS avec Smartdock. Soit le coffret à 169.00€'
                 }
 
                 if ( codePromoInfos.promoCode.id == '611vwK8n')
