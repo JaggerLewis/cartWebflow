@@ -273,6 +273,7 @@ class ShoppingCart {
             if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
             {
                 promoCodeId = '611vwK8n' ; // LOVEJAG
+                promoCodeId = 'hXbVDcY2' ; // 10ANS
             }
             else {
                 console.log(this.promoCodeInfos)
@@ -309,6 +310,12 @@ class ShoppingCart {
                 {
                     codeHelper = '30€ de réduction avec le code JUNE30 sur les JAG GPS avec Smartdock et 20€ avec le code JUNE20 sur les JAG GPS.'
                 }
+
+                if ( codePromoInfos.promoCode.id == 'hXbVDcY2')
+                {
+                    codeHelper = 'Pour les 10ANS de Jagger, 30€ de réduction avec le code 10ANS sur les JAG GPS avec Smartdock.'
+                }
+
                 if ( codePromoInfos.promoCode.id == '611vwK8n')
                 {
                     codeHelper = 'Profitez de 20€ de réduction avec le code LOVEJAG.'
