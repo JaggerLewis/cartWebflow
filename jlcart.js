@@ -431,7 +431,7 @@ class ShoppingCart {
             reductionAmountHelperDivPopup.style.display = 'none'
             
             if ( this.promoCodeInfos.helper != '') {
-                reductionAmountHelperPopup.innerHTML = this.promoCodeInfos.helper
+                reductionAmountHelperPopup.innerHTML = this.promoCodeInfos.helper + '<br>(à saisir au moment du paiement)'
                 reductionAmountHelperDivPopup.style.display = 'flex'
             }
         }   
