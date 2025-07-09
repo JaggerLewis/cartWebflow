@@ -321,9 +321,6 @@ class ShoppingCart {
                     codeHelper = 'Profitez de 20€ de réduction avec le code LOVEJAG.'
                 }
 
-                if (codeHelper != '') {
-                    codeHelper = '<div style="background-color: #e1724f;border-radius: 10px;color: white;padding:5px;"><span>' + codeHelper + '</span></div>';
-                }
                 let promoCodeInfos = {
                     'id' : codePromoInfos.promoCode.id,
                     'amount' : codePromoInfos.promoCode.amount / 100,
@@ -420,7 +417,7 @@ class ShoppingCart {
             reductionAmountHelperDiv.style.display = 'none'
             
             if ( this.promoCodeInfos.helper != '') {
-                reductionAmountHelperSpan.innerHTML = this.promoCodeInfos.helper
+                reductionAmountHelperSpan.innerHTML = '<div style="background-color: #e1724f;border-radius: 10px;color: white;padding:5px;"><span>' + this.promoCodeInfos.helper + '</span></div>';
                 reductionAmountHelperDiv.style.display = 'flex'
             }
         }
