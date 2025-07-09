@@ -419,16 +419,26 @@ class ShoppingCart {
             reductionAmountHelperSpan.innerHTML = ''
             reductionAmountHelperDiv.style.display = 'none'
             
-            if ( this.promoCodeInfos.id == undefined )
-            {
-                return true
-            }
-
             if ( this.promoCodeInfos.helper != '') {
                 reductionAmountHelperSpan.innerHTML = this.promoCodeInfos.helper
                 reductionAmountHelperDiv.style.display = 'flex'
             }
-        }        
+        }
+
+        if (document.getElementById('JL_Basket_Discount_Helper_Div_Popup'))
+        {
+            const reductionAmountHelperDivPopup = document.getElementById('JL_Basket_Discount_Helper_Div_Popup');
+            const reductionAmountHelperPopup = document.getElementById('JL_Basket_Discount_Helper_Popup');
+
+            reductionAmountHelperPopup.innerHTML = ''
+            reductionAmountHelperDivPopup.style.display = 'none'
+            
+            if ( this.promoCodeInfos.helper != '') {
+                reductionAmountHelperPopup.innerHTML = this.promoCodeInfos.helper
+                reductionAmountHelperDivPopup.style.display = 'flex'
+            }
+        }   
+        
         return true
     }
     
@@ -465,6 +475,8 @@ class ShoppingCart {
         }       
 
         //let reductionAmount = this.applyCodePromo(); 
+        this.applyCodeHelper();
+
         let reductionAmount = 0;
 
         console.log(cartAmountTotal, deliveryPrice, reductionAmount);
