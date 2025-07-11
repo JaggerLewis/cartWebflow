@@ -667,8 +667,6 @@ class ShoppingCart {
   saveCart({ callApi = true, event } = {}) {
     let JagSession = JSON.parse(localStorage.getItem("JagSession"));
 
-    console.log(JagSession, this.cart)
-
     JagSession.cart = this.cart;
     console.log("JagSession", JagSession);
     localStorage.setItem("JagSession", JSON.stringify(JagSession));
