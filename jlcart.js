@@ -32,7 +32,7 @@ const setCartNbItems = () => { //USED
     }
 }
 
-const getUTMs = () {
+const getUTMs = () => {
   const params = new URLSearchParams(window.location.search);
   const utms = {};
 
