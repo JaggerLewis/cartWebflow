@@ -773,7 +773,7 @@ const refreshOrderInfo = async () => {
 
         let item = cartItems[i];
 
-	let amount_total = parseint(item.price.price) * 100;
+	let amount_total = parseInt(item.price.price) * 100;
         newItem = {
             item_id: item.metadata?.sku,
             item_name: item.name,
