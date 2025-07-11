@@ -33,14 +33,10 @@ const setCartNbItems = () => {
   //USED
   if (JL_NavBar) {
     let count = 0;
-    const session = localStorage.getItem("JagSession");
-    if (session) {
-      try {
-        JSON.parse(session).cart.forEach((elem) => (count += elem.quantity));
-      } catch (_) {
-        localStorage.removeItem("JagSession");
-        location.reload();
-      }
+    if (localStorage.getItem("JagSession")) {
+      JSON.parse(localStorage.getItem("JagSession")).cart.forEach(
+        (elem) => (count += elem.quantity)
+      );
     }
     document.getElementById("jl-cart-number").textContent = count;
   }
@@ -90,6 +86,19 @@ class ShoppingCart {
     // On supprime l'ancienne référence
     if (localStorage.getItem("shoppingCart")) {
       localStorage.removeItem("shoppingCart");
+    }
+
+    // Catch corrupted localStorage
+    if (localStorage.getItem("JagSession")) {
+      const session = localStorage.getItem("JagSession");
+      try {
+        const parsed = JSON.parse(session);
+        if (typeof parsed === "string") {
+          localStorage.removeItem("JagSession");
+        }
+      } catch (_) {
+        localStorage.removeItem("JagSession");
+      }
     }
 
     let JagSession = {
