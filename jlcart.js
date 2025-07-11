@@ -789,7 +789,7 @@ const refreshOrderInfo = async () => {
     }
     
     orderTotalAmount = orderTotalAmount + orderShippingCost;
-    orderTotalTax = parseInt(orderTotalAmount / 1.2);
+    orderTotalTax = orderTotalAmount - parseInt(orderTotalAmount / 1.2);
 
     purchaseInfos = {
         'transaction_id': orderNumber,
