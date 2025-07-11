@@ -33,10 +33,14 @@ const setCartNbItems = () => {
   //USED
   if (JL_NavBar) {
     let count = 0;
-    if (localStorage.getItem("JagSession")) {
-      JSON.parse(localStorage.getItem("JagSession")).cart.forEach(
-        (elem) => (count += elem.quantity)
-      );
+    const session = localStorage.getItem("JagSession");
+    if (session) {
+      try {
+        JSON.parse(session).cart.forEach((elem) => (count += elem.quantity));
+      } catch (_) {
+        localStorage.removeItem("JagSession");
+        location.reload();
+      }
     }
     document.getElementById("jl-cart-number").textContent = count;
   }
@@ -55,8 +59,8 @@ const saveUTMs = () => {
   JagSession = localStorage.getItem("JagSession");
   if (JagSession) {
     const jag = JSON.parse(JagSession);
-    JagSession.utms = { ...(jag.utms ?? {}), ...utms };
-    localStorage.setItem("JagSession", JSON.stringify(JagSession));
+    jag.utms = { ...(jag.utms ?? {}), ...utms };
+    localStorage.setItem("JagSession", JSON.stringify(jag));
   }
 
   return utms;
@@ -140,8 +144,7 @@ class ShoppingCart {
       };
     }
 
-    //const utms = saveUTMs()
-    const utms = {};
+    const utms = saveUTMs();
 
     this.orderId = JagSession.orderId;
     this.orderNumber = JagSession.orderNumber;
@@ -648,8 +651,7 @@ class ShoppingCart {
     ) {
       infosCart["customerEmail"] = JagSession.customerEmail;
     }
-    //const utms = saveUTMs();
-    const utms = {};
+    const utms = saveUTMs();
     infosCart["utms"] = utms;
 
     const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
@@ -662,8 +664,7 @@ class ShoppingCart {
 
   updateCartInDb({ event } = {}) {
     const JagSession = JSON.parse(localStorage.getItem("JagSession"));
-    //const utms = saveUTMs();
-    const utms = {};
+    const utms = saveUTMs();
     try {
       const answer = fetch(`${interfaceUrl}/stripe/cart`, {
         method: "POST",
