@@ -917,6 +917,8 @@ const refreshOrderInfo = async () => {
 
   let cartItems = orderDatas.aside_data.cart;
 
+  console.log("cartItems", cartItems)
+
   for (i = 0; i < cartItems.length; i++) {
     let item = cartItems[i];
 
@@ -968,7 +970,9 @@ const refreshOrderInfo = async () => {
     voucherCodes: [orderDatas.aside_data?.promoCodeId],
     //subId,
     //customerId,
-    productIds: orderItems.map((o) => o.item_id),
+    productIds: orderItems.map((item) => {
+      return item.item_id;
+    }),
   };
   sendAffilaeTags(affilaeOptions);
 
