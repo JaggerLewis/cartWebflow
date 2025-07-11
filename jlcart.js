@@ -32,7 +32,7 @@ const setCartNbItems = () => { //USED
     }
 }
 
-const getUTMs = () => {
+const saveUTMs = () => {
   const params = new URLSearchParams(window.location.search);
   const utms = {};
 
@@ -41,6 +41,10 @@ const getUTMs = () => {
       utms[key] = value;
     }
   }
+
+JagSession = localStorage.getItem("JagSession");
+JagSession.utms = {...(JagSession.utms ?? {}), ...utms);
+localStorage.setItem("JagSession", JSON.stringify(JagSession));
 
   return utms;
 }
@@ -84,7 +88,8 @@ class ShoppingCart {
                 session_creation_time : Date.now(),
                 customerEmail : undefined,
                 tsEncartEmail : Date.now(),
-                tsEncartIsHide : false
+                tsEncartIsHide : false,
+		utms: {},
             }
 
         if (!localStorage.getItem("JagSession")) {
@@ -128,6 +133,8 @@ class ShoppingCart {
                 'helper' : '',
             }
         }
+
+	const utms = saveUTMs()
         
         this.orderId = JagSession.orderId
         this.orderNumber = JagSession.orderNumber
@@ -139,6 +146,7 @@ class ShoppingCart {
         this.customerEmail = JagSession.customerEmail
         this.tsEncartEmail = Date.now();
         this.tsEncartIsHide = false;
+	this.utms = utms;
         //this.promoCode = JagSession.promoCode
         
         if (this.orderId != undefined) {
@@ -594,7 +602,7 @@ class ShoppingCart {
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) ) {
             infosCart['customerEmail'] = JagSession.customerEmail
         }
-	const utms = getUTMs();
+	const utms = saveUTMs();
 	infosCart['utms'] = utms;
         
 	const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
@@ -607,7 +615,7 @@ class ShoppingCart {
 
     updateCartInDb({ event } = {}) {
         const JagSession = JSON.parse(localStorage.getItem("JagSession"))
-	const utms = getUTMs();
+	const utms = saveUTMs();
         try {
             const answer = fetch(`${interfaceUrl}/stripe/cart`, {
                 method: "POST",
