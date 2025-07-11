@@ -62,6 +62,17 @@ const saveUTMs = () => {
   return utms;
 };
 
+const updateSessionAfterOrderConfirmed = () => {
+  const session = JSON.parse(localStorage.getItem("JagSession"));
+  if (session) {
+    session.orderId = undefined;
+    session.cart = [];
+    session.utms = {};
+    session.promoCodeId = undefined;
+    localStorage.setItem("JagSession", JSON.stringify(session));
+  }
+};
+
 // TODO(dev): update with new methode
 class Product {
   constructor(name, description, metadata, image, price) {
@@ -660,6 +671,9 @@ class ShoppingCart {
     ) {
       infosCart["customerEmail"] = JagSession.customerEmail;
     }
+
+    infosCart["promoCodeId"] = JagSession.promoCodeId;
+
     const utms = saveUTMs();
     infosCart["utms"] = utms;
 
@@ -684,6 +698,7 @@ class ShoppingCart {
           event: event,
           customerEmail: JagSession.customerEmail,
           utms: utms,
+          promoCodeId: JagSession.promoCodeId,
         }),
       });
       return answer;
@@ -913,6 +928,9 @@ const refreshOrderInfo = async () => {
   gtag("event", "conversion", conversionValue);
 
   console.log("🐾 JAG gtag Conversion Sent", conversionValue);
+
+  // remove cart, orderId, promoCodeId, utms
+  updateSessionAfterOrderConfirmed();
 };
 
 const changeChildsId = (node, suffix, filter) => {
