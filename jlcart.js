@@ -43,7 +43,7 @@ const saveUTMs = () => {
   }
 
 JagSession = localStorage.getItem("JagSession");
-JagSession.utms = {...(JagSession.utms ?? {}), ...utms);
+JagSession.utms = {...(JagSession.utms ?? {}), ...utms};
 localStorage.setItem("JagSession", JSON.stringify(JagSession));
 
   return utms;
