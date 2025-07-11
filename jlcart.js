@@ -44,7 +44,7 @@ const setCartNbItems = () => {
 
 const saveUTMs = () => {
   const params = new URLSearchParams(window.location.search);
-  const utms = {};
+  let utms = {};
 
   for (const [key, value] of params.entries()) {
     if (key.startsWith("utm_")) {
@@ -54,9 +54,8 @@ const saveUTMs = () => {
 
   const session = JSON.parse(localStorage.getItem("JagSession"));
   if (session) {
-    utms = { ...(session.utms ?? {}), ...utms };
-    session.utms = utms;
-    localStorage.setItem("JagSession", JSON.stringify(jag));
+    session.utms = { ...(session.utms ?? {}), ...utms };
+    localStorage.setItem("JagSession", JSON.stringify(session));
   }
 
   return utms;
