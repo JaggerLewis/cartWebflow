@@ -773,24 +773,18 @@ const refreshOrderInfo = async () => {
 
         let item = cartItems[i];
 
-        let itemColor = '';
-        if (item.description) {
-            if (item.description.toLowerCase().indexOf('weimar') > -1) { itemColor = 'Weimar'; }
-            if (item.description.toLowerCase().indexOf('fauve') > -1) { itemColor = 'Fauve'; }
-            if (item.description.toLowerCase().indexOf('charbon') > -1) { itemColor = 'Charbon'; }
-        }
-
+	let amount_total = parseint(item.price.price) * 100;
         newItem = {
-            item_id: item.price.product,
-            item_name: item.description,
+            item_id: item.metadata?.sku,
+            item_name: item.name,
             index: 0,
             item_brand: "Jagger & Lewis",
-            item_variant: itemColor,
-            price: item.amount_total,
+            item_variant: item.metadata?.colorId,
+            price: amount_total,
             quantity: item.quantity
         }
 
-        orderTotalAmount += item.amount_total
+        orderTotalAmount += amount_total
         orderItems.push(newItem)
     }
     
