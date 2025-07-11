@@ -32,6 +32,19 @@ const setCartNbItems = () => { //USED
     }
 }
 
+const getUTMs = () {
+  const params = new URLSearchParams(window.location.search);
+  const utms = {};
+
+  for (const [key, value] of params.entries()) {
+    if (key.startsWith('utm_')) {
+      utms[key] = value;
+    }
+  }
+
+  return utms;
+}
+
 // TODO(dev): update with new methode
 class Product {
     constructor(name, description, metadata, image, price) {
@@ -581,8 +594,10 @@ class ShoppingCart {
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) ) {
             infosCart['customerEmail'] = JagSession.customerEmail
         }
-
-        const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
+	const utms = getUTMs();
+	infosCart['utms'] = utms;
+        
+	const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(infosCart)
@@ -592,6 +607,7 @@ class ShoppingCart {
 
     updateCartInDb({ event } = {}) {
         const JagSession = JSON.parse(localStorage.getItem("JagSession"))
+	const utms = getUTMs();
         try {
             const answer = fetch(`${interfaceUrl}/stripe/cart`, {
                 method: "POST",
@@ -601,6 +617,7 @@ class ShoppingCart {
                     orderId: JagSession.orderId,
                     event: event,
                     customerEmail : JagSession.customerEmail,
+		    utms: utms,
                 })
             })
             return answer
