@@ -673,8 +673,7 @@ class ShoppingCart {
 
     infosCart["promoCodeId"] = JagSession.promoCodeId;
 
-    const utms = saveUTMs();
-    infosCart["utms"] = utms;
+    infosCart["utms"] = JagSession.utms;
 
     const answer = fetch(`${interfaceUrl}/stripe/checkout_session`, {
       method: "POST",
@@ -686,7 +685,6 @@ class ShoppingCart {
 
   updateCartInDb({ event } = {}) {
     const JagSession = JSON.parse(localStorage.getItem("JagSession"));
-    const utms = saveUTMs();
     try {
       const answer = fetch(`${interfaceUrl}/stripe/cart`, {
         method: "POST",
@@ -696,7 +694,7 @@ class ShoppingCart {
           orderId: JagSession.orderId,
           event: event,
           customerEmail: JagSession.customerEmail,
-          utms: utms,
+          utms: JagSession.utms,
           promoCodeId: JagSession.promoCodeId,
         }),
       });
