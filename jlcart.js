@@ -61,6 +61,43 @@ const saveUTMs = () => {
   return utms;
 };
 
+const sendAffilaeTags =
+  () =>
+  ({
+    id,
+    amount,
+    payment,
+    voucherCodes,
+    //subId,
+    //customerId,
+    productIds,
+  }) => {
+    const keys = [
+      "685aa0d433b2cea9692d8927-685aa0050dc0eb2e2377266d", // fixed
+      "685aa7165d3209982770c09e-685aa0050dc0eb2e2377266d", // percent
+    ];
+    for (const key of keys) {
+      const aeEvent = {};
+      /* {{KEY}} must be updated for each rule */
+      aeEvent.key = key;
+      aeEvent.Conversion = {};
+      /* Values below must be updated */
+      aeEvent.Conversion.id = id;
+      aeEvent.Conversion.amount = amount;
+      aeEvent.Conversion.payment = payment;
+      aeEvent.Conversion.voucher = voucherCodes.join(";"); // List of voucher_id seperated by ;
+      //aeEvent.Conversion.subid = subId;
+      //aeEvent.Conversion.customer = customerId;
+      aeEvent.Conversion.currency = "EUR";
+      aeEvent.Conversion.product = productIds.join(";"); // List of product_id seperated by ;
+      "AeTracker" in window
+        ? AeTracker.sendConversion(aeEvent)
+        : (window.AE = window.AE || []).push(aeEvent);
+
+      console.log("affilae tags sent : ", aeEvent);
+    }
+  };
+
 const updateSessionAfterOrderConfirmed = () => {
   const session = JSON.parse(localStorage.getItem("JagSession"));
   if (session) {
@@ -925,6 +962,17 @@ const refreshOrderInfo = async () => {
   gtag("event", "conversion", conversionValue);
 
   console.log("🐾 JAG gtag Conversion Sent", conversionValue);
+
+  const affilaeOptions = {
+    id: orderNumber,
+    amount: (orderTotalAmount - orderTotalTax) / 100,
+    payment: "online",
+    voucherCodes: [orderDatas.aside_data?.promoCodeId],
+    //subId,
+    //customerId,
+    productIds: orderItems.map((o) => o.item_id),
+  };
+  sendAffilaeTags(affilaeOptions);
 
   // remove cart, orderId, promoCodeId, utms
   updateSessionAfterOrderConfirmed();
