@@ -773,13 +773,13 @@ const refreshOrderInfo = async () => {
 
         let item = cartItems[i];
 
-	let amount_total = parseInt(item.price.price) * 100;
+	let amount_total = parseInt(item.id.price.price) * 100;
         newItem = {
-            item_id: item.metadata?.sku,
-            item_name: item.name,
+            item_id: item.id.metadata.sku,
+            item_name: item.id.name,
             index: 0,
             item_brand: "Jagger & Lewis",
-            item_variant: item.metadata?.colorId,
+            item_variant: item.id.metadata?.colorId,
             price: amount_total,
             quantity: item.quantity
         }
