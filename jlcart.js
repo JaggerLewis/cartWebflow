@@ -963,7 +963,7 @@ const refreshOrderInfo = async () => {
 
   const affilaeOptions = {
     id: orderNumber,
-    amount: (orderTotalAmount - orderTotalTax) / 100,
+    amount: orderTotalAmount / 100,
     payment: "online",
     voucherCodes: [orderDatas.aside_data?.promoCodeId],
     //subId,
