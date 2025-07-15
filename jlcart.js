@@ -367,7 +367,7 @@ class ShoppingCart {
         JagSession.customerEmail != "undefined"
       ) {
         promoCodeId = "611vwK8n"; // LOVEJAG
-        promoCodeId = "hXbVDcY2"; // 10ANS
+        promoCodeId = "8g6sCTax"; // 10ANS
       } else {
         console.log(this.promoCodeInfos);
         this.applyCodeHelper();
