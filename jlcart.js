@@ -404,19 +404,11 @@ class ShoppingCart {
 
       console.log(codePromoInfos.promoCode.expires_at, Date.now());
 
-<<<<<<< HEAD
-                if ( ( codePromoInfos.promoCode.id == 'hXbVDcY2') || ( codePromoInfos.promoCode.id == '8g6sCTax') )
-                {
-                    codeHelper = 'Pour les 10ANS de Jagger, 30€ de réduction avec le code 10ANS sur les JAG GPS avec Smartdock. Soit le coffret à 169.00€'
-                    codePromoInfos.promoCode.id = '8g6sCTax' ; // On remplace l'ancien 10 ANS par le nouveau
-                }
-=======
-      if (codePromoInfos.promoCode.expires_at * 1000 > Date.now()) {
-        if (codePromoInfos.promoCode.id == "96poDEs6") {
-          codeHelper =
-            "30€ de réduction avec le code <b>JUNE30</b> sur les JAG GPS avec Smartdock et 20€ avec le code JUNE20 sur les JAG GPS.";
+        if ( ( codePromoInfos.promoCode.id == 'hXbVDcY2') || ( codePromoInfos.promoCode.id == '8g6sCTax') )
+        {
+            codeHelper = 'Pour les 10ANS de Jagger, 30€ de réduction avec le code 10ANS sur les JAG GPS avec Smartdock. Soit le coffret à 169.00€'
+            codePromoInfos.promoCode.id = '8g6sCTax' ; // On remplace l'ancien 10 ANS par le nouveau
         }
->>>>>>> 70ff25d57ddbcf19bc2a83d4f24c72989dc4a547
 
         if (codePromoInfos.promoCode.id == "hXbVDcY2") {
           codeHelper =
