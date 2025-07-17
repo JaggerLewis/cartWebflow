@@ -359,6 +359,24 @@ class ShoppingCart {
 
     console.log("promo code : ", promoCodeId);
 
+<<<<<<< HEAD
+        if (!promoCodeId) {
+            let JagSession = JSON.parse(localStorage.getItem("JagSession"))
+            if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
+            {
+                promoCodeId = '611vwK8n' ; // LOVEJAG
+                promoCodeId = 'hXbVDcY2' ; // 10ANS
+                promoCodeId = '8g6sCTax' ; // New 10ANS
+            }
+            else {
+                console.log(this.promoCodeInfos)
+                this.applyCodeHelper()
+                return;
+            }
+        }
+        
+        console.log('start check promo', promoCodeId);
+=======
     if (!promoCodeId) {
       let JagSession = JSON.parse(localStorage.getItem("JagSession"));
       if (
@@ -374,6 +392,7 @@ class ShoppingCart {
         return;
       }
     }
+>>>>>>> 70ff25d57ddbcf19bc2a83d4f24c72989dc4a547
 
     console.log("start check promo", promoCodeId);
 
@@ -403,11 +422,19 @@ class ShoppingCart {
 
       console.log(codePromoInfos.promoCode.expires_at, Date.now());
 
+<<<<<<< HEAD
+                if ( ( codePromoInfos.promoCode.id == 'hXbVDcY2') || ( codePromoInfos.promoCode.id == '8g6sCTax') )
+                {
+                    codeHelper = 'Pour les 10ANS de Jagger, 30€ de réduction avec le code 10ANS sur les JAG GPS avec Smartdock. Soit le coffret à 169.00€'
+                    codePromoInfos.promoCode.id = '8g6sCTax' ; // On remplace l'ancien 10 ANS par le nouveau
+                }
+=======
       if (codePromoInfos.promoCode.expires_at * 1000 > Date.now()) {
         if (codePromoInfos.promoCode.id == "96poDEs6") {
           codeHelper =
             "30€ de réduction avec le code <b>JUNE30</b> sur les JAG GPS avec Smartdock et 20€ avec le code JUNE20 sur les JAG GPS.";
         }
+>>>>>>> 70ff25d57ddbcf19bc2a83d4f24c72989dc4a547
 
         if (codePromoInfos.promoCode.id == "hXbVDcY2") {
           codeHelper =
@@ -1195,7 +1222,7 @@ const showNewCart = (event) => {
 
     document.getElementById("JL_Basket_Item_Label_" + nbItem).innerHTML =
       getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
-    if (prod.id.metadata.colorId != "undefined") {
+    if ( (prod.id.metadata.colorId) && ( prod.id.metadata.colorId != "undefined") ) {
       document.getElementById("JL_Basket_Item_Color_" + nbItem).innerHTML =
         prod.id.metadata.colorId;
     } else {
