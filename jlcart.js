@@ -557,13 +557,15 @@ class ShoppingCart {
       reductionAmountHelperDivPopup.style.display = "none";
 
       if (this.promoCodeInfos.helper != "") {
-       // TODO : reactivate when needed
-        /*
         reductionAmountHelperPopup.innerHTML =
           this.promoCodeInfos.helper + "<br>(à saisir au moment du paiement)";
         reductionAmountHelperDivPopup.style.display = "flex";
-        */
       }
+    }
+    // Remove "à saisir lors du paiement"
+    const extraDivs = document.getElementsByClassName("text-block-6015");
+    if (extraDivs?.length > 0) {
+      extraDivs[0].style.display = "none";
     }
 
     return true;
