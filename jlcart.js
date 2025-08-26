@@ -557,9 +557,12 @@ class ShoppingCart {
       reductionAmountHelperDivPopup.style.display = "none";
 
       if (this.promoCodeInfos.helper != "") {
+       // TODO : reactivate when needed
+        /*
         reductionAmountHelperPopup.innerHTML =
           this.promoCodeInfos.helper + "<br>(à saisir au moment du paiement)";
         reductionAmountHelperDivPopup.style.display = "flex";
+        */
       }
     }
 
