@@ -408,7 +408,10 @@ class ShoppingCart {
 
       console.log(codePromoInfos.promoCode.expires_at, Date.now());
 
-      if (codePromoInfos.promoCode.expires_at * 1000 > Date.now()) {
+      if (
+        !codePromoInfos.promoCode.expires_at ||
+        codePromoInfos.promoCode.expires_at * 1000 > Date.now()
+      ) {
         if (codePromoInfos.promoCode.id == "96poDEs6") {
           codeHelper =
             "30€ de réduction avec le code <b>JUNE30</b> sur les JAG GPS avec Smartdock et 20€ avec le code JUNE20 sur les JAG GPS.";
