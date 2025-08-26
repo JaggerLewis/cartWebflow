@@ -433,7 +433,7 @@ class ShoppingCart {
 
         if (codePromoInfos.promoCode.id === "4LI1vKAa") {
           codeHelper =
-            "<b>Victimes de notre succès</b> : Nos colliers GPS seront expédiés à partir du 15 septembre… 20€ de réduction + 2 accessoires offerts pour patienter avec le code <b>MERCI20</b> !";
+            "<b>VICTIMES DE NOTRE SUCCÈS</b> : Nos colliers GPS seront expédiés à partir du 15 septembre… 20€ de réduction + 2 accessoires offerts pour patienter avec le code <b>MERCI20</b> !";
         }
 
         let promoCodeInfos = {
