@@ -562,7 +562,7 @@ class ShoppingCart {
         reductionAmountHelperDivPopup.style.display = "flex";
       }
     }
-    // Remove "à saisir lors du paiement"
+    // TODO : Remove "à saisir lors du paiement"
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
       extraDivs[0].style.display = "none";
