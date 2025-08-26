@@ -446,6 +446,7 @@ class ShoppingCart {
           helper: codeHelper,
         };
         shoppingCart.savePromoCode(promoCodeInfos);
+        console.log("code promo applied");
       } else {
         console.log("code promo expired");
       }
@@ -461,6 +462,7 @@ class ShoppingCart {
     this.promoCodeInfos = promoCodeInfos;
     let JagSession = JSON.parse(localStorage.getItem("JagSession"));
     JagSession.promoCodeInfos = promoCodeInfos;
+    JagSession.promoCodeId = promoCodeInfos.id;
     localStorage.setItem("JagSession", JSON.stringify(JagSession));
   }
 
