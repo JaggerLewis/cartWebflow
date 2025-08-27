@@ -512,6 +512,7 @@ class ShoppingCart {
     if (isApplied == false) {
       return reductionAmount;
     }
+    return reductionAmount;
 
     reductionAmount = JagSession.promoCode.amount;
     reductionLabel = JagSession.promoCode.name;
