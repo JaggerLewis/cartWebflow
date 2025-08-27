@@ -487,8 +487,9 @@ class ShoppingCart {
       return reductionAmount;
     }
 
-    if (this.promoCodeInfos.minimumAmount > this.getTotalPrice()) {
-      console.log("minimum not reached");
+    const totalPrice = this.getTotalPrice();
+    if (this.promoCodeInfos.minimumAmount > totalPrice) {
+      console.log("minimum not reached", this.promoCodeInfos.minimumAmount, totalPrice);
       return reductionAmount;
     }
 
