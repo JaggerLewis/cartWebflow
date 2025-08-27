@@ -609,10 +609,10 @@ class ShoppingCart {
       cartAmountSpan.innerHTML = cartAmountTotal.toFixed(2) + " &euro;";
     }
 
-    //let reductionAmount = this.applyCodePromo();
+    let reductionAmount = this.applyCodePromo();
     this.applyCodeHelper();
 
-    let reductionAmount = 0;
+    //let reductionAmount = 0;
 
     console.log(cartAmountTotal, deliveryPrice, reductionAmount);
 
