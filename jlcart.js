@@ -440,7 +440,7 @@ class ShoppingCart {
           id: codePromoInfos.promoCode.id,
           amount: codePromoInfos.promoCode.amount / 100,
           name: codePromoInfos.promoCode.name,
-          minimumAmount: minimumAmount,
+          minimumAmount: minimumAmount / 100,
           productsEAN: productsEAN,
           expires_at: codePromoInfos.promoCode.expires_at,
           helper: codeHelper,
