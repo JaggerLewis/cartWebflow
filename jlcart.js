@@ -497,25 +497,14 @@ class ShoppingCart {
       return reductionAmount;
     }
 
-    if (this.promoCodeInfos.productsEAN == []) {
-      reductionAmount = this.promoCodeInfos.amount;
-      reductionLabel = this.promoCodeInfos.name;
-    }
+    const isAppliedForProducts =
+      this.cart.some((productCart) => {
+        return this.promoCodeInfos.productsEAN.includes(
+          productCart.id.metadata?.productId
+        );
+      }) || this.promoCodeInfos.productsEAN.length == 0;
 
-    console.log(
-      "cart",
-      this.cart.map((pc) => pc.id.metadata?.productId),
-      "id",
-      this.promoCodeInfos.productsEAN
-    );
-    const isApplied = this.cart.some((productCart) => {
-      return this.promoCodeInfos.productsEAN.includes(
-        productCart.id.metadata?.productId
-      );
-    });
-    console.log("isApplied", isApplied);
-
-    if (isApplied == false) {
+    if (!isAppliedForProducts) {
       return reductionAmount;
     }
     reductionAmount = this.promoCodeInfos.amount;
