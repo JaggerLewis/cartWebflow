@@ -505,7 +505,7 @@ class ShoppingCart {
       this.promoCodeInfos.productsEAN
     );
     const isApplied = this.cart.some((productCart) => {
-      return this.promoCodeInfos.includes(productCart.id.metadata?.productId);
+      return this.promoCodeInfos.productsEAN.includes(productCart.id.metadata?.productId);
     });
     console.log("isApplied", isApplied);
 
