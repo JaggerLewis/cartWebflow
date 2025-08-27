@@ -572,7 +572,7 @@ class ShoppingCart {
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
       extraDivs[0].innerHTML = "Réduction ajoutée au moment du paiement";
-      //extraDivs[0].style.display = "flex";
+      extraDivs[0].style.display = "cenetered";
     }
 
     return true;
