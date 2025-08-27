@@ -489,7 +489,11 @@ class ShoppingCart {
 
     const totalPrice = this.getTotalPrice();
     if (this.promoCodeInfos.minimumAmount > totalPrice) {
-      console.log("minimum not reached", this.promoCodeInfos.minimumAmount, totalPrice);
+      console.log(
+        "minimum not reached",
+        this.promoCodeInfos.minimumAmount,
+        totalPrice
+      );
       return reductionAmount;
     }
 
@@ -505,17 +509,17 @@ class ShoppingCart {
       this.promoCodeInfos.productsEAN
     );
     const isApplied = this.cart.some((productCart) => {
-      return this.promoCodeInfos.productsEAN.includes(productCart.id.metadata?.productId);
+      return this.promoCodeInfos.productsEAN.includes(
+        productCart.id.metadata?.productId
+      );
     });
     console.log("isApplied", isApplied);
 
     if (isApplied == false) {
       return reductionAmount;
     }
-    return reductionAmount;
-
-    reductionAmount = JagSession.promoCode.amount;
-    reductionLabel = JagSession.promoCode.name;
+    reductionAmount = this.promoCodeInfos.amount;
+    reductionLabel = this.promoCodeInfos.name;
 
     if (document.getElementById("JL_Basket_Discount_Amount")) {
       if (reductionAmount > 0) {
@@ -564,7 +568,7 @@ class ShoppingCart {
         reductionAmountHelperDivPopup.style.display = "flex";
       }
     }
-    
+
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
       extraDivs[0].innerHTML = "Réduction ajoutée au moment du paiement";
