@@ -558,19 +558,16 @@ class ShoppingCart {
 
       if (this.promoCodeInfos.helper != "") {
         reductionAmountHelperPopup.innerHTML =
-          "Réduction ajoutée au moment du paiement";
-        //reductionAmountHelperPopup.innerHTML =
-        //  this.promoCodeInfos.helper + "<br>(à saisir au moment du paiement)";
+          this.promoCodeInfos.helper + "<br>(à saisir au moment du paiement)";
         reductionAmountHelperDivPopup.style.display = "flex";
       }
     }
-    // TODO : Remove "à saisir lors du paiement"
-    /*
+    
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
-      extraDivs[0].style.display = "none";
+      extraDivs[0].innerHTML = "Réduction ajoutée au moment du paiement";
+      extraDivs[0].style.display = "flex";
     }
-      */
 
     return true;
   }
