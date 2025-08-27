@@ -433,7 +433,7 @@ class ShoppingCart {
 
         if (codePromoInfos.promoCode.id === "4LI1vKAa") {
           codeHelper =
-            "<b>VICTIMES DE NOTRE SUCCÈS</b> : Nos colliers GPS seront expédiés à partir du 15 septembre… 20€ de réduction + 2 accessoires offerts pour patienter avec le code <b>MERCI20</b> !";
+            "<b>VICTIMES DE NOTRE SUCCÈS</b> : Nos colliers GPS seront expédiés à partir du 15 septembre… 40€ d'avantages pour patienter : 20€ de réduction avec le code <b>MERCI20</b> + 2 accessoires offerts (valeur 20€) !";
         }
 
         let promoCodeInfos = {
@@ -469,7 +469,6 @@ class ShoppingCart {
   applyCodePromo() {
     let reductionAmount = 0;
     let reductionLabel = "";
-    let isApplied = false;
 
     const reductionAmountDiv = document.getElementById(
       "JL_Basket_Discount_Div"
@@ -484,10 +483,12 @@ class ShoppingCart {
     reductionAmountDiv.style.display = "none";
 
     if (this.promoCodeInfos.id == undefined) {
+      console.log("no promo code");
       return reductionAmount;
     }
 
     if (this.promoCodeInfos.minimumAmount > this.getTotalPrice()) {
+      console.log("minimum not reached");
       return reductionAmount;
     }
 
@@ -496,15 +497,16 @@ class ShoppingCart {
       reductionLabel = this.promoCodeInfos.name;
     }
 
-    this.cart.forEach((productCart) => {
-      if (
-        this.promoCodeInfos.productsEAN.includes(
-          productCart.id.metadata.productId
-        )
-      ) {
-        isApplied = true;
-      }
+    console.log(
+      "cart",
+      this.cart.map((pc) => pc.id.metadata?.productId),
+      "id",
+      this.promoCodeInfos.productsEAN
+    );
+    const isApplied = this.cart.some((productCart) => {
+      return this.promoCodeInfos.includes(productCart.id.metadata?.productId);
     });
+    console.log("isApplied", isApplied);
 
     if (isApplied == false) {
       return reductionAmount;
@@ -537,10 +539,8 @@ class ShoppingCart {
       reductionAmountHelperDiv.style.display = "none";
 
       if (this.promoCodeInfos.helper != "") {
-        reductionAmountHelperSpan.innerHTML =
-          '<div style="background-color: #e1724f;border-radius: 10px;color: white;padding:5px;"><span>' +
-          this.promoCodeInfos.helper +
-          "</span></div>";
+        const color = "#4858f5";
+        reductionAmountHelperSpan.innerHTML = `<div style="background-color: ${color};border-radius: 10px;color: white;padding:5px;"><span>${this.promoCodeInfos.helper}</span></div>`;
         reductionAmountHelperDiv.style.display = "flex";
       }
     }
@@ -558,15 +558,19 @@ class ShoppingCart {
 
       if (this.promoCodeInfos.helper != "") {
         reductionAmountHelperPopup.innerHTML =
-          this.promoCodeInfos.helper + "<br>(à saisir au moment du paiement)";
+          "Réduction ajoutée au moment du paiement";
+        //reductionAmountHelperPopup.innerHTML =
+        //  this.promoCodeInfos.helper + "<br>(à saisir au moment du paiement)";
         reductionAmountHelperDivPopup.style.display = "flex";
       }
     }
     // TODO : Remove "à saisir lors du paiement"
+    /*
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
       extraDivs[0].style.display = "none";
     }
+      */
 
     return true;
   }
