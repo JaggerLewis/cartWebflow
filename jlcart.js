@@ -363,24 +363,26 @@ class ShoppingCart {
     // promoCodeId = "4LI1vKAa";
 
     let JagSession = JSON.parse(localStorage.getItem("JagSession"));
-    
-    if (promoCodeId === "4LI1vKAa") {
-        promoCodeId = undefined;
-        this.savePromoCode(undefined);
+
+    if (promoCodeId === "4LI1vKAa" || JagSession?.promoCodeId === "4LI1vKAa") {
+      promoCodeId = undefined;
+      this.savePromoCode(undefined);
     }
-    
+
     if (!promoCodeId) {
-        if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
-        {
-            promoCodeId = '611vwK8n' ; // LOVEJAG
-            //promoCodeId = 'hXbVDcY2' ; // 10ANS
-            //promoCodeId = '8g6sCTax' ; // New 10ANS
-        }
-        else {
-            console.log(this.promoCodeInfos)
-            this.applyCodeHelper()
-            return;
-        }
+      if (
+        JagSession.customerEmail &&
+        JagSession.customerEmail != "" &&
+        JagSession.customerEmail != "undefined"
+      ) {
+        promoCodeId = "611vwK8n"; // LOVEJAG
+        //promoCodeId = 'hXbVDcY2' ; // 10ANS
+        //promoCodeId = '8g6sCTax' ; // New 10ANS
+      } else {
+        console.log(this.promoCodeInfos);
+        this.applyCodeHelper();
+        return;
+      }
     }
 
     console.log("start check promo", promoCodeId);
