@@ -362,8 +362,14 @@ class ShoppingCart {
     // Add pre_order code by default
     // promoCodeId = "4LI1vKAa";
 
+    let JagSession = JSON.parse(localStorage.getItem("JagSession"));
+    
+    if (promoCodeId === "4LI1vKAa") {
+        promoCodeId = undefined;
+        this.savePromoCode(undefined);
+    }
+    
     if (!promoCodeId) {
-        let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
         {
             promoCodeId = '611vwK8n' ; // LOVEJAG
@@ -459,7 +465,7 @@ class ShoppingCart {
     this.promoCodeInfos = promoCodeInfos;
     let JagSession = JSON.parse(localStorage.getItem("JagSession"));
     JagSession.promoCodeInfos = promoCodeInfos;
-    JagSession.promoCodeId = promoCodeInfos.id;
+    JagSession.promoCodeId = promoCodeInfos?.id;
     localStorage.setItem("JagSession", JSON.stringify(JagSession));
   }
 
