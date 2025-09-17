@@ -360,17 +360,15 @@ class ShoppingCart {
     console.log("promo code : ", promoCodeId);
 
     // Add pre_order code by default
-    promoCodeId = "4LI1vKAa";
+    // promoCodeId = "4LI1vKAa";
 
-    // TODO : Removed during pre_order period
-    /*
     if (!promoCodeId) {
         let JagSession = JSON.parse(localStorage.getItem("JagSession"))
         if ( JagSession.customerEmail && ( JagSession.customerEmail != '' ) && ( JagSession.customerEmail != 'undefined' ) )
         {
             promoCodeId = '611vwK8n' ; // LOVEJAG
-            promoCodeId = 'hXbVDcY2' ; // 10ANS
-            promoCodeId = '8g6sCTax' ; // New 10ANS
+            //promoCodeId = 'hXbVDcY2' ; // 10ANS
+            //promoCodeId = '8g6sCTax' ; // New 10ANS
         }
         else {
             console.log(this.promoCodeInfos)
@@ -378,7 +376,6 @@ class ShoppingCart {
             return;
         }
     }
-    */
 
     console.log("start check promo", promoCodeId);
 
