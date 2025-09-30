@@ -339,7 +339,7 @@ class ShoppingCart {
   }
 
   getPromoCodeDatas = async (promoCodeId) => {
-    /*try {
+    try {
             const answer = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -348,8 +348,7 @@ class ShoppingCart {
             return answerJson;
         } catch (_) {
             return null;
-        }*/
-    return null;
+        }
   };
 
   getPromoCode = async () => {
