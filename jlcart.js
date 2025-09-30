@@ -1395,7 +1395,7 @@ try {
         },
       });
       init();
-      shoppingCart.showNewCart(null);
+      showNewCart(null);
     });
   }
 } catch (e) {
