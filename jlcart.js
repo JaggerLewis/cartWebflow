@@ -1403,4 +1403,6 @@ try {
       console.log("shoppingCart", shoppingCart);
     });
   }
-} catch (_) {}
+} catch (e) {
+  console.log(e);
+}
