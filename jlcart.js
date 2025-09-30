@@ -431,7 +431,7 @@ class ShoppingCart {
         }
 
         if (codePromoInfos.promoCode.id == "611vwK8n") {
-          codeHelper =
+          codeHelper = 
             "Profitez de 20€ de réduction avec le code <b>LOVEJAG</b>.";
         }
 
@@ -561,7 +561,7 @@ class ShoppingCart {
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
       extraDivs[0].innerHTML = "Réduction ajoutée au moment du paiement";
-      extraDivs[0].style.display = "cenetered";
+      extraDivs[0].style.display = "centered";
     }
 
     return true;
