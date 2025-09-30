@@ -435,11 +435,6 @@ class ShoppingCart {
             "Profitez de 20€ de réduction avec le code <b>LOVEJAG</b>.";
         }
 
-        if (codePromoInfos.promoCode.id === "4LI1vKAa") {
-          codeHelper =
-            "<b>VICTIMES DE NOTRE SUCCÈS</b> : Nos colliers GPS seront expédiés à partir du 15 septembre… 40€ d'avantages pour patienter : 20€ de réduction avec le code <b>MERCI20</b> + 2 accessoires offerts (valeur 20€) !";
-        }
-
         let promoCodeInfos = {
           id: codePromoInfos.promoCode.id,
           amount: codePromoInfos.promoCode.amount / 100,
@@ -538,8 +533,9 @@ class ShoppingCart {
       reductionAmountHelperDiv.style.display = "none";
 
       if (this.promoCodeInfos.helper != "") {
-        const color = "#4858f5";
-        reductionAmountHelperSpan.innerHTML = `<div style="background-color: ${color};border-radius: 10px;color: white;padding:5px;"><span>${this.promoCodeInfos.helper}</span></div>`;
+        //const color = "#4858f5";
+        //reductionAmountHelperSpan.innerHTML = `<div style="background-color: ${color};border-radius: 10px;color: white;padding:5px;"><span>${this.promoCodeInfos.helper}</span></div>`;
+        reductionAmountHelperSpan.innerHTML = `${this.promoCodeInfos.helper}`;
         reductionAmountHelperDiv.style.display = "flex";
       }
     }
