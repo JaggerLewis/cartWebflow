@@ -1384,6 +1384,7 @@ try {
     const eventId = queryParams.get("eventId");
     getEventDatas(eventId).then((res) => {
       const eventDatas = res.result.event.datas;
+      console.log(eventDatas)
       shoppingCart.saveOrderId(eventDatas.order._id);
       shoppingCart.saveCustomerEmail(eventDatas.customer.email);
       shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
