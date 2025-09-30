@@ -1382,7 +1382,6 @@ try {
   if (JLCart) {
     const queryParams = new URLSearchParams(document.location.search);
     const eventId = queryParams.get("eventId");
-    const promoCodeId = queryParams.get("promoCodeId");
     getEventDatas(eventId).then((res) => {
       const eventDatas = res.result.event.datas;
       shoppingCart.saveOrderId(eventDatas.order._id);
@@ -1395,11 +1394,6 @@ try {
         },
       });
       init();
-    });
-    getPromoCodeDatas(promoCodeId).then((res) => {
-      const promoCodeDatas = res.promoCode;
-      shoppingCart.savePromoCode(promoCodeDatas);
-      console.log("shoppingCart", shoppingCart);
     });
   }
 } catch (e) {
