@@ -368,13 +368,18 @@ class ShoppingCart {
       this.savePromoCode(undefined);
     }
 
+    if (promoCodeId === "611vwK8n" || JagSession?.promoCodeId === "611vwK8n") {
+      promoCodeId = "WqpN3HDE"
+    }
+
     if (!promoCodeId) {
       if (
         JagSession.customerEmail &&
         JagSession.customerEmail != "" &&
         JagSession.customerEmail != "undefined"
       ) {
-        promoCodeId = "611vwK8n"; // LOVEJAG
+        promoCodeId = "WqpN3HDE" // LOVEJAG
+        //promoCodeId = "611vwK8n"; // OLD_LOVEJAG
         //promoCodeId = 'hXbVDcY2' ; // 10ANS
         //promoCodeId = '8g6sCTax' ; // New 10ANS
       } else {
@@ -430,7 +435,7 @@ class ShoppingCart {
           codePromoInfos.promoCode.id = "8g6sCTax"; // On remplace l'ancien 10 ANS par le nouveau
         }
 
-        if (codePromoInfos.promoCode.id == "611vwK8n") {
+        if (codePromoInfos.promoCode.id == "611vwK8n" || codePromoInfos.promoCode.id === "WqpN3HDE") {
           codeHelper = 
             "Profitez de 20€ de réduction avec le code <b>LOVEJAG</b>.";
         }
