@@ -717,7 +717,8 @@ class ShoppingCart {
   }
 
   getCartStripeUrl() {
-    const url = window.location.origin + window.location.pathname;
+    const queryString = window.location?.search ?? "";
+    const url = window.location.origin + window.location.pathname + queryString;
     let value = this.cart.map((e) => {
       return { id: e.id.price.id, quantity: e.quantity };
     });
