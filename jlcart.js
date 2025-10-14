@@ -1385,18 +1385,18 @@ try {
     const eventId = queryParams.get("eventId");
     getEventDatas(eventId).then((res) => {
       const eventDatas = res.result.event.datas;
-      console.log(eventDatas)
+      console.log("event", eventDatas)
       shoppingCart.saveOrderId(eventDatas.order._id);
-      shoppingCart.saveCustomerEmail(eventDatas.customer.email);
-      shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
-      shoppingCart.saveCart({
-        event: {
-          type: "recreate Cart",
-          cart: eventDatas.order.aside_data.cart,
-        },
-      });
-      init();
-      showNewCart(null);
+      // shoppingCart.saveCustomerEmail(eventDatas.customer.email);
+      // shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
+      // shoppingCart.saveCart({
+      //   event: {
+      //     type: "recreate Cart",
+      //     cart: eventDatas.order.aside_data.cart,
+      //   },
+      // });
+      // init();
+      // showNewCart(null);
     });
   }
 } catch (e) {
