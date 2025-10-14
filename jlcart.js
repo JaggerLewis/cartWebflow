@@ -1394,16 +1394,16 @@ try {
       const eventDatas = res.result.event.datas;
       console.log("event", eventDatas);
       shoppingCart.saveOrderId(eventDatas.order._id);
-      // shoppingCart.saveCustomerEmail(eventDatas.customer.email);
-      // shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
-      // shoppingCart.saveCart({
-      //   event: {
-      //     type: "recreate Cart",
-      //     cart: eventDatas.order.aside_data.cart,
-      //   },
-      // });
-      // init();
-      // showNewCart(null);
+      shoppingCart.saveCustomerEmail(eventDatas.customer.email);
+      shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
+      shoppingCart.saveCart({
+        event: {
+          type: "recreate Cart",
+          cart: eventDatas.order.aside_data.cart,
+        },
+      });
+      init();
+      showNewCart(null);
     });
   }
 } catch (e) {
