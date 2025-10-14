@@ -340,15 +340,18 @@ class ShoppingCart {
 
   getPromoCodeDatas = async (promoCodeId) => {
     try {
-            const answer = await fetch(`${interfaceUrl}/stripe/promo_code/${promoCodeId}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            })
-            const answerJson = await answer.json();
-            return answerJson;
-        } catch (_) {
-            return null;
+      const answer = await fetch(
+        `${interfaceUrl}/stripe/promo_code/${promoCodeId}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
         }
+      );
+      const answerJson = await answer.json();
+      return answerJson;
+    } catch (_) {
+      return null;
+    }
   };
 
   getPromoCode = async () => {
@@ -369,7 +372,7 @@ class ShoppingCart {
     }
 
     if (promoCodeId === "611vwK8n" || JagSession?.promoCodeId === "611vwK8n") {
-      promoCodeId = "WqpN3HDE"
+      promoCodeId = "WqpN3HDE";
     }
 
     if (!promoCodeId) {
@@ -378,7 +381,7 @@ class ShoppingCart {
         JagSession.customerEmail != "" &&
         JagSession.customerEmail != "undefined"
       ) {
-        promoCodeId = "WqpN3HDE" // LOVEJAG
+        promoCodeId = "WqpN3HDE"; // LOVEJAG
         //promoCodeId = "611vwK8n"; // OLD_LOVEJAG
         //promoCodeId = 'hXbVDcY2' ; // 10ANS
         //promoCodeId = '8g6sCTax' ; // New 10ANS
@@ -435,8 +438,11 @@ class ShoppingCart {
           codePromoInfos.promoCode.id = "8g6sCTax"; // On remplace l'ancien 10 ANS par le nouveau
         }
 
-        if (codePromoInfos.promoCode.id == "611vwK8n" || codePromoInfos.promoCode.id === "WqpN3HDE") {
-          codeHelper = 
+        if (
+          codePromoInfos.promoCode.id == "611vwK8n" ||
+          codePromoInfos.promoCode.id === "WqpN3HDE"
+        ) {
+          codeHelper =
             "Profitez de 20€ de réduction avec le code <b>LOVEJAG</b>.";
         }
 
@@ -626,6 +632,7 @@ class ShoppingCart {
   saveOrderId(orderId) {
     let JagSession = JSON.parse(localStorage.getItem("JagSession"));
     JagSession.orderId = orderId;
+    this.orderId = orderId;
     localStorage.setItem("JagSession", JSON.stringify(JagSession));
     console.log("🐾 JAG orderId Saved ", this.orderId);
   }
@@ -1385,7 +1392,7 @@ try {
     const eventId = queryParams.get("eventId");
     getEventDatas(eventId).then((res) => {
       const eventDatas = res.result.event.datas;
-      console.log("event", eventDatas)
+      console.log("event", eventDatas);
       shoppingCart.saveOrderId(eventDatas.order._id);
       // shoppingCart.saveCustomerEmail(eventDatas.customer.email);
       // shoppingCart.recreateCart(eventDatas.order.aside_data.cart);
