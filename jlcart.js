@@ -429,7 +429,7 @@ class ShoppingCart {
             "30€ de réduction avec le code <b>JUNE30</b> sur les JAG GPS avec Smartdock et 20€ avec le code JUNE20 sur les JAG GPS.";
         }
 
-        if (
+        else if (
           codePromoInfos.promoCode.id == "hXbVDcY2" ||
           codePromoInfos.promoCode.id == "8g6sCTax"
         ) {
@@ -438,12 +438,17 @@ class ShoppingCart {
           codePromoInfos.promoCode.id = "8g6sCTax"; // On remplace l'ancien 10 ANS par le nouveau
         }
 
-        if (
+        else if (
           codePromoInfos.promoCode.id == "611vwK8n" ||
           codePromoInfos.promoCode.id === "WqpN3HDE"
         ) {
           codeHelper =
             "Profitez de 20€ de réduction avec le code <b>LOVEJAG</b>.";
+        }
+
+        else if (codePromoInfos.promoCode.id == "Tg1JhZXo") {
+          codeHelper =
+            "Pour Halloween, 30€ de réduction avec le code <b>BOUH30</b> sur les JAG GPS avec Smartdock et une chaussette d'une valeur de 10€ offert.";
         }
 
         let promoCodeInfos = {
