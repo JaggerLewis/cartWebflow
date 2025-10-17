@@ -441,8 +441,11 @@ class ShoppingCart {
           codeHelper =
             "Profitez de 20€ de réduction avec le code <b>LOVEJAG</b>.";
         } else if (codePromoInfos.promoCode.id == "Tg1JhZXo") {
-          codeHelper =
-           "Offre Halloween : <b>30€ de remise sur les GPS avec Smartdock + une chaussette offerte</b> avec le code <b>BOUH30</b>";
+          const isSmartdock = window.location.href.includes("smartdock");
+          if (isSmartdock) {
+            codeHelper =
+              "Offre Halloween : <b>30€ de remise sur les GPS avec Smartdock + une chaussette offerte</b> avec le code <b>BOUH30</b>";
+          }
         }
 
         let promoCodeInfos = {
