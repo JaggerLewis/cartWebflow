@@ -356,15 +356,15 @@ class ShoppingCart {
 
   getPromoCode = async () => {
     const queryParams = new URLSearchParams(document.location.search);
-    let promoCodeId = queryParams.get("promoCodeId");
+    let JagSession = JSON.parse(localStorage.getItem("JagSession"));
+
+    let promoCodeId = queryParams.get("promoCodeId") || JagSession?.promoCodeId;
     let codeHelper = "";
 
     console.log("promo code : ", promoCodeId);
 
     // Add pre_order code by default
     // promoCodeId = "4LI1vKAa";
-
-    let JagSession = JSON.parse(localStorage.getItem("JagSession"));
 
     if (promoCodeId === "4LI1vKAa" || JagSession?.promoCodeId === "4LI1vKAa") {
       promoCodeId = undefined;
@@ -427,26 +427,20 @@ class ShoppingCart {
         if (codePromoInfos.promoCode.id == "96poDEs6") {
           codeHelper =
             "30€ de réduction avec le code <b>JUNE30</b> sur les JAG GPS avec Smartdock et 20€ avec le code JUNE20 sur les JAG GPS.";
-        }
-
-        else if (
+        } else if (
           codePromoInfos.promoCode.id == "hXbVDcY2" ||
           codePromoInfos.promoCode.id == "8g6sCTax"
         ) {
           codeHelper =
             "Pour les 10ANS de Jagger, 30€ de réduction avec le code 10ANS sur les JAG GPS avec Smartdock. Soit le coffret à 169.00€";
           codePromoInfos.promoCode.id = "8g6sCTax"; // On remplace l'ancien 10 ANS par le nouveau
-        }
-
-        else if (
+        } else if (
           codePromoInfos.promoCode.id == "611vwK8n" ||
           codePromoInfos.promoCode.id === "WqpN3HDE"
         ) {
           codeHelper =
             "Profitez de 20€ de réduction avec le code <b>LOVEJAG</b>.";
-        }
-
-        else if (codePromoInfos.promoCode.id == "Tg1JhZXo") {
+        } else if (codePromoInfos.promoCode.id == "Tg1JhZXo") {
           codeHelper =
             "Pour Halloween, 30€ de réduction avec le code <b>BOUH30</b> sur les JAG GPS avec Smartdock et une chaussette d'une valeur de 10€ offert.";
         }
