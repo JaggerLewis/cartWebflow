@@ -1142,6 +1142,7 @@ const redirectToStripe = async (event) => {
       });
     } catch (e) {
       console.log("error with tag manager : ", e);
+      window.location.href = apiResJson.url;
     }
     //window.location.href = apiResJson.url
   } else {
