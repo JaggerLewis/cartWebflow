@@ -363,14 +363,13 @@ class ShoppingCart {
     let codeHelper = "";
 
     const nowTs = Date.now();
-    const isBlackFriday = nowTs >= 1700833200000 && nowTs <= 1701518340000;
+    const isBlackFriday = nowTs <= 1764629999000;
 
     console.log(
       "isBlackFriday",
       isBlackFriday,
       nowTs,
-      nowTs >= 1700833200000,
-      nowTs <= 1701518340000
+      nowTs <= 1764629999000
     );
 
     if (isBlackFriday) {
@@ -567,7 +566,7 @@ class ShoppingCart {
 
   applyCodeHelper() {
     const nowTs = Date.now();
-    const isBlackFriday = nowTs >= 1700833200000 && nowTs <= 1701518340000;
+    const isBlackFriday = nowTs <= 1764629999000;
     if (isBlackFriday) {
       return false;
     }
