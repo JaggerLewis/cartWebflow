@@ -1258,7 +1258,7 @@ const showNewCart = (event) => {
       }
     } catch(e)
     {
-      console.log('line-through', e)
+      console.log('line-through not ok', e)
     }
 
     document
