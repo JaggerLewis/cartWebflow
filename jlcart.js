@@ -1229,8 +1229,8 @@ const showNewCart = (event) => {
   shoppingCart.cart.forEach((prod) => {
     createLine(nbItem);
 
-    document.getElementById("JL_Basket_Item_Label_" + nbItem).innerHTML =
-      getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
+    document.getElementById("JL_Basket_Item_Label_" + nbItem).innerHTML = prod.id.name;
+      //getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
     if (prod.id.metadata.colorId && prod.id.metadata.colorId != "undefined") {
       document.getElementById("JL_Basket_Item_Color_" + nbItem).innerHTML =
         prod.id.metadata.colorId;
