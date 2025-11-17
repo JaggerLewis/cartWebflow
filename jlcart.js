@@ -1249,7 +1249,7 @@ const showNewCart = (event) => {
 
     try {
       console.log('prod.id.price.libReduc', prod.id.price.libReduc);
-      if (prod.id.price.libReduc) {
+      if (prod.id.price.libReduc != undefined) {
         if (prod.id.price.libReduc != '') {
           document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).innerHTML = prod.id.price.libReduc;
           document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).style.display = 'flex';
