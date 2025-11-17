@@ -1247,6 +1247,19 @@ const showNewCart = (event) => {
     document.getElementById("JL_Basket_Item_Price_" + nbItem).innerHTML =
       (prod.quantity * prod.id.price.price).toFixed(2) + " &euro;";
 
+    try {
+      if (prod.id.price.libReduc) {
+        if (prod.id.price.libReduc != '') {
+          document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).innerHTML = prod.id.price.libReduc;
+          document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).style.display = 'flex';
+          document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).style.textDecoration = 'line-through';
+        }
+      }
+    } catch(e)
+    {
+      console.log('line-through', e)
+    }
+
     document
       .getElementById("JL_Basket_Item_Trash_Icon_" + nbItem)
       .setAttribute("nbItem", nbItem);
