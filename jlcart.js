@@ -1248,6 +1248,7 @@ const showNewCart = (event) => {
       (prod.quantity * prod.id.price.price).toFixed(2) + " &euro;";
 
     try {
+      console.log('prod.id.price.libReduc', prod.id.price.libReduc);
       if (prod.id.price.libReduc) {
         if (prod.id.price.libReduc != '') {
           document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).innerHTML = prod.id.price.libReduc;
