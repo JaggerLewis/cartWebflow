@@ -159,6 +159,7 @@ class ShoppingCart {
       tsEncartEmail: Date.now(),
       tsEncartIsHide: false,
       utms: {},
+      isPromo: false,
     };
 
     if (!localStorage.getItem("JagSession")) {
