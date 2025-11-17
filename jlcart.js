@@ -568,11 +568,11 @@ class ShoppingCart {
   }
 
   applyCodeHelper() {
-    const nowTs = Date.now();
-    const isBlackFriday = nowTs <= 1764629999000;
-    if (isBlackFriday) {
-      return false;
-    }
+    // const nowTs = Date.now();
+    // const isBlackFriday = nowTs <= 1764629999000;
+    // if (isBlackFriday) {
+    //   return false;
+    // }
 
     if (document.getElementById("JL_Basket_Discount_Helper_Div")) {
       const reductionAmountHelperDiv = document.getElementById(
