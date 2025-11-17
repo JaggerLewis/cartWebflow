@@ -365,12 +365,7 @@ class ShoppingCart {
     const nowTs = Date.now();
     const isBlackFriday = nowTs <= 1764629999000;
 
-    console.log(
-      "isBlackFriday",
-      isBlackFriday,
-      nowTs,
-      nowTs <= 1764629999000
-    );
+    console.log("isBlackFriday", isBlackFriday, nowTs, nowTs <= 1764629999000);
 
     if (isBlackFriday) {
       if (!JagSession.isPromo) {
@@ -510,6 +505,12 @@ class ShoppingCart {
   }
 
   applyCodePromo() {
+    const nowTs = Date.now();
+    const isBlackFriday = nowTs <= 1764629999000;
+    if (isBlackFriday) {
+      return 0;
+    }
+
     let reductionAmount = 0;
     let reductionLabel = "";
 
