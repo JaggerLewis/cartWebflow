@@ -467,7 +467,8 @@ class ShoppingCart {
               "Offre Halloween : <b>30€ de remise sur les GPS avec Smartdock + une chaussette offerte</b> avec le code <b>BOUH30</b>";
           }
         } else if (codePromoInfos.promoCode.id == "4wZNio0u") {
-          codeHelper = "BLACK WEEKS -40€ sur nos GPS avec formule à vie - Jusqu'au 30 novembre";
+          codeHelper =
+            "BLACK WEEKS -40€ sur nos GPS avec formule à vie - Jusqu'au 30 novembre";
         }
 
         let promoCodeInfos = {
@@ -556,6 +557,11 @@ class ShoppingCart {
   }
 
   applyCodeHelper() {
+    const isBlackFriday = nowTs >= 1700833200000 && nowTs <= 1701518340000;
+    if (isBlackFriday) {
+      return false;
+    }
+
     if (document.getElementById("JL_Basket_Discount_Helper_Div")) {
       const reductionAmountHelperDiv = document.getElementById(
         "JL_Basket_Discount_Helper_Div"
@@ -1251,8 +1257,9 @@ const showNewCart = (event) => {
   shoppingCart.cart.forEach((prod) => {
     createLine(nbItem);
 
-    document.getElementById("JL_Basket_Item_Label_" + nbItem).innerHTML = prod.id.name;
-      //getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
+    document.getElementById("JL_Basket_Item_Label_" + nbItem).innerHTML =
+      prod.id.name;
+    //getTrad(prod.id.metadata.title_fr, prod.id.metadata.title_en);
     if (prod.id.metadata.colorId && prod.id.metadata.colorId != "undefined") {
       document.getElementById("JL_Basket_Item_Color_" + nbItem).innerHTML =
         prod.id.metadata.colorId;
@@ -1270,17 +1277,22 @@ const showNewCart = (event) => {
       (prod.quantity * prod.id.price.price).toFixed(2) + " &euro;";
 
     try {
-      console.log('prod.id.price.libReduc', prod.id.price.libReduc);
+      console.log("prod.id.price.libReduc", prod.id.price.libReduc);
       if (prod.id.price.libReduc != undefined) {
-        if (prod.id.price.libReduc != '') {
-          document.getElementById('JL_Basket_Item_Price_Reduction_'+ nbItem).innerHTML = prod.id.price.libReduc;
-          document.getElementById('JL_Basket_Item_Price_Reduction_'+ nbItem).style.display = 'flex';
-          document.getElementById('JL_Basket_Item_Price_Reduction_'+ nbItem).style.textDecoration = 'line-through';
+        if (prod.id.price.libReduc != "") {
+          document.getElementById(
+            "JL_Basket_Item_Price_Reduction_" + nbItem
+          ).innerHTML = prod.id.price.libReduc;
+          document.getElementById(
+            "JL_Basket_Item_Price_Reduction_" + nbItem
+          ).style.display = "flex";
+          document.getElementById(
+            "JL_Basket_Item_Price_Reduction_" + nbItem
+          ).style.textDecoration = "line-through";
         }
       }
-    } catch(e)
-    {
-      console.log('line-through not ok', e)
+    } catch (e) {
+      console.log("line-through not ok", e);
     }
 
     document
