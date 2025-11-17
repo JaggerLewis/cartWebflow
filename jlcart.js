@@ -361,6 +361,26 @@ class ShoppingCart {
     let promoCodeId = queryParams.get("promoCodeId") || JagSession?.promoCodeId;
     let codeHelper = "";
 
+    const nowTs = Date.now();
+    const isBlackFriday = nowTs >= 1700833200000 && nowTs <= 1701518340000;
+
+    if (isBlackFriday) {
+      if (!JagSession.isPromo) {
+        JagSession.isPromo = true;
+        JagSession.cart = [];
+        localStorage.setItem("JagSession", JSON.stringify(JagSession));
+      }
+      promoCodeId = "4wZNio0u";
+    }
+    if (!isBlackFriday && JagSession.isPromo) {
+      JagSession.isPromo = false;
+      JagSession.cart = [];
+      localStorage.setItem("JagSession", JSON.stringify(JagSession));
+      if (promoCodeId === "4wZNio0u") {
+        promoCodeId = "WqpN3HDE";
+      }
+    }
+
     console.log("promo code : ", promoCodeId);
 
     // Add pre_order code by default
@@ -446,6 +466,8 @@ class ShoppingCart {
             codeHelper =
               "Offre Halloween : <b>30€ de remise sur les GPS avec Smartdock + une chaussette offerte</b> avec le code <b>BOUH30</b>";
           }
+        } else if (codePromoInfos.promoCode.id == "4wZNio0u") {
+          codeHelper = "BLACK WEEKS -40€ sur nos GPS avec formule à vie - Jusqu'au 30 novembre";
         }
 
         let promoCodeInfos = {
