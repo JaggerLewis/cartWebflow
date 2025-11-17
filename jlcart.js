@@ -365,6 +365,14 @@ class ShoppingCart {
     const nowTs = Date.now();
     const isBlackFriday = nowTs >= 1700833200000 && nowTs <= 1701518340000;
 
+    console.log(
+      "isBlackFriday",
+      isBlackFriday,
+      nowTs,
+      nowTs >= 1700833200000,
+      nowTs <= 1701518340000
+    );
+
     if (isBlackFriday) {
       if (!JagSession.isPromo) {
         JagSession.isPromo = true;
