@@ -374,6 +374,7 @@ class ShoppingCart {
         localStorage.setItem("JagSession", JSON.stringify(JagSession));
       }
       promoCodeId = "4wZNio0u";
+      init();
     }
     if (!isBlackFriday && JagSession.isPromo) {
       JagSession.isPromo = false;
@@ -382,6 +383,7 @@ class ShoppingCart {
       if (promoCodeId === "4wZNio0u") {
         promoCodeId = "WqpN3HDE";
       }
+      init();
     }
 
     console.log("promo code : ", promoCodeId);
