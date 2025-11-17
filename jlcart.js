@@ -1251,9 +1251,9 @@ const showNewCart = (event) => {
       console.log('prod.id.price.libReduc', prod.id.price.libReduc);
       if (prod.id.price.libReduc != undefined) {
         if (prod.id.price.libReduc != '') {
-          document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).innerHTML = prod.id.price.libReduc;
-          document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).style.display = 'flex';
-          document.getElementById('JL_Basket_Item_Price_Reduction'+ nbItem).style.textDecoration = 'line-through';
+          document.getElementById('JL_Basket_Item_Price_Reduction_'+ nbItem).innerHTML = prod.id.price.libReduc;
+          document.getElementById('JL_Basket_Item_Price_Reduction_'+ nbItem).style.display = 'flex';
+          document.getElementById('JL_Basket_Item_Price_Reduction_'+ nbItem).style.textDecoration = 'line-through';
         }
       }
     } catch(e)
