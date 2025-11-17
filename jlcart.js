@@ -570,9 +570,9 @@ class ShoppingCart {
   applyCodeHelper() {
     const nowTs = Date.now();
     const isBlackFriday = nowTs <= 1764629999000;
-    // if (isBlackFriday) {
-    //   return false;
-    // }
+    if (isBlackFriday) {
+       return false;
+    }
 
     if (document.getElementById("JL_Basket_Discount_Helper_Div")) {
       const reductionAmountHelperDiv = document.getElementById(
@@ -611,9 +611,6 @@ class ShoppingCart {
       }
     }
 
-    if (isBlackFriday) {
-      return true;
-    }
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
       extraDivs[0].innerHTML = "Réduction ajoutée au moment du paiement";
