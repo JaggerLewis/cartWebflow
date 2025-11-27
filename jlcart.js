@@ -374,8 +374,8 @@ class ShoppingCart {
         localStorage.setItem("JagSession", JSON.stringify(JagSession));
       }
       promoCodeId = "4wZNio0u";
-      setCartNbItems();
       emptyCart();
+      setCartNbItems();
     } else if (!isBlackFriday && JagSession.isPromo) {
       JagSession.isPromo = false;
       JagSession.cart = [];
@@ -383,8 +383,8 @@ class ShoppingCart {
       if (promoCodeId === "4wZNio0u") {
         promoCodeId = "WqpN3HDE";
       }
-      setCartNbItems();
       emptyCart();
+      setCartNbItems();
     }
 
     console.log("promo code : ", promoCodeId);
