@@ -376,7 +376,7 @@ class ShoppingCart {
       promoCodeId = "4wZNio0u";
       // initNavBar();
       setCartNbItems();
-      emptyCart();
+      //emptyCart();
     } else if (!isBlackFriday && JagSession.isPromo) {
       JagSession.isPromo = false;
       JagSession.cart = [];
@@ -386,7 +386,7 @@ class ShoppingCart {
       }
       // initNavBar();
       setCartNbItems();
-      emptyCart();
+      //emptyCart();
     }
 
     console.log("promo code : ", promoCodeId);
