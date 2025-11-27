@@ -374,9 +374,8 @@ class ShoppingCart {
         localStorage.setItem("JagSession", JSON.stringify(JagSession));
       }
       promoCodeId = "4wZNio0u";
-      // initNavBar();
       setCartNbItems();
-      //emptyCart();
+      emptyCart();
     } else if (!isBlackFriday && JagSession.isPromo) {
       JagSession.isPromo = false;
       JagSession.cart = [];
@@ -384,9 +383,8 @@ class ShoppingCart {
       if (promoCodeId === "4wZNio0u") {
         promoCodeId = "WqpN3HDE";
       }
-      // initNavBar();
       setCartNbItems();
-      //emptyCart();
+      emptyCart();
     }
 
     console.log("promo code : ", promoCodeId);
@@ -1206,16 +1204,6 @@ const emptyCart = () => {
       child.remove();
     }
   }
-
-  document.getElementById("JL_Btn_Close_Basket").style.display = "block";
-  document.getElementById("JL_Basket_Empty").style.display = "flex";
-  // document.getElementById('JL_Basket_Content').style.display = 'none';
-  document.getElementById("JL_Basket_Items").style.display = "none";
-  // document.getElementById('JL_Basket_Delivery_Amount').style.display = 'none';
-  // document.getElementById('JL_Basket_Info_Abo').style.display = 'none';
-  document.getElementById("JL_Basket_Boutons").style.display = "none";
-  document.getElementById("JL_Basket_Container").style.display = "flex";
-  document.getElementById("JL_Basket_Total").style.display = "none";
 };
 
 const showNewCart = (event) => {
