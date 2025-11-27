@@ -374,16 +374,17 @@ class ShoppingCart {
         localStorage.setItem("JagSession", JSON.stringify(JagSession));
       }
       promoCodeId = "4wZNio0u";
-      init();
-    }
-    if (!isBlackFriday && JagSession.isPromo) {
+      initNavBar();
+      setCartNbItems();
+    } else if (!isBlackFriday && JagSession.isPromo) {
       JagSession.isPromo = false;
       JagSession.cart = [];
       localStorage.setItem("JagSession", JSON.stringify(JagSession));
       if (promoCodeId === "4wZNio0u") {
         promoCodeId = "WqpN3HDE";
       }
-      init();
+      initNavBar();
+      setCartNbItems();
     }
 
     console.log("promo code : ", promoCodeId);
@@ -571,7 +572,7 @@ class ShoppingCart {
     const nowTs = Date.now();
     const isBlackFriday = nowTs <= 1764629999000;
     if (isBlackFriday) {
-       return false;
+      return false;
     }
 
     if (document.getElementById("JL_Basket_Discount_Helper_Div")) {
@@ -1068,9 +1069,7 @@ const changeChildsId = (node, suffix, filter) => {
   }
 };
 
-const init = async () => {
-  console.log("🐾 JAG IS HERE " + JL_pageId);
-
+const initNavBar = () => {
   if (JL_NavBar) {
     document.getElementById("JL_Basket_Item").style.display = "none";
     document.getElementById("JL_Basket_Empty").style.display = "block";
@@ -1090,6 +1089,14 @@ const init = async () => {
         document.getElementById("JL_Basket_Discount_Div").style.display =
           "none";
       });
+  }
+};
+
+const init = async () => {
+  console.log("🐾 JAG IS HERE " + JL_pageId);
+
+  if (JL_NavBar) {
+    initNavBar();
   }
 
   if (document.getElementById("JL_Abo_Newsletter")) {
