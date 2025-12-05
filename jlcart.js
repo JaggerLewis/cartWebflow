@@ -364,8 +364,7 @@ class ShoppingCart {
 
     const nowTs = Date.now();
     const isBlackFriday = nowTs <= 1764629999000;
-
-    console.log("isBlackFriday", isBlackFriday, nowTs, nowTs <= 1764629999000);
+    const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
 
     if (isBlackFriday) {
       if (!JagSession.isPromo) {
@@ -407,10 +406,14 @@ class ShoppingCart {
         JagSession.customerEmail != "" &&
         JagSession.customerEmail != "undefined"
       ) {
-        promoCodeId = "WqpN3HDE"; // LOVEJAG
-        //promoCodeId = "611vwK8n"; // OLD_LOVEJAG
-        //promoCodeId = 'hXbVDcY2' ; // 10ANS
-        //promoCodeId = '8g6sCTax' ; // New 10ANS
+        if (isChristmas) {
+          promoCodeId = "ewvBp3NJ";
+        } else {
+          promoCodeId = "WqpN3HDE"; // LOVEJAG
+          //promoCodeId = "611vwK8n"; // OLD_LOVEJAG
+          //promoCodeId = 'hXbVDcY2' ; // 10ANS
+          //promoCodeId = '8g6sCTax' ; // New 10ANS
+        }
       } else {
         console.log(this.promoCodeInfos);
         this.applyCodeHelper();
@@ -475,6 +478,9 @@ class ShoppingCart {
         } else if (codePromoInfos.promoCode.id == "4wZNio0u") {
           codeHelper =
             "BLACK WEEKS -40€ sur nos GPS avec formule à vie - Jusqu'au 30 novembre";
+        } else if (codePromoInfos.promoCode.id == "ewvBp3NJ") {
+          codeHelper =
+            "Promotion de Noël! Du 3 au 25 décembre, profitez d'une réduction de 30€ sur les coffrets GPS avec le code <b>NOEL30</b> !";
         }
 
         let promoCodeInfos = {
@@ -510,6 +516,8 @@ class ShoppingCart {
   applyCodePromo() {
     const nowTs = Date.now();
     const isBlackFriday = nowTs <= 1764629999000;
+    const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
+    // Black Friday Override : no promo code
     if (isBlackFriday) {
       return 0;
     }
@@ -571,6 +579,8 @@ class ShoppingCart {
   applyCodeHelper() {
     const nowTs = Date.now();
     const isBlackFriday = nowTs <= 1764629999000;
+    const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
+    // Black Friday Override : no promo code
     if (isBlackFriday) {
       return false;
     }
@@ -615,7 +625,8 @@ class ShoppingCart {
     const extraDivs = document.getElementsByClassName("text-block-6015");
     if (extraDivs?.length > 0) {
       //extraDivs[0].innerHTML = "Réduction ajoutée au moment du paiement";
-      extraDivs[0].innerHTML = "Code promotionnel à ajouter au moment du paiement";
+      extraDivs[0].innerHTML =
+        "Code promotionnel à ajouter au moment du paiement";
       extraDivs[0].style.display = "centered";
     }
 
