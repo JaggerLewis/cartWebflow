@@ -421,6 +421,10 @@ class ShoppingCart {
       }
     }
 
+    if (isChristmas && promoCodeId === "WqpN3HDE") {
+      promoCodeId = "ewvBp3NJ";
+    }
+
     console.log("start check promo", promoCodeId);
 
     let codePromoInfos = await fetch(
