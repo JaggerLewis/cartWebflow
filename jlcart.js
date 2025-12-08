@@ -369,7 +369,6 @@ class ShoppingCart {
     if (isBlackFriday) {
       if (!JagSession.isPromo) {
         JagSession.isPromo = true;
-        JagSession.cart = [];
         localStorage.setItem("JagSession", JSON.stringify(JagSession));
       }
       promoCodeId = "4wZNio0u";
@@ -377,7 +376,6 @@ class ShoppingCart {
       setCartNbItems();
     } else if (!isBlackFriday && JagSession.isPromo) {
       JagSession.isPromo = false;
-      JagSession.cart = [];
       localStorage.setItem("JagSession", JSON.stringify(JagSession));
       if (promoCodeId === "4wZNio0u") {
         promoCodeId = "WqpN3HDE";
@@ -1209,6 +1207,8 @@ const redirectToStripe = async (event) => {
     }
     //window.location.href = apiResJson.url
   } else {
+    emptyCart();
+    setCartNbItems();
     showAddCart("", true);
   }
 };
@@ -1220,6 +1220,9 @@ const emptyCart = () => {
       child.remove();
     }
   }
+  const JagSession = JSON.parse(localStorage.getItem("JagSession"));
+  JagSession.cart = [];
+  localStorage.setItem("JagSession", JSON.stringify(JagSession));
 };
 
 const showNewCart = (event) => {
