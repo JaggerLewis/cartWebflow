@@ -364,15 +364,15 @@ class ShoppingCart {
 
     const nowTs = Date.now();
     // TODO : Remove after christmas is over
-    const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
+    const isChristmas = nowTs <= 1766707200000;
     if (isChristmas) {
       if (!JagSession.isPromo) {
         JagSession.isPromo = true;
         localStorage.setItem("JagSession", JSON.stringify(JagSession));
+        emptyCart();
+        setCartNbItems();
       }
       promoCodeId = "ewvBp3NJ";
-      emptyCart();
-      setCartNbItems();
     } else if (!isChristmas && JagSession.isPromo) {
       JagSession.isPromo = false;
       localStorage.setItem("JagSession", JSON.stringify(JagSession));
@@ -519,7 +519,7 @@ class ShoppingCart {
   applyCodePromo() {
     const nowTs = Date.now();
     // TODO : Remove after christmas is over
-    const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
+    const isChristmas = nowTs <= 1766707200000;
     if (isChristmas) {
       return 0;
     }
@@ -581,7 +581,7 @@ class ShoppingCart {
   applyCodeHelper() {
     const nowTs = Date.now();
     // TODO : Remove after christmas is over
-    const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
+    const isChristmas = nowTs <= 1766707200000;
     if (isChristmas) {
       return false;
     }
