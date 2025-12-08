@@ -363,21 +363,20 @@ class ShoppingCart {
     let codeHelper = "";
 
     const nowTs = Date.now();
-    const isBlackFriday = nowTs <= 1764629999000;
+    // TODO : Remove after christmas is over
     const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
-
-    if (isBlackFriday) {
+    if (isChristmas) {
       if (!JagSession.isPromo) {
         JagSession.isPromo = true;
         localStorage.setItem("JagSession", JSON.stringify(JagSession));
       }
-      promoCodeId = "4wZNio0u";
+      promoCodeId = "ewvBp3NJ";
       emptyCart();
       setCartNbItems();
-    } else if (!isBlackFriday && JagSession.isPromo) {
+    } else if (!isChristmas && JagSession.isPromo) {
       JagSession.isPromo = false;
       localStorage.setItem("JagSession", JSON.stringify(JagSession));
-      if (promoCodeId === "4wZNio0u") {
+      if (promoCodeId === "ewvBp3NJ") {
         promoCodeId = "WqpN3HDE";
       }
       emptyCart();
@@ -404,6 +403,7 @@ class ShoppingCart {
         JagSession.customerEmail != "" &&
         JagSession.customerEmail != "undefined"
       ) {
+        // TODO : Remove after christmas is over
         if (isChristmas) {
           promoCodeId = "ewvBp3NJ";
         } else {
@@ -419,6 +419,7 @@ class ShoppingCart {
       }
     }
 
+    // TODO : Remove after christmas is over
     if (isChristmas && promoCodeId === "WqpN3HDE") {
       promoCodeId = "ewvBp3NJ";
     }
@@ -482,7 +483,7 @@ class ShoppingCart {
             "BLACK WEEKS -40€ sur nos GPS avec formule à vie - Jusqu'au 30 novembre";
         } else if (codePromoInfos.promoCode.id == "ewvBp3NJ") {
           codeHelper =
-            "Promotion de Noël! Du 3 au 25 décembre, profitez d'une réduction de 30€ sur les coffrets GPS avec le code <b>NOEL30</b> !";
+            "Promotion de Noël! Du 3 au 25 décembre, profitez d'une réduction de 30€ sur les coffrets GPS !";
         }
 
         let promoCodeInfos = {
@@ -517,10 +518,9 @@ class ShoppingCart {
 
   applyCodePromo() {
     const nowTs = Date.now();
-    const isBlackFriday = nowTs <= 1764629999000;
+    // TODO : Remove after christmas is over
     const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
-    // Black Friday Override : no promo code
-    if (isBlackFriday) {
+    if (isChristmas) {
       return 0;
     }
 
@@ -580,10 +580,9 @@ class ShoppingCart {
 
   applyCodeHelper() {
     const nowTs = Date.now();
-    const isBlackFriday = nowTs <= 1764629999000;
+    // TODO : Remove after christmas is over
     const isChristmas = nowTs >= 1764720000000 && nowTs < 1766707200000;
-    // Black Friday Override : no promo code
-    if (isBlackFriday) {
+    if (isChristmas) {
       return false;
     }
 
