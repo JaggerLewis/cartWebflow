@@ -357,6 +357,7 @@ class ShoppingCart {
 
   applyOpeCoMessage() {
       if (document.getElementById("JL_Basket_Discount_Helper_Div")) {
+        console.log('msg opeCo');
         const reductionAmountHelperDiv = document.getElementById(
           "JL_Basket_Discount_Helper_Div"
         );
@@ -371,7 +372,7 @@ class ShoppingCart {
         const color = "#bb051f";
         reductionAmountHelperSpan.innerHTML = `<div style="background-color: ${color};border-radius: 10px;color: white;padding:5px;"><span>${messageOpeCo}</span></div>`;
         
-        reductionAmountHelperSpan.innerHTML = `${messageOpeCo}`;
+        //reductionAmountHelperSpan.innerHTML = `${messageOpeCo}`;
         reductionAmountHelperDiv.style.display = "flex";
     }
   }
@@ -386,13 +387,6 @@ class ShoppingCart {
     const nowTs = Date.now();
 
     let isOpeCo = true;
-
-    if (isOpeCo)
-    {
-      console.log('Cancel Code Promo during Ope Cod')
-      this.applyOpeCoMessage();
-      return;
-    }
 
     // TODO : Remove after christmas is over
     const isChristmas = nowTs <= 1766707200000;
@@ -412,6 +406,13 @@ class ShoppingCart {
       }
       emptyCart();
       setCartNbItems();
+    }
+
+    if (isOpeCo)
+    {
+      console.log('Cancel Code Promo during Ope Cod')
+      this.applyOpeCoMessage();
+      return;
     }
 
     console.log("promo code : ", promoCodeId);
