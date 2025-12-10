@@ -369,7 +369,7 @@ class ShoppingCart {
         OpeCoHelperSpan.innerHTML = "";
         OpeCoHelperDiv.style.display = "none";
 
-        messageOpeCo = "COMMANDEZ AVANT LE 19 DÉCEMBRE 14H00 pour retrouver votre colis sous le sapin le 24 !";
+        const messageOpeCo = "COMMANDEZ AVANT LE 19 DÉCEMBRE 14H00 pour retrouver votre colis sous le sapin le 24 !";
         const color = "#bb051f";
         OpeCoHelperSpan.innerHTML = `<div style="background-color: ${color};border-radius: 10px;color: white;padding:5px;"><span>${messageOpeCo}</span></div>`;
         
