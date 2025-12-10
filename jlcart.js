@@ -366,7 +366,7 @@ class ShoppingCart {
           "JL_Basket_OpeCo_Helper_Span"
         );
 
-        reductionAmountHelperSpan.innerHTML = "";
+        OpeCoHelperSpan.innerHTML = "";
         OpeCoHelperDiv.style.display = "none";
 
         messageOpeCo = "COMMANDEZ AVANT LE 19 DÉCEMBRE 14H00 pour retrouver votre colis sous le sapin le 24 !";
