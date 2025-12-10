@@ -356,24 +356,24 @@ class ShoppingCart {
   };
 
   applyOpeCoMessage() {
-      if (document.getElementById("JL_Basket_Discount_Helper_Div")) {
+      if (document.getElementById("JL_Basket_OpeCo_Helper_Div")) {
         console.log('msg opeCo');
-        const reductionAmountHelperDiv = document.getElementById(
-          "JL_Basket_Discount_Helper_Div"
+
+        const OpeCoHelperDiv = document.getElementById(
+          "JL_Basket_OpeCo_Helper_Div"
         );
-        const reductionAmountHelperSpan = document.getElementById(
-          "JL_Basket_Discount_Helper_Span"
+        const OpeCoHelperSpan = document.getElementById(
+          "JL_Basket_OpeCo_Helper_Span"
         );
 
         reductionAmountHelperSpan.innerHTML = "";
-        reductionAmountHelperDiv.style.display = "none";
+        OpeCoHelperDiv.style.display = "none";
 
         messageOpeCo = "COMMANDEZ AVANT LE 19 DÉCEMBRE 14H00 pour retrouver votre colis sous le sapin le 24 !";
         const color = "#bb051f";
-        reductionAmountHelperSpan.innerHTML = `<div style="background-color: ${color};border-radius: 10px;color: white;padding:5px;"><span>${messageOpeCo}</span></div>`;
+        OpeCoHelperSpan.innerHTML = `<div style="background-color: ${color};border-radius: 10px;color: white;padding:5px;"><span>${messageOpeCo}</span></div>`;
         
-        //reductionAmountHelperSpan.innerHTML = `${messageOpeCo}`;
-        reductionAmountHelperDiv.style.display = "flex";
+        OpeCoHelperDiv.style.display = "flex";
     }
   }
 
@@ -410,7 +410,7 @@ class ShoppingCart {
 
     if (isOpeCo)
     {
-      console.log('Cancel Code Promo during Ope Cod')
+      console.log('Apply Message OpeCo')
       this.applyOpeCoMessage();
       return;
     }
@@ -618,6 +618,18 @@ class ShoppingCart {
       return false;
     }
 
+    if (document.getElementById("JL_Basket_OpeCo_Helper_Div")) {
+      const OpeCoHelperDiv = document.getElementById(
+          "JL_Basket_OpeCo_Helper_Div"
+        );
+
+      const OpeCoHelperSpan = document.getElementById(
+        "JL_Basket_OpeCo_Helper_Span"
+      );
+      OpeCoHelperDiv.style.display = 'none';
+      OpeCoHelperSpan.innerHTML = '';
+    }
+    
     if (document.getElementById("JL_Basket_Discount_Helper_Div")) {
       const reductionAmountHelperDiv = document.getElementById(
         "JL_Basket_Discount_Helper_Div"
