@@ -411,7 +411,7 @@ class ShoppingCart {
     if (isOpeCo)
     {
       console.log('Apply Message OpeCo')
-      this.applyOpeCoMessage();
+      //this.applyOpeCoMessage();
       return;
     }
 
