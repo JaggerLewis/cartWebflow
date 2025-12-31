@@ -551,7 +551,7 @@ class ShoppingCart {
   applyCodePromo() {
     const nowTs = Date.now();
     // TODO : Remove after christmas is over
-    const isChristmas = nowTs <= 1766707200000;
+    const isChristmas = nowTs <= 2766707200000;
     if (isChristmas) {
       return 0;
     }
