@@ -515,7 +515,7 @@ class ShoppingCart {
             "BLACK WEEKS -40€ sur nos GPS avec formule à vie - Jusqu'au 30 novembre";
         } else if (codePromoInfos.promoCode.id == "ewvBp3NJ") {
           codeHelper =
-            "Promotion de Noël! Du 3 au 25 décembre, profitez d'une réduction de 30€ sur les coffrets GPS !";
+            "Prix givrés jusqu'au 31 janvier, 40€ de réduction sur nos GPS !";
         }
 
         let promoCodeInfos = {
